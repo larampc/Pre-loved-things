@@ -15,9 +15,10 @@ header {
     margin: 0  auto;
     justify-content: center;
     background-color: white;
-    border-radius: 1rem;
+    border-radius: 30px;
     border-color: black;
-    border-width: 1rem;
+    border-width: 1px;
+    border-style:solid;
 }
 
 #cart, #heart{
@@ -40,7 +41,8 @@ input[name="search"] {
 }
 
 .searchbtn img {
-    height: 1.5rem;
+    height: 1.2rem;
+    margin-right: 0.2rem;
 }
 
 .searchbtn {
@@ -55,7 +57,7 @@ input[name="search"] {
     border: none;
     cursor: pointer;
     height: 2rem;
-    border-radius: 1rem;
+    border-radius: 30px;
 }
   
 .dropdown-categories {
