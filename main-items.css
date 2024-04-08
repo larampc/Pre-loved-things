@@ -1,0 +1,33 @@
+.item-main img{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-color: #D9D9D9;
+}
+
+.items {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+main h2 {
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    
+}
+
+.item-info {
+    display: flex;
+    justify-content: space-between;
+    p {
+        margin: 0.2rem; 
+    }
+    .price {
+        font-weight: bold;
+    }
+}

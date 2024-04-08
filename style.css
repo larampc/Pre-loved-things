@@ -6,22 +6,25 @@ body {
 }
 
 header {
+    position: fixed;
+    width: 100%;
+    top:0;
     display: flex;
     height: 5rem;
     background-color: #F2E8D5;
     align-items: center;
+    justify-content:space-between;
 }
 
 .search-container {
     display: flex;
     align-items: center;
-    margin: 0  auto;
-    justify-content: center;
     background-color: white;
     border-radius: 30px;
     border-color: black;
     border-width: 1px;
     border-style:solid;
+    flex-grow: 0.5;
 }
 
 #cart, #heart{
@@ -43,11 +46,13 @@ header {
 .search-container form {
     display: flex;
     align-items: center;
+    flex-grow: 1;
 }
 
 input[name="search"] {
     border-width: 0;
-    outline: none;    
+    outline: none;
+    width: 100%;
 }
 
 .searchbtn img {
@@ -101,4 +106,8 @@ input[name="search"] {
   
 .dropdown-categories:hover .dropdown-content {
     display: block;
+}
+
+main {
+    margin-top: 6rem;
 }
