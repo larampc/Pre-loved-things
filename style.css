@@ -111,3 +111,12 @@ input[name="search"] {
 main {
     margin-top: 6rem;
 }
+
+body > footer {
+    margin-top: 2em;
+    padding: 0.5em;
+    margin-bottom: 0;
+    background-color: #F2E8D5;
+    color: black;
+    text-align: center;
+}
