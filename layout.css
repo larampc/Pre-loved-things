@@ -1,0 +1,44 @@
+.itemPage {
+    display: grid;
+    grid-template-columns:  auto auto auto auto;
+    grid-template-rows:  auto auto auto auto;
+    grid-template-areas: "picture picture header header"
+                            "picture picture description description"
+                            "picture picture priceSection priceSection"
+                            "sendMessage userProfile tags tags";
+    justify-items: center;
+    align-items: center;
+
+                            
+    }
+
+.picture {
+    grid-area: picture;
+}
+.description {
+    grid-area: description;
+}
+.priceSection {
+    grid-area: priceSection;
+    display: flex;
+    justify-content: space-between;
+}
+
+.price {
+    flex-grow: 2;
+}
+
+.header {
+    grid-area: header;
+}
+.sendMessage {
+    grid-area: sendMessage;
+}
+.itemTags {
+    grid-area: tags;
+    display: flex;
+    flex-wrap: wrap;
+}
+.userProfile {
+    grid-area: userProfile;
+}

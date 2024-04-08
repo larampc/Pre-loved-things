@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <title>Pre-loved</title>    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="item.css" rel="stylesheet">
+        <link href="layout.css" rel="stylesheet">
+        <link href="responsive.css" rel="stylesheet">
+        <link href="comments.css" rel="stylesheet">
+        <link href="forms.css" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <img src="images/logo.png"><a href="main.php"></a></img>
+            <div class="search-container">
+                <form action="/action_page.php" method="get">
+                <input type="text" name="search">
+                <button type="submit"><i class="search"></i></button>
+                </form>
+            </div>
+            <img src="images/heart.png"><a href="liked.php"></a></img>
+            <img src="images/cart.png"><a href="cart.php"></a></img>
+            <a href="login.html">Login</a>
+        </header>
+        <main>
+            <article class="itemPage">
+                <header>
+                    <h2>ITEM</h2>
+                    <span class="edit"><img src="images/pencil.png" alt="pencil"></span>
+                    <span class="like"><img src="images/heart.png" alt="heart"></span>
+                </header>
+                <span class="picture"><img src="https://picsum.photos/200" alt="item photo"></span>
+                <section class="description">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor efficitur tempus. Suspendisse potenti. In hac habitasse platea dictumst. Duis maximus vestibulum purus, non iaculis dolor pretium a. Nulla venenatis velit quis nisl ultricies, non condimentum urna eleifend. Sed sit amet urna tortor. Phasellus eget sodales est. Integer bibendum est et orci mollis tristique. Nunc cursus aliquet leo et consectetur. Donec eros dolor, consectetur nec dolor sit amet, finibus dictum sapien.</p>
+                </section>
+                <section class="priceSection">
+                    <span class="price">20€</span>
+                    <form>
+                        <img src="images/cart.png" alt="cart">
+                        <label> 
+                            <button class="Buy" type="submit">Buy now!</button>
+                        </label>
+                    </form>
+                </section>
+                <section class="sendMessage">
+                    <form>
+                        <label> 
+                            <button class="SendMessage" type="submit">Send Message</button>
+                        </label>
+                    </form>
+                </section>
+                <section class="userProfile">
+                    <img src="images/profile.png" alt="profile picture">
+                    <form>
+                        <label> 
+                            <button class="UserProfile" type="submit">User Profile</button>
+                        </label>
+                    </form>
+                </section>
+                <section class="itemTags">
+                    <ul>
+                        <li>
+                            Category: A
+                        </li>
+                        <li>
+                            Size: S
+                        </li>
+                        <li>
+                            Condition: New
+                        </li>
+                    </ul>
+                </section>
+            </article>
+        </main>
+    </body>
