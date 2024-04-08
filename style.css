@@ -12,8 +12,10 @@ header {
 .search-container {
     display: flex;
     align-items: center;
-    flex-grow: 1;
+    margin: 0  auto;
     justify-content: center;
+    background-color: white;
+    border-radius: 1rem;
 }
 
 #cart, #heart{
@@ -30,13 +32,28 @@ header {
     height: 5rem;
 }
 
+input[name="search"] {
+    border-width: 0;
+    outline: none;    
+}
+
+.searchbtn img {
+    height: 1rem;
+}
+
+.searchbtn {
+    background-color: transparent;
+    border-width: 0;
+}
+
 .dropbtn {
     background-color: #D9D9D9;
     color: black;
-    padding: 16px;
     font-size: 16px;
     border: none;
     cursor: pointer;
+    height: 2rem;
+    border-radius: 1rem;
 }
   
 .dropdown-categories {
