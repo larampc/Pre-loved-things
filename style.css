@@ -6,10 +6,28 @@ header {
     display: flex;
     height: 5rem;
     background-color: #F2E8D5;
+    align-items: center;
 }
 
 .search-container {
     display: flex;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+#cart, #heart{
+    height: 2rem;
+    padding: 0.5rem;
+}
+
+#login {
+    padding-right: 1rem;
+    padding-left: 0.5rem;
+}
+
+#logo {
+    height: 5rem;
 }
 
 .dropbtn {
@@ -46,8 +64,4 @@ header {
   
 .dropdown-categories:hover .dropdown-content {
     display: block;
-}
-  
-.dropdown-categories:hover .dropbtn {
-    background-color: #D9D9D9;
 }
