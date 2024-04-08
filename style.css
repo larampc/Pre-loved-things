@@ -90,9 +90,10 @@ input[name="search"] {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
+    border-radius: 1rem;
 }
   
 .dropdown-content a {
@@ -102,7 +103,10 @@ input[name="search"] {
     display: block;
 }
   
-.dropdown-content a:hover {background-color: #D9D9D9}
+.dropdown-content a:hover {
+    background-color: #D9D9D9;
+    border-radius: 1rem;
+}
   
 .dropdown-categories:hover .dropdown-content {
     display: block;
