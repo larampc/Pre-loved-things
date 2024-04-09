@@ -1,20 +1,25 @@
 .itemPage {
     display: grid;
-    grid-template-columns:  auto auto auto auto;
-    grid-template-rows:  auto auto auto auto;
-    grid-template-areas: "picture picture header header"
-                            "picture picture description description"
-                            "picture picture priceSection priceSection"
-                            "sendMessage userProfile tags tags";
+    grid-template-columns:  auto auto auto;
+    grid-template-rows:  auto auto auto;
+    grid-template-areas: "picture picture header"
+                            "picture picture description"
+                            "picture picture priceSection"
+                            "sendMessage userProfile tags";
     justify-items: center;
-    align-items: center;
-
-                            
-    }
+    margin: 1rem;
+}
 
 .picture {
     grid-area: picture;
+    img {
+        margin-right: 1rem;
+        width: 20rem;
+        height: 20rem;
+        border-radius: 1rem;
+    }
 }
+
 .description {
     grid-area: description;
 }
@@ -41,4 +46,20 @@
 }
 .userProfile {
     grid-area: userProfile;
+}
+
+.itemPage header {
+    display: flex;
+    height: 4rem;
+    width: 100%;
+    justify-content:space-between;
+    h2 {
+        flex-grow: 2;
+    }
+}
+
+
+.edit img, .like img {
+    height: 2rem;
+    margin: 1rem 0rem;
 }
