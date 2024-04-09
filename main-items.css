@@ -16,12 +16,6 @@ main h2 {
     margin-top: 2rem;
 }
 
-.nav {
-    display: flex;
-    align-items: center;
-    
-}
-
 .item-info {
     display: flex;
     justify-content: space-between;

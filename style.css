@@ -124,3 +124,8 @@ body > footer {
     color: black;
     text-align: center;
 }
+
+.nav {
+    display: flex;
+    align-items: center;
+}
