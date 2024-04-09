@@ -30,5 +30,6 @@ main h2 {
     }
     .price {
         font-weight: bold;
+        text-align: right;
     }
 }
