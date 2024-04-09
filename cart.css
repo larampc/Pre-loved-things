@@ -1,0 +1,23 @@
+.Buy {
+    background-color: transparent;
+    border-style: none;
+    color: #6A4806;
+    padding: 0;
+    margin-left: 5px;
+}
+.buy-item {
+    display: flex;
+    align-items: center;
+    background-color: #F2E8D5;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    height: 2rem;
+    img {
+        height: 1.5rem;
+    }
+}
+
+main h2 {
+    text-align: center;
+    padding-top: 1rem;
+}

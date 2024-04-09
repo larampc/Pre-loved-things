@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <title>Pre-loved</title>    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet">
+        <link href="cart.css" rel="stylesheet">
+    </head>
+    <body>
+    <header>
+        <a href="main.php"><img src="images/logo.png" id="logo"></a>
+        <div class="search-container">
+            <div class="dropdown-categories">
+                <button class="dropbtn">All Categories<img src="images/dropdown.png"></button>
+                <div class="dropdown-content">
+                <a href="#">Clothes</a>
+                <a href="#">Technology</a>
+                <a href="#">Toys</a>
+                <a href="#">Cars</a>
+                <a href="#">Books</a>
+                <a href="#">Sport</a>
+                </div>
+              </div>
+            <form action="/action_page.php">
+              <input type="text" name="search">
+              <button type="submit" class="searchbtn"><img src="images/search.png"></button>
+            </form>
+        </div>
+        <div class="nav">
+            <a href="liked.php"><img src="images/heart.png" id="heart"></a>
+            <a href="cart.php"><img src="images/cart.png" id="cart"></a>
+            <a href="login.html" id="login">Log in</a>
+        </div> 
+    </header>
+    <main>
+        <h2>Your cart</h2>
+        <section class="seller">
+            <div class="seller-info">
+                <img src="images/profile.png" class="profile-pic">
+                <p>Username</p>
+            </div>
+            <div class="item">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+            <p class="nitem">Numer items</p>
+            <p class="total">Total</p>
+            <form class="buy-item">
+                <img src="images/cart.png" alt="cart">
+                <label> 
+                    <button class="Buy" type="submit">Buy now!</button>
+                </label>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© Pre-loved, 2024</p>
+    </footer>
+    </body>
