@@ -5,7 +5,7 @@ body {
     font-family: "Carrois Gothic SC";
 }
 
-header {
+body > header {
     position: fixed;
     width: 100%;
     top:0;
