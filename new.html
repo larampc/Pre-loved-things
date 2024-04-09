@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <title>Pre-loved</title>    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style-yellow.css" rel="stylesheet">
+        <link href="new.css" rel="stylesheet">
+    </head>
+    <body>
+    <header>
+        <a href="main.php"><img src="images/logo.png" id="logo"></a>
+        <div class="search-container">
+            <div class="dropdown-categories">
+                <button class="dropbtn">All Categories<img src="images/dropdown.png"></button>
+                <div class="dropdown-content">
+                <a href="#">Clothes</a>
+                <a href="#">Technology</a>
+                <a href="#">Toys</a>
+                <a href="#">Cars</a>
+                <a href="#">Books</a>
+                <a href="#">Sport</a>
+                </div>
+              </div>
+            <form action="/action_page.php">
+              <input type="text" name="search">
+              <button type="submit" class="searchbtn"><img src="images/search.png"></button>
+            </form>
+        </div>
+        <div class="nav">
+            <a href="liked.php"><img src="images/heart.png" id="heart"></a>
+            <a href="cart.php"><img src="images/cart.png" id="cart"></a>
+            <a href="login.html" id="login">Log in</a>
+        </div> 
+    </header>
+    <main>
+        <h2>New item</h2>
+        <form>
+            <label for="iname">Item Name</label>
+            <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
+
+            <label for="category">category</label>
+                <select id="category" name="category">
+                <option value="other">Other</option>
+                <option value="clothes">Clothes</option>
+                <option value="tech">Technology</option>
+                <option value="toys">Toys</option>
+                <option value="cars">Cars</option>
+                <option value="books">Books</option>
+                <option value="sports">Sports</option>
+                </select>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" placeholder="The price of your item" required>
+
+            <label for="description">Desciption</label>
+            <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
+
+            <label for="description">images</label>
+            <input type="file" id="img1" name="img1" accept="image/*" required>
+            <input type="file" id="img2" name="img2" accept="image/*" required>
+
+
+            <input type="submit" value="Submit">
+        </form>
+
+    </main>
+    <footer>
+        <p>© Pre-loved, 2024</p>
+    </footer>
+    </body>

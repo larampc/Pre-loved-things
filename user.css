@@ -93,3 +93,7 @@ main {
     padding-left: 3.5rem;
     padding-bottom: 0.5rem;
 }
+
+.feedback > p {
+    text-decoration:underline;
+}
