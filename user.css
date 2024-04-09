@@ -44,6 +44,7 @@ main {
 .item-info {
     display: flex;
     justify-content: space-between;
+    width: 10rem;
     p {
         margin: 0.2rem; 
     }
@@ -51,7 +52,6 @@ main {
         font-weight: bold;
         text-align: right;
     }
-    margin-right: 20px;
 }
 
 .feedback {
@@ -96,4 +96,8 @@ main {
 
 .feedback > p {
     text-decoration:underline;
+}
+
+body > footer {
+    margin-top: 2rem;
 }

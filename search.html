@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+    <html lang="en-US">
+    <head>
+        <title>Pre-loved</title>    
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet">
+        <link href="search.css" rel="stylesheet">
+    </head>
+    <body>
+    <header>
+        <a href="main.php"><img src="images/logo.png" id="logo"></a>
+        <div class="search-container">
+            <div class="dropdown-categories">
+                <button class="dropbtn">All Categories<img src="images/dropdown.png"></button>
+                <div class="dropdown-content">
+                <a href="#">Clothes</a>
+                <a href="#">Technology</a>
+                <a href="#">Toys</a>
+                <a href="#">Cars</a>
+                <a href="#">Books</a>
+                <a href="#">Sport</a>
+                </div>
+              </div>
+            <form action="/action_page.php">
+              <input type="text" name="search">
+              <button type="submit" class="searchbtn"><img src="images/search.png"></button>
+            </form>
+        </div>
+        <div class="nav">
+            <a href="liked.php"><img src="images/heart.png" id="heart"></a>
+            <a href="cart.php"><img src="images/cart.png" id="cart"></a>
+            <a href="login.html" id="login">Log in</a>
+        </div> 
+    </header>
+    <main>
+        <section class="filter">
+            <h2>Filters</h2>
+            <div class="options">
+                <p>Prices</p>
+                <label><input type="checkbox" id="zero" name="zero">0-5€</label>
+                <label><input type="checkbox" id="five" name="five">5-10€</label>
+                <label><input type="checkbox" id="ten" name="ten">10-20€</label>
+                <label><input type="checkbox" id="twenty" name="twenty">20-50€</label>
+                <label><input type="checkbox" id="fifty" name="fifty">>50€</label>
+            </div>
+            <div class="options">
+                <p>Condition</p>
+                <label><input type="checkbox" id="new" name="new">New</label>
+                <label><input type="checkbox" id="used" name="used">Used</label>
+                <label><input type="checkbox" id="old" name="old">Old</label>
+            </div>
+        </section>
+        <section class="items">
+            <div class="item-main">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+            <div class="item-main">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+            <div class="item-main">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+            <div class="item-main">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+            <div class="item-main">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+            <div class="item-main">
+                <img src="images/flowe.png"></img>
+                <div class="item-info">
+                    <p class="name">Name</p>
+                    <p class="price">Price</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>© Pre-loved, 2024</p>
+    </footer>
+    </body>

@@ -27,3 +27,8 @@ main h2 {
         text-align: right;
     }
 }
+
+main {
+    margin-top: 6rem;
+    margin-bottom: 2rem;
+}

@@ -132,3 +132,7 @@ button {
     height: 1rem;
     margin-top: 0.5rem;
 }
+
+body > footer {
+    margin-top: 2rem;
+}
