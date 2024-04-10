@@ -36,6 +36,7 @@
             <a href="login.html" id="login">Log in</a>
         </div> 
     </header>
+    <main>
 <?php } ?>
 
 <?php function drawFooter() { ?>
