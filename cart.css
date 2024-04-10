@@ -72,13 +72,16 @@ main h2 {
 
 .sum {
     grid-area: sum;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     background-color: #EBEBEB;
     justify-content: end;
     padding: 0 1rem;
     margin-left: 1rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    position: sticky;
+    top: 6rem;
 }
 
 .seller-items {
