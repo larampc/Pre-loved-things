@@ -9,7 +9,8 @@ CREATE TABLE items (
     model VARCHAR,                      
     date INTEGER,                             -- date the item was published
     description VARCHAR,
-    user REFERENCES users
+    user REFERENCES users,
+    imagePath VARCHAR
 );
 
 CREATE TABLE users (
