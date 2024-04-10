@@ -2,7 +2,7 @@ main {
     display: grid;
     grid-template-columns:  1fr auto;
     grid-template-rows:  2fr 3fr;
-    column-gap: 3rem;
+    column-gap: 10rem;
     grid-template-areas: "user items"
                             "feedback items";
                            
