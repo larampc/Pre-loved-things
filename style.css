@@ -69,12 +69,16 @@ input[name="search"] {
     height: 1rem;
 }
 
+
+button {
+    font-family: "Carrois Gothic SC";
+}
+
 .dropbtn {
     display: flex;
     align-items: center;
     background-color: #D9D9D9;
     color: black;
-    font-family: "Carrois Gothic SC";
     border: none;
     cursor: pointer;
     height: 2rem;
