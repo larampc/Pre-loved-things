@@ -24,9 +24,7 @@
                 </div>
               </div>
             <form action="/action_page.php">
-                <label>
                     <input type="text" name="search">
-                </label>
                 <button type="submit" class="searchbtn"><img src="images/search.png" alt="search button"></button>
             </form>
         </div>
