@@ -4,7 +4,7 @@
   <h2>Last Added Items</h2>
   <div class="item-main">
     <?php foreach($items as $item) { ?> 
-        <img src="images/flowe.png"></img>
+        <img src="<?="images/" . $item['imagePath']?>" alt="<?= explode($item['imagePath'],'.')[0]?>"  >
         <div class="item-info">
             <p class="name"><?=$item['Name']?></p>
             <p class="price"><?=$item['Price']?></p>
@@ -12,8 +12,8 @@
        <?php } ?>
     <h2>Most liked</h2>
     <section class="items">
-    <?php foreach($items as $item) { ?> 
-        <img src="images/flowe.png"></img>
+    <?php foreach($items as $item) { ?>
+        <img src="<?="images/" . $item['imagePath']?>" alt="<?= explode($item['imagePath'],'.')[0]?>"  >
         <div class="item-info">
             <p class="name"><?=$item['Name']?></p>
             <p class="price"><?=$item['Price']?></p>

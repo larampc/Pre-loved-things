@@ -10,10 +10,10 @@
 </head>
 <body>
     <header>
-        <a href="main.php"><img src="images/logo.png" id="logo"></a>
+        <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
         <div class="search-container">
             <div class="dropdown-categories">
-                <button class="dropbtn">All Categories<img src="images/dropdown.png"></button>
+                <button class="dropbtn">All Categories<img src="images/dropdown.png" alt="categories dropdown button"></button>
                 <div class="dropdown-content">
                 <a href="#">Clothes</a>
                 <a href="#">Technology</a>
@@ -24,13 +24,15 @@
                 </div>
               </div>
             <form action="/action_page.php">
-              <input type="text" name="search">
-              <button type="submit" class="searchbtn"><img src="images/search.png"></button>
+                <label>
+                    <input type="text" name="search">
+                </label>
+                <button type="submit" class="searchbtn"><img src="images/search.png" alt="search button"></button>
             </form>
         </div>
         <div class="nav">
-            <a href="liked.php"><img src="images/heart.png" id="heart"></a>
-            <a href="cart.php"><img src="images/cart.png" id="cart"></a>
+            <a href="liked.php"><img src="images/heart.png" id="heart" alt="heart"></a>
+            <a href="cart.php"><img src="images/cart.png" id="cart" alt="cart"></a>
             <a href="login.html" id="login">Log in</a>
         </div> 
     </header>
@@ -38,7 +40,6 @@
 
 <?php function drawFooter() { ?>
     </main>
-
     <footer>
         <p>© Pre-loved, 2024</p>
     </footer>
