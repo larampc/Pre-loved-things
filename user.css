@@ -1,19 +1,30 @@
 main {
     display: grid;
     grid-template-columns:  1fr auto;
-    grid-template-rows:  auto auto;
+    grid-template-rows:  2fr 3fr;
+    column-gap: 3rem;
     grid-template-areas: "user items"
                             "feedback items";
                            
-    padding: 1rem 3rem 0 3rem;
+    padding: 3rem;
 }
 
 .user  {
     grid-area: user;
+    display: flex;
+    margin-bottom: 2rem;
 }
 
 .feedback {
     grid-area: feedback;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.comment-box {
+    overflow:auto;
 }
 
 .items {
@@ -24,9 +35,11 @@ main {
 }
 
 .user img {
-    height: 10rem;
-    margin-right: 1rem;
     float: left;
+}
+
+.user-detais {
+    align-self: center;
 }
 
 .item-main {
@@ -70,7 +83,7 @@ main {
 
 .comment {
     background-color: #F1F1F1;
-    margin: 1rem;
+    margin: 0 1rem 1rem;
     border-radius: 1rem;
 }
 
