@@ -127,3 +127,49 @@ body > header {
 .itemPage .itemTags ul {
     display: flex;
 }
+
+/* CART PAGE */
+
+.cartPage .Buy {
+    justify-content: center;
+}
+
+.cartPage .seller {
+    display: grid;
+    grid-template-columns:  2fr 1fr;
+    grid-template-rows:  auto auto;
+    grid-template-areas: "seller-info seller-info"
+                            " seller-items sum";
+}
+
+.cartPage .seller-info {
+    grid-area: seller-info;
+    display: flex;
+    align-items: center;
+}
+
+.cartPage .item {
+    display: flex;
+}
+
+.cartPage .item-info {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cartPage .sum {
+    grid-area: sum;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.cartPage .seller-items {
+    grid-area: seller-items;
+}
+
+.cartPage .sum-price {
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,6 @@
+/* CART PAGE */
+
+.cartPage .sum {
+    position: sticky;
+    top: 6rem;
+}
