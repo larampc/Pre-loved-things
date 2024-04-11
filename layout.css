@@ -50,6 +50,20 @@ body > header {
     align-items: center;
 }
 
+.items {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+
+/* ITEM CARD */
+
+.item-main .item-info {
+    display: flex;
+    justify-content: space-between;
+}
+
 
 
 /* ITEM PAGE */

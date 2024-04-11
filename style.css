@@ -87,7 +87,7 @@ button {
 }
 
 main {
-    margin-top: 5rem;
+    margin-top: 6rem;
     margin-bottom: 2rem;
 }
 
@@ -98,6 +98,36 @@ body > footer {
     color: black;
     text-align: center;
 }
+
+main > h2 {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+
+
+
+
+/* ITEM CARD */
+
+.item-main .item-info {
+    p {
+        margin: 0.2rem; 
+    }
+    .price {
+        font-weight: bold;
+        text-align: right;
+    }
+}
+
+.item-main img{
+    width: 10rem;
+    height: 10rem;
+    border-radius: 0.5rem;
+    border-style: solid;
+    border-color: #D9D9D9;
+}
+
 
 
 
