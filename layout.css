@@ -173,3 +173,10 @@ body > header {
     display: flex;
     justify-content: space-between;
 }
+
+/* NEW ITEM PAGE */
+
+main .newItemPage form {
+    display: flex;
+    flex-direction: column;
+}
