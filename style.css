@@ -6,26 +6,17 @@ body {
 }
 
 body > header {
-    position: fixed;
     width: 100%;
-    top:0;
-    display: flex;
     height: 5rem;
     background-color: #F2E8D5;
-    align-items: center;
-    justify-content:space-between;
-    z-index: 10;
 }
 
 .search-container {
-    display: flex;
-    align-items: center;
     background-color: white;
     border-radius: 30px;
     border-color: black;
     border-width: 1px;
     border-style:solid;
-    flex-grow: 0.5;
 }
 
 #cart, #heart{
@@ -42,12 +33,6 @@ body > header {
 
 #logo {
     height: 5rem;
-}
-
-.search-container form {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
 }
 
 input[name="search"] {
@@ -75,8 +60,6 @@ button {
 }
 
 .dropbtn {
-    display: flex;
-    align-items: center;
     background-color: #D9D9D9;
     color: black;
     border: none;
@@ -84,19 +67,11 @@ button {
     height: 2rem;
     border-radius: 30px;
 }
-  
-.dropdown-categories {
-    position: relative;
-    display: inline-block;
-}
-  
+
 .dropdown-content {
-    display: none;
-    position: absolute;
     background-color: #f9f9f9;
     min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
     border-radius: 1rem;
 }
   
@@ -104,16 +79,11 @@ button {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
-    display: block;
 }
   
 .dropdown-content a:hover {
     background-color: #D9D9D9;
     border-radius: 1rem;
-}
-  
-.dropdown-categories:hover .dropdown-content {
-    display: block;
 }
 
 main {
@@ -127,11 +97,6 @@ body > footer {
     background-color: #F2E8D5;
     color: black;
     text-align: center;
-}
-
-.nav {
-    display: flex;
-    align-items: center;
 }
 
 

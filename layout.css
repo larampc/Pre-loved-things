@@ -1,3 +1,59 @@
+
+
+body > header {
+    position: fixed;
+    top:0;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    z-index: 10;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    flex-grow: 0.5;
+}
+
+.search-container form {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.dropbtn {
+    display: flex;
+    align-items: center;
+}
+  
+.dropdown-categories {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    display: block;
+}
+
+.dropdown-categories:hover .dropdown-content {
+    display: block;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+
+
+/* ITEM PAGE */
+
 .itemPage {
     display: grid;
     grid-template-columns:  auto auto auto;
