@@ -180,3 +180,32 @@ main .newItemPage form {
     display: flex;
     flex-direction: column;
 }
+
+/* SEARCH PAGE */
+
+.searchPage .item-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchPage .options {
+    display: flex;
+    flex-direction: column;
+}
+
+main .searchPage{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "filter items";
+}
+
+.searchPage .filter {
+    grid-area: filter;
+}
+
+.searchPage .items {
+    grid-area: items;
+    display: flex;
+    flex-wrap: wrap;
+}

@@ -320,3 +320,31 @@ main .newItemPage form > * {
     border-radius: 0.5rem;
     background-color: #F2E8D5;
 }
+
+/* SEARCH PAGE */
+
+.searchPage .item-info {
+    width: 10rem;
+}
+
+.searchPage .price {
+    text-align: right;
+}
+
+main .searchPage  h2 {
+    margin:0;
+}
+
+.searchPage .filter {
+    padding: 1rem;
+    background-color: #F2E8D5;
+    margin-right: 1rem;
+}
+
+.searchPage .items {
+    margin: 2rem 0;
+}
+
+.searchPage .item-main {
+    flex: 10%;
+}
