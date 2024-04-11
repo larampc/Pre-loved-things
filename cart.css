@@ -49,13 +49,6 @@ main h2 {
 .item {
     display: flex;
     margin: 1rem;
-    img {
-        width: 10rem;
-        height: 10rem;
-        border-radius: 0.5rem;
-        border-style: solid;
-        border-color: #D9D9D9;
-    }
 }
 
 .item-info {
