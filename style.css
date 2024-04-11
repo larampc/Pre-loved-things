@@ -285,3 +285,38 @@ main .cartPage  h2 {
 .cartPage .seller-items {
     border-bottom-style: solid;
 }
+
+/* NEW ITEM PAGE */
+
+main .newItemPage {
+    background-color: #F2E8D5;
+}
+
+main .newItemPage form {
+    background-color: white;
+    padding: 1rem;
+    margin: 0 1rem;
+}
+
+main .newItemPage h2 {
+    text-align: center;
+}
+
+main .newItemPage form > * {
+    padding: 0.5rem;
+}
+
+.newItemPage input[type=text], input[type=number], select  {
+    background-color: #F1F1F1;
+    border-style: none;
+    border-radius: 0.5rem;
+}
+
+.newItemPage input[type=submit] {
+    margin-top:1.5rem;
+    width: 10rem;
+    margin: auto;
+    border-style: none;
+    border-radius: 0.5rem;
+    background-color: #F2E8D5;
+}

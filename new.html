@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style.css" rel="stylesheet">
         <link href="layout.css" rel="stylesheet">
-        <link href="new.css" rel="stylesheet">
     </head>
     <body>
     <header>
@@ -35,36 +34,37 @@
         </div> 
     </header>
     <main>
-        <h2>New item</h2>
-        <form>
-            <label for="iname">Item Name</label>
-            <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
+        <article class="newItemPage">
+            <h2>New item</h2>
+            <form>
+                <label for="iname">Item Name</label>
+                <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 
-            <label for="category">category</label>
-                <select id="category" name="category">
-                <option value="other">Other</option>
-                <option value="clothes">Clothes</option>
-                <option value="tech">Technology</option>
-                <option value="toys">Toys</option>
-                <option value="cars">Cars</option>
-                <option value="books">Books</option>
-                <option value="sports">Sports</option>
-                </select>
+                <label for="category">category</label>
+                    <select id="category" name="category">
+                    <option value="other">Other</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="tech">Technology</option>
+                    <option value="toys">Toys</option>
+                    <option value="cars">Cars</option>
+                    <option value="books">Books</option>
+                    <option value="sports">Sports</option>
+                    </select>
 
-            <label for="price">Price</label>
-            <input type="number" id="price" name="price" placeholder="The price of your item" required>
+                <label for="price">Price</label>
+                <input type="number" id="price" name="price" placeholder="The price of your item" required>
 
-            <label for="description">Desciption</label>
-            <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
+                <label for="description">Desciption</label>
+                <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
 
-            <label for="description">images</label>
-            <input type="file" id="img1" name="img1" accept="image/*" required>
-            <input type="file" id="img2" name="img2" accept="image/*" required>
+                <label for="description">images</label>
+                <input type="file" id="img1" name="img1" accept="image/*" required>
+                <input type="file" id="img2" name="img2" accept="image/*" required>
 
 
-            <input type="submit" value="Submit">
-        </form>
-
+                <input type="submit" value="Submit">
+            </form>
+        </article>
     </main>
     <footer>
         <p>© Pre-loved, 2024</p>
