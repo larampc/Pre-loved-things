@@ -70,7 +70,6 @@ input[name="search"] {
     height: 1rem;
 }
 
-
 button {
     font-family: "Carrois Gothic SC";
 }
@@ -119,6 +118,7 @@ button {
 
 main {
     margin-top: 5rem;
+    margin-bottom: 2rem;
 }
 
 body > footer {
@@ -132,4 +132,95 @@ body > footer {
 .nav {
     display: flex;
     align-items: center;
+}
+
+
+
+/* ITEM PAGE */
+
+.itemPage .picture {
+    img {
+        margin-right: 3rem;
+        width: 25rem;
+        height: 25rem;
+        border-radius: 1rem;
+    }
+}
+
+.itemPage .userProfile {
+    margin-right: 3rem;
+    img {
+        height: 2rem;
+        margin-top: 0.5rem;
+    }
+}
+
+.itemPage .sendMessage-btn {
+    background-color: #F2E8D5;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-top:0.5rem;
+    border-style: none;
+    color: #6A4806;
+}
+
+.itemPage .userProfile-btn {
+    background-color: transparent;
+    border-style: none;
+    text-decoration: underline;
+    margin-top: 1rem;
+}
+
+.itemPage header {
+    height: 4rem;
+    width: 100%;
+}
+
+.itemPage .edit img, .itemPage .like img {
+    height: 2rem;
+    margin: 1rem 0rem;
+}
+
+.itemPage .priceSection {
+    width: 100%;
+}
+
+.itemPage .price {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.itemPage .Buy {
+    background-color: transparent;
+    border-style: none;
+    color: #6A4806;
+    padding: 0;
+    margin-left: 5px;
+}
+
+.itemPage .buy-item {
+    background-color: #F2E8D5;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    height: 2rem;
+    img {
+        height: 1.5rem;
+    }
+}
+
+.itemPage .itemTags ul {
+    padding: 0;
+    margin: 0;
+}
+
+.itemPage .itemTags li {
+    font-size: 0.7rem;
+    margin-right: 0.5rem;
+    border-style: solid;
+    border-radius: 0.5rem;
+    border-color: grey;
+    padding: 0.3rem;
+    list-style: none;
+    height: 1rem;
+    margin-top: 0.5rem;
 }
