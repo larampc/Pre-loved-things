@@ -1,0 +1,44 @@
+main {
+    font-family: "Carrois Gothic SC";
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.7;
+    color: #c4c2ca;
+    background-color: #1f2029;
+    overflow-x: hidden;
+}
+
+.forgot-password {
+    color: #c4c3ca;
+}
+
+.forgot-password:hover {
+    color: #ffeba7;
+}
+
+.login-register p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.login-register p {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.login-register h2 {
+    font-weight: 600;
+}
+
+.login-register h4 span {
+    padding: 0 20px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.login-resgister a:hover {
+    text-decoration: none;
+}
+
