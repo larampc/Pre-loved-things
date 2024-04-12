@@ -5,6 +5,7 @@
     text-align: center;
     margin: 0 auto;
     width: 40%;
+    border-radius: 10px;
 }
 
 .login h2, .register h2 {
