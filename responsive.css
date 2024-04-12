@@ -4,3 +4,10 @@
     position: sticky;
     top: 6rem;
 }
+
+
+/* USER PAGE */
+
+.userPage .comment-box {
+    overflow:auto;
+}

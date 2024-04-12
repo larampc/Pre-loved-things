@@ -209,3 +209,40 @@ main .searchPage{
     display: flex;
     flex-wrap: wrap;
 }
+
+/* USER PAGE */
+
+main .userPage{
+    display: grid;
+    grid-template-columns:  1fr auto;
+    grid-template-rows:  2fr 3fr;
+    column-gap: 10rem;
+    grid-template-areas: "user items"
+                         "feedback items";
+}
+
+.userPage .user  {
+    grid-area: user;
+    display: flex;
+}
+
+.userPage .feedback {
+    grid-area: feedback;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.userPage .items {
+    grid-area: items;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userPage .user img {
+    float: left;
+}
+
+.userPage .comment img {
+    float: left;
+}
