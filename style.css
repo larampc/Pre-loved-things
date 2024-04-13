@@ -47,6 +47,7 @@ header nav {
 input[type="search"] {
     border-width: 0;
     outline: none;
+    width: 100%;
 }
 
 .searchbtn img {
