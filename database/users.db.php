@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-require_once('database/connection.db.php');
 
 function register_user(PDO $dbh, string $username, string $password)
 {

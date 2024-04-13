@@ -17,6 +17,9 @@ body > header {
     border-color: black;
     border-width: 1px;
     border-style:solid;
+    label {
+        width: 100%;
+    }
 }
 
 #cart, #heart{
@@ -35,10 +38,9 @@ body > header {
     height: 5rem;
 }
 
-input[name="search"] {
+input[type="search"] {
     border-width: 0;
     outline: none;
-    width: 100%;
 }
 
 .searchbtn img {
@@ -223,10 +225,8 @@ main > h2 {
 /* CART PAGE */
 
 .cartPage .Buy {
-    background-color: transparent;
     border-style: none;
     color: white;
-    padding: 0;
     background-color: black;
     border-radius: 0.5rem;
     padding: 1rem;
@@ -313,9 +313,8 @@ main .newItemPage form > * {
 }
 
 .newItemPage input[type=submit] {
-    margin-top:1.5rem;
     width: 10rem;
-    margin: auto;
+    margin: 1.5rem auto auto auto;
     border-style: none;
     border-radius: 0.5rem;
     background-color: #F2E8D5;

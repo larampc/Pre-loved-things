@@ -8,7 +8,7 @@
     require_once('database/connection.db.php');
 
     $db = getDatabaseConnection();
-    $items = getItems($db);
+    $items = getItems($db, 3);
 
     drawHeader();
     drawItems($items);
