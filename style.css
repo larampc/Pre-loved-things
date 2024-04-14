@@ -27,6 +27,12 @@ body > header {
     padding: 0.5rem;
 }
 
+header nav {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
 #login {
     padding-right: 1rem;
     padding-left: 0.5rem;
@@ -41,6 +47,7 @@ body > header {
 input[type="search"] {
     border-width: 0;
     outline: none;
+    width: 100%;
 }
 
 .searchbtn img {
