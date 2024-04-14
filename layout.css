@@ -150,14 +150,14 @@ body > header {
 .slider-btns{
     position: absolute;
     z-index: 2;
-    width:40%;
+    width:24rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .slider-btns span{
-    padding: 1vi 1.2vi;
-    font-size: 2vi;
+    padding: 0.5rem 0.6rem;
+    font-size: 1rem;
     background: rgba(255, 255, 255, 0.151);
     border-radius: 100%;
     color: white;
@@ -170,13 +170,13 @@ body > header {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .5vi;
+    gap: .5rem;
     z-index: 1;
 }
 
 .dots .dot{
-    width: 1vi;
-    height: 1vi;
+    width: 0.5rem;
+    height: 0.5rem;
     background-color: white;
     opacity: .2;
     border-radius: 50%;

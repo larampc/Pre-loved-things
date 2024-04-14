@@ -146,7 +146,7 @@ main > h2 {
 .slides, .item-images, .image-slide {
     width: 25rem;
     height: 25rem;
-    border-radius: 3vi;
+    border-radius: 3rem;
 }
 
 .item-images {
