@@ -80,7 +80,7 @@ body > header {
 }
 
 
-.itemPage .picture {
+.itemPage .item-images {
     grid-area: picture;
 }
 
@@ -126,6 +126,61 @@ body > header {
 
 .itemPage .itemTags ul {
     display: flex;
+}
+
+.slides {
+    position: absolute;
+    object-fit: cover;
+}
+
+.item-images{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.image-slide{
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-btns{
+    position: absolute;
+    z-index: 2;
+    width:40%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slider-btns span{
+    padding: 1vi 1.2vi;
+    font-size: 2vi;
+    background: rgba(255, 255, 255, 0.151);
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+}
+.dots{
+    position: absolute;
+    width: 100%;
+    top: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5vi;
+    z-index: 1;
+}
+
+.dots .dot{
+    width: 1vi;
+    height: 1vi;
+    background-color: white;
+    opacity: .2;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
 /* CART PAGE */

@@ -11,3 +11,13 @@
 .userPage .comment-box {
     overflow:auto;
 }
+
+/* ITEM PAGE */
+
+.slides {
+    transition: transform .4s ease-in-out;
+}
+
+.dots .dot {
+    transition: opacity .2s ease-in-out;
+}

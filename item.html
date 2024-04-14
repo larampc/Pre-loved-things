@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="style.css" rel="stylesheet">
         <link href="layout.css" rel="stylesheet">
+        <link href="responsive.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <header>
@@ -40,7 +42,21 @@
                     <span class="edit"><img src="images/pencil.png" alt="pencil"></span>
                     <span class="like"><img src="images/heart.png" alt="heart"></span>
                 </header>
-                <span class="picture"><img src="https://picsum.photos/200" alt="item photo"></span>
+                <div class="item-images">
+                    <div class="slider-btns">
+                        <span id="prev-btn"><i class="fa fa-chevron-left"></i></span>
+                        <span id="next-btn"><i class="fa fa-chevron-right"></i></span>
+                    </div>
+                    <div class="image-slide">
+                        <section class="dots">
+                            <div class="dot" style="opacity: 0.2;"></div>
+                            <div class="dot" style="opacity: 0.2;"></div>
+                        </section>
+                        <img class="slides" src="images/item_ex/godafoss-1840758__340.jpg" alt="item">
+                        <img class="slides" src="images/item_ex/night-3078326__340.jpg" alt="item">
+                    </div>
+                </div>
+                <script src="slide.js"></script>
                 <section class="description">
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor efficitur tempus. Suspendisse potenti. In hac habitasse platea dictumst. Duis maximus vestibulum purus, non iaculis dolor pretium a. Nulla venenatis velit quis nisl ultricies, non condimentum urna eleifend. Sed sit amet urna tortor. Phasellus eget sodales est. Integer bibendum est et orci mollis tristique. Nunc cursus aliquet leo et consectetur. Donec eros dolor, consectetur nec dolor sit amet, finibus dictum sapien.</p>
                 </section>

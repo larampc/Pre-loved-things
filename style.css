@@ -135,13 +135,15 @@ main > h2 {
 
 /* ITEM PAGE */
 
-.itemPage .picture {
-    img {
-        margin-right: 3rem;
-        width: 25rem;
-        height: 25rem;
-        border-radius: 1rem;
-    }
+
+.slides, .item-images, .image-slide {
+    width: 25rem;
+    height: 25rem;
+    border-radius: 3vi;
+}
+
+.item-images {
+    margin-right: 3rem;
 }
 
 .itemPage .userProfile {
