@@ -11,7 +11,7 @@
     <link href="icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body>
+<body> 
     <header>
         <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
         <search class="search-container">
@@ -35,12 +35,10 @@
         </search>
         <nav>
             <i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i>
-<!--            <i class="material-symbols-outlined big"> shopping_bag </i>-->
-<!--            <i class="material-symbols-outlined big"> shopping_cart </i>-->
             <?php if (isset($_SESSION['username'])) { ?>
                 <i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i>
                 <?= $_SESSION['username'] ?> |
-                <a href="user.php?username=<?=$_SESSION['username']?>"><i class="material-symbols-outlined <?= $page=="user"? "filled": "big"?>"> person </i> </a>
+                <a href="profile.php?>"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
                 <a href="login.php" id="login">Log in</a>
             <?php } ?>
@@ -51,6 +49,7 @@
 
 <?php function draw_footer() { ?>
     </main>
+    <script src="header.js" defer></script>
     <footer>
         <p>© Pre-loved, 2024</p>
     </footer>

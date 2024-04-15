@@ -11,12 +11,15 @@
     require_once('templates/item.tpl.php');
 
     $db = get_database_connection();
-    draw_header("user");
+    draw_header("profile");
     ?>
     <article class="userPage">
     <?php
-    $username = $_GET['username'];
-    $user = get_user($db, $username);
+    $username = $_SESSION['username'];
+    $user = get_user($db, $username);?>
+        <a href="action_logout.php" class="logout">Log out</a>
+        <a href="new.php" class="logout">New Item</a>
+    <?php
     $feedback = get_user_feedback($db, $username);
     $items = get_user_items($db, $username);
 

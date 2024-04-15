@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-function drawUserDetails($user) { ?>
+function draw_user_details($user) { ?>
     <section class="user">
         <img src="images/profile.png" class="profile-pic" alt="profile picture">
         <div class="user-details">
@@ -12,7 +12,7 @@ function drawUserDetails($user) { ?>
     <?php
 }
 
-function drawUserFeedback($user, $feedback) { ?>
+function draw_user_feedback($user, $feedback) { ?>
     <section class="feedback">
         <h2>Feedback</h2>
             <div class ="comment-box">

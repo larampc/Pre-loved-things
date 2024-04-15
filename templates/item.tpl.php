@@ -75,4 +75,38 @@ function draw_items(array $items) { ?>
             </ul>
         </section>
     </article>
+<?php }
+
+function draw_new_item_form() { ?>
+    <article class="newItemPage">
+        <h2>New item</h2>
+        <form action="action_new_item.php" method="POST">
+            <label for="iname">Item Name</label>
+            <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
+
+            <label for="category">category</label>
+            <select id="category" name="category">
+                <option value="other">Other</option>
+                <option value="clothes">Clothes</option>
+                <option value="tech">Technology</option>
+                <option value="toys">Toys</option>
+                <option value="cars">Cars</option>
+                <option value="books">Books</option>
+                <option value="sports">Sports</option>
+            </select>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" placeholder="The price of your item" required>
+
+            <label for="description">Desciption</label>
+            <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
+
+            <label for="description">images</label>
+            <input type="file" id="img1" name="img1" accept="image/*" required>
+            <input type="file" id="img2" name="img2" accept="image/*" required>
+
+
+            <input type="submit" value="Submit">
+        </form>
+    </article>
 <?php } ?>
