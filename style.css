@@ -3,6 +3,7 @@
 body {
     margin: 0;
     font-family: "Carrois Gothic SC", serif;
+    min-height: 100dvh;
 }
 
 body > header {
@@ -90,8 +91,7 @@ button {
 }
 
 main {
-    margin-top: 6rem;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 }
 
 body > footer {

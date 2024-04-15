@@ -1,8 +1,18 @@
 
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
 body > header {
-    position: fixed;
-    top:0;
     display: flex;
     align-items: center;
     justify-content:space-between;
