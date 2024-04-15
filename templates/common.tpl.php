@@ -1,4 +1,4 @@
-<?php function draw_header() { ?>
+<?php function draw_header(string $page) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -8,14 +8,15 @@
     <link href="style.css" rel="stylesheet">
     <link href="layout.css" rel="stylesheet">
     <link href="responsive.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <header>
         <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
         <search class="search-container">
             <div class="dropdown-categories">
-                <button class="dropbtn">All Categories<img src="images/dropdown.png" alt="categories dropdown button"></button>
+                <button class="dropbtn">All Categories<i class="material-symbols-outlined">expand_more</i></button>
                 <div class="dropdown-content">
                     <a href="#">Clothes</a>
                     <a href="#">Technology</a>
@@ -29,15 +30,17 @@
                 <label>
                     <input type="search" id="searchbar">
                 </label>
-                <button type="submit" class="searchbtn"><img src="images/search.png" alt="search button"></button>
+                <button type="submit" class="searchbtn"><i class="material-symbols-outlined">search</i></button>
             </form>
         </search>
         <nav>
-            <a href="liked.php"><img src="images/heart.png" id="heart" alt="heart"></a>
-            <a href="cart.php"><img src="images/cart.png" id="cart" alt="cart"></a>
+            <i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i>
+<!--            <i class="material-symbols-outlined big"> shopping_bag </i>-->
+<!--            <i class="material-symbols-outlined big"> shopping_cart </i>-->
             <?php if (isset($_SESSION['username'])) { ?>
+                <i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i>
                 <?= $_SESSION['username'] ?> |
-                <a href="user.php"><i class="fa-regular fa-user"></i></a>
+                <a href="user.php?username=<?=$_SESSION['username']?>"><i class="material-symbols-outlined <?= $page=="user"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
                 <a href="login.php" id="login">Log in</a>
             <?php } ?>

@@ -1,12 +1,14 @@
 <?php
     declare(strict_types = 1);
 
+    session_start();
+
     require_once('database/connection.db.php');
     require_once('database/cart.db.php');
 
     require_once('templates/common.tpl.php');
 
-    draw_header();
+    draw_header("cart");
 
     ?>
 

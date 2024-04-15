@@ -1,6 +1,8 @@
 <?php
 
     declare(strict_types=1);
+    session_start();
+
     require_once('database/connection.db.php');
     require_once('database/users.db.php');
 
@@ -9,7 +11,7 @@
     require_once('templates/item.tpl.php');
 
     $db = get_database_connection();
-    draw_header();
+    draw_header("user");
     ?>
     <article class="userPage">
     <?php

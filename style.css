@@ -468,3 +468,7 @@ main .userPage{
     text-decoration: none;
     padding-bottom: 1rem;
 }
+
+i {
+    color: black;
+}
