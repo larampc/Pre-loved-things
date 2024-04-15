@@ -16,19 +16,19 @@ function verify_user(PDO $dbh, string $username, string $password): bool
   return $stmt->fetch() !== false;
 }
 
-function getUser(PDO $dbh, string $username): ?array {
+function getUser(PDO $dbh, string $username): array {
     $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
     $stmt->execute(array($username));
     return $stmt->fetch();
 }
 
-function getUserFeedback(PDO $dbh, string $username): ?array {
+function getUserFeedback(PDO $dbh, string $username): array {
     $stmt = $dbh->prepare('SELECT * FROM comments WHERE mainuser = ?');
     $stmt->execute(array($username));
     return $stmt->fetchAll();
 }
 
-function getUserItems(PDO $dbh, string $username): ?array {
+function getUserItems(PDO $dbh, string $username): array {
     $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
     $stmt->execute(array($username));
     return $stmt->fetchAll();

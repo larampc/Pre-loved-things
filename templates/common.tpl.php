@@ -34,12 +34,11 @@
         <nav>
             <a href="liked.php"><img src="images/heart.png" id="heart" alt="heart"></a>
             <a href="cart.php"><img src="images/cart.png" id="cart" alt="cart"></a>
-            <a href="login.html" id="login">Log in</a>
             <?php if (isset($_SESSION['username'])) { ?>
                 <?= $_SESSION['username'] ?> |
                 <a href="user.php"><img src="images/user.png" id="user-pic" alt="user"></a>
             <?php } else { ?>
-                <a href="login.php" id="login">Login</a>
+                <a href="login.php" id="login">Log in</a>
             <?php } ?>
         </nav>
     </header>

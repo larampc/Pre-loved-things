@@ -12,5 +12,5 @@
     $item = getItem($db, intval($_GET['id']));
 
     draw_header();
-    drawItemPage($item);
+    draw_item_page($item);
     draw_footer();

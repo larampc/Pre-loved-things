@@ -21,6 +21,12 @@ body > header {
     flex-grow: 1;
 }
 
+header nav {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
 .dropbtn {
     display: flex;
     align-items: center;

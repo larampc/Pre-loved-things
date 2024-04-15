@@ -8,8 +8,8 @@
     require_once('templates/common.tpl.php');
     require_once('templates/item.tpl.php');
 
-    $db = getDatabaseConnection();
-    drawHeader();
+    $db = get_database_connection();
+    draw_header();
     ?>
     <article class="userPage">
     <?php
@@ -21,8 +21,8 @@
     drawUserDetails($user);
     drawUserfeedback($user, $feedback);
     foreach ($items as $item) {
-        drawItem($item);
+        draw_item($item);
     }
     ?> </article>
 <?php
-    drawFooter();
+    draw_footer();

@@ -1,6 +1,6 @@
-<?php declare(strict_types = 1); ?>
+<?php declare(strict_types = 1);
 
-function drawItem($item) { ?>
+function draw_item($item) { ?>
     <div class="item-main">
         <img src="<?="images/" . $item['imagePath']?>" alt="<?= explode($item['imagePath'],'.')[0]?>">
         <div class="item-info">
@@ -14,18 +14,18 @@ function draw_items(array $items) { ?>
     <h2>Last Added Items</h2>
     <section class="items">
         <?php foreach($items as $item) {
-            drawItem($item);
+            draw_item($item);
         } ?>
     </section>
     <h2>Most liked</h2>
     <section class="items">
     <?php foreach($items as $item) {
-        drawItem($item);
+        draw_item($item);
     } ?>
     </section>
 <?php } ?>
 
-<?php function drawItemPage($item) { ?>
+<?php function draw_item_page($item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item['name']?></h2>
