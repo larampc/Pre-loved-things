@@ -10,5 +10,5 @@ $dbh = get_database_connection();
 
 if (verify_user($dbh, $_POST['username'], $_POST['password'])) {
   $_SESSION['username'] = $_POST['username'];
-  header('Location: index.php');
+  header('Location: main.php');
 } else  header('Location: login.php');

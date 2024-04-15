@@ -1,4 +1,4 @@
-<?php function drawHeader() { ?>
+<?php function draw_header() { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
-    <link href="main-items.css" rel="stylesheet">
+    <link href="layout.css" rel="stylesheet">
+    <link href="responsive.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -31,13 +32,18 @@
         <div class="nav">
             <a href="liked.php"><img src="images/heart.png" id="heart" alt="heart"></a>
             <a href="cart.php"><img src="images/cart.png" id="cart" alt="cart"></a>
-            <a href="login.html" id="login">Log in</a>
-        </div> 
+            <?php if (isset($_SESSION['username'])) { ?>
+                <?= $_SESSION['username'] ?> |
+                <a href="user.php"><img src="images/user.png" id="user-pic" alt="user"></a>
+            <?php } else { ?>
+                <a href="login.php" id="login">Login</a>
+            <?php } ?>
+        </div>
     </header>
     <main>
 <?php } ?>
 
-<?php function drawFooter() { ?>
+<?php function draw_footer() { ?>
     </main>
     <footer>
         <p>© Pre-loved, 2024</p>

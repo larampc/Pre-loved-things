@@ -8,9 +8,9 @@
     require_once('database/connection.db.php');
     require_once('database/item.db.php');
 
-    $db = getDatabaseConnection();
+    $db = get_database_connection();
     $item = getItem($db, intval($_GET['id']));
 
-    drawHeader();
+    draw_header();
     drawItemPage($item);
-    drawFooter();
+    draw_footer();

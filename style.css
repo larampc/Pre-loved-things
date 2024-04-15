@@ -19,7 +19,7 @@ body > header {
     border-style:solid;
 }
 
-#cart, #heart{
+#cart, #heart, #user-pic {
     height: 2rem;
     padding: 0.5rem;
 }
@@ -416,4 +416,44 @@ main .userPage{
 
 .userPage .feedback > p {
     text-decoration:underline;
+}
+
+/* LOGIN AND REGISTER */
+.login, .register {
+    background-color: #F2E8D5;
+    text-align: center;
+    margin: 0 auto;
+    width: 40%;
+    border-radius: 10px;
+}
+.login h2, .register h2 {
+    padding-top: 1rem;
+}
+.login form > *, .register form > * {
+    margin: 0.5rem auto;
+}
+.login button, .register button {
+    border-style: none;
+    color: white;
+    padding: 0;
+    background-color: black;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    justify-content: center;
+    width: 50%;
+    margin-bottom: 1.5rem;
+}
+
+.login input, .register input {
+    border-style: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+    width: 65%;
+}
+
+.login a {
+    color: black;
+    text-decoration: none;
+    padding-bottom: 1rem;
 }

@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1); ?>
 
-<?php function drawItems(array $items) { ?>
+<?php function draw_items(array $items) { ?>
     <h2>Last Added Items</h2>
     <section class="items">
         <?php foreach($items as $item) { ?>
