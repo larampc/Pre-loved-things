@@ -6,7 +6,7 @@
 
     require_once('templates/common.tpl.php');
 
-    drawHeader();
+    draw_header();
 
     ?>
 
@@ -14,12 +14,12 @@
         <h2>Your cart</h2>
         <section class="seller">
             <div class="seller-info">
-                <img src="images/profile.png" class="profile-pic">
+                <img src="images/profile.png" class="profile-pic" alt="profile-photo">
                 <p>Username</p>
             </div>
             <section class="seller-items">
                 <div class="item">
-                    <img src="images/flower.png">
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
@@ -41,33 +41,33 @@
         </section>
         <section class="seller">
             <div class="seller-info">
-                <img src="images/profile.png" class="profile-pic">
+                <img src="images/profile.png" class="profile-pic" alt="profile">
                 <p>Username</p>
             </div>
             <section class="seller-items">
                 <div class="item">
-                    <img src="images/flower.png"></img>
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="images/flower.png">
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="images/flower.png">
+                    <img src="images/flower.png"  alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="images/flower.png">
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
@@ -89,26 +89,26 @@
         </section>
         <section class="seller">
             <div class="seller-info">
-                <img src="images/profile.png" class="profile-pic">
+                <img src="images/profile.png" class="profile-pic" alt="profile">
                 <p>Username</p>
             </div>
             <section class="seller-items">
                 <div class="item">
-                    <img src="images/flower.png">
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="images/flower.png">
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="images/flower.png"></img>
+                    <img src="images/flower.png" alt="item">
                     <div class="item-info">
                         <p class="name">Name</p>
                         <p class="price">Price</p>
