@@ -131,6 +131,6 @@
     </article>
 
 <?php
-    drawFooter();
+    draw_footer();
 
 

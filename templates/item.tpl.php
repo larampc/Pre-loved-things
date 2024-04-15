@@ -1,13 +1,13 @@
 <?php declare(strict_types = 1);
 
 function draw_item($item) { ?>
-    <div class="item-main">
+    <a href="item.php?id=<?= $item['id']?>" class="item-main">
         <img src="<?="images/" . $item['imagePath']?>" alt="<?= explode($item['imagePath'],'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item['name']?></p>
             <p class="price"><?=$item['price']?></p>
         </div>
-    </div>
+    </a>
 <?php }
 
 function draw_items(array $items) { ?>

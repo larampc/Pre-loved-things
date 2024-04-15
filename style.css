@@ -114,6 +114,7 @@ main > h2 {
 /* ITEM CARD */
 
 .item-main .item-info {
+    color: black;
     p {
         margin: 0.2rem; 
     }
@@ -121,6 +122,10 @@ main > h2 {
         font-weight: bold;
         text-align: right;
     }
+}
+
+.item-main {
+    text-decoration: none;
 }
 
 .item-main img, .item img{
