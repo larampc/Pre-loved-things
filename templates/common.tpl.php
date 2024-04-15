@@ -8,6 +8,7 @@
     <link href="style.css" rel="stylesheet">
     <link href="layout.css" rel="stylesheet">
     <link href="responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <header>
@@ -36,7 +37,7 @@
             <a href="cart.php"><img src="images/cart.png" id="cart" alt="cart"></a>
             <?php if (isset($_SESSION['username'])) { ?>
                 <?= $_SESSION['username'] ?> |
-                <a href="user.php"><img src="images/user.png" id="user-pic" alt="user"></a>
+                <a href="user.php"><i class="fa-regular fa-user"></i></a>
             <?php } else { ?>
                 <a href="login.php" id="login">Log in</a>
             <?php } ?>
