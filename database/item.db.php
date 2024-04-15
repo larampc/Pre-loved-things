@@ -1,7 +1,7 @@
 <?php
   declare(strict_types = 1);
 
-  function getItems(PDO $db, int $count) {
+  function get_items(PDO $db, int $count) {
     $stmt = $db->prepare('SELECT * FROM items LIMIT ?');
     $stmt->execute([$count]);
     return $stmt->fetchAll();

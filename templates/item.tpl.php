@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1); ?>
 
 function drawItem($item) { ?>
     <div class="item-main">
@@ -10,7 +10,7 @@ function drawItem($item) { ?>
     </div>
 <?php }
 
-function drawItems(array $items) { ?>
+function draw_items(array $items) { ?>
     <h2>Last Added Items</h2>
     <section class="items">
         <?php foreach($items as $item) {
@@ -22,7 +22,7 @@ function drawItems(array $items) { ?>
     <?php foreach($items as $item) {
         drawItem($item);
     } ?>
-    </section> 
+    </section>
 <?php } ?>
 
 <?php function drawItemPage($item) { ?>

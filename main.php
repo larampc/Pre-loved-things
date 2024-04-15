@@ -7,9 +7,9 @@
     require_once('database/item.db.php');
     require_once('database/connection.db.php');
 
-    $db = getDatabaseConnection();
-    $items = getItems($db, 3);
+    $db = get_database_connection();
+    $items = get_items($db, 3);
 
-    drawHeader();
-    drawItems($items);
-    drawFooter();
+    draw_header();
+    draw_items($items);
+    draw_footer();

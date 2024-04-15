@@ -301,3 +301,9 @@ main .userPage{
 .userPage .comment img {
     float: left;
 }
+
+/* LOGIN AND REGISTER */
+.login form, .register form {
+    display: flex;
+    flex-direction: column;
+}
