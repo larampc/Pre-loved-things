@@ -1,4 +1,5 @@
 <?php declare(strict_types = 1);
+require_once('templates/common.tpl.php');
 
 function draw_item($item) { ?>
     <a href="item.php?id=<?= $item['id']?>" class="item-main">

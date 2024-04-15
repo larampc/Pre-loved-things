@@ -1,5 +1,6 @@
 <?php
   declare(strict_types = 1);
+  require_once('database/connection.db.php');
 
   function get_items(PDO $db, int $count) {
     $stmt = $db->prepare('SELECT * FROM items LIMIT ?');
