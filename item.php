@@ -11,7 +11,7 @@
     require_once('database/item.db.php');
 
     $db = get_database_connection();
-    $item = getItem($db, intval($_GET['id']));
+    $item = get_item($db, intval($_GET['id']));
 
     draw_header("item");
     draw_item_page($item);

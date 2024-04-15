@@ -35,12 +35,10 @@
         </search>
         <nav>
             <i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i>
-<!--            <i class="material-symbols-outlined big"> shopping_bag </i>-->
-<!--            <i class="material-symbols-outlined big"> shopping_cart </i>-->
             <?php if (isset($_SESSION['username'])) { ?>
                 <i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i>
                 <?= $_SESSION['username'] ?> |
-                <a href="user.php?username=<?=$_SESSION['username']?>"><i class="material-symbols-outlined <?= $page=="user"? "filled": "big"?>"> person </i> </a>
+                <a href="profile.php?>"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
                 <a href="login.php" id="login">Log in</a>
             <?php } ?>
