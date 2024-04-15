@@ -1,0 +1,27 @@
+.material-symbols-outlined {
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24
+}
+.material-symbols-outlined.filled {
+    font-variation-settings:
+            'FILL' 100,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24
+}
+
+.material-symbols-outlined.big, .material-symbols-outlined.filled {
+    font-size: 30px;
+}
+
+.material-symbols-outlined:hover {
+    font-variation-settings:
+            'FILL' 100,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+    transition: font-variation-settings 10s;
+}
