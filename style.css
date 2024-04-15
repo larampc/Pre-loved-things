@@ -439,6 +439,11 @@ main .userPage{
 .login form > *, .register form > * {
     margin: 0.5rem auto;
 }
+
+.login label, .register label {
+    width: 100%;
+}
+
 .login button, .register button {
     border-style: none;
     color: white;
