@@ -5,7 +5,7 @@
     require_once('database/item.db.php');
 
     $db = get_database_connection();
-    $items = get_items($db, 3);
+    $items = get_items($db, 10);
 
     draw_header();
     draw_items($items);

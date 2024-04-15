@@ -10,7 +10,7 @@
     <link href="responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
-<body>
+<body> 
     <header>
         <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
         <search class="search-container">
@@ -48,6 +48,7 @@
 
 <?php function draw_footer() { ?>
     </main>
+    <script src="header.js" defer></script>
     <footer>
         <p>© Pre-loved, 2024</p>
     </footer>
