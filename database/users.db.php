@@ -28,9 +28,3 @@ function get_user_feedback(PDO $dbh, string $username): array {
     $stmt->execute(array($username));
     return $stmt->fetchAll();
 }
-
-function get_user_items(PDO $dbh, string $username): array {
-    $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
-    $stmt->execute(array($username));
-    return $stmt->fetchAll();
-}

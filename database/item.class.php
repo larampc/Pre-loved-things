@@ -1,5 +1,6 @@
 <?php
 declare(strict_types = 1);
+require_once ('database/connection.db.php');
 
 class Item {
     public int $id;
@@ -18,13 +19,33 @@ class Item {
     public function __construct(PDO $db, int $id)
     {
         $this->id = $id;
-        $this->images = Item::get_item_images($db, $id);
+        $this->images = get_item_images($db, $id);
+    }
+
+    public static function create_items(PDO $dbh, $stmt): array
+    {
+        $items = array();
+        while ($item = $stmt->fetch()) {
+            $new_item = new Item($dbh, $item['id']);
+            $new_item->setBrand($item['brand'])
+                ->setCondition($item['condition'])
+                ->setSize($item['size'])
+                ->setModel($item['model'])
+                ->setCategory($item['category'])
+                ->setName($item['name'])
+                ->setDescription($item['description'])
+                ->setPrice($item['price'])
+                ->setUser($item['user'])
+                ->setQuantity($item['quantity'])
+                ->setModel($item['model']);
+            $items[] = $new_item;
+        }
+        return $items;
     }
 
     public function get_main_image(): string
     {
-        reset($this->images);
-        return key($this->images);
+        return $this->images[array_key_first($this->images)];
     }
     public function setBrand(?string $brand): Item
     {
@@ -82,44 +103,27 @@ class Item {
         $this->price = $price;
         return $this;
     }
-    static function get_item_images(PDO $db, int $id) : array
+    static function get_item_images(PDO $dbh, int $id) : array
     {
-        var_dump($id);
-        $stmt = $db->prepare('SELECT imagePath FROM item_images WHERE item = ? LIMIT 1');
-        $stmt->execute();
-        $images = $stmt->fetchAll();
-        var_dump($images);
+        $stmt = $dbh->prepare('SELECT imagePath FROM item_images WHERE item = ?');
+        $stmt->execute(array($id));
+        $images = array();
+        while ($image = $stmt->fetch()) {
+            $images[] = $image['imagePath'];
+        }
         return $images;
     }
-    static function get_items(PDO $db, int $count) : array {
-        $stmt = $db->prepare('SELECT * FROM items LIMIT ?');
+    static function get_items(PDO $dbh, int $count) : array {
+        $stmt = $dbh->prepare('SELECT * FROM items LIMIT ?');
         $stmt->execute(array($count));
-
-        $items = array();
-        while ($item = $stmt->fetch()) {
-            $new_item = new Item($db, $item['id']);
-            $new_item->setBrand($item['brand'])
-                ->setCondition($item['condition'])
-                ->setSize($item['size'])
-                ->setModel($item['model'])
-                ->setCategory($item['category'])
-                ->setName($item['name'])
-                ->setDescription($item['description'])
-                ->setPrice($item['price'])
-                ->setUser($item['user'])
-                ->setQuantity($item['quantity'])
-                ->setModel($item['model']);
-            $items[] = $new_item;
-        }
-
-        return $items;
+        return self::create_items($dbh, $stmt);
     }
-    static function getItem(PDO $db, int $id) : Item{
-        $stmt = $db->prepare('SELECT * FROM items WHERE id = ?');
+    static function get_item(PDO $dbh, int $id) : Item{
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
 
         $item = $stmt->fetch();
-        $new_item = new Item($db, $item['id']);
+        $new_item = new Item($dbh, $item['id']);
 
         return $new_item->setBrand($item['brand'])
             ->setCondition($item['condition'])
@@ -133,5 +137,24 @@ class Item {
             ->setDate($item['date'])
             ->setQuantity($item['quantity']);
 
+    }
+    static function get_user_items(PDO $dbh, string $username): array {
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
+        $stmt->execute(array($username));
+        return self::create_items($dbh, $stmt);
+    }
+    static function register_item(PDO $db, string $name, string $description, string $price, string $category, string $user) {
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, category, user) VALUES (?, ?, ?, ?, ?)');
+        $stmt->execute([$name, $description, $price, $category, $user]);
+    }
+    static function register_item_images(PDO $db, array $images)
+    {
+        $stmt = $db->prepare('SELECT last_insert_rowid()');
+        $stmt->execute();
+        $id = $stmt->fetchColumn();
+        foreach ($images as $image) {
+            $stmt = $db->prepare('INSERT INTO item_images (item, imagePath) VALUES (?, ?)');
+            $stmt->execute([$id, $image]);
+        }
     }
 }

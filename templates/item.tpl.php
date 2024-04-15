@@ -1,17 +1,17 @@
 <?php declare(strict_types = 1);
 require_once('templates/common.tpl.php');
 
-function draw_item($item) { ?>
-    <a href="item.php?id=<?= $item['id']?>" class="item-main">
-        <img src="<?="images/" . $item['imagePath']?>" alt="<?= explode($item['imagePath'],'.')[0]?>">
+function draw_item(Item $item) { ?>
+    <a href="item.php?id=<?= $item->id ?>" class="item-main">
+        <img src="<?="images/" . $item->get_main_image()?>" alt="<?= explode($item->get_main_image(),'.')[0]?>">
         <div class="item-info">
-            <p class="name"><?=$item['name']?></p>
-            <p class="price"><?=$item['price']?></p>
+            <p class="name"><?=$item->name?></p>
+            <p class="price"><?=$item->price?></p>
         </div>
     </a>
 <?php }
 
-function draw_items(array $items) { ?>
+    function draw_items(array $items) { ?>
     <h2>Last Added Items</h2>
     <section class="items">
         <?php foreach($items as $item) {
@@ -26,19 +26,19 @@ function draw_items(array $items) { ?>
     </section>
 <?php } ?>
 
-<?php function draw_item_page($item) { ?>
+<?php function draw_item_page(Item $item) { ?>
     <article class="itemPage">
         <header>
-            <h2><?=$item['name']?></h2>
+            <h2><?=$item->name?></h2>
             <span class="edit"><img src="images/pencil.png" alt="pencil"></span>
             <span class="like"><img src="images/heart.png" alt="heart"></span>
         </header>
-        <span class="picture"><img src="<?="images/" . $item['imagePath']?>" alt="<?= explode($item['imagePath'],'.')[0]?>"></span>
+        <span class="picture"><img src="<?="images/" . $item->get_main_image()?>" alt="<?= explode($item->get_main_image(),'.')[0]?>"></span>
         <section class="description">
-            <p><?= $item['description'] ?></p>
+            <p><?= $item->description ?></p>
         </section>
         <section class="priceSection">
-            <span class="price"><?= $item['price']?></span>
+            <span class="price"><?= $item->price?></span>
             <form class="buy-item">
                 <img src="images/cart.png" alt="cart">
                 <label>
@@ -64,13 +64,13 @@ function draw_items(array $items) { ?>
         <section class="itemTags">
             <ul>
                 <li>
-                    Category: <?= $item['category'] ?>
+                    Category: <?= $item->category ?>
                 </li>
                 <li>
-                    Size: <?= $item['size'] ?>
+                    Size: <?= $item->size ?>
                 </li>
                 <li>
-                    Condition: <?= $item['condition'] ?>
+                    Condition: <?= $item->condition ?>
                 </li>
             </ul>
         </section>

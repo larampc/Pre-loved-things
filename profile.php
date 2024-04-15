@@ -5,7 +5,7 @@
 
     require_once('database/connection.db.php');
     require_once('database/users.db.php');
-
+    require_once ('database/item.class.php');
     require_once('templates/user.tpl.php');
     require_once('templates/common.tpl.php');
     require_once('templates/item.tpl.php');
@@ -21,7 +21,7 @@
         <a href="new.php" class="logout">New Item</a>
     <?php
     $feedback = get_user_feedback($db, $username);
-    $items = get_user_items($db, $username);
+    $items = Item::get_user_items($db, $username);
 
     draw_user_details($user);
     draw_user_feedback($user, $feedback);

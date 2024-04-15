@@ -8,10 +8,10 @@
     require_once('templates/common.tpl.php');
 
     require_once('database/connection.db.php');
-    require_once('database/item.db.php');
+    require_once('database/item.class.php');
 
     $db = get_database_connection();
-    $item = get_item($db, intval($_GET['id']));
+    $item = Item::get_item($db, intval($_GET['id']));
 
     draw_header("item");
     draw_item_page($item);
