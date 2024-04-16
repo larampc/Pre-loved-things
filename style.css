@@ -50,11 +50,6 @@ input[type="search"] {
     width: 100%;
 }
 
-.searchbtn img {
-    height: 1.2rem;
-    margin-right: 0.2rem;
-}
-
 .searchbtn {
     background-color: transparent;
     border-width: 0;

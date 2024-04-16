@@ -41,6 +41,12 @@ header nav {
     align-items: center;
 }
 
+.searchbtn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .dropbtn {
     display: flex;
     align-items: center;
