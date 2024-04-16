@@ -11,18 +11,18 @@ function draw_item(Item $item) { ?>
     </a>
 <?php }
 
-    function draw_items(array $items) { ?>
+    function draw_items_main(array $items) { ?>
     <h2>Last Added Items</h2>
+        <?php draw_items($items); ?>
+    <h2>Most liked</h2>
+        <?php draw_items($items); ?>
+    <?php }
+
+    function draw_items(array $items) { ?>
     <section class="items">
         <?php foreach($items as $item) {
             draw_item($item);
         } ?>
-    </section>
-    <h2>Most liked</h2>
-    <section class="items">
-    <?php foreach($items as $item) {
-        draw_item($item);
-    } ?>
     </section>
 <?php } ?>
 
@@ -109,4 +109,27 @@ function draw_new_item_form() { ?>
             <input type="submit" value="Submit">
         </form>
     </article>
+<?php }
+
+function draw_page_filters(array $items) { ?>
+    <article class="searchPage">
+            <section class="filter">
+                <h2>Filters</h2>
+                <div class="options">
+                    <p>Prices</p>
+                    <label><input type="checkbox" id="zero" name="zero">0-5€</label>
+                    <label><input type="checkbox" id="five" name="five">5-10€</label>
+                    <label><input type="checkbox" id="ten" name="ten">10-20€</label>
+                    <label><input type="checkbox" id="twenty" name="twenty">20-50€</label>
+                    <label><input type="checkbox" id="fifty" name="fifty">>50€</label>
+                </div>
+                <div class="options">
+                    <p>Condition</p>
+                    <label><input type="checkbox" id="new" name="new">New</label>
+                    <label><input type="checkbox" id="used" name="used">Used</label>
+                    <label><input type="checkbox" id="old" name="old">Old</label>
+                </div>
+            </section>
+            <?php draw_items($items) ?>
+        </article>
 <?php } ?>

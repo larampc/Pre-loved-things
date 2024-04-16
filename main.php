@@ -10,5 +10,5 @@
     $db = get_database_connection();
     $items = Item::get_items($db, 3);
     draw_header("main");
-    draw_items($items);
+    draw_items_main($items);
     draw_footer();

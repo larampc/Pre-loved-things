@@ -18,12 +18,12 @@
             <div class="dropdown-categories">
                 <button class="dropbtn">All Categories<i class="material-symbols-outlined">expand_more</i></button>
                 <div class="dropdown-content">
-                    <a href="#">Clothes</a>
-                    <a href="#">Technology</a>
-                    <a href="#">Toys</a>
-                    <a href="#">Cars</a>
-                    <a href="#">Books</a>
-                    <a href="#">Sport</a>
+                    <a href="search.php?category=clothes">Clothes</a>
+                    <a href="search.php?category=technology">Technology</a>
+                    <a href="search.php?category=toys">Toys</a>
+                    <a href="search.php?category=cars">Cars</a>
+                    <a href="search.php?category=books">Books</a>
+                    <a href="search.php?category=sport">Sport</a>
                 </div>
             </div>
             <form action="/action_page.php">
@@ -37,6 +37,7 @@
             <i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i>
             <?php if (isset($_SESSION['username'])) { ?>
                 <i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i>
+                <i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> inbox </i>
                 <?= $_SESSION['username'] ?> |
                 <a href="profile.php?>"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>

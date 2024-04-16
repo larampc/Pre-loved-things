@@ -118,6 +118,11 @@ class Item {
         $stmt->execute(array($count));
         return self::create_items($dbh, $stmt);
     }
+    static function get_items_category(PDO $dbh, string $category) : array {
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE category = ?');
+        $stmt->execute(array($category));
+        return self::create_items($dbh, $stmt);
+    }
     static function get_item(PDO $dbh, int $id) : Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
