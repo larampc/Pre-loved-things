@@ -23,7 +23,7 @@ body > header {
     border-color: black;
     border-width: 1px;
     border-style:solid;
-    label {
+    label[form=searchbar] {
         width: 100%;
     }
 }

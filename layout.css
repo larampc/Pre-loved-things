@@ -23,9 +23,10 @@ body > header {
     display: flex;
     align-items: center;
     flex-grow: 0.5;
-    label {
+    label[for=searchbar] {
         display: flex;
         align-items: center;
+        flex-grow: 1;
     }
 }
 
