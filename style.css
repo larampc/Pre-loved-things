@@ -463,12 +463,13 @@ i {
     display: inline-block;
 }
 #suggestions {
-    width: 50%;
+    width: 30%;
     position: absolute;
     top: 6px;
     background-color: #F1F1F1;
     transition: all 1s ease;
-    margin-top: 1.5rem;
+    margin-top: 3.2rem;
+    margin-left: 7rem;
     display: none;
     border-radius: 0.5rem;
 }
