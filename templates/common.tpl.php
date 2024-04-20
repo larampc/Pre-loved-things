@@ -9,6 +9,7 @@
     <link href="layout.css" rel="stylesheet">
     <link href="responsive.css" rel="stylesheet">
     <link href="icons.css" rel="stylesheet">
+    <script src="scripts/search.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body> 
@@ -26,20 +27,19 @@
                     <a href="search.php?category=sport">Sport</a>
                 </div>
             </div>
-            <form action="/action_page.php">
-                <label>
-                    <input type="search" id="searchbar">
-                </label>
-                <button type="submit" class="searchbtn"><i class="material-symbols-outlined">search</i></button>
+            <form class="search" method="GET" action="search.php">
+                <label for="searchbar"><input name="q" type="search" id="searchbar" autocomplete="off"></label>
+                <button type="submit" class="searchbtn" ><i class="material-symbols-outlined">search</i></button>
+                <div id="suggestions"></div>
             </form>
         </search>
         <nav>
-            <i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i>
+            <a href="cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if (isset($_SESSION['username'])) { ?>
-                <i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i>
-                <i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> inbox </i>
+                <a href="favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
+                <a href="chat.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
                 <?= $_SESSION['username'] ?> |
-                <a href="profile.php?>"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
+                <a href="profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
                 <a href="login.php" id="login">Log in</a>
             <?php } ?>

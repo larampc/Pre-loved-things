@@ -468,3 +468,23 @@ main .userPage{
 i {
     color: black;
 }
+.search {
+    position: relative;
+    display: inline-block;
+}
+#suggestions {
+    width: 50%;
+    position: absolute;
+    top: 6px;
+    background-color: #F1F1F1;
+    transition: all 1s ease;
+    margin-top: 1.5rem;
+    display: none;
+    border-radius: 0.5rem;
+}
+
+#suggestions a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+}

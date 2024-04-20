@@ -111,25 +111,29 @@ function draw_new_item_form() { ?>
     </article>
 <?php }
 
-function draw_page_filters(array $items) { ?>
+function draw_page_filters(array $items) {
+    ?>
     <article class="searchPage">
             <section class="filter">
                 <h2>Filters</h2>
-                <div class="options">
+                <div class="options" id="Price">
                     <p>Prices</p>
-                    <label><input type="checkbox" id="zero" name="zero">0-5€</label>
-                    <label><input type="checkbox" id="five" name="five">5-10€</label>
-                    <label><input type="checkbox" id="ten" name="ten">10-20€</label>
-                    <label><input type="checkbox" id="twenty" name="twenty">20-50€</label>
-                    <label><input type="checkbox" id="fifty" name="fifty">>50€</label>
+                    <label><input type="checkbox" name="0-5" autocomplete='off'>0-5€</label>
+                    <label><input type="checkbox" name="5-10" autocomplete='off'>5-10€</label>
+                    <label><input type="checkbox" name="10-20" autocomplete='off'>10-20€</label>
+                    <label><input type="checkbox" name="20-50" autocomplete='off'>20-50€</label>
+                    <label><input type="checkbox" name="50-9999999" autocomplete='off'>50€</label>
                 </div>
-                <div class="options">
+                <div class="options" id="Condition">
                     <p>Condition</p>
-                    <label><input type="checkbox" id="new" name="new">New</label>
-                    <label><input type="checkbox" id="used" name="used">Used</label>
-                    <label><input type="checkbox" id="old" name="old">Old</label>
+                    <label><input type="checkbox" name="New" autocomplete='off'>New</label>
+                    <label><input type="checkbox" name="Used" autocomplete='off'>Used</label>
+                    <label><input type="checkbox" name="Old" autocomplete='off'>Old</label>
                 </div>
             </section>
-            <?php draw_items($items) ?>
+        <section id="searchres">
+            <?php draw_items($items); ?>
+        </section>
+
         </article>
 <?php } ?>

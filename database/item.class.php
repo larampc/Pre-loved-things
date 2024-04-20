@@ -148,6 +148,51 @@ class Item {
         $stmt->execute(array($username));
         return self::create_items($dbh, $stmt);
     }
+
+    static function get_items_by_search(PDO $dbh, string $q): array
+    {
+        $stmt = $dbh->prepare(
+            'SELECT * 
+                FROM items 
+                WHERE name LIKE ?'
+        );
+        $stmt->execute(array("%$q%"));
+
+        return self::create_items($dbh, $stmt);
+    }
+
+    static function get_items_by_search_cat(PDO $dbh, string $q, string $cat): array
+    {
+        $stmt = $dbh->prepare(
+            'SELECT * 
+                FROM items 
+                WHERE name LIKE ? AND category = ?'
+        );
+        $stmt->execute(array("%$q%", $cat));
+
+        return self::create_items($dbh, $stmt);
+    }
+
+    static function get_items_by_range(PDO $dbh, int $first, int $second): array
+    {
+         $stmt = $dbh->prepare(
+            'SELECT * 
+                FROM items 
+                WHERE price > ? AND price < ?'
+        );
+        $stmt->execute(array($first, $second));
+
+        return self::create_items($dbh, $stmt);
+    }
+
+    static function get_items_by_condition(PDO $dbh, string $condition): array
+    {
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE condition = ?');
+        $stmt->execute(array($condition));
+
+        return self::create_items($dbh, $stmt);
+    }
+
     static function register_item(PDO $db, string $name, string $description, string $price, string $category, string $user) {
         $stmt = $db->prepare('INSERT INTO items (name, description, price, category, user) VALUES (?, ?, ?, ?, ?)');
         $stmt->execute([$name, $description, $price, $category, $user]);

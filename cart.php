@@ -4,7 +4,6 @@
     session_start();
 
     require_once('database/connection.db.php');
-    require_once('database/cart.db.php');
 
     require_once('templates/common.tpl.php');
 
@@ -29,7 +28,7 @@
                 </div>
             </section>
             <div class="sum">
-                <p>Numer items</p>
+                <p>Number items</p>
                 <div class="sum-price">
                     <p>Total: </p>
                     <p>Price</p>
