@@ -26,21 +26,41 @@ function draw_item(Item $item) { ?>
     </section>
 <?php } ?>
 
+<?php function draw_item_images(array $images) { ?>
+    <section class="dots">
+    <?php for($i = 0; $i < sizeof($images); $i++) { ?>
+        <div class="dot" style="opacity: 0.2;"></div>
+    <?php } ?>
+    </section>
+    <?php foreach($images as $image) { ?>
+        <img class="slides" src="<?="images/" . $image?>" alt="item"> 
+    <?php } ?>
+<?php } ?>
+
 <?php function draw_item_page(Item $item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
             <span class="edit"><img src="images/pencil.png" alt="pencil"></span>
-            <span class="like"><img src="images/heart.png" alt="heart"></span>
+            <span class="like"><i class="material-symbols-outlined big"> favorite </i></span>
         </header>
-        <span class="picture"><img src="<?="images/" . $item->get_main_image()?>" alt="<?= explode($item->get_main_image(),'.')[0]?>"></span>
+        <div class="item-images">
+            <div class="slider-btns">
+                <span id="prev-btn"><i class="fa fa-chevron-left"></i></span>
+                <span id="next-btn"><i class="fa fa-chevron-right"></i></span>
+            </div>
+            <div class="image-slide">
+                <?php draw_item_images($item->images) ?>
+            </div>
+        </div>
+        <script src="slide.js"></script>
         <section class="description">
             <p><?= $item->description ?></p>
         </section>
         <section class="priceSection">
             <span class="price"><?= $item->price?></span>
             <form class="buy-item">
-                <img src="images/cart.png" alt="cart">
+                <i class="material-symbols-outlined cart big"> local_mall </i>
                 <label>
                     <button class="Buy" type="submit">Buy now!</button>
                 </label>

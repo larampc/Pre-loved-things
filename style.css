@@ -167,7 +167,7 @@ main > h2 {
     width: 100%;
 }
 
-.itemPage .edit img, .itemPage .like img {
+.itemPage .edit img, .itemPage .like i {
     height: 2rem;
     margin: 1rem 0;
 }
@@ -194,9 +194,6 @@ main > h2 {
     border-radius: 1rem;
     padding: 0.5rem;
     height: 2rem;
-    img {
-        height: 1.5rem;
-    }
 }
 
 .itemPage .itemTags ul {

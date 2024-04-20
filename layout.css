@@ -74,7 +74,7 @@ header nav {
 
 .itemPage {
     display: grid;
-    grid-template-columns:  auto auto auto;
+    grid-template-columns:  auto auto 1fr;
     grid-template-rows:  auto auto auto;
     grid-template-areas: "picture picture header"
                             "picture picture description"
@@ -82,7 +82,6 @@ header nav {
                             "sendMessage userProfile tags";
     padding: 1rem 3rem 0 3rem;
 }
-
 
 .itemPage .item-images {
     grid-area: picture;
