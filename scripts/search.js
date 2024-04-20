@@ -1,4 +1,4 @@
-const search = document.querySelector('.search')
+const search = document.querySelector('.search-container')
 
 if (search) {
     const input = search.querySelector('input')

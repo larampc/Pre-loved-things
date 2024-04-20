@@ -16,17 +16,15 @@
     <header>
         <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="search.php">
-                <label>
-                    <select name="category" class="dropdown-content">
-                        <option value="">All Categories</option>
-                        <option value="clothes">Clothes</option>
-                        <option value="technology">Technology</option>
-                        <option value="toys">Toys</option>
-                        <option value="cars">Cars</option>
-                        <option value="books">Books</option>
-                        <option value="sport">Sport</option>
-                    </select>
-                </label>
+                <select name="category" class="dropdown-content">
+                    <option value="">All Categories</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="technology">Technology</option>
+                    <option value="toys">Toys</option>
+                    <option value="cars">Cars</option>
+                    <option value="books">Books</option>
+                    <option value="sport">Sport</option>
+                </select>
                 <label for="searchbar"><input name="q" type="search" id="searchbar" autocomplete="off"></label>
                 <button type="submit" class="searchbtn" ><i class="material-symbols-outlined">search</i></button>
                 <div id="suggestions"></div>
