@@ -47,30 +47,6 @@ header nav {
     align-items: center;
 }
 
-.dropbtn {
-    display: flex;
-    align-items: center;
-}
-  
-.dropdown-categories {
-    position: relative;
-    display: inline-block;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    z-index: 1;
-}
-
-.dropdown-content a {
-    display: block;
-}
-
-.dropdown-categories:hover .dropdown-content {
-    display: block;
-}
-
 .nav {
     display: flex;
     align-items: center;

@@ -27,7 +27,26 @@ function draw_user_feedback($user, $feedback) { ?>
                         <?php
                     } ?>
             </div>
-        <p>+ Add your review</p>
+        <?php if ($user['username']!=$_SESSION['username']) echo("<p>+ Add your review</p>"); ?>
     </section>
 <?php
+}
+
+function draw_profile_details($user) {
+    ?>
+    <section class="user">
+        <img src="images/profile.png" class="profile-pic" alt="profile picture">
+        <div class="user-details">
+            <h2 class="username"><?=$user['username']?></h2>
+            <p class="phone"><?=$user['phone']?></p>
+            <p class="email"><?=$user['email']?></p>
+            <a href="action_logout.php" class="logout">Log out</a>
+            <a href="edit_profile.php">Edit profile</a>
+        </div>
+    </section>
+    <?php
+}
+
+function draw_cart() {
+
 }

@@ -15,24 +15,22 @@
 <body> 
     <header>
         <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
-        <search class="search-container">
-            <div class="dropdown-categories">
-                <button class="dropbtn">All Categories<i class="material-symbols-outlined">expand_more</i></button>
-                <div class="dropdown-content">
-                    <a href="search.php?category=clothes">Clothes</a>
-                    <a href="search.php?category=technology">Technology</a>
-                    <a href="search.php?category=toys">Toys</a>
-                    <a href="search.php?category=cars">Cars</a>
-                    <a href="search.php?category=books">Books</a>
-                    <a href="search.php?category=sport">Sport</a>
-                </div>
-            </div>
-            <form class="search" method="GET" action="search.php">
+            <form class="search-container" method="GET" action="search.php">
+                <label>
+                    <select name="category" class="dropdown-content">
+                        <option value="">All Categories</option>
+                        <option value="clothes">Clothes</option>
+                        <option value="technology">Technology</option>
+                        <option value="toys">Toys</option>
+                        <option value="cars">Cars</option>
+                        <option value="books">Books</option>
+                        <option value="sport">Sport</option>
+                    </select>
+                </label>
                 <label for="searchbar"><input name="q" type="search" id="searchbar" autocomplete="off"></label>
                 <button type="submit" class="searchbtn" ><i class="material-symbols-outlined">search</i></button>
                 <div id="suggestions"></div>
             </form>
-        </search>
         <nav>
             <a href="cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if (isset($_SESSION['username'])) { ?>
