@@ -22,87 +22,36 @@ class Item {
         $this->images = get_item_images($db, $id);
     }
 
-    public static function create_items(PDO $dbh, $stmt): array
+    public static function create_item(PDO $dbh, array $item): Item
     {
-        $items = array();
-        while ($item = $stmt->fetch()) {
-            $new_item = new Item($dbh, $item['id']);
-            $new_item->setBrand($item['brand'])
-                ->setCondition($item['condition'])
-                ->setSize($item['size'])
-                ->setModel($item['model'])
-                ->setCategory($item['category'])
-                ->setName($item['name'])
-                ->setDescription($item['description'])
-                ->setPrice($item['price'])
-                ->setUser($item['user'])
-                ->setQuantity($item['quantity'])
-                ->setModel($item['model']);
-            $items[] = $new_item;
+        $new_item = new Item($dbh, $item['id']);
+        $new_item->brand = $item['brand'] != null ? $item['brand'] : "";
+        $new_item->condition = $item['condition'] != null ? $item['condition'] : "";
+        $new_item->price = $item['price'] != null ? $item['price'] : 0.0;
+        $new_item->description = $item['description'] != null ? $item['description'] : "";
+        $new_item->category = $item['category'] != null ? $item['category'] : "";
+        $new_item->quantity = $item['quantity'] != null ? $item['quantity'] : 0;
+        $new_item->model = $item['model'] != null ? $item['model'] : "";
+        $new_item->size = $item['size'] != null ? $item['size'] : "";
+        $new_item->name = $item['name'] != null ? $item['name'] : "";
+        $new_item->user = $item['user'] != null ? $item['user'] : "";
+        return $new_item;
+    }
+
+    public static function create_items(PDO $dbh, array $items): array
+    {
+        $new_items = array();
+        foreach ($items as $item) {
+            $new_items[] = self::create_item($dbh, $item['id']);
         }
-        return $items;
+        return $new_items;
     }
 
     public function get_main_image(): string
     {
         return $this->images[array_key_first($this->images)];
     }
-    public function setBrand(?string $brand): Item
-    {
-        if($brand == null) return $this;
-        $this->brand = $brand;
-        return $this;
-    }
-    public function setCondition(?string $condition): Item {
-        if($condition == null) return $this;
-        $this->condition = $condition;
-        return $this;
-    }
-    public function setSize(?string $size): Item {
-        if($size == null) return $this;
-        $this->size = $size;
-        return $this;
-    }
-    public function setDate(?string $date): Item {
-        if ($date == null) return $this;
-        $this->date = $date;
-        return $this;
-    }
-    public function setQuantity(?int $quantity): Item {
-        if($quantity == null) return $this;
-        $this->quantity = $quantity;
-        return $this;
-    }
-    public function setModel(?string $model): Item {
-        if($model == null) return $this;
-        $this->model = $model;
-        return $this;
-    }
-    public function setCategory(?string $category): Item {
-        if($category == null) return $this;
-        $this->category = $category;
-        return $this;
-    }
-    public function setName(string $name): Item {
-        $this->name = $name;
-        return $this;
-    }
-    public function setDescription(?string $description): Item
-    {
-        if($description == null) return $this;
-        $this->description = $description;
-        return $this;
-    }
-    public function setUser(string $user): Item
-    {
-        $this->user = $user;
-        return $this;
-    }
-    public function setPrice(float $price): Item
-    {
-        $this->price = $price;
-        return $this;
-    }
+
     static function get_item_images(PDO $dbh, int $id) : array
     {
         $stmt = $dbh->prepare('SELECT imagePath FROM item_images WHERE item = ?');
@@ -116,37 +65,24 @@ class Item {
     static function get_items(PDO $dbh, int $count) : array {
         $stmt = $dbh->prepare('SELECT * FROM items LIMIT ?');
         $stmt->execute(array($count));
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
     }
     static function get_items_category(PDO $dbh, string $category) : array {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE category = ?');
         $stmt->execute(array($category));
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
     }
     static function get_item(PDO $dbh, int $id) : Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
 
-        $item = $stmt->fetch();
-        $new_item = new Item($dbh, $item['id']);
-
-        return $new_item->setBrand($item['brand'])
-            ->setCondition($item['condition'])
-            ->setSize($item['size'])
-            ->setModel($item['model'])
-            ->setCategory($item['category'])
-            ->setName($item['name'])
-            ->setDescription($item['description'])
-            ->setPrice($item['price'])
-            ->setUser($item['user'])
-            ->setDate($item['date'])
-            ->setQuantity($item['quantity']);
+        return self::create_item($dbh, $stmt->fetch());
 
     }
     static function get_user_items(PDO $dbh, string $username): array {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
         $stmt->execute(array($username));
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function get_items_by_search(PDO $dbh, string $q): array
@@ -158,7 +94,7 @@ class Item {
         );
         $stmt->execute(array("%$q%"));
 
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function get_items_by_search_cat(PDO $dbh, string $q, string $cat): array
@@ -170,7 +106,7 @@ class Item {
         );
         $stmt->execute(array("%$q%", $cat));
 
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function get_items_by_range(PDO $dbh, int $first, int $second): array
@@ -178,11 +114,11 @@ class Item {
          $stmt = $dbh->prepare(
             'SELECT * 
                 FROM items 
-                WHERE price > ? AND price < ?'
+                WHERE price >= ? AND price <= ?'
         );
         $stmt->execute(array($first, $second));
 
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function get_items_by_condition(PDO $dbh, string $condition): array
@@ -190,7 +126,23 @@ class Item {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE condition = ?');
         $stmt->execute(array($condition));
 
-        return self::create_items($dbh, $stmt);
+        return self::create_items($dbh, $stmt->fetchAll());
+    }
+
+    static function get_cart_items(PDO $dbh, string $user): array
+    {
+        $stmt = $dbh->prepare('SELECT user_cart.user, user_cart.item, items.user
+    FROM user_cart JOIN items ON user_cart.item = items.id  WHERE user = ?');
+        $stmt->execute(array($user));
+
+        return self::create_items($dbh, $stmt->fetchAll());
+    }
+    static function get_items_user(PDO $dbh, string $user): array
+    {
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
+        $stmt->execute(array($user));
+
+        return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function register_item(PDO $db, string $name, string $description, string $price, string $category, string $user) {

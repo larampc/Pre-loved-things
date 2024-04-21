@@ -41,14 +41,18 @@ function draw_item(Item $item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
-            <span class="edit"><img src="images/pencil.png" alt="pencil"></span>
+            <?php if ($item->user == $_SESSION["username"]) { ?>
+                <span class="edit"><i class="material-symbols-outlined big"> edit </i></span>
+            <?php } ?>
             <span class="like"><i class="material-symbols-outlined big"> favorite </i></span>
         </header>
         <div class="item-images">
-            <div class="slider-btns">
-                <span id="prev-btn"><i class="fa fa-chevron-left"></i></span>
-                <span id="next-btn"><i class="fa fa-chevron-right"></i></span>
-            </div>
+            <?php if (count($item->images) > 1) { ?>
+                <div class="slider-btns">
+                    <span class="material-symbols-outlined"> chevron_left </span>
+                    <span class="material-symbols-outlined"> chevron_right </span>
+                </div>
+            <?php } ?>
             <div class="image-slide">
                 <?php draw_item_images($item->images) ?>
             </div>

@@ -4,11 +4,12 @@
     session_start();
 
     require_once('database/connection.db.php');
+    require_once('templates/item.tpl.php');
+    require_once('database/item.class.php');
 
-    require_once('templates/common.tpl.php');
-
+    $db = get_database_connection();
+    $items = Item::get_cart_items($db, $_SESSION['username']);
     draw_header("cart");
-
     ?>
 
 <article class="cartPage">

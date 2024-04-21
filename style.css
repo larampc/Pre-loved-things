@@ -167,7 +167,7 @@ main > h2 {
     width: 100%;
 }
 
-.itemPage .edit img, .itemPage .like i {
+.itemPage .edit img, .itemPage i {
     height: 2rem;
     margin: 1rem 0;
 }
