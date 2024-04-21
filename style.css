@@ -99,7 +99,7 @@ main > h2 {
 
 /* ITEM CARD */
 
-.item-main .item-info {
+.items .item-info {
     color: black;
     p {
         margin: 0.2rem; 
@@ -110,11 +110,11 @@ main > h2 {
     }
 }
 
-.item-main {
+.items .item {
     text-decoration: none;
 }
 
-.item-main img, .item img{
+.item img{
     width: 10rem;
     height: 10rem;
     border-radius: 0.5rem;
@@ -139,10 +139,10 @@ main > h2 {
 }
 
 .itemPage .userProfile {
+    color: black;
     margin-right: 3rem;
     img {
         height: 2rem;
-        margin-top: 0.5rem;
     }
 }
 
@@ -214,6 +214,11 @@ main > h2 {
 }
 
 /* CART PAGE */
+
+.cartPage a {
+    text-decoration: none;
+    color: black;
+}
 
 .cartPage .Buy {
     border-style: none;
@@ -335,7 +340,7 @@ main .searchPage  h2 {
     margin: 2rem 0;
 }
 
-.searchPage .item-main {
+.searchPage .item {
     flex: 10%;
 }
 

@@ -2,7 +2,7 @@
 require_once('templates/common.tpl.php');
 
 function draw_item(Item $item) { ?>
-    <a href="item.php?id=<?= $item->id ?>" class="item-main">
+    <a href="item.php?id=<?= $item->id ?>" class="item">
         <img src="<?="images/" . $item->get_main_image()?>" alt="<?= explode($item->get_main_image(),'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
@@ -37,7 +37,7 @@ function draw_item(Item $item) { ?>
     <?php } ?>
 <?php } ?>
 
-<?php function draw_item_page(Item $item) { ?>
+<?php function draw_item_page(PDO $db, Item $item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
@@ -77,14 +77,9 @@ function draw_item(Item $item) { ?>
                 </label>
             </form>
         </section>
-        <section class="userProfile">
-            <form>
-                <label>
-                    <button class="userProfile-btn" type="submit">User Profile</button>
-                </label>
-            </form>
-            <img src="images/profile.png" alt="profile picture">
-        </section>
+        <a class="userProfile" href="user.php?username=<?=$item->creator?>"><?=$item->creator?>
+            <img src="images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
+        </a>
         <section class="itemTags">
             <ul>
                 <li>

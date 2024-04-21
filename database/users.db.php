@@ -28,3 +28,9 @@ function get_user_feedback(PDO $dbh, string $username): array {
     $stmt->execute(array($username));
     return $stmt->fetchAll();
 }
+
+function get_user_image(PDO $dbh, string $username): string {
+    $stmt = $dbh->prepare('SELECT photoPath FROM users WHERE username = ?');
+    $stmt->execute(array($username));
+    return $stmt->fetchColumn();
+}

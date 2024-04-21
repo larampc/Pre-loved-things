@@ -47,13 +47,19 @@ function draw_profile_details($user) {
     <?php
 }
 
-function draw_cart($items) { ?>
+function draw_cart(PDO $db, array $items) { ?>
     <article class="cartPage">
         <h2>Your cart</h2>
         <?php
         $user = null;
         $num_items = 0;
         $sum = 0;
+        if (empty($items)) { ?>
+            <p>You have no items</p>
+            </article>
+        <?php
+        return;
+        }
         foreach ($items as $item) {
             if ($user != $item->creator && $user != null) { ?>
                 </article>
@@ -77,19 +83,12 @@ function draw_cart($items) { ?>
             if ($user != $item->creator) { ?>
                 <section class="seller">
                     <div class="seller-info">
-                        <img src="images/profile.png" class="profile-pic" alt="profile-photo">
+                        <img src="images/<?=get_user_image($db, $item->creator)?>" class="profile-pic" alt="profile-photo">
                         <p><?=$item->creator?></p>
                     </div>
                     <article class="seller-items">
-            <?php } ?>
-                        <div class="item">
-                            <img src="images/flower.png" alt="item">
-                            <div class="item-info">
-                                <p class="name"><?=$item->name?></p>
-                                <p class="price"><?=$item->price?></p>
-                            </div>
-                        </div>
-        <?php
+            <?php }
+            draw_item($item);
             $num_items += 1;
             $sum += $item->price;
             $user = $item->creator;

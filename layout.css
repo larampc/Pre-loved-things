@@ -63,7 +63,7 @@ header nav {
 
 /* ITEM CARD */
 
-.item-main .item-info {
+.items .item-info {
     display: flex;
     justify-content: space-between;
 }
@@ -125,6 +125,7 @@ header nav {
     grid-area: userProfile;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
 }
 
 .itemPage .itemTags ul {
