@@ -15,7 +15,7 @@ class Item {
     public string $condition;
     public string $size;
     public string $date;
-    public string $user;
+    public string $creator;
     public function __construct(PDO $db, int $id)
     {
         $this->id = $id;
@@ -34,7 +34,7 @@ class Item {
         $new_item->model = $item['model'] != null ? $item['model'] : "";
         $new_item->size = $item['size'] != null ? $item['size'] : "";
         $new_item->name = $item['name'] != null ? $item['name'] : "";
-        $new_item->user = $item['user'] != null ? $item['user'] : "";
+        $new_item->creator = $item['creator'] != null ? $item['creator'] : "";
         return $new_item;
     }
 
@@ -42,7 +42,7 @@ class Item {
     {
         $new_items = array();
         foreach ($items as $item) {
-            $new_items[] = self::create_item($dbh, $item['id']);
+            $new_items[] = self::create_item($dbh, $item);
         }
         return $new_items;
     }
@@ -80,7 +80,7 @@ class Item {
 
     }
     static function get_user_items(PDO $dbh, string $username): array {
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');
         $stmt->execute(array($username));
         return self::create_items($dbh, $stmt->fetchAll());
     }
@@ -131,22 +131,23 @@ class Item {
 
     static function get_cart_items(PDO $dbh, string $user): array
     {
-        $stmt = $dbh->prepare('SELECT user_cart.user, user_cart.item, items.user
-    FROM user_cart JOIN items ON user_cart.item = items.id  WHERE user = ?');
+        $stmt = $dbh->prepare('SELECT *
+        FROM items LEFT JOIN user_cart 
+        ON user_cart.item = items.id  WHERE user_cart.user = ?');
         $stmt->execute(array($user));
 
         return self::create_items($dbh, $stmt->fetchAll());
     }
     static function get_items_user(PDO $dbh, string $user): array
     {
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE user = ?');
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');
         $stmt->execute(array($user));
 
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function register_item(PDO $db, string $name, string $description, string $price, string $category, string $user) {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, category, user) VALUES (?, ?, ?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator) VALUES (?, ?, ?, ?, ?)');
         $stmt->execute([$name, $description, $price, $category, $user]);
     }
     static function register_item_images(PDO $db, array $images)
@@ -158,5 +159,14 @@ class Item {
             $stmt = $db->prepare('INSERT INTO item_images (item, imagePath) VALUES (?, ?)');
             $stmt->execute([$id, $image]);
         }
+    }
+    static function sort_by_user(array $items): array
+    {
+        uasort($items, function($a, $b) {
+            if ($a->creator < $b->creator) return -1;
+            else if ($a->creator == $b->creator) return 0;
+            else return 1;
+        });
+        return $items;
     }
 }

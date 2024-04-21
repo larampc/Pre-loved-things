@@ -41,7 +41,7 @@ function draw_item(Item $item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
-            <?php if ($item->user == $_SESSION["username"]) { ?>
+            <?php if ($item->creator == $_SESSION["username"]) { ?>
                 <span class="edit"><i class="material-symbols-outlined big"> edit </i></span>
             <?php } ?>
             <span class="like"><i class="material-symbols-outlined big"> favorite </i></span>

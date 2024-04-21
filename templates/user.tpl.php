@@ -47,6 +47,66 @@ function draw_profile_details($user) {
     <?php
 }
 
-function draw_cart() {
-
-}
+function draw_cart($items) { ?>
+    <article class="cartPage">
+        <h2>Your cart</h2>
+        <?php
+        $user = null;
+        $num_items = 0;
+        $sum = 0;
+        foreach ($items as $item) {
+            if ($user != $item->creator && $user != null) { ?>
+                </article>
+                    <div class="sum">
+                        <p>Number items: <?=$num_items?></p>
+                        <div class="sum-price">
+                            <p>Total: </p>
+                            <p><?=$sum?></p>
+                        </div>
+                        <form class="buy-item">
+                            <label>
+                                <button class="Buy" type="submit">Buy now!</button>
+                            </label>
+                        </form>
+                    </div>
+                </section>
+        <?php
+                $num_items = 0;
+                $sum = 0;
+            }
+            if ($user != $item->creator) { ?>
+                <section class="seller">
+                    <div class="seller-info">
+                        <img src="images/profile.png" class="profile-pic" alt="profile-photo">
+                        <p><?=$item->creator?></p>
+                    </div>
+                    <article class="seller-items">
+            <?php } ?>
+                        <div class="item">
+                            <img src="images/flower.png" alt="item">
+                            <div class="item-info">
+                                <p class="name"><?=$item->name?></p>
+                                <p class="price"><?=$item->price?></p>
+                            </div>
+                        </div>
+        <?php
+            $num_items += 1;
+            $sum += $item->price;
+            $user = $item->creator;
+        } ?>
+            </article>
+            <div class="sum">
+                <p>Number items: <?=$num_items?></p>
+                <div class="sum-price">
+                    <p>Total: </p>
+                    <p><?=$sum?></p>
+                </div>
+                <form class="buy-item">
+                    <label>
+                        <button class="Buy" type="submit">Buy now!</button>
+                    </label>
+                </form>
+            </div>
+        </section>
+    </article>
+<?php }

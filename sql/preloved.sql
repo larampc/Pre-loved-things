@@ -3,10 +3,18 @@ DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS favorites;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS item_images;
+DROP TABLE IF EXISTS user_cart;
+
 
 CREATE TABLE item_images (
     imagePath VARCHAR,
     item INTEGER references items
+);
+
+
+CREATE TABLE user_cart (
+   user VARCHAR references users,
+   item INTEGER references items
 );
 
 CREATE TABLE items (
@@ -20,7 +28,7 @@ CREATE TABLE items (
     model VARCHAR,                      
     date INTEGER,                             -- date the item was published
     description VARCHAR,
-    user VARCHAR REFERENCES users
+    creator VARCHAR REFERENCES users
 );
 
 CREATE TABLE users (
@@ -34,7 +42,7 @@ CREATE TABLE users (
 
 CREATE TABLE comments (
   id INTEGER PRIMARY KEY,            -- comment id
-  mainuser INTEGER REFERENCES users,   -- user this comment is about
+  mainuser VARCHAR REFERENCES users,   -- user this comment is about
   userc VARCHAR REFERENCES users, -- user that wrote the comment
   date INTEGER,                 -- date when news item was published in epoch format
   text VARCHAR,                       -- comment text
@@ -43,7 +51,7 @@ CREATE TABLE comments (
 
 CREATE TABLE favorites (
   id INTEGER PRIMARY KEY,            
-  user INTEGER REFERENCES users,   
+  user VARCHAR REFERENCES users,
   item VARCHAR REFERENCES items
 );
 
@@ -83,7 +91,7 @@ VALUES
     ('sam_carter', 'sammy123', 'Sam Carter', 'sam@example.com', 6667778888),
     ('lisa_adams', 'lisalisa', 'Lisa Adams', 'lisa@example.com', 3334445555);
 
-INSERT INTO items (name, price, category, condition, size, brand, model, date, description, user)
+INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator)
 VALUES
     ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 'john_doe'),
     ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 'jane_smith'),
@@ -130,6 +138,20 @@ VALUES
     ('lisa_adams', 'john_doe', '2024-04-10', 'Nice backpack.', 4);
 
 INSERT INTO favorites (user, item)
+VALUES
+    ('john_doe', 'Guitar'),
+    ('jane_smith', 'Laptop'),
+    ('alice_wonder', 'Camera'),
+    ('bob_green', 'Watch'),
+    ('sarah_jones', 'Bicycle'),
+    ('mike_andrews', 'Smartphone'),
+    ('emily_brown', 'Television'),
+    ('alex_king', 'Desk'),
+    ('sam_carter', 'Headphones'),
+    ('lisa_adams', 'Backpack');
+
+
+INSERT INTO user_cart (user, item)
 VALUES
     ('john_doe', 'Guitar'),
     ('jane_smith', 'Laptop'),
