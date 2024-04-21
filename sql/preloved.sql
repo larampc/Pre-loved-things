@@ -50,7 +50,6 @@ CREATE TABLE comments (
 );
 
 CREATE TABLE favorites (
-  id INTEGER PRIMARY KEY,            
   user VARCHAR REFERENCES users,
   item VARCHAR REFERENCES items
 );

@@ -9,6 +9,18 @@ function register_user(PDO $dbh, string $username, string $password, string $ema
   $stmt->execute(array($username, sha1($password), $email));
 }
 
+function like_item(PDO $dbh, string $username, int $item)
+{
+    $stmt = $dbh->prepare('INSERT INTO favorites VALUES (?, ?)');
+    $stmt->execute(array($username, $item));
+}
+
+function dislike_item(PDO $dbh, string $username, int $item)
+{
+    $stmt = $dbh->prepare('DELETE FROM favorites WHERE user = ? AND item = ?');
+    $stmt->execute(array($username, $item));
+}
+
 function verify_user(PDO $dbh, string $username, string $password): bool
 {
   $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ? AND password = ?');

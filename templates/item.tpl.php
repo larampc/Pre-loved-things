@@ -44,7 +44,7 @@ function draw_item(Item $item) { ?>
             <?php if ($item->creator == $_SESSION["username"]) { ?>
                 <span class="edit"><i class="material-symbols-outlined big"> edit </i></span>
             <?php } ?>
-            <span class="like"><i class="material-symbols-outlined big"> favorite </i></span>
+            <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $_SESSION["username"], $item)? "filled": "big"?>"> favorite </button></span>
         </header>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>

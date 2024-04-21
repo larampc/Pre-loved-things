@@ -138,6 +138,24 @@ class Item {
 
         return self::create_items($dbh, $stmt->fetchAll());
     }
+
+    static function get_favorite_items(PDO $dbh, string $user): array
+    {
+        $stmt = $dbh->prepare('SELECT *
+        FROM items LEFT JOIN favorites 
+        ON favorites.item = items.id  WHERE favorites.user = ?');
+        $stmt->execute(array($user));
+
+        return self::create_items($dbh, $stmt->fetchAll());
+    }
+
+    static function check_favorite(PDO $dbh, string $user, Item $item): bool
+    {
+        $stmt = $dbh->prepare('SELECT *
+        FROM favorites WHERE user = ? AND item = ?');
+        $stmt->execute(array($user, $item->id));
+        return !empty($stmt->fetchAll());
+    }
     static function get_items_user(PDO $dbh, string $user): array
     {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');

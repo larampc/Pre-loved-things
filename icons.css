@@ -17,11 +17,31 @@
     font-size: 30px;
 }
 
-.material-symbols-outlined:hover {
+.like .material-symbols-outlined.big:hover {
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+}
+.like .material-symbols-outlined.filled:hover {
+    font-variation-settings:
+            'FILL' 100,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+}
+
+a .material-symbols-outlined.big:hover {
     font-variation-settings:
             'FILL' 100,
             'wght' 400,
             'GRAD' 0,
             'opsz' 24;
     transition: font-variation-settings 10s;
+}
+
+.material-symbols-outlined {
+    background-color: transparent;
+    border: none;
 }
