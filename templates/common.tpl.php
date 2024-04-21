@@ -36,7 +36,7 @@
             <a href="cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if (isset($_SESSION['user_id'])) { ?>
                 <a href="favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
-                <a href="chat.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
+                <a href="inbox2.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
                 <a href="profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
                 <a href="login.php" id="login">Log in</a>
