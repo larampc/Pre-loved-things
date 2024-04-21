@@ -20,7 +20,7 @@
     $feedback = get_user_feedback($db, $username);
     $items = Item::get_user_items($db, $username);
     draw_profile_details($user);
-    draw_user_feedback($user, $feedback); ?>
+    draw_user_feedback($db, $user, $feedback); ?>
         <a href="new.php" class="logout">New Item</a>
     <?php foreach ($items as $item) {
         draw_item($item);

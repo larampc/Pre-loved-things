@@ -5,7 +5,7 @@ require_once('database/connection.db.php');
 
 function register_user(PDO $dbh, string $username, string $password, string $email)
 {
-  $stmt = $dbh->prepare('INSERT INTO users VALUES (?, ?, NULL, ?, NULL)');
+  $stmt = $dbh->prepare('INSERT INTO users(username, password, name, email, phone) VALUES (?, ?, NULL, ?, NULL)');
   $stmt->execute(array($username, sha1($password), $email));
 }
 

@@ -57,7 +57,7 @@ function draw_item(Item $item) { ?>
                 <?php draw_item_images($item->images) ?>
             </div>
         </div>
-        <script src="slide.js"></script>
+        <script src="scripts/slide.js" defer></script>
         <section class="description">
             <p><?= $item->description ?></p>
         </section>

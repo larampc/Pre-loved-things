@@ -2,7 +2,7 @@
 declare(strict_types=1);
 function draw_user_details($user) { ?>
     <section class="user">
-        <img src="images/profile.png" class="profile-pic" alt="profile picture">
+        <img src="images/<?=$user['photoPath']?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="username"><?=$user['username']?></h2>
             <p class="phone"><?=$user['phone']?></p>
@@ -12,14 +12,14 @@ function draw_user_details($user) { ?>
     <?php
 }
 
-function draw_user_feedback($user, $feedback) { ?>
+function draw_user_feedback(PDO $db, $user, $feedback) { ?>
     <section class="feedback">
         <h2>Feedback</h2>
             <div class ="comment-box">
                 <?php
                     foreach ($feedback as $comment) { ?>
                     <article class="comment">
-                        <img src="images/profile.png" class="profile-pic" alt="profile picture">
+                        <img src="images/<?= get_user_image($db, $comment['userc'])?>" class="profile-pic" alt="profile picture">
                         <p class="uname"><?=$comment['userc']?></p>
                         <time><?=$comment['date']?></time>
                         <p class="content"><?=$comment['text']?></p>
