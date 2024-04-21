@@ -8,4 +8,4 @@ require_once('database/users.db.php');
 
 $dbh = get_database_connection();
 
-add_cart($dbh, (int)$_SESSION['user_id'], (int)$_GET['item']);
+if ($_SESSION['user_id'] !== null) add_cart($dbh, (int)$_SESSION['user_id'], (int)$_GET['item']);

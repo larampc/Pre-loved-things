@@ -2,8 +2,8 @@
 require_once('templates/common.tpl.php');
 
 function draw_item(Item $item) { ?>
-    <a href="item.php?id=<?= $item->id ?>" class="item">
-        <img src="<?="images/" . $item->get_main_image()?>" alt="<?= explode($item->get_main_image(),'.')[0]?>">
+    <a href="item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
+        <img src="<?="images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
             <p class="price"><?=$item->price?></p>

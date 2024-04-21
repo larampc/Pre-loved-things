@@ -27,6 +27,12 @@ function add_cart(PDO $dbh, int $id, int $item)
     $stmt->execute(array($id, $item));
 }
 
+function remove_cart(PDO $dbh, int $id, int $item)
+{
+    $stmt = $dbh->prepare('DELETE FROM user_cart WHERE user = ? AND item = ?');
+    $stmt->execute(array($id, $item));
+}
+
 function verify_user(PDO $dbh, string $email, string $password): array
 {
   $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
