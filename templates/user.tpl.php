@@ -106,7 +106,7 @@ function draw_cart(PDO $db, array $items) { ?>
                 <section class="seller">
                     <div class="seller-info">
                         <img src="images/<?=get_user_image($db, $item->creator)?>" class="profile-pic" alt="profile-photo">
-                        <p><?=$item->creator?></p>
+                        <p><?=get_user($db, $item->creator)['name']?></p>
                     </div>
                     <article class="seller-items">
             <?php }

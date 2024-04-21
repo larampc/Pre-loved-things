@@ -21,6 +21,12 @@ function dislike_item(PDO $dbh, int $id, int $item)
     $stmt->execute(array($id, $item));
 }
 
+function add_cart(PDO $dbh, int $id, int $item)
+{
+    $stmt = $dbh->prepare('INSERT INTO user_cart VALUES (?, ?)');
+    $stmt->execute(array($id, $item));
+}
+
 function verify_user(PDO $dbh, string $email, string $password): array
 {
   $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? AND password = ?');

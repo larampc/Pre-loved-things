@@ -156,6 +156,14 @@ class Item {
         $stmt->execute(array($user_id, $item->id));
         return !empty($stmt->fetchAll());
     }
+
+    static function check_cart(PDO $dbh, int $user_id, Item $item): bool
+    {
+        $stmt = $dbh->prepare('SELECT *
+        FROM user_cart WHERE user = ? AND item = ?');
+        $stmt->execute(array($user_id, $item->id));
+        return !empty($stmt->fetchAll());
+    }
     static function get_items_user(PDO $dbh, string $user): array
     {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');

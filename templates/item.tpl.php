@@ -63,12 +63,10 @@ function draw_item(Item $item) { ?>
         </section>
         <section class="priceSection">
             <span class="price"><?= $item->price?></span>
-            <form class="buy-item">
+            <section class="buy-item">
                 <i class="material-symbols-outlined cart big"> local_mall </i>
-                <label>
-                    <button class="Buy" type="submit">Buy now!</button>
-                </label>
-            </form>
+                <button value="<?=$item->id?>" class="Buy"><?=Item::check_cart($db, (int)$_SESSION['user_id'], $item)?  "Already in cart" : "Buy now!"?></button>
+            </section>
         </section>
         <section class="sendMessage">
             <form>
