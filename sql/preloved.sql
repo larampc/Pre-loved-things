@@ -28,7 +28,8 @@ CREATE TABLE users (
   password VARCHAR,                  -- password stored in sha-1
   name VARCHAR,                       -- real name
   email VARCHAR,
-  phone INTEGER
+  phone INTEGER,
+  photoPath VARCHAR DEFAULT 'profile.png'
 );
 
 CREATE TABLE comments (

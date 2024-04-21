@@ -15,7 +15,7 @@ else if (!empty($_GET['category']) && empty($_GET['q'])) {
     $items = Item::get_items_category($db, $_GET['category']);
 }
 else if (!empty($_GET['category']) && !empty($_GET['q'])) {
-    $items = Item::get_items_by_search_cat($db, $_GET['q'], $_GET['category']);
+    $items = Item::get_items_by_category($db, $_GET['q'], $_GET['category']);
 }
 else {
     $items = Item::get_items($db, 18);

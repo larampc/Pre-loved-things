@@ -97,7 +97,7 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function get_items_by_search_cat(PDO $dbh, string $q, string $cat): array
+    static function get_items_by_category(PDO $dbh, string $q, string $cat): array
     {
         $stmt = $dbh->prepare(
             'SELECT * 
