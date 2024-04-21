@@ -42,15 +42,15 @@ function draw_item(Item $item) { ?>
         <header>
             <h2><?=$item->name?></h2>
             <?php if ($item->creator == $_SESSION["username"]) { ?>
-                <span class="edit"><i class="material-symbols-outlined big"> edit </i></span>
+                <a class="edit"><i class="material-symbols-outlined big"> edit </i></a>
             <?php } ?>
             <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $_SESSION["username"], $item)? "filled": "big"?>"> favorite </button></span>
         </header>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>
                 <div class="slider-btns">
-                    <span class="material-symbols-outlined"> chevron_left </span>
-                    <span class="material-symbols-outlined"> chevron_right </span>
+                    <i class="material-symbols-outlined" id="prev-btn"> chevron_left </i>
+                    <i class="material-symbols-outlined" id="next-btn"> chevron_right </i>
                 </div>
             <?php } ?>
             <div class="image-slide">

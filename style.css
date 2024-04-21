@@ -213,6 +213,17 @@ main > h2 {
     margin-top: 0.5rem;
 }
 
+.slider-btns i{
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1.5rem;
+    background: rgba(200, 200, 200, 0.451);
+    border-radius: 100%;
+    color: white;
+    cursor: pointer;
+    text-align: center;
+}
+
 /* CART PAGE */
 
 .cartPage a {
