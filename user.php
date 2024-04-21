@@ -15,10 +15,10 @@
     ?>
     <article class="userPage">
     <?php
-    $username = $_GET['username'];
-    $user = get_user($db, $username);
-    $feedback = get_user_feedback($db, $username);
-    $items = Item::get_user_items($db, $username);
+    $user_id = (int)$_GET['user_id'];
+    $user = get_user($db, $user_id);
+    $feedback = get_user_feedback($db, $user_id);
+    $items = Item::get_user_items($db, $user_id);
 
     draw_user_details($user);
     draw_user_feedback($db, $user, $feedback);

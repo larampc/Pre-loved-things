@@ -15,7 +15,7 @@ class Item {
     public string $condition;
     public string $size;
     public string $date;
-    public string $creator;
+    public int $creator;
     public function __construct(PDO $db, int $id)
     {
         $this->id = $id;
@@ -34,7 +34,7 @@ class Item {
         $new_item->model = $item['model'] != null ? $item['model'] : "";
         $new_item->size = $item['size'] != null ? $item['size'] : "";
         $new_item->name = $item['name'] != null ? $item['name'] : "";
-        $new_item->creator = $item['creator'] != null ? $item['creator'] : "";
+        $new_item->creator = $item['creator'];
         return $new_item;
     }
 
@@ -79,9 +79,9 @@ class Item {
         return self::create_item($dbh, $stmt->fetch());
 
     }
-    static function get_user_items(PDO $dbh, string $username): array {
+    static function get_user_items(PDO $dbh, int $user_id): array {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');
-        $stmt->execute(array($username));
+        $stmt->execute(array($user_id));
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
@@ -129,31 +129,31 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function get_cart_items(PDO $dbh, string $user): array
+    static function get_cart_items(PDO $dbh, int $user_id): array
     {
         $stmt = $dbh->prepare('SELECT *
         FROM items LEFT JOIN user_cart 
         ON user_cart.item = items.id  WHERE user_cart.user = ?');
-        $stmt->execute(array($user));
+        $stmt->execute(array($user_id));
 
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function get_favorite_items(PDO $dbh, string $user): array
+    static function get_favorite_items(PDO $dbh, int $user_id): array
     {
         $stmt = $dbh->prepare('SELECT *
         FROM items LEFT JOIN favorites 
         ON favorites.item = items.id  WHERE favorites.user = ?');
-        $stmt->execute(array($user));
+        $stmt->execute(array($user_id));
 
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function check_favorite(PDO $dbh, string $user, Item $item): bool
+    static function check_favorite(PDO $dbh, int $user_id, Item $item): bool
     {
         $stmt = $dbh->prepare('SELECT *
         FROM favorites WHERE user = ? AND item = ?');
-        $stmt->execute(array($user, $item->id));
+        $stmt->execute(array($user_id, $item->id));
         return !empty($stmt->fetchAll());
     }
     static function get_items_user(PDO $dbh, string $user): array
@@ -164,9 +164,9 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function register_item(PDO $db, string $name, string $description, string $price, string $category, string $user) {
+    static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id) {
         $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator) VALUES (?, ?, ?, ?, ?)');
-        $stmt->execute([$name, $description, $price, $category, $user]);
+        $stmt->execute([$name, $description, $price, $category, $user_id]);
     }
     static function register_item_images(PDO $db, array $images)
     {

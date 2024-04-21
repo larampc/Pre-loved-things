@@ -41,10 +41,10 @@ function draw_item(Item $item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
-            <?php if ($item->creator == $_SESSION["username"]) { ?>
+            <?php if ($item->creator == $_SESSION['user_id']) { ?>
                 <a class="edit"><i class="material-symbols-outlined big"> edit </i></a>
             <?php } ?>
-            <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $_SESSION["username"], $item)? "filled": "big"?>"> favorite </button></span>
+            <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, (int)$_SESSION['user_id'], $item)? "filled": "big"?>"> favorite </button></span>
         </header>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>
@@ -77,7 +77,7 @@ function draw_item(Item $item) { ?>
                 </label>
             </form>
         </section>
-        <a class="userProfile" href="user.php?username=<?=$item->creator?>"><?=$item->creator?>
+        <a class="userProfile" href="user.php?user_id=<?=$item->creator?>"><?=get_user($db, $item->creator)['name']?>
             <img src="images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
         </a>
         <section class="itemTags">
@@ -120,7 +120,7 @@ function draw_new_item_form() { ?>
             <label for="description">Desciption</label>
             <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
 
-            <label for="description">images</label>
+            <label for="images">images</label>
             <input type="file" id="img1" name="img1" accept="image/*" required>
             <input type="file" id="img2" name="img2" accept="image/*" required>
 

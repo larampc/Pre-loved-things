@@ -11,7 +11,7 @@
 
 
     $db = get_database_connection();
-    $items = Item::get_cart_items($db, $_SESSION['username']);
+    $items = Item::get_cart_items($db, (int)$_SESSION['user_id']);
     $items = Item::sort_by_user($items);
     draw_header("cart");
     draw_cart($db, $items);

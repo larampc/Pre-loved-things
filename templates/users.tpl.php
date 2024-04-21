@@ -10,9 +10,11 @@ require_once('templates/common.tpl.php');
     <section class="register">
         <h2>Sign Up</h2>
         <form class="register-form" action="action_register.php" method="POST">
-            <input type="text" name="username" placeholder="Your name">
+            <input type="text" name="name" placeholder="Your name">
             <i class="input-icon"></i>
             <input type="email" name="email" placeholder="Your email">
+            <i class="input-icon"></i>
+            <input type="text" name="phone" placeholder="Your phone number">
             <i class="input-icon"></i>
             <input type="password" name="password" placeholder="Your password" autocomplete="off">
             <i class="input-icon"></i>
@@ -28,7 +30,7 @@ require_once('templates/common.tpl.php');
     <section class="login">
         <h2>Log in</h2>
         <form class="login-form" action="action_login.php" method="POST">
-            <input type="text" name="username" placeholder="Your username">
+            <input type="email" name="email" placeholder="Your email">
             <i class="input-icon"></i>
             <input type="password" name="password" placeholder="Your password" autocomplete="off">
             <i class="input-icon"></i>

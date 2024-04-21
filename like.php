@@ -8,4 +8,4 @@ require_once('database/users.db.php');
 
 $dbh = get_database_connection();
 
-like_item($dbh, $_SESSION['username'], (int)$_GET['item']);
+like_item($dbh, (int)$_SESSION['user_id'], (int)$_GET['item']);

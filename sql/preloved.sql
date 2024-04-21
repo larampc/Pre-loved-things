@@ -13,7 +13,7 @@ CREATE TABLE item_images (
 
 
 CREATE TABLE user_cart (
-   user VARCHAR references users,
+   user INTEGER references users,
    item INTEGER references items
 );
 
@@ -28,11 +28,11 @@ CREATE TABLE items (
     model VARCHAR,                      
     date INTEGER,                             -- date the item was published
     description VARCHAR,
-    creator VARCHAR REFERENCES users
+    creator INTEGER REFERENCES users
 );
 
 CREATE TABLE users (
-  username VARCHAR PRIMARY KEY,      -- unique username
+  user_id INTEGER PRIMARY KEY AUTOINCREMENT,
   password VARCHAR,                  -- password stored in sha-1
   name VARCHAR,                       -- real name
   email VARCHAR,
@@ -42,16 +42,16 @@ CREATE TABLE users (
 
 CREATE TABLE comments (
   id INTEGER PRIMARY KEY,            -- comment id
-  mainuser VARCHAR REFERENCES users,   -- user this comment is about
-  userc VARCHAR REFERENCES users, -- user that wrote the comment
+  mainuser INTEGER REFERENCES users,   -- user this comment is about
+  userc INTEGER REFERENCES users, -- user that wrote the comment
   date INTEGER,                 -- date when news item was published in epoch format
   text VARCHAR,                       -- comment text
   rating INTEGER
 );
 
 CREATE TABLE favorites (
-  user VARCHAR REFERENCES users,
-  item VARCHAR REFERENCES items
+  user INTEGER REFERENCES users,
+  item INTEGER REFERENCES items
 );
 
 INSERT INTO item_images (item, imagePath) VALUES
@@ -77,41 +77,41 @@ INSERT INTO item_images (item, imagePath) VALUES
     (20,'flower.png');
 
 
-INSERT INTO users (username, password, name, email, phone)
+INSERT INTO users (password, name, email, phone)
 VALUES
-    ('john_doe', 'password123', 'John Doe', 'john@example.com', 1234567890),
-    ('jane_smith', 'securepass', 'Jane Smith', 'jane@example.com', 9876543210),
-    ('alice_wonder', 'mypassword', 'Alice Wonder', 'alice@example.com', 5551234567),
-    ('bob_green', 'letmein', 'Bob Green', 'bob@example.com', 4447890123),
-    ('sarah_jones', 'p@ssw0rd', 'Sarah Jones', 'sarah@example.com', 9998887777),
-    ('mike_andrews', 'password321', 'Mike Andrews', 'mike@example.com', 1112223333),
-    ('emily_brown', 'brownie', 'Emily Brown', 'emily@example.com', 7776665555),
-    ('alex_king', 'king123', 'Alex King', 'alex@example.com', 2223334444),
-    ('sam_carter', 'sammy123', 'Sam Carter', 'sam@example.com', 6667778888),
-    ('lisa_adams', 'lisalisa', 'Lisa Adams', 'lisa@example.com', 3334445555);
+    ('password123', 'John Doe', 'john@example.com', 1234567890),
+    ('securepass', 'Jane Smith', 'jane@example.com', 9876543210),
+    ('mypassword', 'Alice Wonder', 'alice@example.com', 5551234567),
+    ('letmein', 'Bob Green', 'bob@example.com', 4447890123),
+    ('p@ssw0rd', 'Sarah Jones', 'sarah@example.com', 9998887777),
+    ('password321', 'Mike Andrews', 'mike@example.com', 1112223333),
+    ('brownie', 'Emily Brown', 'emily@example.com', 7776665555),
+    ('king123', 'Alex King', 'alex@example.com', 2223334444),
+    ('sammy123', 'Sam Carter', 'sam@example.com', 6667778888),
+    ('lisalisa', 'Lisa Adams', 'lisa@example.com', 3334445555);
 
 INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator)
 VALUES
-    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 'john_doe'),
-    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 'jane_smith'),
-    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 'bob_green'),
-    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 'sarah_jones'),
-    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 'alice_wonder'),
-    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 'mike_andrews'),
-    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 'emily_brown'),
-    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 'alex_king'),
-    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 'sam_carter'),
-    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 'lisa_adams'),
-    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 'john_doe'),
-    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 'jane_smith'),
-    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 'alice_wonder'),
-    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 'bob_green'),
-    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 'sarah_jones'),
-    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 'mike_andrews'),
-    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 'emily_brown'),
-    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 'alex_king'),
-    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 'sam_carter'),
-    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 'lisa_adams');
+    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1),
+    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2),
+    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4),
+    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5),
+    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3),
+    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6),
+    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7),
+    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8),
+    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9),
+    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10),
+    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1),
+    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2),
+    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3),
+    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4),
+    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5),
+    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6),
+    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7),
+    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8),
+    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9),
+    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10);
 
 INSERT INTO comments (mainuser, userc, date, text, rating)
 VALUES

@@ -295,31 +295,31 @@ main .cartPage  h2 {
 
 /* NEW ITEM PAGE */
 
-main .newItemPage {
+.newItemPage, .edit-profile {
     background-color: #F2E8D5;
 }
 
-main .newItemPage form {
+.newItemPage form, .edit-profile form {
     background-color: white;
     padding: 1rem;
     margin: 0 1rem;
 }
 
-main .newItemPage h2 {
+.newItemPage h2, main .edit-profile h2 {
     text-align: center;
 }
 
-main .newItemPage form > * {
+.newItemPage form > *, .edit-profile form > * {
     padding: 0.5rem;
 }
 
-.newItemPage input[type=text], input[type=number], select  {
+.newItemPage input[type=text], .newItemPage input[type=number], select, .edit-profile input[type=text] {
     background-color: #F1F1F1;
     border-style: none;
     border-radius: 0.5rem;
 }
 
-.newItemPage input[type=submit] {
+.newItemPage input[type=submit], .edit-profile input[type=submit] {
     width: 10rem;
     margin: 1.5rem auto auto auto;
     border-style: none;
