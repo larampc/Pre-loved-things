@@ -4,6 +4,8 @@ DROP TABLE IF EXISTS favorites;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS item_images;
 DROP TABLE IF EXISTS user_cart;
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS chatrooms;
 
 
 CREATE TABLE item_images (
@@ -53,6 +55,21 @@ CREATE TABLE comments (
 CREATE TABLE favorites (
   user INTEGER REFERENCES users,
   item INTEGER REFERENCES items
+);
+
+CREATE TABLE messages (
+    chatroom INTEGER NOT NULL REFERENCES chatrooms,
+    sender INTEGER NOT NULL REFERENCES users,
+    sentTime INTEGER NOT NULL,
+    readDate INTEGER DEFAULT NULL,
+    message VARCHAR NOT NULL
+);
+
+CREATE TABLE chatrooms (
+   chatroom_id INTEGER PRIMARY KEY AUTOINCREMENT,
+   item_id INTEGER NOT NULL REFERENCES items,
+   seller_id INTEGER NOT NULL REFERENCES users,
+   buyer_id INTEGER NOT NULL REFERENCES users
 );
 
 INSERT INTO item_images (item, imagePath) VALUES
@@ -163,3 +180,45 @@ VALUES
     ('alex_king', 'Desk'),
     ('sam_carter', 'Headphones'),
     ('lisa_adams', 'Backpack');
+
+INSERT INTO chatrooms (chatroom_id, item_id, seller_id, buyer_id)
+VALUES
+    (1, 10, 1, 2),
+    (2, 11, 3, 4),
+    (3, 12, 1, 4);
+
+INSERT INTO messages (chatroom, sender, sentTime, readDate, message)
+VALUES
+    (1, 1, 1648732345, NULL, 'Hi there! Is item 10 still available?'),
+    (1, 2, 1648741234, 1648750000, 'Yes, item 10 is available. Are you interested in purchasing it?'),
+    (1, 1, 1648763123, NULL, 'Great! When can we meet for the transaction?'),
+    (1, 2, 1648780098, NULL, 'I am available on weekends. How about Saturday afternoon?'),
+    (1, 1, 1648791234, NULL, 'Saturday afternoon works for me. Let''s confirm the details.'),
+    (1, 2, 1648802345, NULL, 'Perfect! Let''s meet at the coffee shop near the park.'),
+    (1, 1, 1648813456, NULL, 'See you there!'),
+    (1, 2, 1648824567, NULL, 'Looking forward to it!'),
+    (1, 1, 1648835678, NULL, 'I''ll be wearing a blue jacket.'),
+    (1, 2, 1648846789, NULL, 'Got it! I''ll be in a red hat.'),
+    (1, 1, 1648857890, NULL, 'Did you arrive?'),
+    (1, 2, 1648868901, NULL, 'I''m here. Where are you?'),
+    (1, 1, 1648880012, NULL, 'I''m near the entrance.'),
+    (1, 2, 1648891123, NULL, 'I see you!'),
+    (1, 1, 1648902234, NULL, 'Let''s finalize the transaction.'),
+    (1, 2, 1648913345, NULL, 'Sure, here''s the payment.'),
+    (2, 3, 1648732345, NULL, 'Hello! I''m interested in item 11.'),
+    (2, 4, 1648741234, 1648750000, 'Great! It''s still available.'),
+    (2, 3, 1648763123, NULL, 'Can we arrange a meetup?'),
+    (2, 4, 1648780098, NULL, 'Sure, when are you available?'),
+    (2, 3, 1648791234, NULL, 'I''m free on weekdays after 5 PM.'),
+    (2, 4, 1648802345, NULL, 'How about Thursday evening?'),
+    (2, 3, 1648813456, NULL, 'Thursday evening works for me.'),
+    (2, 4, 1648824567, NULL, 'Let''s meet at the shopping mall.'),
+    (2, 3, 1648835678, NULL, 'Sounds good. See you there!'),
+    (2, 4, 1648846789, NULL, 'See you on Thursday!'),
+    (2, 3, 1648857890, NULL, 'I''m wearing a black hat.'),
+    (2, 4, 1648868901, NULL, 'Got it! I''ll be in a green shirt.'),
+    (2, 3, 1648880012, NULL, 'Let''s finalize the details on Thursday.'),
+    (2, 4, 1648891123, NULL, 'Sure, looking forward to it!'),
+    (2, 3, 1648902234, NULL, 'See you soon.'),
+    (2, 4, 1648913345, NULL, 'Take care!'),
+    (3, 1, 1648902234, NULL, 'See you soon.');
