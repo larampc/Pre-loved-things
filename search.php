@@ -20,6 +20,6 @@ else if (!empty($_GET['category']) && !empty($_GET['q'])) {
 else {
     $items = Item::get_items($db, 18);
 }
-draw_header("main");
+draw_header("search");
 draw_page_filters($items);
 draw_footer();

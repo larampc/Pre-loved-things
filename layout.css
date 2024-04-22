@@ -238,6 +238,10 @@ header nav {
 
 /* SEARCH PAGE */
 
+.searchPage {
+    flex-grow: 1;
+}
+
 .searchPage .item-info {
     display: flex;
     justify-content: space-between;

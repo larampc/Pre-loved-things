@@ -44,7 +44,7 @@
             <?php } ?>
         </nav>
     </header>
-    <main>
+    <main class=<?=$page . "Main"?>>
 <?php } ?>
 
 <?php function draw_footer() { ?>

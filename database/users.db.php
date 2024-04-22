@@ -36,7 +36,7 @@ function remove_cart(PDO $dbh, int $id, int $item)
 function verify_user(PDO $dbh, string $email, string $password): array
 {
   $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
-  $stmt->execute(array($email, sha1($password)));
+  $stmt->execute(array($email, $password));
   return $stmt->fetch();
 }
 
