@@ -127,15 +127,6 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function get_cart_items(PDO $dbh, int $user_id): array
-    {
-        $stmt = $dbh->prepare('SELECT *
-        FROM items LEFT JOIN user_cart 
-        ON user_cart.item = items.id  WHERE user_cart.user = ?');
-        $stmt->execute(array($user_id));
-
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
 
     static function get_favorite_items(PDO $dbh, int $user_id): array
     {
@@ -168,6 +159,16 @@ class Item {
         $stmt->execute(array($user));
 
         return self::create_items($dbh, $stmt->fetchAll());
+    }
+
+    static function get_items_in_array(PDO $dbh, array $items): array
+    {   $res = array();
+        foreach ($items as $item) {
+            $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
+            $stmt->execute(array($item));
+            $res[] = $stmt->fetch();
+        }
+        return self::create_items($dbh, $res);
     }
 
     static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage) {
