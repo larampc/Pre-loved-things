@@ -11,6 +11,12 @@ main {
     flex-grow: 1;
 }
 
+main.inboxMain {
+    display: grid;
+    grid-template-columns:  2fr 3fr;
+    grid-template-areas: "inbox message"
+}
+
 body > header {
     display: flex;
     align-items: center;

@@ -4,7 +4,7 @@ main {
     margin: 7rem 0 2rem;
 }
 
-main.newMain, main.profileMain {
+main.newMain, main.editprofile {
     margin: 0;
     padding: 7rem 0 2rem;
     background-color: #F2E8D5;
@@ -510,6 +510,48 @@ i {
 
 
 /* IMBOX PAGE */
+
+.chat-inbox {
+    margin-left: 3rem;
+    grid-area: inbox;
+}
+.chat-page {
+    margin-right: 3rem;
+    grid-area: message;
+}
+.message-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+.message-header .item-info {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.item-msg-img {
+    max-height: 3rem;
+    max-width: 3rem;
+    border: 2px solid #D9D9D9;
+    border-radius: 0.5rem;
+    margin-right: 1rem;
+}
+.message-header .user-info {
+    display: flex;
+    align-items: center;
+}
+.addressee-img {
+    max-height: 4rem;
+    max-width: 4rem;
+    margin-left: 1rem;
+}
+.msg-inbox {
+    background-color: #FAFAFA;
+    border: 2px solid #D9D9D9;
+    border-radius: 1rem;
+}
+
+
 .chat {
     display: flex;
     align-items: center;
