@@ -62,3 +62,31 @@ function update_user(PDO $dbh, int $id, $email, $phone, $name, $photo) {
     $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, photoPath=? WHERE user_id = ?');
     $stmt->execute(array( $email, $phone, $name, $photo, $id));
 }
+
+function get_cart_items(PDO $dbh, int $user_id): array
+{
+    $stmt = $dbh->prepare('SELECT *
+        FROM items LEFT JOIN user_cart 
+        ON user_cart.item = items.id  WHERE user_cart.user = ?');
+    $stmt->execute(array($user_id));
+    return Item::create_items($dbh, $stmt->fetchAll());
+}
+
+function get_cart_items_ids(PDO $dbh, int $user_id): array
+{
+    $stmt = $dbh->prepare('SELECT items.id
+        FROM items LEFT JOIN user_cart 
+        ON user_cart.item = items.id  WHERE user_cart.user = ?');
+    $stmt->execute(array($user_id));
+    return array($stmt->fetchColumn());
+}
+
+function add_to_cart(PDO $dbh, array $item_id, int $user) {
+    $in_cart = get_cart_items_ids($dbh, $user);
+    foreach ($item_id as $id) {
+        if (!(!empty($in_cart) && in_array($id, $in_cart))) {
+            $stmt = $dbh->prepare('INSERT INTO user_cart VALUES (?, ?)');
+            $stmt->execute(array($user, $id));
+        }
+    }
+}
