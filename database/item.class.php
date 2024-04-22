@@ -1,7 +1,5 @@
 <?php
 declare(strict_types = 1);
-require_once ('database/connection.db.php');
-
 class Item {
     public int $id;
     public string $name;

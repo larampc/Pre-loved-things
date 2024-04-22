@@ -97,7 +97,7 @@ function draw_item(Item $item) { ?>
 function draw_new_item_form() { ?>
     <article class="newItemPage">
         <h2>New item</h2>
-        <form action="action_new_item.php" method="POST" enctype="multipart/form-data">
+        <form action="actions/action_new_item.php" method="POST" enctype="multipart/form-data">
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 

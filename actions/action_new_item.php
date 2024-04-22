@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 session_start();
 
-require_once ('database/item.class.php');
-require_once ('database/connection.db.php');
-require_once ('files.php');
+require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/connection.db.php');
+require_once(__DIR__ . '/../files.php');
 
 $dbh = get_database_connection();
 
@@ -17,4 +17,4 @@ upload_image('img1');
 upload_image('img2');
 
 
-header('Location: profile.php');
+header('Location: ../profile.php');

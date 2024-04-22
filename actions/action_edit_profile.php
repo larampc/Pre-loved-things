@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 session_start();
 
-require_once('database/users.db.php');
+require_once(__DIR__ . '/../database/users.db.php');
+require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
@@ -15,4 +16,4 @@ update_user($dbh, (int)$_SESSION['user_id'],
     empty($_POST['name'])? $user['name']: $_POST['name'],
     empty($_POST['photo'])? $user['photo']: $_POST['photo']);
 
-header('Location: profile.php');
+header('Location: ../profile.php');
