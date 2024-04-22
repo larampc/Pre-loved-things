@@ -3,9 +3,10 @@ declare(strict_types = 1);
 
 session_start();
 
-require_once('templates/item.tpl.php');
-require_once('database/item.class.php');
-require_once ('database/connection.db.php');
+require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/connection.db.php');
+
+require_once(__DIR__ . '/../templates/item.tpl.php');
 
 $db = get_database_connection();
 if (empty($_GET['category']) && !empty($_GET['q'])) {

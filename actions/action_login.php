@@ -12,5 +12,5 @@ $user = verify_user($dbh, $_POST['email'], $_POST['password']);
 if ($user != -1) {
   $_SESSION['user_id'] = $user;
   if ($_SESSION['cart']) add_to_cart($dbh, $_SESSION['cart'], $user);
-  header('Location: ../main.php');
-} else  header('Location: ../login.php');
+  header('Location: ../index.php');
+} else  header('Location: ../pages/login.php');

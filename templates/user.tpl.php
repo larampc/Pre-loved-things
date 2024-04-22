@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
-require_once('templates/common.tpl.php');
+require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_details($user) { ?>
     <section class="user">
-        <img src="images/<?=$user['photoPath']?>" class="profile-pic" alt="profile picture">
+        <img src="../images/<?=$user['photoPath']?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user['name']?></h2>
             <p class="phone"><?=$user['phone']?></p>
@@ -16,7 +16,7 @@ function draw_user_details($user) { ?>
 function draw_edit_profile($user) { ?>
     <article class="edit-profile">
         <h2>Edit profile</h2>
-        <form action="actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
+        <form action="../actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
             <label for="name"> Name </label>
             <input type="text" id="name" name="name" placeholder="<?=$user['name']?>">
             <label for="email"> Email </label>
@@ -41,7 +41,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
                     <?php }
                     foreach ($feedback as $comment) { ?>
                     <article class="comment">
-                        <img src="images/<?= get_user_image($db, $comment['userc'])?>" class="profile-pic" alt="profile picture">
+                        <img src="../images/<?= get_user_image($db, $comment['userc'])?>" class="profile-pic" alt="profile picture">
                         <p class="uname"><?=$comment['userc']?></p>
                         <time><?=$comment['date']?></time>
                         <p class="content"><?=$comment['text']?></p>
@@ -57,12 +57,12 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
 function draw_profile_details($user) {
     ?>
     <section class="user">
-        <img src="images/profile.png" class="profile-pic" alt="profile picture">
+        <img src="../images/profile.png" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user['name']?></h2>
             <p class="phone"><?=$user['phone']?></p>
             <p class="email"><?=$user['email']?></p>
-            <a href="actions/action_logout.php" class="logout">Log out</a>
+            <a href="../actions/action_logout.php" class="logout">Log out</a>
             <a href="edit_profile.php">Edit profile</a>
         </div>
     </section>
@@ -105,7 +105,7 @@ function draw_cart(PDO $db, array $items) { ?>
             if ($user != $item->creator) { ?>
                 <section class="seller">
                     <div class="seller-info">
-                        <img src="images/<?=get_user_image($db, $item->creator)?>" class="profile-pic" alt="profile-photo">
+                        <img src="../images/<?=get_user_image($db, $item->creator)?>" class="profile-pic" alt="profile-photo">
                         <p><?=get_user($db, $item->creator)['name']?></p>
                     </div>
                     <article class="seller-items">

@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
-require_once('templates/common.tpl.php');
+require_once(__DIR__ . '/../templates/common.tpl.php');
 
 function draw_item(Item $item) { ?>
-    <a href="item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
-        <img src="<?="images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
+    <a href="../pages/item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
+        <img src="<?="../images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
             <p class="price"><?=$item->price?></p>
@@ -33,7 +33,7 @@ function draw_item(Item $item) { ?>
     <?php } ?>
     </section>
     <?php foreach($images as $image) { ?>
-        <img class="slides" src="<?="images/" . $image?>" alt="item"> 
+        <img class="slides" src="<?="../images/" . $image?>" alt="item">
     <?php } ?>
 <?php } ?>
 
@@ -57,7 +57,7 @@ function draw_item(Item $item) { ?>
                 <?php draw_item_images($item->images) ?>
             </div>
         </div>
-        <script src="scripts/slide.js" defer></script>
+        <script src="../scripts/slide.js" defer></script>
         <section class="description">
             <p><?= $item->description ?></p>
         </section>
@@ -76,7 +76,7 @@ function draw_item(Item $item) { ?>
             </form>
         </section>
         <a class="userProfile" href="user.php?user_id=<?=$item->creator?>"><?=get_user($db, $item->creator)['name']?>
-            <img src="images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
+            <img src="../images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
         </a>
         <section class="itemTags">
             <ul>
@@ -97,7 +97,7 @@ function draw_item(Item $item) { ?>
 function draw_new_item_form() { ?>
     <article class="newItemPage">
         <h2>New item</h2>
-        <form action="actions/action_new_item.php" method="POST" enctype="multipart/form-data">
+        <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 

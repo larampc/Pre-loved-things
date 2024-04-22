@@ -1,13 +1,13 @@
 <?php
 
-require_once('database/connection.db.php');
-require_once ('database/message.class.php');
-require_once ('database/chatroom.class.php');
-require_once ('database/user.class.php');
+require_once(__DIR__ . '/../database/connection.db.php');
+require_once(__DIR__ . '/../database/message.class.php');
+require_once(__DIR__ . '/../database/chatroom.class.php');
+require_once(__DIR__ . '/../database/user.class.php');
 
-require_once('templates/messages.tpl.php');
-require_once('templates/common.tpl.php');
-require_once ('templates/chatroom.tpl.php');
+require_once(__DIR__ . '/../templates/messages.tpl.php');
+require_once(__DIR__ . '/../templates/common.tpl.php');
+require_once(__DIR__ . '/../templates/chatroom.tpl.php');
 
 session_start();
 
@@ -21,12 +21,12 @@ draw_user_chatrooms($chatrooms, User::get_user($db, $user_id));
     <section class="chat-page">
         <header class="message-header">
             <figure class="item-info">
-                <img src="images/flower.png" alt="item image" class="item-msg-img">
+                <img src="../images/flower.png" alt="item image" class="item-msg-img">
                 <figcaption>Item</figcaption>
             </figure>
             <aside class="user-info">
                 <p>User Name</p>
-                <img src="images/profile.png" alt="addressee profile image" class="addressee-img">
+                <img src="../images/profile.png" alt="addressee profile image" class="addressee-img">
             </aside>
         </header>
 
