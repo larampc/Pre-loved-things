@@ -9,6 +9,7 @@
 
     require_once('database/item.class.php');
     require_once('database/users.db.php');
+    require_once(__DIR__ . '/database/connection.db.php');
 
 
     $db = get_database_connection();

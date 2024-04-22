@@ -7,6 +7,8 @@
     require_once ('database/item.class.php');
     require_once('templates/user.tpl.php');
     require_once('templates/item.tpl.php');
+    require_once(__DIR__ . '/database/connection.db.php');
+
 
     $db = get_database_connection();
     draw_header("profile");

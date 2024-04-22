@@ -43,8 +43,8 @@ function draw_item(Item $item) { ?>
             <h2><?=$item->name?></h2>
             <?php if ($item->creator == $_SESSION['user_id']) { ?>
                 <a class="edit"><i class="material-symbols-outlined big"> edit </i></a>
-            <?php } ?>
-            <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, (int)$_SESSION['user_id'], $item)? "filled": "big"?>"> favorite </button></span>
+            <?php } if ($_SESSION['user_id']) { ?>
+                <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, (int)$_SESSION['user_id'], $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
         </header>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>
@@ -65,7 +65,7 @@ function draw_item(Item $item) { ?>
             <span class="price"><?= $item->price?></span>
             <section class="buy-item">
                 <i class="material-symbols-outlined cart big"> local_mall </i>
-                <button value="<?=$item->id?>" class="Buy"><?=Item::check_cart($db, (int)$_SESSION['user_id'], $item)?  "Already in cart" : "Buy now!"?></button>
+                <button value="<?=$item->id?>" class="Buy"><?=Item::check_cart($db, (int)$_SESSION['user_id'], $item) || ($_SESSION['cart'] && in_array($item->id, $_SESSION['cart']))?  "Already in cart" : "Buy now!"?></button>
             </section>
         </section>
         <section class="sendMessage">
@@ -97,7 +97,7 @@ function draw_item(Item $item) { ?>
 function draw_new_item_form() { ?>
     <article class="newItemPage">
         <h2>New item</h2>
-        <form action="action_new_item.php" method="POST" enctype="multipart/form-data">
+        <form action="actions/action_new_item.php" method="POST" enctype="multipart/form-data">
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 

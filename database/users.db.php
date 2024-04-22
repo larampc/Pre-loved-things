@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-require_once('database/connection.db.php');
 
 function register_user(PDO $dbh, string $password, string $email, string $name, string $phone)
 {
@@ -33,11 +32,13 @@ function remove_cart(PDO $dbh, int $id, int $item)
     $stmt->execute(array($id, $item));
 }
 
-function verify_user(PDO $dbh, string $email, string $password): array
+function verify_user(PDO $dbh, string $email, string $password): int
 {
-  $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? AND password = ?');
+  $stmt = $dbh->prepare('SELECT user_id FROM users WHERE email = ? AND password = ?');
   $stmt->execute(array($email, sha1($password)));
-  return $stmt->fetch();
+  $user = $stmt->fetchColumn();
+  if ($user === false) return -1;
+  return $user;
 }
 
 function get_user(PDO $dbh, int $id): array {
@@ -61,4 +62,32 @@ function get_user_image(PDO $dbh, int $id): string {
 function update_user(PDO $dbh, int $id, $email, $phone, $name, $photo) {
     $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, photoPath=? WHERE user_id = ?');
     $stmt->execute(array( $email, $phone, $name, $photo, $id));
+}
+
+function get_cart_items(PDO $dbh, int $user_id): array
+{
+    $stmt = $dbh->prepare('SELECT *
+        FROM items LEFT JOIN user_cart 
+        ON user_cart.item = items.id  WHERE user_cart.user = ?');
+    $stmt->execute(array($user_id));
+    return Item::create_items($dbh, $stmt->fetchAll());
+}
+
+function get_cart_items_ids(PDO $dbh, int $user_id): array
+{
+    $stmt = $dbh->prepare('SELECT items.id
+        FROM items LEFT JOIN user_cart 
+        ON user_cart.item = items.id  WHERE user_cart.user = ?');
+    $stmt->execute(array($user_id));
+    return array($stmt->fetchColumn());
+}
+
+function add_to_cart(PDO $dbh, array $item_id, int $user) {
+    $in_cart = get_cart_items_ids($dbh, $user);
+    foreach ($item_id as $id) {
+        if (!(!empty($in_cart) && in_array($id, $in_cart))) {
+            $stmt = $dbh->prepare('INSERT INTO user_cart VALUES (?, ?)');
+            $stmt->execute(array($user, $id));
+        }
+    }
 }

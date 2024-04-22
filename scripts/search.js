@@ -3,7 +3,7 @@ const search = document.querySelector('.search-container')
 if (search) {
     const input = search.querySelector('input')
     input.addEventListener('input', async () => {
-        const response = await fetch('api_search.php?' + encodeForAjax({ q: input.value }))
+        const response = await fetch('../api/api_search.php?' + encodeForAjax({ q: input.value }))
         const items = await response.json()
 
         const suggestions = search.querySelector('#suggestions');
@@ -65,7 +65,7 @@ function noDisplay() {
 
 async function getFilteredItems() {
     console.log(encodeForAjax({cat: categories, cond: conditions}));
-    const response = await fetch('api_search_range.php?' + encodeForAjax({cat: categories, cond: conditions}))
+    const response = await fetch('../api/api_search_range.php?' + encodeForAjax({cat: categories, cond: conditions}))
     const items = await response.json();
     const searchres = document.querySelector('#searchres');
     searchres.innerHTML = '';

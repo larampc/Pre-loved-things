@@ -5,10 +5,10 @@
     <title>Pre-loved</title>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
-    <link href="layout.css" rel="stylesheet">
-    <link href="responsive.css" rel="stylesheet">
-    <link href="icons.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/layout.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/icons.css" rel="stylesheet">
     <script src="scripts/search.js" defer></script>
     <script src="scripts/header.js" defer></script>
     <script src="scripts/like.js" defer></script>
@@ -44,7 +44,7 @@
             <?php } ?>
         </nav>
     </header>
-    <main>
+    <main class=<?=$page . "Main"?>>
 <?php } ?>
 
 <?php function draw_footer() { ?>
