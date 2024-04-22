@@ -9,7 +9,6 @@
     require_once('templates/user.tpl.php');
     require_once('templates/item.tpl.php');
 
-
     $db = get_database_connection();
     $items = Item::get_cart_items($db, (int)$_SESSION['user_id']);
     $items = Item::sort_by_user($items);

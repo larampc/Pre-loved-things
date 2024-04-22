@@ -86,10 +86,10 @@ function draw_cart(PDO $db, array $items) { ?>
             if ($user != $item->creator && $user != null) { ?>
                 </article>
                     <div class="sum">
-                        <p>Number items: <?=$num_items?></p>
+                        <p class="num-items">Number items: <?=$num_items?></p>
                         <div class="sum-price">
                             <p>Total: </p>
-                            <p><?=$sum?></p>
+                            <p class="total"><?=$sum?></p>
                         </div>
                         <form class="buy-item">
                             <label>
@@ -117,10 +117,10 @@ function draw_cart(PDO $db, array $items) { ?>
         } ?>
             </article>
             <div class="sum">
-                <p>Number items: <?=$num_items?></p>
+                <p class="num-items">Number items: <?=$num_items?></p>
                 <div class="sum-price">
                     <p>Total: </p>
-                    <p><?=$sum?></p>
+                    <p class="total"><?=$sum?></p>
                 </div>
                 <form class="buy-item">
                     <label>

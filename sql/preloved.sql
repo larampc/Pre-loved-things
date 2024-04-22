@@ -30,6 +30,7 @@ CREATE TABLE items (
     model VARCHAR,                      
     date INTEGER,                             -- date the item was published
     description VARCHAR,
+    mainImage VARCHAR,
     creator INTEGER REFERENCES users
 );
 
@@ -107,28 +108,28 @@ VALUES
     ('sammy123', 'Sam Carter', 'sam@example.com', 6667778888),
     ('lisalisa', 'Lisa Adams', 'lisa@example.com', 3334445555);
 
-INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator)
+INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator, mainImage)
 VALUES
-    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1),
-    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2),
-    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4),
-    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5),
-    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3),
-    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6),
-    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7),
-    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8),
-    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9),
-    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10),
-    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1),
-    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2),
-    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3),
-    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4),
-    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5),
-    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6),
-    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7),
-    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8),
-    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9),
-    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10);
+    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png'),
+    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2, 'flower.png'),
+    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png'),
+    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5,'flower.png'),
+    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png'),
+    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png'),
+    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png'),
+    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png'),
+    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9 ,'flower.png'),
+    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10 ,'flower.png'),
+    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1,'flower.png'),
+    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2,'flower.png'),
+    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3,'flower.png'),
+    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4,'flower.png'),
+    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5,'flower.png'),
+    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6,'flower.png'),
+    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,'flower.png'),
+    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8,'flower.png'),
+    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,'flower.png'),
+    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10,'flower.png');
 
 INSERT INTO comments (mainuser, userc, date, text, rating)
 VALUES

@@ -6,6 +6,7 @@ class Item {
     public int $id;
     public string $name;
     public array $images;
+    public string $mainImage;
     public float $price;
     public string $description;
     public string $category;
@@ -35,6 +36,8 @@ class Item {
         $new_item->size = $item['size'] != null ? $item['size'] : "";
         $new_item->name = $item['name'] != null ? $item['name'] : "";
         $new_item->creator = $item['creator'];
+        $new_item->mainImage = $item['mainImage']!= null ? $item['mainImage'] : "";;
+
         return $new_item;
     }
 
@@ -45,11 +48,6 @@ class Item {
             $new_items[] = self::create_item($dbh, $item);
         }
         return $new_items;
-    }
-
-    public function get_main_image(): string
-    {
-        return $this->images[array_key_first($this->images)];
     }
 
     static function get_item_images(PDO $dbh, int $id) : array
@@ -139,6 +137,16 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
+    static function get_cart_items_test(PDO $dbh, int $user_id): array
+    {
+        $stmt = $dbh->prepare('SELECT *
+        FROM items LEFT JOIN user_cart
+        ON user_cart.item = items.id JOIN users ON items.creator = users.user_id WHERE user_cart.user = ?');
+        $stmt->execute(array($user_id));
+
+        return $stmt->fetchAll();
+    }
+
     static function get_favorite_items(PDO $dbh, int $user_id): array
     {
         $stmt = $dbh->prepare('SELECT *
@@ -172,9 +180,9 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id) {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator) VALUES (?, ?, ?, ?, ?)');
-        $stmt->execute([$name, $description, $price, $category, $user_id]);
+    static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage) {
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator, mainImage) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt->execute([$name, $description, $price, $category, $user_id, $mainImage]);
     }
     static function register_item_images(PDO $db, array $images)
     {
