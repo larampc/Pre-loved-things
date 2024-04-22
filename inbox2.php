@@ -25,8 +25,8 @@ draw_user_chatrooms($chatrooms, User::get_user($db, $user_id));
                 <figcaption>Item</figcaption>
             </figure>
             <aside class="user-info">
-                <img src="images/profile.png" alt="addressee profile image" class="addressee-img">
                 <p>User Name</p>
+                <img src="images/profile.png" alt="addressee profile image" class="addressee-img">
             </aside>
         </header>
 
@@ -38,15 +38,13 @@ draw_user_chatrooms($chatrooms, User::get_user($db, $user_id));
             <?php draw_sent_message() ?>
             <?php draw_sent_message() ?>
             <?php draw_sent_message() ?>
-        </article>
-        <footer class="msg-bottom">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Write message...">
                 <button type="button" class="send-icon">
                     <i class="bi bi-send"></i>
                 </button>
             </div>
-        </footer>
+        </article>
     </section>
 <?php
 

@@ -9,6 +9,6 @@ require_once(__DIR__ . '/database/connection.db.php');
 
 
 $db = get_database_connection();
-draw_header("profile");
+draw_header("editprofile");
 draw_edit_profile(get_user($db, (int)$_SESSION['user_id']));
 draw_footer();

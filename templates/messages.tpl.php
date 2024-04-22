@@ -9,7 +9,6 @@
     <?php }
     function draw_received_message() : void{ ?>
         <div class="received-message">
-            <img src="images/profile.png" alt="Sender Profile Image">
             <p class="received-msg-text">
 Hi!! This is a message from Riya. Lorem ipsum dolor sit amet consectetur adipisicing elit.
 Non quas nemo eum, earum sunt, nobis similique quisquam eveniet pariatur commodi modi voluptatibus
@@ -21,7 +20,6 @@ Non quas nemo eum, earum sunt, nobis similique quisquam eveniet pariatur commodi
 
     function draw_sent_message() : void { ?>
         <div class="sent-message">
-            <img src="images/profile.png" alt="User Profile Image">
             <p class="sent-msg-text">
                 Hi!! This is a message from Riya. Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Non quas nemo eum, earum sunt, nobis similique quisquam eveniet pariatur commodi modi voluptatibus
