@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 session_start();
 
-require_once('database/users.db.php');
-require_once('database/item.class.php');
+require_once(__DIR__ . '/../database/users.db.php');
+require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/connection.db.php');
 
 
 $dbh = get_database_connection();

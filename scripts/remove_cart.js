@@ -6,7 +6,7 @@ if (cart_page) {
     remove.forEach(function (elem) {
         elem.addEventListener("click",  async function (event) {
             event.preventDefault()
-            const response = await fetch('remove_cart.php?' + encodeForAjax({item: elem.value}))
+            const response = await fetch('../api/api_remove_cart.php?' + encodeForAjax({item: elem.value}))
             const item = await response.json();
             const ele = document.getElementById(elem.value);
             const seller = ele.parentElement.parentElement

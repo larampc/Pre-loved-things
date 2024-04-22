@@ -16,7 +16,7 @@ function draw_user_details($user) { ?>
 function draw_edit_profile($user) { ?>
     <article class="edit-profile">
         <h2>Edit profile</h2>
-        <form action="action_edit_profile.php" method="POST" enctype="multipart/form-data">
+        <form action="actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
             <label for="name"> Name </label>
             <input type="text" id="name" name="name" placeholder="<?=$user['name']?>">
             <label for="email"> Email </label>
@@ -62,7 +62,7 @@ function draw_profile_details($user) {
             <h2 class="name"><?=$user['name']?></h2>
             <p class="phone"><?=$user['phone']?></p>
             <p class="email"><?=$user['email']?></p>
-            <a href="action_logout.php" class="logout">Log out</a>
+            <a href="actions/action_logout.php" class="logout">Log out</a>
             <a href="edit_profile.php">Edit profile</a>
         </div>
     </section>
