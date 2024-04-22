@@ -137,16 +137,6 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function get_cart_items_test(PDO $dbh, int $user_id): array
-    {
-        $stmt = $dbh->prepare('SELECT *
-        FROM items LEFT JOIN user_cart
-        ON user_cart.item = items.id JOIN users ON items.creator = users.user_id WHERE user_cart.user = ?');
-        $stmt->execute(array($user_id));
-
-        return $stmt->fetchAll();
-    }
-
     static function get_favorite_items(PDO $dbh, int $user_id): array
     {
         $stmt = $dbh->prepare('SELECT *

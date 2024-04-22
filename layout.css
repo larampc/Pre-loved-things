@@ -8,7 +8,6 @@ body {
 main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex-grow: 1;
 }
 
@@ -224,6 +223,10 @@ header nav {
 .cartPage .sum-price {
     display: flex;
     justify-content: space-between;
+}
+
+.cartPage p {
+    text-align: center;
 }
 
 /* NEW ITEM PAGE */
