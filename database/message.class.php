@@ -29,9 +29,9 @@ class Message {
         }
         return $messages;
     }
-    static function send_message (PDO $dbh, int $from, int $to, string $msg) : void {
+    static function send_message (PDO $dbh, int $chatroom, int $sender, string $msg) : void {
         $stmt = $dbh->prepare(
-            'INSERT INTO messages (sender, receiver, message, sentTime) VALUES (?,?,?,?)');
-        $stmt->execute(array($from, $to, $msg, time()));
+            'INSERT INTO messages (chatroom, sender, sentTime, message) VALUES (?,?,?,?)');
+        $stmt->execute(array($chatroom, $sender, time(), $msg));
     }
 }

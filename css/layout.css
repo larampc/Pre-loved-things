@@ -344,7 +344,7 @@ main .userPage{
 .scroll {
     display: flex;
     overflow: auto;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 
 .chat-rooms {

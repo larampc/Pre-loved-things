@@ -37,8 +37,8 @@ class Chatroom {
         return $chatrooms;
     }
     public static function get_unread_message_count(PDO $dbh, int $user_id, int $chatroom_id) : int {
-        $stmt = $dbh->prepare('SELECT COUNT(*) FROM messages WHERE chatroom = ? AND readTime is NULL');
-        $stmt->execute([$chatroom_id]);
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM messages WHERE chatroom = ? AND sender <> ? AND readTime is NULL');
+        $stmt->execute([$chatroom_id, $user_id]);
         return $stmt->fetchColumn();
     }
     public static function get_last_message(PDO $dbh, int $chatroom_id) : Message {
