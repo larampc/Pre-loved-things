@@ -13,8 +13,7 @@
 
     $db = get_database_connection();
 
-    $user_items = intval($_SESSION['user_items']? : $_POST['user_items']);
-    $items = User::get_cart_items_from_user($db, $session->getId(), $user_items);
+    $items = User::get_cart_items_from_user($db, $session->getId(), $session->getItemCheckout());
 
     draw_header("cart-checkout", $session);
     draw_checkout_form();

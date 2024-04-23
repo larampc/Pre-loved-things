@@ -38,6 +38,18 @@ class Session {
         return $_SESSION['cart'] ?? array();
     }
 
+    public function hasItemCheckout(): bool {
+        return isset($_SESSION['user_items']);
+    }
+
+    public function getItemCheckout() : int {
+        return $_SESSION['user_items'] ?? -1;
+    }
+
+    public function setItemCheckout($user_item) {
+        $_SESSION['user_items'] = $user_item;
+    }
+
     public function addMessage(string $type, string $text) {
         $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
     }

@@ -92,7 +92,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
                             <p>Total: </p>
                             <p class="total"><?=$sum?></p>
                         </div>
-                        <form class="checkout-item" action="<?=$session->isLoggedIn()?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
+                        <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                             <input type="hidden" value="<?=$user?>" name="user_items">
                             <label>
                                 <button class="checkout" type="submit">Buy now!</button>
@@ -124,7 +124,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
                     <p>Total: </p>
                     <p class="total"><?=$sum?></p>
                 </div>
-                <form class="checkout-item" action="<?=$session->isLoggedIn()?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
+                <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                     <input type="hidden" value="<?=$user?>" name="user_items">
                     <label>
                         <button class="checkout" type="submit">Buy now!</button>
