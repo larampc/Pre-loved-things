@@ -52,7 +52,7 @@
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Write message...">
                     <button type="button" class="send-icon">
-                        <i class="material-symbols-outlined-filled-color">send</i>
+                        <i class="material-symbols-outlined filled-color">send</i>
                     </button>
                 </div>
             </article>

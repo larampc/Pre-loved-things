@@ -19,6 +19,14 @@ CREATE TABLE user_cart (
    item INTEGER references items
 );
 
+CREATE TABLE purchases (
+   buyer INTEGER references users,
+   seller INTEGER references users,
+   item INTEGER references items,
+   state VARCHAR,
+   code VARCHAR
+);
+
 CREATE TABLE items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL,
