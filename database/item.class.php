@@ -46,6 +46,12 @@ class Item {
         return $new_items;
     }
 
+    public static function update_item(PDO $dbh, int $id,  string $name, string $description, string $price, string $category)
+    {
+        $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category=? WHERE id = ?');
+        $stmt->execute(array($name, $description, floatval(str_replace(',', '.', $price)), $category,$id));
+    }
+
     static function get_item_images(PDO $dbh, int $id) : array
     {
         $stmt = $dbh->prepare('SELECT imagePath FROM item_images WHERE item = ?');
@@ -169,7 +175,7 @@ class Item {
 
     static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage) {
         $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator, mainImage) VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$name, $description, $price, $category, $user_id, $mainImage]);
+        $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $category, $user_id, $mainImage]);
     }
     static function register_item_images(PDO $db, array $images)
     {

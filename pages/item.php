@@ -16,5 +16,5 @@
     $item = Item::get_item($db, intval($_GET['id']));
 
     draw_header("item", $session);
-    draw_item_page($db, $item);
+    draw_item_page($db, $item, $session);
     draw_footer();

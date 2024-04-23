@@ -19,16 +19,16 @@ function draw_edit_profile($user) { ?>
         <h2>Edit profile</h2>
         <form action="../actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
             <label for="name"> Name </label>
-            <input type="text" id="name" name="name" placeholder="<?=$user->name?>">
+            <input type="text" id="name" name="name" value="<?=$user->name?>">
             <label for="username"> Username </label>
-            <input type="text" id="username" name="username" placeholder="<?=$user->username?>">
+            <input type="text" id="username" name="username" value="<?=$user->username?>">
             <label for="email"> Email </label>
-            <input type="text" id="email" name="email" placeholder="<?=$user->email?>">
+            <input type="text" id="email" name="email" value="<?=$user->email?>">
             <label for="phone"> Phone </label>
-            <input type="text" id="phone" name="phone" placeholder="<?=$user->phone?>">
+            <input type="text" id="phone" name="phone" value="<?=$user->phone?>">
             <label for="pf">Profile photo</label>
             <input type="file" id="pf" name="profilePhoto" accept="image/*">
-            <input type="submit" value="Submit">
+            <button type="submit">Submit</button>
         </form>
     </article>
     <?php
