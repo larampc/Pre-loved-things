@@ -14,12 +14,13 @@
     <script src="../scripts/like.js" defer></script>
     <script src="../scripts/add_cart.js" defer></script>
     <script src="../scripts/remove_cart.js" defer></script>
+    <script src="../scripts/chatroom.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body> 
     <header>
-        <a href="index.php"><img src="../images/logo.png" id="logo" alt="logo"></a>
-            <form class="search-container" method="GET" action="search.php">
+        <a href="../index.php"><img src="../images/logo.png" id="logo" alt="logo"></a>
+            <form class="search-container" method="GET" action="../pages/search.php">
                 <select name="category" class="dropdown-content">
                     <option value="">All Categories</option>
                     <option value="clothes">Clothes</option>

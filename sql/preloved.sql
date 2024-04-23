@@ -61,7 +61,7 @@ CREATE TABLE messages (
     chatroom INTEGER NOT NULL REFERENCES chatrooms,
     sender INTEGER NOT NULL REFERENCES users,
     sentTime INTEGER NOT NULL,
-    readDate INTEGER DEFAULT NULL,
+    readTime INTEGER DEFAULT NULL,
     message VARCHAR NOT NULL
 );
 
@@ -187,8 +187,9 @@ VALUES
     (2, 11, 3, 4),
     (3, 12, 1, 4);
 
-INSERT INTO messages (chatroom, sender, sentTime, readDate, message)
+INSERT INTO messages (chatroom, sender, sentTime, readTime, message)
 VALUES
+    (1, 1, 1648732345, NULL, 'Hi there! Is item 10 still available?'),
     (1, 1, 1648732345, NULL, 'Hi there! Is item 10 still available?'),
     (1, 2, 1648741234, 1648750000, 'Yes, item 10 is available. Are you interested in purchasing it?'),
     (1, 1, 1648763123, NULL, 'Great! When can we meet for the transaction?'),

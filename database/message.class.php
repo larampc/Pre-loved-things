@@ -14,39 +14,18 @@ class Message {
         $this->message = $message;
     }
 
-    static function messages_get_users (PDO $dbh, int $userId) : array {
-        $stmt = $dbh->prepare('SELECT * FROM messages WHERE sender = ? OR receiver = ?');
-        $stmt->execute(array($userId, $userId));
-
-        $users = []; //(user, lastMsg, unread count)
-        while ($message = $stmt->fetch()) {
-            $correspondent = (int)$message['sender'] === $userId ? (int)$message['receiver'] : (int)$message['sender'];
-
-        }
-//        $this->query(
-//            "SELECT `user_from`, COUNT(*) `ur`
-//      FROM `messages` WHERE `user_to`=? AND `date_read` IS NULL
-//      GROUP BY `user_from`", [$for]);
-//        while ($r = $this->stmt->fetch()) { $users[$r["user_from"]]["unread"] = $r["ur"]; }
-//
-//        return $users;
-        return $users;
-    }
-
-    function read_messages (PDO $dbh, int $from, int $to, int $limit = 30) : array {
+    static function read_messages (PDO $dbh, int $chatroom, int $sender, int $limit = 30) : array {
         $stmt = $dbh->prepare(
-            'UPDATE messages SET readTime = ? WHERE sender = ? AND readTime IS NULL');
-        $stmt->execute(array(time(), $from));
-
+            'UPDATE messages SET readTime = ? WHERE chatroom = ? AND sender = ? AND readTime IS NULL');
+        $stmt->execute(array(time(), $chatroom, $sender));
         $stmt = $dbh->prepare('SELECT * FROM messages
-                                      WHERE sender IN (?,?) AND receiver IN (?,?)
-                                      ORDER BY sentTime DESC
+                                      WHERE chatroom = ? ORDER BY sentTime DESC
                                       LIMIT ?');
-        $stmt->execute(array($from, $to, $from, $to, $limit));
+        $stmt->execute(array($chatroom, $limit));
 
         $messages = [];
         while ($message = $stmt->fetch()) {
-            $messages[] = new Message($message["sender"], $message["receiver"], $message["sentTime"], $message["readTime"]);
+            $messages[] = new Message($message["chatroom"], $message["sender"], $message["sentTime"], $message["readTime"], $message["message"]);
         }
         return $messages;
     }

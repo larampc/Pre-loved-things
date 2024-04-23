@@ -32,20 +32,31 @@ class Chatroom {
             $chatrooms[] = new Chatroom($chatroom['chatroom_id'] ,Item::get_item($dbh, $chatroom['item_id']),
                 User::get_user($dbh, $chatroom['seller_id']), User::get_user($dbh, $chatroom['buyer_id']),
                 self::get_unread_message_count($dbh, $userId, $chatroom['chatroom_id']),
-                self::get_last_message($dbh, $userId, $chatroom['seller_id']));
+                self::get_last_message($dbh, $chatroom['chatroom_id']));
         }
         return $chatrooms;
     }
     public static function get_unread_message_count(PDO $dbh, int $user_id, int $chatroom_id) : int {
-        $stmt = $dbh->prepare('SELECT COUNT(*) FROM messages WHERE chatroom = ? AND readDate is NULL');
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM messages WHERE chatroom = ? AND readTime is NULL');
         $stmt->execute([$chatroom_id]);
         return $stmt->fetchColumn();
     }
-    public static function get_last_message(PDO $dbh, int $user_id, int $chatroom_id) : Message {
+    public static function get_last_message(PDO $dbh, int $chatroom_id) : Message {
         $stmt = $dbh->prepare('SELECT * FROM messages WHERE chatroom = ? ORDER BY sentTime DESC LIMIT 1');
         $stmt->execute([$chatroom_id]);
         $message = $stmt->fetch();
         return new Message($chatroom_id , $message['sender'] , $message['sentTime'], $message['readTime'], $message['message']);
+    }
+
+    public static function get_chatroom_by_id(PDO $dbh, int $id) : Chatroom
+    {
+        $stmt = $dbh->prepare('SELECT * FROM chatrooms WHERE chatroom_id = ?');
+        $stmt->execute([$id]);
+        $chatroom = $stmt->fetch();
+        return new Chatroom($chatroom['chatroom_id'] ,Item::get_item($dbh, $chatroom['item_id']), User::get_user($dbh, $chatroom['seller_id']),
+        User::get_user($dbh, $chatroom['buyer_id']),
+            self::get_unread_message_count($dbh, $chatroom['buyer_id'], $chatroom['chatroom_id']),
+            self::get_last_message($dbh, $chatroom['chatroom_id']));
     }
 }
 
