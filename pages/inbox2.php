@@ -45,7 +45,7 @@ draw_user_chatrooms($chatrooms, User::get_user($db, $user_id));
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Write message...">
                 <button type="button" class="send-icon">
-                    <i class="bi bi-send"></i>
+                    <i class="material-symbols-outlined filled-color">send</i>
                 </button>
             </div>
         </article>

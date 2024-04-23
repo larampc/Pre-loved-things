@@ -374,6 +374,12 @@ main .userPage{
     flex-grow: 1;
 }
 
+.input-group button {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+
 .chat {
     display: flex;
     align-items: center;
