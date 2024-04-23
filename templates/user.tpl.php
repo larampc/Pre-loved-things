@@ -221,4 +221,27 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
             <p class="total"><?=$sum?></p>
         </div>
     </div>
-<?php }
+<?php } ?>
+
+<?php  function draw_user_options(PDO $db, Session $session) { ?>
+    <section class="display-item">
+        <button type="button" class="collapsible">Pending purchases</button>
+        <section class="items">
+            <?php
+            $items = TrackItem::get_purchased_items($db, $session->getId());
+            foreach ($items as $item) {
+                draw_item_to_track($item->tracking);
+            } ?>
+            </section>
+        <button type="button" class="collapsible">Pending sales</button>
+        <section class="items">
+            <?php
+            $items = TrackItem::get_selling_items($db, $session->getId());
+            foreach ($items as $item) {
+                draw_item_to_track($item->tracking);
+            } ?>
+            </section>
+        <button type="button" class="collapsible">My items</button>
+            <?php draw_items(Item::get_user_items($db, $session->getId())); ?>
+    </section>
+<?php } ?>

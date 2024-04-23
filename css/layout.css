@@ -285,12 +285,12 @@ main .userPage{
                          "feedback items";
 }
 
-.userPage .user  {
+.userPage .user, .pfPage .user  {
     grid-area: user;
     display: flex;
 }
 
-.userPage .feedback {
+.userPage .feedback, .pfPage .feedback {
     grid-area: feedback;
     display: flex;
     flex-direction: column;
@@ -303,7 +303,7 @@ main .userPage{
     flex-wrap: wrap;
 }
 
-.userPage .user img {
+.userPage .user img, .pfPage .user img {
     float: left;
 }
 
@@ -456,4 +456,67 @@ main .userPage{
 
 .payment-form:nth-child(2) {
     display: block;
+}
+
+.item-track {
+    margin-left: 7rem;
+    margin-right: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas: "contact deliveryDate"
+                        "shipping item";
+}
+
+.item-track #contact-seller {
+    grid-area: contact;
+}
+
+.item-track .state {
+    grid-area: shipping;
+}
+
+.item-track #delivery-date {
+    grid-area: deliveryDate;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    p {
+        margin: 0 1rem 0 0;
+    }
+    input {
+        width: 5rem;
+    }
+    button {
+        background-color: #E5CFA4;
+        border-radius: 1rem;
+        border-style: none;
+    }
+}
+
+.item-track .item {
+    grid-area: item;
+    align-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    img {
+        margin: 0 auto;
+    }
+}
+
+.pfPage .items {
+    display: none;
+}
+
+main .pfPage{
+    display: grid;
+    grid-template-columns:  2fr 1fr;
+    grid-template-rows:  2fr 3fr;
+    grid-template-areas: "user items"
+                         "feedback items";
+}
+
+.pfPage .display-item {
+    grid-area: items;
 }

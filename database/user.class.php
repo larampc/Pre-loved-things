@@ -44,25 +44,25 @@ class User
         return !empty($row);
     }
 
-    public static function like_item(PDO $dbh, int $id, int $item)
+    public static function like_item(PDO $dbh, int $id, int $item): void
     {
         $stmt = $dbh->prepare('INSERT INTO favorites VALUES (?, ?)');
         $stmt->execute(array($id, $item));
     }
 
-    public static function dislike_item(PDO $dbh, int $id, int $item)
+    public static function dislike_item(PDO $dbh, int $id, int $item): void
     {
         $stmt = $dbh->prepare('DELETE FROM favorites WHERE user = ? AND item = ?');
         $stmt->execute(array($id, $item));
     }
 
-    public static function add_cart(PDO $dbh, int $id, int $item)
+    public static function add_cart(PDO $dbh, int $id, int $item): void
     {
         $stmt = $dbh->prepare('INSERT INTO user_cart VALUES (?, ?)');
         $stmt->execute(array($id, $item));
     }
 
-    public static function remove_cart(PDO $dbh, int $id, int $item)
+    public static function remove_cart(PDO $dbh, int $id, int $item): void
     {
         $stmt = $dbh->prepare('DELETE FROM user_cart WHERE user = ? AND item = ?');
         $stmt->execute(array($id, $item));
@@ -82,7 +82,8 @@ class User
     }
 
 
-    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $photo) {
+    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $photo): void
+    {
         $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, photoPath=?, username=? WHERE user_id = ?');
         $stmt->execute(array($email, $phone, $name, $photo, $username,$id));
     }
@@ -110,7 +111,8 @@ class User
         return $ids;
     }
 
-    public static function add_to_cart(PDO $dbh, array $item_id, int $user) {
+    public static function add_to_cart(PDO $dbh, array $item_id, int $user): void
+    {
         $in_cart = self::get_cart_items_ids($dbh, $user);
         foreach ($item_id as $id) {
             if (!(!empty($in_cart) && in_array($id, $in_cart))) {

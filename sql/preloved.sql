@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS item_images;
 DROP TABLE IF EXISTS user_cart;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS chatrooms;
+DROP TABLE IF EXISTS purchases;
 
 
 CREATE TABLE item_images (
@@ -21,10 +22,10 @@ CREATE TABLE user_cart (
 
 CREATE TABLE purchases (
    buyer INTEGER references users,
-   seller INTEGER references users,
    item INTEGER references items,
+   deliveryDate INTEGER,
    state VARCHAR,
-   code VARCHAR
+   code VARCHAR PRIMARY KEY
 );
 
 CREATE TABLE items (
@@ -232,3 +233,10 @@ VALUES
     (2, 3, 1648902234, NULL, 'See you soon.'),
     (2, 4, 1648913345, NULL, 'Take care!'),
     (3, 1, 1648902234, NULL, 'See you soon.');
+
+
+INSERT INTO purchases (buyer, item, deliveryDate, state, code) VALUES
+    (1, 2, '2/10/2020', 'shipping', 'ABCDE'),
+    (1, 3, '10/10/2024', 'preparing', 'ABCDEF'),
+    (4, 11, '10/10/2024', 'preparing', 'ABCDEFH'),
+    (2, 1, '10/10/2025', 'delivered', 'ABCDEFG');

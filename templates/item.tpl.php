@@ -186,3 +186,40 @@ function draw_page_filters(array $items) { ?>
         </section>
         </article>
 <?php } ?>
+
+<?php function draw_item_tracking(TrackItem $trackItem, Session $session) { ?>
+    <section class="item-track">
+        <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking->creator == $session->getId()? "Contact buyer" : "") ?></button>
+        <ul class="state">
+            <li class="<?= ($trackItem->state == "preparing"? "current" : "done")?>">Preparing</li>
+            <li class="<?=($trackItem->state == "shipping"? "current" : (($trackItem->state == "delivering" || $trackItem->state == "delivered") ? "done":""))?>">Shipping</li>
+            <li class="<?=($trackItem->state == "delivering"? "current" : ($trackItem->state == "delivered" ? "done":""))?>">Delivering</li>
+            <li class="<?=($trackItem->state == "delivered"? "done" : "")?>">Delivered</li>
+        </ul>
+        <div id="delivery-date">
+            <p>Estimated delivery date: </p>
+            <?php if ($trackItem->state != "delivered" && $trackItem->tracking->creator == $session->getId()) {?>
+                <form method="post" action="../actions/action_update_delivery.php">
+                    <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
+                    <input type="hidden" value="<?=$trackItem->tracking->id?>" name="item">
+                    <button type="submit">Confirm</button>
+                </form>
+            <?php }
+            else {?>
+                <p><?=$trackItem->date?></p>
+            <?php } ?>
+        </div>
+        <?php draw_item($trackItem->tracking );?>
+    </section>
+
+<?php } ?>
+
+<?php function draw_item_to_track(Item $item) { ?>
+    <a href="../pages/track_item.php?item-track=<?= $item->id ?>" class="item" id="<?=$item->id?>">
+        <img src="<?="../images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
+        <div class="item-info">
+            <p class="name"><?=$item->name?></p>
+            <p class="price"><?=$item->price?></p>
+        </div>
+    </a>
+<?php } ?>
