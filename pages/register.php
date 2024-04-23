@@ -1,13 +1,14 @@
 <?php
 
-declare(strict_types=1);
+    declare(strict_types=1);
 
-session_start();
+    require_once(__DIR__ . '/../utils/session.php');
+    $session = new Session();
 
-require_once(__DIR__ . '/../templates/users.tpl.php');
+    require_once(__DIR__ . '/../templates/users.tpl.php');
 
-$checkout = isset($_GET['checkout']);
+    $checkout = isset($_GET['checkout']);
 
-draw_header("register");
-draw_register_form($checkout);
-draw_footer();
+    draw_header("register", $session);
+    draw_register_form($checkout);
+    draw_footer();

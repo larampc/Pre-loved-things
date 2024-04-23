@@ -1,7 +1,8 @@
 <?php
     declare(strict_types = 1);
 
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
+    $session = new Session();
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/item.class.php');
@@ -12,15 +13,15 @@
 
     $db = get_database_connection();
     $items = array();
-    if (isset($_SESSION['user_id'])) {
-        $items = User::get_cart_items($db, (int)$_SESSION['user_id']);
+    if ($session->isLoggedIn()) {
+        $items = User::get_cart_items($db, $session->getId());
     }
     else {
-        if ($_SESSION['cart']) $items = Item::get_items_in_array($db,$_SESSION['cart']);
+        if ($session->hasItemsCart()) $items = Item::get_items_in_array($db, $session->getCart());
     }
     $items = Item::sort_by_user($items);
-    draw_header("cart");
-    draw_cart($db, $items);
+    draw_header("cart", $session);
+    draw_cart($db, $items, $session);
     draw_footer();
 
 

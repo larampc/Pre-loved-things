@@ -1,7 +1,8 @@
 <?php
 declare(strict_types=1);
 
-session_start();
+require_once(__DIR__ . '/../utils/session.php');
+$session = new Session();
 
-echo json_encode($_SESSION['user_id']);
+echo json_encode($session->getId());
 

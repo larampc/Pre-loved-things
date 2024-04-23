@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-session_start();
-
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
+$session = new Session();
 $dbh = get_database_connection();
 
-$user = User::get_user($dbh, (int)$_SESSION['user_id']);
-User::update_user($dbh, (int)$_SESSION['user_id'],
+$user = User::get_user($dbh, $session->getId());
+User::update_user($dbh, $session->getId(),
     empty($_POST['username'])? $user->username: $_POST['username'],
     empty($_POST['email'])? $user->email: $_POST['email'],
     empty($_POST['phone'])? $user->phone: $_POST['phone'],

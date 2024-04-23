@@ -1,7 +1,9 @@
 <?php
 
     declare(strict_types=1);
-    session_start();
+
+    require_once(__DIR__ . '/../utils/session.php');
+    $session = new Session();
 
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/item.class.php');
@@ -12,7 +14,7 @@
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $db = get_database_connection();
-    draw_header("user");
+    draw_header("user", $session);
     ?>
     <article class="userPage">
     <?php
@@ -22,7 +24,7 @@
     $items = Item::get_user_items($db, $user_id);
 
     draw_user_details($user);
-    draw_user_feedback($db, $user, $feedback);
+    draw_user_feedback($db, $user, $feedback, $session);
     draw_items($items);
     ?> </article>
 <?php

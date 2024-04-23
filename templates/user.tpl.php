@@ -34,7 +34,7 @@ function draw_edit_profile($user) { ?>
     <?php
 }
 
-function draw_user_feedback(PDO $db, $user, $feedback) { ?>
+function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
     <section class="feedback">
         <h2>Feedback</h2>
             <div class ="comment-box">
@@ -52,7 +52,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
                         <?php
                     } ?>
             </div>
-        <?php if ($user->user_id!=$_SESSION['user_id']) echo("<p>+ Add your review</p>"); ?>
+        <?php if ($user->user_id!=$session_id) echo("<p>+ Add your review</p>"); ?>
     </section>
 <?php } ?>
 
@@ -70,7 +70,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
     </section>
 <?php } ?>
 
-<?php function draw_cart(PDO $db, array $items) { ?>
+<?php function draw_cart(PDO $db, array $items, Session $session) { ?>
     <article class="cartPage">
         <h2>Your cart</h2>
         <?php
@@ -92,7 +92,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
                             <p>Total: </p>
                             <p class="total"><?=$sum?></p>
                         </div>
-                        <form class="checkout-item" action="<?=$_SESSION['user_id']?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
+                        <form class="checkout-item" action="<?=$session->isLoggedIn()?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
                             <input type="hidden" value="<?=$user?>" name="user_items">
                             <label>
                                 <button class="checkout" type="submit">Buy now!</button>
@@ -124,7 +124,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
                     <p>Total: </p>
                     <p class="total"><?=$sum?></p>
                 </div>
-                <form class="checkout-item" action="<?=$_SESSION['user_id']?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
+                <form class="checkout-item" action="<?=$session->isLoggedIn()?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
                     <input type="hidden" value="<?=$user?>" name="user_items">
                     <label>
                         <button class="checkout" type="submit">Buy now!</button>

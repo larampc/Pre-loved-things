@@ -2,7 +2,8 @@
 
     declare(strict_types = 1);
 
-    session_start();
+    require_once(__DIR__ . '/../utils/session.php');
+    $session = new Session();
 
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
@@ -14,6 +15,6 @@
     $db = get_database_connection();
     $item = Item::get_item($db, intval($_GET['id']));
 
-    draw_header("item");
+    draw_header("item", $session);
     draw_item_page($db, $item);
     draw_footer();

@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-session_start();
+require_once(__DIR__ . '/../utils/session.php');
+$session = new Session();
 
-session_destroy();
+$session->logout();
 
 header('Location: ../index.php');

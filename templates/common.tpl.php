@@ -1,4 +1,4 @@
-<?php function draw_header(string $page) { ?>
+<?php function draw_header(string $page, Session $session) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -37,7 +37,7 @@
             </form>
         <nav>
             <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
-            <?php if (isset($_SESSION['user_id'])) { ?>
+            <?php if ($session->isLoggedIn()) { ?>
                 <a href="../pages/favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
                 <a href="../pages/inbox2.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
                 <a href="../pages/profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
