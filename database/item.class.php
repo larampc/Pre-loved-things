@@ -8,7 +8,6 @@ class Item {
     public float $price;
     public string $description;
     public string $category;
-    public int $quantity;
     public string $model;
     public string $brand;
     public string $condition;
@@ -29,7 +28,6 @@ class Item {
         $new_item->price = $item['price'] != null ? $item['price'] : 0.0;
         $new_item->description = $item['description'] != null ? $item['description'] : "";
         $new_item->category = $item['category'] != null ? $item['category'] : "";
-        $new_item->quantity = $item['quantity'] != null ? $item['quantity'] : 0;
         $new_item->model = $item['model'] != null ? $item['model'] : "";
         $new_item->size = $item['size'] != null ? $item['size'] : "";
         $new_item->name = $item['name'] != null ? $item['name'] : "";
