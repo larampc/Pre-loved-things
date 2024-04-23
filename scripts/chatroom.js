@@ -73,7 +73,8 @@ if (chatrooms) {
                 msg_section.scrollTo(0, msg_section.scrollHeight)
             })
             const send_icon = document.createElement('i')
-            send_icon.classList.add("material-symbols-outlined-filled-color")
+            send_icon.classList.add("material-symbols-outlined")
+            send_icon.classList.add("filled-color")
             send_icon.innerText = "send"
             button.appendChild(send_icon)
             send_msg_div.appendChild(input)
