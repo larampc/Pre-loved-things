@@ -65,7 +65,7 @@ function draw_item(Item $item) { ?>
             <span class="price"><?= $item->price?></span>
             <section class="buy-item">
                 <i class="material-symbols-outlined cart big"> local_mall </i>
-                <button value="<?=$item->id?>" class="Buy"><?=(Item::check_cart($db, (int)$_SESSION['user_id'], $item) || ($_SESSION['cart'] && in_array($item->id, $_SESSION['cart'])))?  "Already in cart" : "Buy now!"?></button>
+                <button value="<?=$item->id?>" class="Buy"><?=($_SESSION['user_id'] == $item->creator) ? "You own this product" : ((Item::check_cart($db, (int)$_SESSION['user_id'], $item) || ($_SESSION['cart'] && in_array($item->id, $_SESSION['cart'])))?  "Already in cart" : "Buy now!")?></button>
             </section>
         </section>
         <section class="sendMessage">
