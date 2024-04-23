@@ -16,5 +16,6 @@ $user_items = intval($_SESSION['user_items']? : $_POST['user_items']);
 $items = get_cart_items_from_user($db, $_SESSION['user_id'], $user_items);
 
 draw_header("cart-checkout");
-draw_checkout_user($items);
+draw_checkout_form();
+draw_checkout_summary($items);
 draw_footer();

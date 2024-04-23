@@ -291,7 +291,7 @@ main .cartPage  h2 {
     text-align: right;
 }
 
-.cartPage .sum {
+.sum {
     height: fit-content;
     background-color: #EBEBEB;
     padding: 0 1rem;
@@ -673,4 +673,21 @@ main.inboxMain ::-webkit-scrollbar-thumb {
 /* Handle on hover */
 main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: #efdab4cd;
+}
+
+.collapsible {
+    width: 100%;
+    background-color: #F1F1F1;
+    border: none;
+}
+
+.buy-form label {
+    margin-top: 0.5rem;
+}
+
+.next, .confirm {
+    display: block;
+    margin: 0.5rem auto;
+    border: none;
+    border-radius: 0.2rem;
 }

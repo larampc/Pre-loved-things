@@ -132,63 +132,90 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
     </article>
 <?php } ?>
 
-<?php function draw_checkout_user(array $items) { ?>
-    <button class="collapsible-shipping">Shipping information</button>
-    <div class="shipping">
-        <label> Address
-            <input type="text" name="address">
-        </label>
-        <label> City
-            <input type="text" name="city">
-        </label>
-        <label> Postal code
-            <input type="text" name="city">
-        </label>
-    </div>
-    <button class="collapsible-billing">Billing information</button>
-    <div class="billing">
-        <label> Name
-            <input type="text" name="address">
-        </label>
-        <label> NIF
-            <input type="text" name="address">
-        </label>
-        <label> Address
-            <input type="text" name="address">
-        </label>
-        <label> City
-            <input type="text" name="city">
-        </label>
-        <label> Postal code
-            <input type="text" name="city">
-        </label>
-    </div>
-    <button class="collapsible-payment">Payment information</button>
-    <div class="payment">
-        <label> Credit card
-            <input type="radio" name="credit-card" checked>
-        </label>
-        <label> Mbway
-            <input type="radio" name="mbway">
-        </label>
-        <label> Paypal
-            <input type="radio" name="paypal">
-        </label>
-        <div id="mbway">
-            <label> Phone number
-                <input type="text" name="phone">
+<?php function draw_checkout_form() { ?>
+    <form class="checkout">
+        <button type="button" class="collapsible">Shipping information</button>
+        <div class="buy-form">
+            <label> Address
+                <input type="text" name="address">
             </label>
+            <label> City
+                <input type="text" name="city">
+            </label>
+            <label> Postal code
+                <input type="text" name="city">
+            </label>
+            <button type="button" class="next">Next</button>
         </div>
-        <div id="credit-card">
-            <label> Card number
-                <input type="text" name="card-number">
+        <button type="button" class="collapsible">Billing information</button>
+        <div class="buy-form">
+            <label> Name
+                <input type="text" name="address">
             </label>
-            <label> CVC
-                <input type="text" name="cvc">
+            <label> NIF
+                <input type="text" name="address">
             </label>
-            <label> Expiration date
-                <input type="date" name="expire">
+            <label> Address
+                <input type="text" name="address">
             </label>
+            <label> City
+                <input type="text" name="city">
+            </label>
+            <label> Postal code
+                <input type="text" name="city">
+            </label>
+            <button type="button" class="next">Next</button>
+        </div>
+        <button type="button" class="collapsible">Payment information</button>
+        <div class="buy-form">
+            <div class="options">
+                <label> Credit card
+                    <input class="option" type="radio" name="option" id="credit-card" checked>
+                </label>
+                <label> Mbway
+                    <input class="option" type="radio" name="option" id="mbway">
+                </label>
+                <label> Paypal
+                    <input class="option" type="radio" name="option" id="paypal">
+                </label>
+            </div>
+            <div id="credit-card" class="payment-form">
+                <label> Card number
+                    <input type="text" name="card-number">
+                </label>
+                <label> CVC
+                    <input type="text" name="cvc">
+                </label>
+                <label> Expiration date
+                    <input type="date" name="expire">
+                </label>
+            </div>
+            <div id="mbway" class="payment-form">
+                <label> Phone number
+                    <input type="text" name="phone">
+                </label>
+            </div>
+            <button type="submit" class="confirm">Confirm payment</button>
+        </div>
+    </form>
+<?php } ?>
+
+<?php function draw_checkout_summary(array $items) {?>
+    <div class="sum">
+        <p class="num-items">Number items: <?=count($items)?></p>
+        <?php
+        $sum = 0;
+        foreach ($items as $item) { ?>
+            <div class="item-info">
+                <p class="name"><?=$item->name?></p>
+                <p class="price"><?=$item->price?></p>
+            </div>
+        <?php
+            $sum +=$item->price;
+        } ?>
+        <div class="sum-price">
+            <p>Total: </p>
+            <p class="total"><?=$sum?></p>
         </div>
     </div>
 <?php }

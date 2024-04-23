@@ -215,7 +215,7 @@ header nav {
     justify-content: space-between;
 }
 
-.cartPage .sum {
+.sum {
     grid-area: sum;
     display: flex;
     flex-direction: column;
@@ -226,7 +226,7 @@ header nav {
     grid-area: seller-items;
 }
 
-.cartPage .sum-price {
+.sum-price {
     display: flex;
     justify-content: space-between;
 }
@@ -400,4 +400,57 @@ main .userPage{
 
 .chat > p {
     align-content: center;
+}
+
+.sum .item-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-checkoutMain {
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+}
+
+.checkout {
+    width: 80%;
+}
+
+.buy-form {
+    display: flex;
+    flex-direction: column;
+    label {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.buy-form {
+    display: none;
+    overflow: hidden;
+}
+
+.buy-form:nth-child(2) {
+    display: block;
+}
+
+.options label {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.payment-form {
+    display: none;
+}
+
+.payment-form:nth-child(2) {
+    display: block;
 }
