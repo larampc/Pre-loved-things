@@ -316,3 +316,76 @@ main .userPage{
     display: flex;
     flex-direction: column;
 }
+
+/* IMBOX PAGE */
+.chat-inbox {
+    grid-area: inbox;
+}
+
+.chat-page {
+    grid-area: message;
+}
+
+.message-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-header .item-info {
+    display: flex;
+    align-items: center;
+}
+
+.message-header .user-info {
+    display: flex;
+    align-items: center;
+}
+
+.scroll {
+    display: flex;
+    overflow: auto;
+    flex-direction: column-reverse;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.received-message {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+
+.sent-message {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    align-self: flex-end;
+}
+
+.input-group {
+    display: flex;
+}
+
+.input-group input {
+    flex-grow: 1;
+}
+
+.chat {
+    display: flex;
+    align-items: center;
+}
+
+.chat-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.chat > p {
+    align-content: center;
+}
