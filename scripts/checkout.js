@@ -5,12 +5,15 @@ for (let i = 0; i < coll.length; i++) {
         let content = this.nextElementSibling;
         if (content.style.display === "block") {
             content.style.display = "none";
+            this.style.borderRadius = "1rem";
         } else {
             content.style.display = "block";
+            this.style.borderRadius = "1rem 1rem 0 0";
             for (let j = 0; j < coll.length; j++) {
                 if (j !== i)  {
                     let content2 = coll[j].nextElementSibling;
                     content2.style.display = "none";
+                    coll[j].style.borderRadius = "1rem";
                 }
             }
         }

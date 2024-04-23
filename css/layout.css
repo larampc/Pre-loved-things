@@ -407,6 +407,9 @@ main .userPage{
     justify-content: space-between;
 }
 
+
+
+
 .cart-checkoutMain {
     display: flex;
     flex-direction: row;
@@ -422,7 +425,7 @@ main .userPage{
     flex-direction: column;
     label {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
     }
 }
 
