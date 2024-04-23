@@ -51,10 +51,9 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
             </div>
         <?php if ($user['user_id']!=$_SESSION['user_id']) echo("<p>+ Add your review</p>"); ?>
     </section>
-<?php
-}
+<?php } ?>
 
-function draw_profile_details($user) {
+<?php function draw_profile_details($user) {
     ?>
     <section class="user">
         <img src="../images/profile.png" class="profile-pic" alt="profile picture">
@@ -66,10 +65,9 @@ function draw_profile_details($user) {
             <a href="edit_profile.php">Edit profile</a>
         </div>
     </section>
-    <?php
-}
+<?php } ?>
 
-function draw_cart(PDO $db, array $items) { ?>
+<?php function draw_cart(PDO $db, array $items) { ?>
     <article class="cartPage">
         <h2>Your cart</h2>
         <?php
@@ -91,9 +89,10 @@ function draw_cart(PDO $db, array $items) { ?>
                             <p>Total: </p>
                             <p class="total"><?=$sum?></p>
                         </div>
-                        <form class="buy-item">
+                        <form class="checkout-item" action="<?=$_SESSION['user_id']?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
+                            <input type="hidden" value="<?=$user?>" name="user_items">
                             <label>
-                                <button class="Buy" type="submit">Buy now!</button>
+                                <button class="checkout" type="submit">Buy now!</button>
                             </label>
                         </form>
                     </div>
@@ -104,10 +103,10 @@ function draw_cart(PDO $db, array $items) { ?>
             }
             if ($user != $item->creator) { ?>
                 <section class="seller">
-                    <div class="seller-info">
+                    <a href="../pages/user.php?user_id=<?=$item->creator?>" class="seller-info">
                         <img src="../images/<?=get_user_image($db, $item->creator)?>" class="profile-pic" alt="profile-photo">
                         <p><?=get_user($db, $item->creator)['name']?></p>
-                    </div>
+                    </a>
                     <article class="seller-items">
             <?php }
             draw_item($item);
@@ -122,12 +121,74 @@ function draw_cart(PDO $db, array $items) { ?>
                     <p>Total: </p>
                     <p class="total"><?=$sum?></p>
                 </div>
-                <form class="buy-item">
+                <form class="checkout-item" action="<?=$_SESSION['user_id']?"../pages/checkout.php": "../pages/login.php?checkout"?>" method="post">
+                    <input type="hidden" value="<?=$user?>" name="user_items">
                     <label>
-                        <button class="Buy" type="submit">Buy now!</button>
+                        <button class="checkout" type="submit">Buy now!</button>
                     </label>
                 </form>
             </div>
         </section>
     </article>
+<?php } ?>
+
+<?php function draw_checkout_user(array $items) { ?>
+    <button class="collapsible-shipping">Shipping information</button>
+    <div class="shipping">
+        <label> Address
+            <input type="text" name="address">
+        </label>
+        <label> City
+            <input type="text" name="city">
+        </label>
+        <label> Postal code
+            <input type="text" name="city">
+        </label>
+    </div>
+    <button class="collapsible-billing">Billing information</button>
+    <div class="billing">
+        <label> Name
+            <input type="text" name="address">
+        </label>
+        <label> NIF
+            <input type="text" name="address">
+        </label>
+        <label> Address
+            <input type="text" name="address">
+        </label>
+        <label> City
+            <input type="text" name="city">
+        </label>
+        <label> Postal code
+            <input type="text" name="city">
+        </label>
+    </div>
+    <button class="collapsible-payment">Payment information</button>
+    <div class="payment">
+        <label> Credit card
+            <input type="radio" name="credit-card" checked>
+        </label>
+        <label> Mbway
+            <input type="radio" name="mbway">
+        </label>
+        <label> Paypal
+            <input type="radio" name="paypal">
+        </label>
+        <div id="mbway">
+            <label> Phone number
+                <input type="text" name="phone">
+            </label>
+        </div>
+        <div id="credit-card">
+            <label> Card number
+                <input type="text" name="card-number">
+            </label>
+            <label> CVC
+                <input type="text" name="cvc">
+            </label>
+            <label> Expiration date
+                <input type="date" name="expire">
+            </label>
+        </div>
+    </div>
 <?php }

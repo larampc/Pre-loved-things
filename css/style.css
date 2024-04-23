@@ -241,7 +241,7 @@ main > h2 {
     color: black;
 }
 
-.cartPage .Buy {
+.cartPage .checkout {
     border-style: none;
     color: white;
     background-color: black;
@@ -560,13 +560,17 @@ i {
     height: 54dvh;
 }
 
+.chat-rooms {
+    height: 54dvh;
+}
+
 .received-message {
     width: 70%;
     background-color: #F2E8D5;
     border-radius: 1rem;
     padding: 0.8rem;
     margin-left: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 0.4rem;
     p {
         margin: 0;
     }
@@ -581,13 +585,17 @@ i {
     border-radius: 1rem;
     padding: 0.8rem;
     margin-right: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 0.4rem;
     p {
         margin: 0;
     }
     time {
         font-size: small;
     }
+}
+
+.received-message + .sent-message, .sent-message + .received-message {
+    margin-top: 1rem;
 }
 
 .input-group {
@@ -643,4 +651,26 @@ i {
     padding: 0.1rem;
     height: 1.3rem;
     min-width: 1.3rem;
+}
+
+main.inboxMain ::-webkit-scrollbar {
+    width: 20px;
+}
+
+/* Track */
+main.inboxMain ::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+/* Handle */
+main.inboxMain ::-webkit-scrollbar-thumb {
+    background: #F2E8D5;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+/* Handle on hover */
+main.inboxMain ::-webkit-scrollbar-thumb:hover {
+    background-color: #efdab4cd;
 }

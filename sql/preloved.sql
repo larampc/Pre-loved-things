@@ -97,7 +97,7 @@ INSERT INTO item_images (item, imagePath) VALUES
 
 INSERT INTO users (password, name, email, phone)
 VALUES
-    ('password123', 'John Doe', 'john@example.com', 1234567890),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', 1234567890),
     ('securepass', 'Jane Smith', 'jane@example.com', 9876543210),
     ('mypassword', 'Alice Wonder', 'alice@example.com', 5551234567),
     ('letmein', 'Bob Green', 'bob@example.com', 4447890123),

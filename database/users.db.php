@@ -2,10 +2,18 @@
 
 declare(strict_types=1);
 
-function register_user(PDO $dbh, string $password, string $email, string $name, string $phone)
+function register_user(PDO $dbh, string $password, string $email, string $name, string $phone): int
 {
   $stmt = $dbh->prepare('INSERT INTO users(password, name, email, phone) VALUES (?, ?, ?, ?)');
   $stmt->execute(array(sha1($password), $name, $email, $phone));
+  return verify_user($dbh, $email, $password);
+}
+
+function verify_email(PDO $dbh, string $email): bool {
+    $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ?');
+    $stmt->execute(array($email));
+    $row = $stmt->fetch();
+    return !empty($row);
 }
 
 function like_item(PDO $dbh, int $id, int $item)
@@ -79,7 +87,12 @@ function get_cart_items_ids(PDO $dbh, int $user_id): array
         FROM items LEFT JOIN user_cart 
         ON user_cart.item = items.id  WHERE user_cart.user = ?');
     $stmt->execute(array($user_id));
-    return array($stmt->fetchColumn());
+    $items = $stmt->fetchAll();
+    $ids = array();
+    foreach ($items as $item) {
+        $ids[] = $item['id'];
+    }
+    return $ids;
 }
 
 function add_to_cart(PDO $dbh, array $item_id, int $user) {
@@ -90,4 +103,12 @@ function add_to_cart(PDO $dbh, array $item_id, int $user) {
             $stmt->execute(array($user, $id));
         }
     }
+}
+
+function get_cart_items_from_user(PDO $dbh, int $buyer, int $seller): array {
+    $stmt = $dbh->prepare('SELECT *
+        FROM items LEFT JOIN user_cart 
+        ON user_cart.item = items.id  WHERE user_cart.user = ? and items.creator = ?');
+    $stmt->execute(array($buyer, $seller));
+    return Item::create_items($dbh, $stmt->fetchAll());
 }
