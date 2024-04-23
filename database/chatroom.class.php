@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-require_once ('database/item.class.php');
-require_once ('database/message.class.php');
+require_once (__DIR__ . '/../database/item.class.php');
+require_once (__DIR__ . '/../database/message.class.php');
 class Chatroom {
     public int $chatroomId;
     public Item $item;

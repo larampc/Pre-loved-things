@@ -4,7 +4,7 @@ main {
     margin: 7rem 0 2rem;
 }
 
-main.newMain, main.editprofile {
+main.newMain, main.editprofileMain {
     margin: 0;
     padding: 7rem 0 2rem;
     background-color: #F2E8D5;
@@ -510,25 +510,26 @@ i {
 
 
 /* IMBOX PAGE */
-
 .chat-inbox {
     margin-left: 3rem;
-    grid-area: inbox;
+    margin-right: 5rem;
 }
+
 .chat-page {
     margin-right: 3rem;
-    grid-area: message;
 }
+
 .message-header{
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 1rem;
 }
+
 .message-header .item-info {
-    display: flex;
-    align-items: center;
     margin: 0;
+    figcaption {
+        font-weight: bold;
+    }
 }
+
 .item-msg-img {
     max-height: 3rem;
     max-width: 3rem;
@@ -536,54 +537,110 @@ i {
     border-radius: 0.5rem;
     margin-right: 1rem;
 }
+
 .message-header .user-info {
-    display: flex;
-    align-items: center;
+    p {
+        font-weight: bold;
+    }
 }
+
 .addressee-img {
-    max-height: 4rem;
-    max-width: 4rem;
+    max-height: 3rem;
+    max-width: 3rem;
     margin-left: 1rem;
 }
+
 .msg-inbox {
     background-color: #FAFAFA;
     border: 2px solid #D9D9D9;
     border-radius: 1rem;
 }
 
+.scroll {
+    height: 54dvh;
+}
+
+.received-message {
+    width: 70%;
+    background-color: #F2E8D5;
+    border-radius: 1rem;
+    padding: 0.8rem;
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+    p {
+        margin: 0;
+    }
+    time {
+        font-size: small;
+    }
+}
+
+.sent-message {
+    width: 70%;
+    background-color: #D9D9D9;
+    border-radius: 1rem;
+    padding: 0.8rem;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    p {
+        margin: 0;
+    }
+    time {
+        font-size: small;
+    }
+}
+
+.input-group {
+    height: 3rem;
+    padding-top: 2px;
+}
+
+.input-group input {
+    height: 2rem;
+    padding: 0 0.5rem;
+    border: 2px solid #F2E8D5;
+    border-radius: 2rem;
+    margin: 0 1rem;
+}
+
+.input-group button {
+    height: 2.4rem;
+    width: 2.4rem;
+    border-width: 0;
+    background-color: #F2E8D5;
+    border-radius: 3rem;
+    margin-right: 1rem;
+}
 
 .chat {
-    display: flex;
-    align-items: center;
     height: 4rem;
     padding: 0.5rem;
     border-bottom: 2px solid #D9D9D9 ;
 }
+
 .chat img {
     height: 3rem;
 }
+
 .chat-content {
     margin: 0 1rem;
-    flex-grow: 1;
     height: 4rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
 }
+
 .chat-content h4 {
     margin: 0;
 }
+
 .chat-content p {
     margin: 0;
     font-size:small;
 }
+
 .chat > p {
     background-color: #F2E8D5;
     border-radius: 0.75rem;
     text-align: center;
-    align-content: center;
     padding: 0.1rem;
     height: 1.3rem;
     min-width: 1.3rem;
-
 }

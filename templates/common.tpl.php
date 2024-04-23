@@ -5,20 +5,20 @@
     <title>Pre-loved</title>    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="css/style.css" rel="stylesheet">
-    <link href="css/layout.css" rel="stylesheet">
-    <link href="css/responsive.css" rel="stylesheet">
-    <link href="css/icons.css" rel="stylesheet">
-    <script src="scripts/search.js" defer></script>
-    <script src="scripts/header.js" defer></script>
-    <script src="scripts/like.js" defer></script>
-    <script src="scripts/add_cart.js" defer></script>
-    <script src="scripts/remove_cart.js" defer></script>
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="../css/layout.css" rel="stylesheet">
+    <link href="../css/responsive.css" rel="stylesheet">
+    <link href="../css/icons.css" rel="stylesheet">
+    <script src="../scripts/search.js" defer></script>
+    <script src="../scripts/header.js" defer></script>
+    <script src="../scripts/like.js" defer></script>
+    <script src="../scripts/add_cart.js" defer></script>
+    <script src="../scripts/remove_cart.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body> 
     <header>
-        <a href="main.php"><img src="images/logo.png" id="logo" alt="logo"></a>
+        <a href="index.php"><img src="../images/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="search.php">
                 <select name="category" class="dropdown-content">
                     <option value="">All Categories</option>
@@ -34,13 +34,13 @@
                 <div id="suggestions"></div>
             </form>
         <nav>
-            <a href="cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
+            <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if (isset($_SESSION['user_id'])) { ?>
-                <a href="favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
-                <a href="inbox2.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
-                <a href="profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
+                <a href="../pages/favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
+                <a href="../pages/inbox2.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
+                <a href="../pages/profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
-                <a href="login.php" id="login">Log in</a>
+                <a href="../pages/login.php" id="login">Log in</a>
             <?php } ?>
         </nav>
     </header>

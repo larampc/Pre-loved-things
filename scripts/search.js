@@ -80,7 +80,7 @@ function addItemSection(items) {
         main.href = "item.php?id=" + items.at(i).id;
         main.className = "item-main";
         const img = document.createElement("img")
-        img.src = "images/flower.png"
+        img.src = "../images/flower.png"
         main.appendChild(img);
         const div = document.createElement("div")
         div.className = "item-info"

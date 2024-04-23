@@ -51,7 +51,7 @@ class User
         $stmt = $dbh->prepare('SELECT * FROM users WHERE user_id = ?');
         $stmt->execute(array($id));
         $user = $stmt->fetch();
-        return new User((int)$user['id'], $user['name'], $user['photoPath']);
+        return new User((int)$user['user_id'], $user['name'], $user['photoPath']);
     }
 
     public static function get_user_feedback(PDO $dbh, int $id): array {

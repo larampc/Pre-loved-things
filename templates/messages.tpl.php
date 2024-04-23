@@ -3,7 +3,7 @@
     function draw_chat() : void { ?>
         <div class="chat">
             <h4>User profile</h4>
-            <img src="images/profile.png">
+            <img src="../images/profile.png">
             <p>heyyy</p>
         </div>
     <?php }
