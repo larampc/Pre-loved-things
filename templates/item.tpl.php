@@ -65,7 +65,7 @@ function draw_item(Item $item) { ?>
             <span class="price"><?= $item->price?></span>
             <section class="buy-item">
                 <i class="material-symbols-outlined cart big"> local_mall </i>
-                <button value="<?=$item->id?>" class="Buy"><?=Item::check_cart($db, (int)$_SESSION['user_id'], $item) || ($_SESSION['cart'] && in_array($item->id, $_SESSION['cart']))?  "Already in cart" : "Buy now!"?></button>
+                <button value="<?=$item->id?>" class="Buy"><?=(Item::check_cart($db, (int)$_SESSION['user_id'], $item) || ($_SESSION['cart'] && in_array($item->id, $_SESSION['cart'])))?  "Already in cart" : "Buy now!"?></button>
             </section>
         </section>
         <section class="sendMessage">
@@ -75,7 +75,7 @@ function draw_item(Item $item) { ?>
                 </label>
             </form>
         </section>
-        <a class="userProfile" href="user.php?user_id=<?=$item->creator?>"><?=get_user($db, $item->creator)['name']?>
+        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=get_user($db, $item->creator)['name']?>
             <img src="../images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
         </a>
         <section class="itemTags">
@@ -128,8 +128,7 @@ function draw_new_item_form() { ?>
     </article>
 <?php }
 
-function draw_page_filters(array $items) {
-    ?>
+function draw_page_filters(array $items) { ?>
     <article class="searchPage">
             <section class="filter">
                 <h2>Filters</h2>
@@ -151,6 +150,5 @@ function draw_page_filters(array $items) {
         <section id="searchres">
             <?php draw_items($items); ?>
         </section>
-
         </article>
 <?php } ?>

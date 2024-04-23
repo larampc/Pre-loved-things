@@ -33,13 +33,18 @@ draw_user_chatrooms($chatrooms, User::get_user($db, $user_id));
         <article class="msg-inbox">
             <section class="scroll">
                 <div class="messages">
-                    <?php draw_received_message() ?>
                     <?php draw_sent_message() ?>
                     <?php draw_received_message() ?>
                     <?php draw_sent_message() ?>
+                    <?php draw_received_message() ?>
                     <?php draw_sent_message() ?>
                     <?php draw_sent_message() ?>
                     <?php draw_sent_message() ?>
+                    <?php draw_sent_message() ?>
+                    <?php draw_received_message() ?>
+                    <?php draw_sent_message() ?>
+                    <?php draw_sent_message() ?>
+
                 </div>
             </section>
             <div class="input-group">
