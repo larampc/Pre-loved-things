@@ -3,10 +3,12 @@ declare(strict_types = 1);
 function draw_user_chatrooms(array $chatrooms, User $from) : void { ?>
     <section class="chat-inbox">
         <h2>Inbox</h2>
-        <?php foreach($chatrooms as $chatroom) {
-            $to = $chatroom->seller == $from ? $chatroom->buyer : $chatroom->seller;
-            draw_small_chatroom($chatroom, $from, $to);
-        } ?>
+        <section class="chat-rooms">
+            <?php foreach($chatrooms as $chatroom) {
+                $to = $chatroom->seller == $from ? $chatroom->buyer : $chatroom->seller;
+                draw_small_chatroom($chatroom, $from, $to);
+            } ?>
+        </section>
     </section>
     <?php
 }

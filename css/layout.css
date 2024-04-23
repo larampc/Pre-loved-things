@@ -347,6 +347,12 @@ main .userPage{
     flex-direction: column-reverse;
 }
 
+.chat-rooms {
+    display: flex;
+    overflow: auto;
+    flex-direction: column;
+}
+
 .messages {
     display: flex;
     flex-direction: column;
