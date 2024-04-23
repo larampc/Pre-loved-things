@@ -10,7 +10,6 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-if (isset($_SESSION['user_id'])) User::add_cart($dbh, $session->getId(), (int)$_GET['item']);
-else {
-    $session->addToCart((int)$_GET['item']);
-}
+$session->setItemCheckout($_POST['user_items']);
+
+Header("Location: ". ($session->isLoggedIn()?"../pages/checkout.php": "../pages/login.php?checkout"));

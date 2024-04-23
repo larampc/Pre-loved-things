@@ -37,14 +37,16 @@ function draw_item(Item $item) { ?>
     <?php } ?>
 <?php } ?>
 
-<?php function draw_item_page(PDO $db, Item $item) { ?>
+<?php function draw_item_page(PDO $db, Item $item, Session $session) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
-            <?php if ($item->creator == $_SESSION['user_id']) { ?>
-                <a class="edit"><i class="material-symbols-outlined big"> edit </i></a>
-            <?php } if ($_SESSION['user_id']) { ?>
-                <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, (int)$_SESSION['user_id'], $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
+            <?php if ($session->isLoggedIn() && $item->creator == $session->getId()) { ?>
+                <form method="post" action="../pages/edit_item.php">
+                    <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
+                </form>
+            <?php } if ($session->isLoggedIn()) { ?>
+                <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
         </header>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>
@@ -65,7 +67,7 @@ function draw_item(Item $item) { ?>
             <span class="price"><?= $item->price?></span>
             <section class="buy-item">
                 <i class="material-symbols-outlined cart big"> local_mall </i>
-                <button value="<?=$item->id?>" class="Buy"><?=($_SESSION['user_id'] == $item->creator) ? "You own this product" : ((Item::check_cart($db, (int)$_SESSION['user_id'], $item) || ($_SESSION['cart'] && in_array($item->id, $_SESSION['cart'])))?  "Already in cart" : "Buy now!")?></button>
+                <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
             </section>
         </section>
         <section class="sendMessage">
@@ -75,8 +77,8 @@ function draw_item(Item $item) { ?>
                 </label>
             </form>
         </section>
-        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=get_user($db, $item->creator)['name']?>
-            <img src="../images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
+        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=User::get_user($db, $item->creator)->name?>
+            <img src="../images/<?=User::get_user($db, $item->creator)->photoPath?>" alt="profile picture">
         </a>
         <section class="itemTags">
             <ul>
@@ -123,7 +125,39 @@ function draw_new_item_form() { ?>
             <input type="file" id="img2" name="img2" accept="image/*" required>
 
 
-            <input type="submit" value="Submit">
+            <button type="submit" >Submit</button>
+        </form>
+    </article>
+<?php }
+
+function draw_edit_item_form(Item $item) { ?>
+    <article class="newItemPage">
+        <h2>Edit item</h2>
+        <form action="../actions/action_edit_item.php" method="POST" enctype="multipart/form-data">
+            <label for="iname">Item Name</label>
+            <input type="text" id="iname" name="iname" value="<?= $item->name ?>" required>
+            <label for="category">category</label>
+            <select id="category" name="category">
+                <option value="other" <?=$item->category=="other"? "selected":""?>>Other</option>
+                <option value="clothes" <?=$item->category=="clothes"? "selected":""?>>Clothes</option>
+                <option value="tech" <?=$item->category=="technology"? "selected":""?>>Technology</option>
+                <option value="toys" <?=$item->category=="toys"? "selected":""?>>Toys</option>
+                <option value="cars" <?=$item->category=="cars"? "selected":""?>>Cars</option>
+                <option value="books" <?=$item->category=="books"? "selected":""?>>Books</option>
+                <option value="sports" <?=$item->category=="sports"? "selected":""?>>Sports</option>
+            </select>
+
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" value="<?= $item->price ?>" required>
+
+            <label for="description">Desciption</label>
+            <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40">
+
+            <label for="images">images</label>
+            <input type="file" id="img1" name="img1" accept="image/*">
+            <input type="file" id="img2" name="img2" accept="image/*">
+
+            <button type="submit" value="<?=$item->id?>" name="edit-item">Submit</button>
         </form>
     </article>
 <?php }

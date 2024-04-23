@@ -36,10 +36,11 @@ CREATE TABLE items (
 
 CREATE TABLE users (
   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username VARCHAR UNIQUE,
   password VARCHAR,                  -- password stored in sha-1
   name VARCHAR,                       -- real name
-  email VARCHAR,
-  phone INTEGER,
+  email VARCHAR UNIQUE,
+  phone VARCHAR,
   photoPath VARCHAR DEFAULT 'profile.png'
 );
 
@@ -95,18 +96,18 @@ INSERT INTO item_images (item, imagePath) VALUES
     (20,'flower.png');
 
 
-INSERT INTO users (password, name, email, phone)
+INSERT INTO users (password, name, email, phone, username)
 VALUES
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', 1234567890),
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Jane Smith', 'jane@example.com', 9876543210),
-    ('mypassword', 'Alice Wonder', 'alice@example.com', 5551234567),
-    ('letmein', 'Bob Green', 'bob@example.com', 4447890123),
-    ('p@ssw0rd', 'Sarah Jones', 'sarah@example.com', 9998887777),
-    ('password321', 'Mike Andrews', 'mike@example.com', 1112223333),
-    ('brownie', 'Emily Brown', 'emily@example.com', 7776665555),
-    ('king123', 'Alex King', 'alex@example.com', 2223334444),
-    ('sammy123', 'Sam Carter', 'sam@example.com', 6667778888),
-    ('lisalisa', 'Lisa Adams', 'lisa@example.com', 3334445555);
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', '1234567890', 'johny'),
+    ('securepass', 'Jane Smith', 'jane@example.com', '9876543210', 'janey'),
+    ('mypassword', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful'),
+    ('letmein', 'Bob Green', 'bob@example.com', '4447890123', 'bobby'),
+    ('p@ssw0rd', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita'),
+    ('password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse'),
+    ('brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii'),
+    ('king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall'),
+    ('sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro'),
+    ('lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa');
 
 INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator, mainImage)
 VALUES
@@ -189,37 +190,37 @@ VALUES
 
 INSERT INTO messages (chatroom, sender, sentTime, readTime, message)
 VALUES
-    (1, 1, 164873235, NULL, 'Hi there! Is item 10 still available?'),
-    (1, 1, 164873245, NULL, 'Hi there! Is item 10 still available?'),
-    (1, 2, 164874234, 1648750000, 'Yes, item 10 is available. Are you interested in purchasing it?'),
-    (1, 1, 164873123, NULL, 'Great! When can we meet for the transaction?'),
-    (1, 2, 164880098, NULL, 'I am available on weekends. How about Saturday afternoon?'),
-    (1, 1, 164791234, NULL, 'Saturday afternoon works for me. Let''s confirm the details.'),
-    (1, 2, 168802345, NULL, 'Perfect! Let''s meet at the coffee shop near the park.'),
-    (1, 1, 148813456, NULL, 'See you there!'),
+    (1, 1, 1648732345, NULL, 'Hi there! Is item 10 still available?'),
+    (1, 1, 1648732345, NULL, 'Hi there! Is item 10 still available?'),
+    (1, 2, 1648741234, 1648750000, 'Yes, item 10 is available. Are you interested in purchasing it?'),
+    (1, 1, 1648763123, NULL, 'Great! When can we meet for the transaction?'),
+    (1, 2, 1648780098, NULL, 'I am available on weekends. How about Saturday afternoon?'),
+    (1, 1, 1648791234, NULL, 'Saturday afternoon works for me. Let''s confirm the details.'),
+    (1, 2, 1648802345, NULL, 'Perfect! Let''s meet at the coffee shop near the park.'),
+    (1, 1, 1648813456, NULL, 'See you there!'),
     (1, 2, 1648824567, NULL, 'Looking forward to it!'),
-    (1, 1, 164835678, NULL, 'I''ll be wearing a blue jacket.'),
-    (1, 2, 168846789, NULL, 'Got it! I''ll be in a red hat.'),
-    (1, 1, 148857890, NULL, 'Did you arrive?'),
-    (1, 2, 648868901, NULL, 'I''m here. Where are you?'),
-    (1, 1, 148880012, NULL, 'I''m near the entrance.'),
-    (1, 2, 648891123, NULL, 'I see you!'),
-    (1, 1, 168902234, NULL, 'Let''s finalize the transaction.'),
-    (1, 2, 648913345, NULL, 'Sure, here''s the payment.'),
-    (2, 3, 148732345, NULL, 'Hello! I''m interested in item 11.'),
+    (1, 1, 1648835678, NULL, 'I''ll be wearing a blue jacket.'),
+    (1, 2, 1648846789, NULL, 'Got it! I''ll be in a red hat.'),
+    (1, 1, 1648857890, NULL, 'Did you arrive?'),
+    (1, 2, 1648868901, NULL, 'I''m here. Where are you?'),
+    (1, 1, 1648880012, NULL, 'I''m near the entrance.'),
+    (1, 2, 1648891123, NULL, 'I see you!'),
+    (1, 1, 1648902234, NULL, 'Let''s finalize the transaction.'),
+    (1, 2, 1648913345, NULL, 'Sure, here''s the payment.'),
+    (2, 3, 1648732345, NULL, 'Hello! I''m interested in item 11.'),
     (2, 4, 1648741234, 1648750000, 'Great! It''s still available.'),
-    (2, 3, 164863123, NULL, 'Can we arrange a meetup?'),
-    (2, 4, 164780098, NULL, 'Sure, when are you available?'),
-    (2, 3, 164891234, NULL, 'I''m free on weekdays after 5 PM.'),
-    (2, 4, 164802345, NULL, 'How about Thursday evening?'),
-    (2, 3, 164813456, NULL, 'Thursday evening works for me.'),
-    (2, 4, 164824567, NULL, 'Let''s meet at the shopping mall.'),
-    (2, 3, 164835678, NULL, 'Sounds good. See you there!'),
-    (2, 4, 164846789, NULL, 'See you on Thursday!'),
-    (2, 3, 164857890, NULL, 'I''m wearing a black hat.'),
-    (2, 4, 164868901, NULL, 'Got it! I''ll be in a green shirt.'),
-    (2, 3, 168880012, NULL, 'Let''s finalize the details on Thursday.'),
-    (2, 4, 148891123, NULL, 'Sure, looking forward to it!'),
-    (2, 3, 148902234, NULL, 'See you soon.'),
-    (2, 4, 148913345, NULL, 'Take care!'),
-    (3, 1, 148902234, NULL, 'See you soon.');
+    (2, 3, 1648763123, NULL, 'Can we arrange a meetup?'),
+    (2, 4, 1648780098, NULL, 'Sure, when are you available?'),
+    (2, 3, 1648791234, NULL, 'I''m free on weekdays after 5 PM.'),
+    (2, 4, 1648802345, NULL, 'How about Thursday evening?'),
+    (2, 3, 1648813456, NULL, 'Thursday evening works for me.'),
+    (2, 4, 1648824567, NULL, 'Let''s meet at the shopping mall.'),
+    (2, 3, 1648835678, NULL, 'Sounds good. See you there!'),
+    (2, 4, 1648846789, NULL, 'See you on Thursday!'),
+    (2, 3, 1648857890, NULL, 'I''m wearing a black hat.'),
+    (2, 4, 1648868901, NULL, 'Got it! I''ll be in a green shirt.'),
+    (2, 3, 1648880012, NULL, 'Let''s finalize the details on Thursday.'),
+    (2, 4, 1648891123, NULL, 'Sure, looking forward to it!'),
+    (2, 3, 1648902234, NULL, 'See you soon.'),
+    (2, 4, 1648913345, NULL, 'Take care!'),
+    (3, 1, 1648902234, NULL, 'See you soon.');

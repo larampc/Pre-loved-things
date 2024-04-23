@@ -10,14 +10,21 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
     <section class="register">
         <h2>Sign Up</h2>
         <form class="register-form" action="../actions/action_register.php<?=$checkout? "?checkout": ""?>" method="POST">
-            <input type="text" name="name" placeholder="Your name">
-            <i class="input-icon"></i>
-            <input type="email" name="email" placeholder="Your email">
-            <i class="input-icon"></i>
-            <input type="text" name="phone" placeholder="Your phone number">
-            <i class="input-icon"></i>
-            <input type="password" name="password" placeholder="Your password" autocomplete="off">
-            <i class="input-icon"></i>
+            <label>
+                <input type="text" name="name" placeholder="Your name">
+            </label>
+            <label>
+                <input type="text" name="username" placeholder="Your username">
+            </label>
+            <label>
+                <input type="email" name="email" placeholder="Your email">
+            </label>
+            <label>
+                <input type="text" name="phone" placeholder="Your phone number">
+            </label>
+            <label>
+                <input type="password" name="password" placeholder="Your password" autocomplete="off">
+            </label>
             <button class="login-button" type="submit">Register</button>
         </form>
     </section>

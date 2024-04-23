@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types=1);
+    declare(strict_types=1);
 
-session_start();
+    require_once(__DIR__ . '/../utils/session.php');
+    $session = new Session();
 
-require_once(__DIR__ . '/../templates/users.tpl.php');
+    require_once(__DIR__ . '/../templates/users.tpl.php');
 
-$checkout = isset($_GET['checkout']);
-if ($checkout) $_SESSION['user_items'] = $_POST['user_items'];
+    $checkout = isset($_GET['checkout']);
 
-draw_header("login");
-draw_login_form($checkout);
-draw_footer();
+    draw_header("login", $session);
+    draw_login_form($checkout);
+    draw_footer();
