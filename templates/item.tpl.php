@@ -41,7 +41,7 @@ function draw_item(Item $item) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
-            <?php if ($item->creator == $_SESSION['user_id']) { ?>
+            <?php if (isset($_SESSION['user_id']) && $item->creator == $_SESSION['user_id']) { ?>
                 <a class="edit"><i class="material-symbols-outlined big"> edit </i></a>
             <?php } if ($_SESSION['user_id']) { ?>
                 <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, (int)$_SESSION['user_id'], $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
@@ -75,8 +75,8 @@ function draw_item(Item $item) { ?>
                 </label>
             </form>
         </section>
-        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=get_user($db, $item->creator)['name']?>
-            <img src="../images/<?= get_user_image($db, $item->creator)?>" alt="profile picture">
+        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=User::get_user($db, $item->creator)->name?>
+            <img src="../images/<?=User::get_user($db, $item->creator)->photoPath?>" alt="profile picture">
         </a>
         <section class="itemTags">
             <ul>

@@ -36,10 +36,11 @@ CREATE TABLE items (
 
 CREATE TABLE users (
   user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username VARCHAR UNIQUE,
   password VARCHAR,                  -- password stored in sha-1
   name VARCHAR,                       -- real name
-  email VARCHAR,
-  phone INTEGER,
+  email VARCHAR UNIQUE,
+  phone VARCHAR,
   photoPath VARCHAR DEFAULT 'profile.png'
 );
 
@@ -95,18 +96,18 @@ INSERT INTO item_images (item, imagePath) VALUES
     (20,'flower.png');
 
 
-INSERT INTO users (password, name, email, phone)
+INSERT INTO users (password, name, email, phone, username)
 VALUES
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', 1234567890),
-    ('securepass', 'Jane Smith', 'jane@example.com', 9876543210),
-    ('mypassword', 'Alice Wonder', 'alice@example.com', 5551234567),
-    ('letmein', 'Bob Green', 'bob@example.com', 4447890123),
-    ('p@ssw0rd', 'Sarah Jones', 'sarah@example.com', 9998887777),
-    ('password321', 'Mike Andrews', 'mike@example.com', 1112223333),
-    ('brownie', 'Emily Brown', 'emily@example.com', 7776665555),
-    ('king123', 'Alex King', 'alex@example.com', 2223334444),
-    ('sammy123', 'Sam Carter', 'sam@example.com', 6667778888),
-    ('lisalisa', 'Lisa Adams', 'lisa@example.com', 3334445555);
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', '1234567890', 'johny'),
+    ('securepass', 'Jane Smith', 'jane@example.com', '9876543210', 'janey'),
+    ('mypassword', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful'),
+    ('letmein', 'Bob Green', 'bob@example.com', '4447890123', 'bobby'),
+    ('p@ssw0rd', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita'),
+    ('password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse'),
+    ('brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii'),
+    ('king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall'),
+    ('sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro'),
+    ('lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa');
 
 INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator, mainImage)
 VALUES

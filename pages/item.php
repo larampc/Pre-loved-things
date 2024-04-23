@@ -5,7 +5,7 @@
     session_start();
 
     require_once(__DIR__ . '/../database/item.class.php');
-    require_once(__DIR__ . '/../database/users.db.php');
+    require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/connection.db.php');
 
     require_once(__DIR__ . '/../templates/item.tpl.php');

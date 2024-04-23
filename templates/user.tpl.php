@@ -3,11 +3,12 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_details($user) { ?>
     <section class="user">
-        <img src="../images/<?=$user['photoPath']?>" class="profile-pic" alt="profile picture">
+        <img src="../images/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
-            <h2 class="name"><?=$user['name']?></h2>
-            <p class="phone"><?=$user['phone']?></p>
-            <p class="email"><?=$user['email']?></p>
+            <h2 class="name"><?=$user->name?></h2>
+            <p class="username"><?=$user->username?></p>
+            <p class="phone"><?=$user->phone?></p>
+            <p class="email"><?=$user->email?></p>
         </div>
     </section>
     <?php
@@ -18,11 +19,13 @@ function draw_edit_profile($user) { ?>
         <h2>Edit profile</h2>
         <form action="../actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
             <label for="name"> Name </label>
-            <input type="text" id="name" name="name" placeholder="<?=$user['name']?>">
+            <input type="text" id="name" name="name" placeholder="<?=$user->name?>">
+            <label for="username"> Username </label>
+            <input type="text" id="username" name="username" placeholder="<?=$user->username?>">
             <label for="email"> Email </label>
-            <input type="text" id="email" name="email" placeholder="<?=$user['email']?>">
+            <input type="text" id="email" name="email" placeholder="<?=$user->email?>">
             <label for="phone"> Phone </label>
-            <input type="text" id="phone" name="phone" placeholder="<?=$user['phone']?>">
+            <input type="text" id="phone" name="phone" placeholder="<?=$user->phone?>">
             <label for="pf">Profile photo</label>
             <input type="file" id="pf" name="profilePhoto" accept="image/*">
             <input type="submit" value="Submit">
@@ -41,7 +44,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
                     <?php }
                     foreach ($feedback as $comment) { ?>
                     <article class="comment">
-                        <img src="../images/<?= get_user_image($db, $comment['userc'])?>" class="profile-pic" alt="profile picture">
+                        <img src="../images/<?= User::get_user($db, $comment['userc'])->photoPath?>" class="profile-pic" alt="profile picture">
                         <p class="uname"><?=$comment['userc']?></p>
                         <time><?=$comment['date']?></time>
                         <p class="content"><?=$comment['text']?></p>
@@ -49,7 +52,7 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
                         <?php
                     } ?>
             </div>
-        <?php if ($user['user_id']!=$_SESSION['user_id']) echo("<p>+ Add your review</p>"); ?>
+        <?php if ($user->user_id!=$_SESSION['user_id']) echo("<p>+ Add your review</p>"); ?>
     </section>
 <?php } ?>
 
@@ -58,9 +61,9 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
     <section class="user">
         <img src="../images/profile.png" class="profile-pic" alt="profile picture">
         <div class="user-details">
-            <h2 class="name"><?=$user['name']?></h2>
-            <p class="phone"><?=$user['phone']?></p>
-            <p class="email"><?=$user['email']?></p>
+            <h2 class="name"><?=$user->name?></h2>
+            <p class="phone"><?=$user->phone?></p>
+            <p class="email"><?=$user->email?></p>
             <a href="../actions/action_logout.php" class="logout">Log out</a>
             <a href="edit_profile.php">Edit profile</a>
         </div>
@@ -104,8 +107,8 @@ function draw_user_feedback(PDO $db, $user, $feedback) { ?>
             if ($user != $item->creator) { ?>
                 <section class="seller">
                     <a href="../pages/user.php?user_id=<?=$item->creator?>" class="seller-info">
-                        <img src="../images/<?=get_user_image($db, $item->creator)?>" class="profile-pic" alt="profile-photo">
-                        <p><?=get_user($db, $item->creator)['name']?></p>
+                        <img src="../images/<?=User::get_user($db, $item->creator)->photoPath?>" class="profile-pic" alt="profile-photo">
+                        <p><?=User::get_user($db, $item->creator)->name?></p>
                     </a>
                     <article class="seller-items">
             <?php }
