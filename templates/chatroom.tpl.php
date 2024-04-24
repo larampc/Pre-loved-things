@@ -19,6 +19,8 @@ function draw_small_chatroom(Chatroom $chatroom, User $from, User $to) : void { 
             <h4><?= $to->name?></h4>
             <p> <?= $chatroom->last_message->message ?></p>
         </div>
-        <p><?=$chatroom->unread_message_count?></p>
+        <?php if ($chatroom->unread_message_count !== 0) {?>
+            <p><?=$chatroom->unread_message_count?></p>
+        <?php } ?>
     </div>
 <?php }
