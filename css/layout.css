@@ -302,6 +302,19 @@ main .userPage{
     justify-content: space-between;
 }
 
+.userPage .user-details, .pfPage .user-details {
+    align-self: center;
+    i {
+        transform: translateY(25%);
+    }
+}
+
+.pfPage .display-item > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .userPage .items {
     grid-area: items;
     display: flex;

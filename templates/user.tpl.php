@@ -65,7 +65,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
             <p class="phone"><?=$user->phone?></p>
             <p class="email"><?=$user->email?></p>
             <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
-            <a href="edit_profile.php">Edit profile</a>
+            <a href="edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
         </div>
     </section>
 <?php } ?>
@@ -233,7 +233,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 
 <?php  function draw_user_options(PDO $db, Session $session) { ?>
     <section class="display-item">
-        <a href="../pages/new.php" class="new-item"> New item </a>
+        <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
         <button type="button" class="collapsible">Pending purchases</button>
         <section class="items">
             <?php
