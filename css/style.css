@@ -565,6 +565,7 @@ i {
 
 .chat-rooms {
     height: 54dvh;
+    padding: 0.2rem;
 }
 
 .received-message {
@@ -626,9 +627,42 @@ i {
 
 .chat {
     height: 4rem;
+    margin-top: 5px;
     padding: 0.5rem;
-    border-bottom: 2px solid #D9D9D9 ;
+    border-radius: 1rem;
+    position: relative;
 }
+
+.chat:after {
+    content : "";
+    position: absolute;
+    margin: 0 auto;
+    left: 5%;
+    bottom  : -3px;
+    height  : 2px;
+    width   : 90%;
+    border-bottom: 2px solid #D9D9D9;
+}
+
+.chat:hover {
+    background-color: #fff8ef;
+    box-shadow: 0 0 5px #D9D9D9;
+    border-radius: 1rem;
+    z-index: 10;
+}
+
+.current-chat {
+    background-color: #F2E8D5;
+    box-shadow: 0 0 2px #D9D9D9;
+    border-radius: 1rem;
+}
+
+.current-chat:hover {
+    background-color: #F2E8D5;
+    box-shadow: 0 0 2px #D9D9D9;
+    border-radius: 1rem;
+}
+
 
 .chat img {
     height: 3rem;

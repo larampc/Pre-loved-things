@@ -8,7 +8,7 @@ if (chatrooms) {
         chatroom.addEventListener("click", async () => {
             const curr = document.querySelector('.current-chat')
             chatroom.classList.add("current-chat");
-            if(curr) curr.classList.remove("current-chat");
+            if(curr && curr !== chatroom) curr.classList.remove("current-chat");
             const chatPage = document.querySelector('.chat-page')
 
             const header = document.createElement('header')
