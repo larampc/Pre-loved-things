@@ -8,6 +8,7 @@ function draw_user_chatrooms(array $chatrooms, User $from) : void { ?>
                 $to = $chatroom->seller == $from ? $chatroom->buyer : $chatroom->seller;
                 draw_small_chatroom($chatroom, $from, $to);
             } ?>
+            <div class="inbox-end">Looks like there are no more messages</div>
         </section>
     </section>
     <?php
