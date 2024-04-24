@@ -1,7 +1,10 @@
 let coll = document.getElementsByClassName("collapsible");
 
-coll[0].style.borderRadius = "1rem 1rem 0 0";
-coll[0].nextElementSibling.style.maxHeight = coll[0].nextElementSibling.scrollHeight +"px"
+if (coll.length > 0) {
+    coll[0].style.borderRadius = "1rem 1rem 0 0";
+    coll[0].nextElementSibling.style.maxHeight = coll[0].nextElementSibling.scrollHeight +"px"
+}
+
 for (let i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
         let content = this.nextElementSibling;
@@ -36,7 +39,7 @@ for (let i = 0; i < next.length; i++) {
         for (let j = 0; j < coll.length; j++) {
             if (j === i+1)  {
                 let content2 = coll[j].nextElementSibling;
-                coll[j].style.transitionDelay = "0"
+                coll[j].style.transitionDelay = "0ms"
                 content2.style.maxHeight = content2.scrollHeight+"px"
                 coll[j].style.borderRadius = "1rem 1rem 0 0";
             }
