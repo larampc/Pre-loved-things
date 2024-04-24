@@ -69,7 +69,7 @@ if (chatrooms) {
                 await fetch("../api/api_send_messages.php?chatroom=" + chatroom.id.substring(4) + "&sender=" + user + "&message=" + text)
                 input.value = ''
                 const msg_section = document.querySelector('section.scroll')
-                msg_section.appendChild(create_message(user,text, user, Date.now()))
+                msg_section.insertBefore(create_message(user,text, user, Date.now()), msg_section.firstChild)
                 msg_section.scrollTo(0, msg_section.scrollHeight)
             })
             const send_icon = document.createElement('i')
