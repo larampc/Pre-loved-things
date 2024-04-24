@@ -568,7 +568,8 @@ i {
 }
 
 .received-message {
-    width: 70%;
+    max-width: 70%;
+    width: fit-content;
     background-color: #F2E8D5;
     border-radius: 1rem;
     padding: 0.8rem;
@@ -583,7 +584,7 @@ i {
 }
 
 .sent-message {
-    width: 70%;
+    max-width: 70%;
     background-color: #D9D9D9;
     border-radius: 1rem;
     padding: 0.8rem;
