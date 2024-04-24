@@ -710,7 +710,9 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: #F2E8D5;
     padding: 0 6rem;
     border-radius: 0 0 1rem 1rem;
-    transition-duration: 100ms;
+    display: flex;
+    max-height: 0;
+    transition-duration: 500ms;
 }
 
 .checkout > button {

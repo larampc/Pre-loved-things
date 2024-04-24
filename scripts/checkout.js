@@ -1,18 +1,24 @@
 let coll = document.getElementsByClassName("collapsible");
 
+coll[0].style.borderRadius = "1rem 1rem 0 0";
+coll[0].nextElementSibling.style.maxHeight = coll[0].nextElementSibling.scrollHeight +"px"
 for (let i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
         let content = this.nextElementSibling;
-        if (content.style.display === "flex") {
-            content.style.display = "none";
+        console.log(content.style.maxHeight.length)
+        if (content.style.maxHeight !== "0px" && content.style.maxHeight) {
+            this.style.transitionDelay = "500ms"
+            content.style.maxHeight = "0"
             this.style.borderRadius = "1rem";
         } else {
-            content.style.display = "flex";
+            this.style.transitionDelay = "0ms"
+            content.style.maxHeight = content.scrollHeight+"px"
             this.style.borderRadius = "1rem 1rem 0 0";
             for (let j = 0; j < coll.length; j++) {
                 if (j !== i)  {
                     let content2 = coll[j].nextElementSibling;
-                    content2.style.display = "none";
+                    coll[j].style.transitionDelay = "500ms"
+                    content2.style.maxHeight = "0"
                     coll[j].style.borderRadius = "1rem";
                 }
             }
@@ -25,11 +31,15 @@ let next = document.getElementsByClassName("next");
 for (let i = 0; i < next.length; i++) {
     next[i].addEventListener("click", function() {
         let content = this.parentElement;
-        content.style.display = "none";
+        content.previousElementSibling.style.transitionDelay = "500ms"
+        content.style.maxHeight = "0"
+        content.previousElementSibling.style.borderRadius = "1rem";
         for (let j = 0; j < coll.length; j++) {
             if (j === i+1)  {
                 let content2 = coll[j].nextElementSibling;
-                content2.style.display = "block";
+                coll[j].style.transitionDelay = "0"
+                content2.style.maxHeight = content2.scrollHeight+"px"
+                coll[j].style.borderRadius = "1rem 1rem 0 0";
             }
         }
     });
