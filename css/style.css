@@ -137,7 +137,6 @@ main > h2 {
 
 /* ITEM PAGE */
 
-
 .slides, .item-images, .image-slide {
     width: 25rem;
     height: 25rem;
@@ -417,8 +416,18 @@ main .userPage, .pfPage{
     width: 23rem;
 }
 
-.userPage .user-detais, .pfPage .user-detais {
+.userPage .user-details, .pfPage .user-details {
     align-self: center;
+    a {
+        background-color: #F1F1F1;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+        color: black;
+    }
+    i {
+        transform: translateY(25%);
+    }
 }
 
 

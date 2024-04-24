@@ -64,7 +64,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
             <h2 class="name"><?=$user->name?></h2>
             <p class="phone"><?=$user->phone?></p>
             <p class="email"><?=$user->email?></p>
-            <a href="../actions/action_logout.php" class="logout">Log out</a>
+            <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
             <a href="edit_profile.php">Edit profile</a>
         </div>
     </section>
