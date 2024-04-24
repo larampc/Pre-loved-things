@@ -343,6 +343,16 @@ main .cartPage  h2 {
     background-color: #F2E8D5;
 }
 
+.item-track img {
+    width: 20rem;
+    height: 20rem;
+}
+
+.item-track .item-info {
+    display: flex;
+    justify-content: space-around;
+}
+
 /* SEARCH PAGE */
 
 .searchPage .item-info {
