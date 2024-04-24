@@ -816,3 +816,79 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     text-decoration: none;
     color: black;
 }
+
+:root {
+    --error-background: rgba(232, 133, 127, 0.66);
+    --error-primary: #5a1410;
+    --success-background: rgba(169, 232, 127, 0.66);
+    --success-primary: #105a11;
+}
+#messages article{
+    position: absolute;
+    width: max-content;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6px;
+    backdrop-filter: blur(5px);
+    transform: translateY(30px);
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    padding: 10px 8px;
+    i {
+        padding-right: 5px;
+    }
+}
+#messages .error {
+    animation: fade-in 5s linear;
+    background-color: var(--error-background);
+    color: var(--error-primary);
+}
+
+#messages .success {
+    animation: fade-in 2s linear;
+    background-color: var(--success-background);
+    color: var(--success-primary);
+}
+@keyframes fade-in {
+    5% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    95% {
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+.message-progress {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    width: calc(100% - 8px);
+    height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
+    border-radius: inherit;
+}
+
+.error .message-progress {
+    animation: progress 5s 0s linear;
+    background: linear-gradient(to right, var(--error-background), var(--error-primary));
+}
+
+.success .message-progress {
+    animation: progress 2s 0s linear;
+    background: linear-gradient(to right, var(--success-background), var(--success-primary));
+}
+
+@keyframes progress {
+    to {
+        transform: scaleX(1);
+    }
+}

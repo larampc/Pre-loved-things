@@ -46,6 +46,22 @@
             <?php } ?>
         </nav>
     </header>
+    <?php if ($session->getMessages()) { ?>
+        <section id="messages">
+            <?php foreach ($session->getMessages() as $messsage) { ?>
+                <article class="<?=$messsage['type']?>">
+                    <?php
+                    if ($messsage['type'] == "success") { ?>
+                        <i class="material-symbols-outlined green"> check_circle</i>
+                    <?php } else if ($messsage['type'] == "error") { ?>
+                        <i class="material-symbols-outlined red"> error </i>
+                    <?php } ?>
+                    <?=$messsage['text']?>
+                    <div class="message-progress"></div>
+                </article>
+            <?php } ?>
+        </section>
+    <?php } ?>
     <main class=<?=$page . "Main"?>>
 <?php } ?>
 
