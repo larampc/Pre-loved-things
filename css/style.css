@@ -729,6 +729,24 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-radius: 1rem;
 }
 
+.checkoutSum {
+    height: fit-content;
+    background-color: #F1F1F1;
+    border-top: 2px solid #D9D9D9;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+}
+
+.checkoutSum .item-info {
+    display: flex;
+    justify-content: space-between;
+}
+.checkoutSum .sum-price {
+    border-top: 2px solid #c4c3ca;
+}
+
 /* VERTICAL PROGRESS BAR */
 
 .state {

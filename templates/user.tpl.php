@@ -212,7 +212,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 <?php } ?>
 
 <?php function draw_checkout_summary(array $items) {?>
-    <div class="sum">
+    <div class="checkoutSum">
         <p class="num-items">Number items: <?=count($items)?></p>
         <?php
         $sum = 0;
