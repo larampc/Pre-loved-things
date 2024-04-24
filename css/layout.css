@@ -433,9 +433,6 @@ main .userPage{
     overflow: hidden;
 }
 
-.buy-form:nth-child(2) {
-    display: block;
-}
 
 .options label {
     display: flex;
@@ -505,7 +502,14 @@ main .userPage{
 }
 
 .pfPage .items {
-    display: none;
+    display: flex;
+    overflow: hidden;
+    max-height: 0;
+    transition-duration: 500ms;
+}
+
+.pfPage .collapsible {
+    border-radius: 1rem;
 }
 
 main .pfPage{

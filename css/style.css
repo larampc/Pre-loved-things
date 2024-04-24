@@ -234,6 +234,11 @@ main > h2 {
     text-align: center;
 }
 
+.edit {
+    background: none;
+    border: none;
+}
+
 /* CART PAGE */
 
 .cartPage a {
@@ -715,7 +720,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     transition-duration: 500ms;
 }
 
-.checkout > button {
+.checkout li > button {
     height: 4rem;
     font-weight: bold;
     font-size: large;
@@ -723,11 +728,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-radius: 1rem;
 }
 
-
-.edit {
-    background: none;
-    border: none;
-}
+/* VERTICAL PROGRESS BAR */
 
 .state {
     font-family: 'Carrois Gothic SC', sans-serif;
@@ -742,7 +743,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     counter-increment: list;
 }
 
-.state li:not(:last-child) {
+.item-track .state li:not(:last-child) {
     padding-bottom: 20px;
 }
 
@@ -762,7 +763,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-left: 2px solid #6A4806;
 }
 
-.state li::after {
+.checkout .state li > button::before, .item-track .state li::after{
     content: '';
     position: absolute;
     left: -2.2rem;
@@ -802,4 +803,15 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     margin-top:0.5rem;
     border-style: none;
     color: #6A4806;
+}
+
+.new-item {
+    display: block;
+    text-align: center;
+    width: 100%;
+    background-color: #F1F1F1;
+    border: none;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: black;
 }

@@ -5,7 +5,6 @@ coll[0].nextElementSibling.style.maxHeight = coll[0].nextElementSibling.scrollHe
 for (let i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
         let content = this.nextElementSibling;
-        console.log(content.style.maxHeight.length)
         if (content.style.maxHeight !== "0px" && content.style.maxHeight) {
             this.style.transitionDelay = "500ms"
             content.style.maxHeight = "0"

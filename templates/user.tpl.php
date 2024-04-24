@@ -137,69 +137,77 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 
 <?php function draw_checkout_form() { ?>
     <form class="checkout">
-        <button type="button" class="collapsible">Shipping information</button>
-        <div class="buy-form">
-            <label> Address
-                <input type="text" name="address">
-            </label>
-            <label> City
-                <input type="text" name="city">
-            </label>
-            <label> Postal code
-                <input type="text" name="city">
-            </label>
-            <button type="button" class="next">Next</button>
-        </div>
-        <button type="button" class="collapsible">Billing information</button>
-        <div class="buy-form">
-            <label> Name
-                <input type="text" name="address">
-            </label>
-            <label> NIF
-                <input type="text" name="address">
-            </label>
-            <label> Address
-                <input type="text" name="address">
-            </label>
-            <label> City
-                <input type="text" name="city">
-            </label>
-            <label> Postal code
-                <input type="text" name="city">
-            </label>
-            <button type="button" class="next">Next</button>
-        </div>
-        <button type="button" class="collapsible">Payment information</button>
-        <div class="buy-form">
-            <div class="options">
-                <label> Credit card
-                    <input class="option" type="radio" name="option" id="credit-card" checked>
-                </label>
-                <label> Mbway
-                    <input class="option" type="radio" name="option" id="mbway">
-                </label>
-                <label> Paypal
-                    <input class="option" type="radio" name="option" id="paypal">
-                </label>
-            </div>
-            <div id="credit-card" class="payment-form">
-                <label> Card number
-                    <input type="text" name="card-number">
-                </label>
-                <label> CVC
-                    <input type="text" name="cvc">
-                </label>
-                <label> Expiration date
-                    <input type="date" name="expire">
-                </label>
-            </div>
-            <div id="mbway" class="payment-form">
-                <label> Phone number
-                    <input type="text" name="phone">
-                </label>
-            </div>
-            <button type="submit" class="confirm">Confirm payment</button>
-        </div>
+        <ul class="state">
+            <li>
+                <button type="button" class="collapsible">Shipping information</button>
+                <div class="buy-form">
+                    <label> Address
+                        <input type="text" name="address">
+                    </label>
+                    <label> City
+                        <input type="text" name="city">
+                    </label>
+                    <label> Postal code
+                        <input type="text" name="city">
+                    </label>
+                    <button type="button" class="next">Next</button>
+                </div>
+            </li>
+            <li>
+                <button type="button" class="collapsible">Billing information</button>
+                <div class="buy-form">
+                    <label> Name
+                        <input type="text" name="address">
+                    </label>
+                    <label> NIF
+                        <input type="text" name="address">
+                    </label>
+                    <label> Address
+                        <input type="text" name="address">
+                    </label>
+                    <label> City
+                        <input type="text" name="city">
+                    </label>
+                    <label> Postal code
+                        <input type="text" name="city">
+                    </label>
+                    <button type="button" class="next">Next</button>
+                </div>
+            </li>
+            <li>
+                <button type="button" class="collapsible">Payment information</button>
+                <div class="buy-form">
+                    <div class="options">
+                        <label> Credit card
+                            <input class="option" type="radio" name="option" id="credit-card" checked>
+                        </label>
+                        <label> Mbway
+                            <input class="option" type="radio" name="option" id="mbway">
+                        </label>
+                        <label> Paypal
+                            <input class="option" type="radio" name="option" id="paypal">
+                        </label>
+                    </div>
+                    <div id="credit-card" class="payment-form">
+                        <label> Card number
+                            <input type="text" name="card-number">
+                        </label>
+                        <label> CVC
+                            <input type="text" name="cvc">
+                        </label>
+                        <label> Expiration date
+                            <input type="date" name="expire">
+                        </label>
+                    </div>
+                    <div id="mbway" class="payment-form">
+                        <label> Phone number
+                            <input type="text" name="phone">
+                        </label>
+                    </div>
+                    <button type="submit" class="confirm">Confirm payment</button>
+                </div>
+            </li>
+        </ul>
     </form>
 <?php } ?>
 
@@ -225,6 +233,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 
 <?php  function draw_user_options(PDO $db, Session $session) { ?>
     <section class="display-item">
+        <a href="../pages/new.php" class="new-item"> New item </a>
         <button type="button" class="collapsible">Pending purchases</button>
         <section class="items">
             <?php
