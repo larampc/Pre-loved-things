@@ -348,10 +348,6 @@ main .cartPage  h2 {
     height: 20rem;
 }
 
-.item-track .item-info {
-    display: flex;
-    justify-content: space-around;
-}
 
 /* SEARCH PAGE */
 
@@ -755,9 +751,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 }
 
 .buy-form label {
-    justify-content: space-between;
     padding: 0.5rem;
-    align-items: center;
     input[type="text"] {
         margin-left: 4rem;
         border-style: none;
@@ -765,13 +759,9 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
         padding: 0.5rem;
         transition-duration: 100ms;
     }
-    input[type="text"]:focus {
-        flex-grow: 1;
-    }
 }
 
 .next, .confirm {
-    display: block;
     margin: 0.5rem auto;
     border: none;
     border-radius: 0.5rem;
@@ -785,7 +775,6 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: #F2E8D5;
     padding: 0 6rem;
     border-radius: 0 0 1rem 1rem;
-    display: flex;
     max-height: 0;
     transition-duration: 500ms;
 }
@@ -808,10 +797,6 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     margin-top: 1rem;
 }
 
-.checkoutSum .item-info {
-    display: flex;
-    justify-content: space-between;
-}
 .checkoutSum .sum-price {
     border-top: 2px solid #c4c3ca;
 }
@@ -821,13 +806,11 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 .state {
     font-family: 'Carrois Gothic SC', sans-serif;
     font-size: 1rem;
-    position: relative;
     padding-left: 3rem;
     list-style: none;
 }
 
 .state li {
-    position: relative;
     counter-increment: list;
 }
 
@@ -837,24 +820,18 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 
 .state li::before {
     content: '';
-    position: absolute;
-    left: -1.7rem;
     height: 100%;
     border-left: 2px dashed #6A4806;
 }
 
 .state li.done::before {
     content: '';
-    position: absolute;
-    left: -1.7rem;
     height: 100%;
     border-left: 2px solid #6A4806;
 }
 
 .checkout .state li > button::before, .item-track .state li::after{
     content: '';
-    position: absolute;
-    left: -2.2rem;
     width: 1rem;
     height: 1rem;
     border: 2px solid #c4c2ca;
@@ -894,7 +871,6 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 }
 
 .new-item {
-    display: block;
     text-align: center;
     width: 100%;
     background-color: #F1F1F1;
@@ -910,26 +886,21 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     --success-background: rgba(169, 232, 127, 0.66);
     --success-primary: #105a11;
 }
+
 #messages article{
-    position: absolute;
     width: max-content;
-    left: 0;
-    right: 0;
-    bottom: 24px;
     margin-left: auto;
     margin-right: auto;
     border-radius: 6px;
     backdrop-filter: blur(5px);
-    transform: translateY(30px);
     opacity: 0;
     visibility: hidden;
-    display: flex;
-    align-items: center;
     padding: 10px 8px;
     i {
         padding-right: 5px;
     }
 }
+
 #messages .error {
     animation: fade-in 5s linear;
     background-color: var(--error-background);
@@ -941,26 +912,20 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: var(--success-background);
     color: var(--success-primary);
 }
+
 @keyframes fade-in {
     5% {
         opacity: 1;
         visibility: visible;
-        transform: translateY(0);
     }
     95% {
         opacity:1;
-        transform: translateY(0);
     }
 }
 
 .message-progress {
-    position: absolute;
-    left: 4px;
-    bottom: 4px;
     width: calc(100% - 8px);
     height: 3px;
-    transform: scaleX(0);
-    transform-origin: left;
     border-radius: inherit;
 }
 
@@ -972,10 +937,4 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 .success .message-progress {
     animation: progress 2s 0s linear;
     background: linear-gradient(to right, var(--success-background), var(--success-primary));
-}
-
-@keyframes progress {
-    to {
-        transform: scaleX(1);
-    }
 }

@@ -242,6 +242,11 @@ header nav {
     flex-direction: column;
 }
 
+.item-track .item-info {
+    display: flex;
+    justify-content: space-around;
+}
+
 /* SEARCH PAGE */
 
 .searchPage {
@@ -526,4 +531,95 @@ main .pfPage{
 
 .pfPage .display-item {
     grid-area: items;
+}
+
+
+/* CHECKOUT PAGE */
+
+.buy-form label {
+    justify-content: space-between;
+    align-items: center;
+    input[type="text"]:focus {
+        flex-grow: 1;
+    }
+}
+
+.next, .confirm {
+    display: block;
+}
+
+.buy-form {
+    display: flex;
+}
+
+.checkoutSum .item-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* VERTICAL PROGRESS BAR */
+
+.state {
+    position: relative;
+}
+
+.state li {
+    position: relative;
+}
+
+.state li::before {
+    position: absolute;
+    left: -1.7rem;
+}
+
+.state li.done::before {
+    position: absolute;
+    left: -1.7rem;
+}
+
+.checkout .state li > button::before, .item-track .state li::after{
+    position: absolute;
+    left: -2.2rem;
+}
+
+.state li.current::after {
+    left: -2.3rem;
+}
+
+.new-item {
+    display: block;
+}
+
+#messages article{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    transform: translateY(30px);
+    display: flex;
+    align-items: center;
+}
+
+@keyframes fade-in {
+    5% {
+        transform: translateY(0);
+    }
+    95% {
+        transform: translateY(0);
+    }
+}
+
+.message-progress {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+@keyframes progress {
+    to {
+        transform: scaleX(1);
+    }
 }
