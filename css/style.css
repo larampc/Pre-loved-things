@@ -676,6 +676,22 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: #efdab4cd;
 }
 
+.empty-msg-inbox {
+    border-left: 2px solid #D9D9D9;
+    text-align: center;
+    height: 100%;
+    align-content: center;
+    font-weight: bold;
+    color: #D9D9D9;
+    i {
+        font-size: 6rem;
+        color: #D9D9D9;
+    }
+    p{
+        margin: 0;
+    }
+}
+
 
 /* CHECKOUT PAGE */
 

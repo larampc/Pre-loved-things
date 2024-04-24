@@ -23,41 +23,11 @@
     draw_user_chatrooms($chatrooms, User::get_user($db, $session->getId()));
     ?>
         <section class="chat-page">
-            <header class="message-header">
-                <figure class="item-info">
-                    <img src="../images/flower.png" alt="item image" class="item-msg-img">
-                    <figcaption>Item</figcaption>
-                </figure>
-                <aside class="user-info">
-                    <p>User Name</p>
-                    <img src="../images/profile.png" alt="addressee profile image" class="addressee-img">
-                </aside>
-            </header>
-
-            <article class="msg-inbox">
-                <section class="scroll">
-                    <div class="messages">
-                        <?php draw_sent_message() ?>
-                        <?php draw_received_message() ?>
-                        <?php draw_sent_message() ?>
-                        <?php draw_received_message() ?>
-                        <?php draw_sent_message() ?>
-                        <?php draw_sent_message() ?>
-                        <?php draw_sent_message() ?>
-                        <?php draw_sent_message() ?>
-                        <?php draw_received_message() ?>
-                        <?php draw_sent_message() ?>
-                        <?php draw_sent_message() ?>
-
-                    </div>
-                </section>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Write message...">
-                    <button type="button" class="send-icon">
-                        <i class="material-symbols-outlined filled-color">send</i>
-                    </button>
-                </div>
+            <article class="empty-msg-inbox">
+                <i class="material-symbols-outlined">inbox</i>
+                <p>Click on a message to open</p>
             </article>
+
         </section>
     <?php
 
