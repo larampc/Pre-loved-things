@@ -45,7 +45,7 @@ function draw_item(Item $item) { ?>
                 <form method="post" action="../pages/edit_item.php">
                     <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                 </form>
-            <?php } if ($session->isLoggedIn()) { ?>
+            <?php } if ($session->isLoggedIn() && !$item->creator == $session->getId()) { ?>
                 <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
         </header>
         <div class="item-images">
