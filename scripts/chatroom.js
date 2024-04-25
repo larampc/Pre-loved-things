@@ -1,5 +1,17 @@
 'use strict'
 
+async function updateUserChatrooms(chatroom_id) {
+    const inbox = document.querySelector('section.chat-rooms')
+    const chat = document.querySelector('#chat' + chatroom_id)
+    const response = await fetch('../api/api_get_current_chatroom.php?chatroom_id=' + chatroom_id)
+    const chatroom = await response.json()
+    const removed = inbox.removeChild(chat)
+    inbox.insertBefore(removed, inbox.firstChild)
+    const {last_message} = chatroom
+    const text = document.querySelector(".current-chat .chat-content > p")
+    text.innerText = last_message.message
+}
+
 
 const chatrooms = document.querySelectorAll('.chat')
 
@@ -7,8 +19,8 @@ if (chatrooms) {
     for (const chatroom of chatrooms) {
         chatroom.addEventListener("click", async () => {
             const curr = document.querySelector('.current-chat')
+            if(curr) curr.classList.remove("current-chat");
             chatroom.classList.add("current-chat");
-            if(curr && curr !== chatroom) curr.classList.remove("current-chat");
             const chatPage = document.querySelector('.chat-page')
 
             const header = document.createElement('header')
@@ -46,7 +58,6 @@ if (chatrooms) {
 
             const response = await fetch('../api/api_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4))
             const messages = await response.json()
-            console.log(messages)
             const user_response = await fetch('../api/api_user.php')
             const user = await user_response.json()
             const msg_inbox = document.createElement('article')
@@ -71,6 +82,7 @@ if (chatrooms) {
                 const msg_section = document.querySelector('section.scroll')
                 msg_section.insertBefore(create_message(user,text, user, Date.now()), msg_section.firstChild)
                 msg_section.scrollTo(0, msg_section.scrollHeight)
+                await updateUserChatrooms(chatroom.id.substring(4))
             })
             const send_icon = document.createElement('i')
             send_icon.classList.add("material-symbols-outlined")
@@ -99,7 +111,7 @@ function create_message(user, message, sender, sentTime) {
     message_p.innerText = message
 
     const message_time = document.createElement('time')
-    const date = new Date(sentTime);
+    const date = new Date(sentTime*1000);
     message_time.dateTime = date.toISOString()
     message_time.innerText = formatDateTime(date)
 

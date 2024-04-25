@@ -48,14 +48,14 @@ class Chatroom {
         return new Message($chatroom_id , $message['sender'] , $message['sentTime'], $message['readTime'], $message['message']);
     }
 
-    public static function get_chatroom_by_id(PDO $dbh, int $id) : Chatroom
+    public static function get_chatroom_by_id(PDO $dbh, int $id, int $user) : Chatroom
     {
         $stmt = $dbh->prepare('SELECT * FROM chatrooms WHERE chatroom_id = ?');
         $stmt->execute([$id]);
         $chatroom = $stmt->fetch();
         return new Chatroom($chatroom['chatroom_id'] ,Item::get_item($dbh, $chatroom['item_id']), User::get_user($dbh, $chatroom['seller_id']),
         User::get_user($dbh, $chatroom['buyer_id']),
-            self::get_unread_message_count($dbh, $chatroom['buyer_id'], $chatroom['chatroom_id']),
+            self::get_unread_message_count($dbh, $user, $chatroom['chatroom_id']),
             self::get_last_message($dbh, $chatroom['chatroom_id']));
     }
 }

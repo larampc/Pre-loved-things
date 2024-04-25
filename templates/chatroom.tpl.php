@@ -4,7 +4,10 @@ function draw_user_chatrooms(array $chatrooms, User $from) : void { ?>
     <section class="chat-inbox">
         <h2>Inbox</h2>
         <section class="chat-rooms">
-            <?php foreach($chatrooms as $chatroom) {
+            <?php usort($chatrooms, function ($a, $b) {
+                return $a->last_message->sentTime < $b->last_message->sentTime;
+            });
+            foreach($chatrooms as $chatroom) {
                 $to = $chatroom->seller == $from ? $chatroom->buyer : $chatroom->seller;
                 draw_small_chatroom($chatroom, $from, $to);
             } ?>
