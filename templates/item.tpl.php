@@ -103,7 +103,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 
-            <label for="category">category</label>
+            <label for="category">Category</label>
             <select id="category" name="category">
                 <option value="">Other</option>
                 <?php foreach ($categories as $category) { ?>
@@ -121,6 +121,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                         if ($options) { ?>
                             <label><?=$tag['tag']?>
                                 <select name="<?=$tag['tag']?>">
+                                    <option value=""></option>
                                 <?php
                                 foreach ($options as $option) { ?>
                                     <option value="<?=$option['value']?>"><?=$option['value']?></option>
@@ -135,6 +136,13 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                 </div>
             <?php }} ?>
 
+            <label for="condition">Condition</label>
+            <select id="condition" name="condition">
+                <?php $conditions = Tag::get_conditions($db);
+                foreach ($conditions as $condition) { ?>
+                    <option value="<?=$condition['condition']?>"><?=ucfirst($condition['condition'])?></option>
+                <?php }?>
+            </select>
 
             <label for="price">Price</label>
             <input type="number" id="price" name="price" placeholder="The price of your item" required>
@@ -219,9 +227,10 @@ function draw_page_filters(array $items, string $category, PDO $dbh) { ?>
                 <?php } ?>
                 <div class="options" id="Condition">
                     <p>Condition</p>
-                    <label><input type="checkbox" name="New" autocomplete='off'>New</label>
-                    <label><input type="checkbox" name="Used" autocomplete='off'>Used</label>
-                    <label><input type="checkbox" name="Old" autocomplete='off'>Old</label>
+                    <?php $conditions = Tag::get_conditions($dbh);
+                    foreach ($conditions as $condition) { ?>
+                        <label><input type="checkbox" name="<?=$condition['condition']?>" autocomplete='off'><?=ucfirst($condition['condition'])?></label>
+                    <?php }?>
                 </div>
             </section>
         <script src="../scripts/infinite_scroll.js" defer></script>

@@ -29,7 +29,7 @@ class Item {
         $new_item->name = $item['name'] != null ? $item['name'] : "";
         $new_item->creator =$item['creator'];
         $new_item->mainImage = $item['mainImage']!= null ? $item['mainImage'] : "";;
-        $new_item->category = Tag::get_item_category($dbh, $item['id']);
+        $new_item->category = Tag::get_category_by_id($dbh, $item['category']);
         $new_item->tags = Tag::get_item_tags($dbh, $item['id']);
         return $new_item;
     }
@@ -181,9 +181,9 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage): int {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator, mainImage) VALUES (?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $category, $user_id, $mainImage]);
+    static function register_item(PDO $db, string $name, string $description, string $price, int $category, int $user_id, string $mainImage): int {
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category) VALUES (?, ?, ?, ?, ?, ?)');
+        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category]);
         $stmt = $db->prepare('SELECT last_insert_rowid()');
         $stmt->execute();
         return $ret ? $stmt->fetchColumn() : -1;

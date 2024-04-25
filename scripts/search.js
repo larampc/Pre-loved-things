@@ -6,15 +6,11 @@ if (search) {
         const response = await fetch('../api/api_search.php?' + encodeForAjax({ q: input.value }))
         const items = await response.json()
 
-        const suggestions = search.querySelector('#suggestions');
+        const suggestions = search.querySelector('#search-suggestions');
         suggestions.innerHTML = '';
-        suggestions.style.display = 'block';
-
         for (const item of items) {
-            if (suggestions.innerHTML !== '') suggestions.appendChild(document.createElement('br'));
-            const row = document.createElement('a')
-            row.href = "item.php?id=" + item.id;
-            row.innerText = item.name;
+            const row = document.createElement('option')
+            row.value = item.name;
             suggestions.appendChild(row);
         }
     })

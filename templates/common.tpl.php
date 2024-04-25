@@ -28,9 +28,9 @@
                         <option value="<?=$category['category']?>"><?=$category['category']?></option>
                     <?php }?>
                 </select>
-                <label for="searchbar"><input name="q" type="search" id="searchbar" autocomplete="off"></label>
+                <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off"></label>
                 <button type="submit" class="searchbtn" ><i class="material-symbols-outlined">search</i></button>
-                <div id="suggestions"></div>
+                <datalist id="search-suggestions"></datalist>
             </form>
         <nav>
             <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>

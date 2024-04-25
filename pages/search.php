@@ -13,14 +13,14 @@
 
     $db = get_database_connection();
     $categories = Tag::get_categories($db);
-    if (empty($_GET['category']) && !empty($_GET['q'])) {
-        $items = Item::get_items_by_search($db, $_GET['q']);
+    if (empty($_GET['category']) && !empty($_GET['search'])) {
+        $items = Item::get_items_by_search($db, $_GET['search']);
     }
     else if (!empty($_GET['category']) && empty($_GET['q'])) {
         $items = Item::get_items_category($db, $_GET['category']);
     }
-    else if (!empty($_GET['category']) && !empty($_GET['q'])) {
-        $items = Item::get_items_by_category($db, $_GET['q'], $_GET['category']);
+    else if (!empty($_GET['category']) && !empty($_GET['search'])) {
+        $items = Item::get_items_by_category($db, $_GET['search'], $_GET['category']);
     }
     else {
         $items = Item::get_items($db, 18);

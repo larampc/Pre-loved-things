@@ -12,9 +12,9 @@ class Tag
         $this->value = $value;
     }
 
-    public static function get_item_category(PDO $dbh, int $item) {
-        $stmt = $dbh->prepare('SELECT categories.category FROM tags_values join tags on tags.id = tags_values.tag join categories on categories.id = tags.category where tags_values.item = ?');
-        $stmt->execute(array($item));
+    public static function get_category_by_id(PDO $dbh, int $id) {
+        $stmt = $dbh->prepare('SELECT category FROM categories where id = ?');
+        $stmt->execute(array($id));
         return $stmt->fetchColumn() ?: "";
     }
 
@@ -38,6 +38,29 @@ class Tag
 
     public static function get_categories(PDO $dbh):  array {
         $stmt = $dbh->prepare('SELECT category FROM categories');
+        $stmt->execute(array());
+        return $stmt->fetchAll();
+    }
+
+    public static function get_tag_id(PDO $dbh, string $category, string $tag):  int {
+        $stmt = $dbh->prepare('SELECT tags.id FROM tags join categories on tags.category = categories.id where categories.category = ? and tags.tag = ?');
+        $stmt->execute(array($category, $tag));
+        return $stmt->fetchColumn();
+    }
+
+    public static function get_category_id(PDO $dbh, string $category):  int {
+        $stmt = $dbh->prepare('SELECT id FROM categories where category = ? ');
+        $stmt->execute(array($category));
+        return $stmt->fetchColumn();
+    }
+
+    static function register_item_tags(PDO $db, int $tag_id, int $item, string $value) {
+        $stmt = $db->prepare('INSERT INTO tags_values (item, tag, value) VALUES (?, ?, ?)');
+        $stmt->execute(array($item, $tag_id, $value));
+    }
+
+    static function get_conditions(PDO $dbh) {
+        $stmt = $dbh->prepare('SELECT * FROM conditions');
         $stmt->execute(array());
         return $stmt->fetchAll();
     }
