@@ -10,5 +10,6 @@
     $checkout = isset($_GET['checkout']);
 
     draw_header("login", $session);
-    draw_login_form($checkout);
+    //draw_login_form($checkout);
+    draw_login_register_form($checkout);
     draw_footer();

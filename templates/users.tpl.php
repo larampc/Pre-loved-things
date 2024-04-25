@@ -26,6 +26,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
                 <input type="password" name="password" placeholder="Your password" autocomplete="off">
             </label>
             <button class="login-button" type="submit">Register</button>
+            <p class="rotateRegister">Already have an account?</p>
         </form>
     </section>
 
@@ -36,14 +37,25 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
     <section class="login">
         <h2>Log in</h2>
         <form class="login-form" action="../actions/action_login.php<?=$checkout? "?checkout": ""?>" method="POST">
-            <input type="email" name="email" placeholder="Your email">
-            <i class="input-icon"></i>
-            <input type="password" name="password" placeholder="Your password" autocomplete="off">
-            <i class="input-icon"></i>
+            <label>
+                <input type="email" name="email" placeholder="Your email">
+            </label>
+            <label>
+                <input type="password" name="password" placeholder="Your password" autocomplete="off">
+            </label>
             <button class="login-button" type="submit">Submit</button>
             <a href="#" class="forgot-password">Forgot your password?</a>
-            <a href="../pages/register.php<?=$checkout? "?checkout": ""?>" class="forgot-password">Don't have an account?</a>
+            <p class="rotateLogin">Don't have an account?</p>
         </form>
+    </section>
+
+<?php } ?>
+
+<?php function draw_login_register_form(bool $checkout)
+{ ?>
+    <section class="flipLoginRegister">
+        <?php draw_login_form($checkout); ?>
+        <?php draw_register_form($checkout); ?>
     </section>
 
 <?php } ?>

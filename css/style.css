@@ -471,11 +471,10 @@ main .userPage, .pfPage{
     background-color: #F2E8D5;
     text-align: center;
     margin: 0 auto;
-    width: 40%;
     border-radius: 10px;
 }
 .login h2, .register h2 {
-    padding-top: 1rem;
+    margin-top: 0;
 }
 .login form > *, .register form > * {
     margin: 0.5rem auto;
@@ -493,7 +492,7 @@ main .userPage, .pfPage{
     padding: 0.5rem;
     justify-content: center;
     width: 50%;
-    margin-bottom: 1.5rem;
+    box-shadow: 0 0 5px #c4c3ca;
 }
 
 .login input, .register input {
@@ -502,12 +501,12 @@ main .userPage, .pfPage{
     padding: 0.5rem;
     text-align: center;
     width: 65%;
+    box-shadow: 0 0 5px #c4c3ca;
 }
 
 .login a {
     color: black;
     text-decoration: none;
-    padding-bottom: 1rem;
 }
 
 i {
@@ -533,6 +532,39 @@ i {
     color: black;
     padding: 10px;
     text-decoration: none;
+}
+
+.loginMain {
+    width: 40%;
+    height: 0;
+    margin-right: auto;
+    margin-left: auto;
+    perspective: 80rem;
+}
+
+.flipLoginRegister {
+    position: relative;
+    width: 100%;
+    height: 24rem;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.login, .register {
+    box-shadow: 5px 5px 10px #c4c3ca;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+.register {
+    background-color: #F2E8D5;
+    transform: rotateY(180deg);
 }
 
 
@@ -904,55 +936,40 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     --success-background: rgba(169, 232, 127, 0.66);
     --success-primary: #105a11;
 }
-
 #messages article{
-    width: max-content;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 6px;
     backdrop-filter: blur(5px);
     opacity: 0;
-    visibility: hidden;
     padding: 10px 8px;
     i {
         padding-right: 5px;
     }
 }
-
 #messages .error {
-    animation: fade-in 5s linear;
     background-color: var(--error-background);
     color: var(--error-primary);
 }
 
 #messages .success {
-    animation: fade-in 2s linear;
     background-color: var(--success-background);
     color: var(--success-primary);
 }
 
-@keyframes fade-in {
-    5% {
-        opacity: 1;
-        visibility: visible;
-    }
-    95% {
-        opacity:1;
-    }
-}
-
 .message-progress {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
     width: calc(100% - 8px);
     height: 3px;
+    transform: scaleX(0);
+    transform-origin: left;
     border-radius: inherit;
 }
 
 .error .message-progress {
-    animation: progress 5s 0s linear;
     background: linear-gradient(to right, var(--error-background), var(--error-primary));
 }
 
 .success .message-progress {
-    animation: progress 2s 0s linear;
     background: linear-gradient(to right, var(--success-background), var(--success-primary));
 }

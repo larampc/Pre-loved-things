@@ -44,8 +44,8 @@ class TrackItem {
         return $result;
     }
 
-    public static function update_delivery(PDO $dbh, int $item, string $date) {
+    public static function update_delivery(PDO $dbh, int $item, string $date): bool {
         $stmt = $dbh->prepare('UPDATE purchases SET deliveryDate=? WHERE item = ?');
-        $stmt->execute(array($date, $item));
+        return $stmt->execute(array($date, $item));
     }
 }

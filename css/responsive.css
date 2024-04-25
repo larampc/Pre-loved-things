@@ -21,3 +21,42 @@
 .dots .dot {
     transition: opacity .2s ease-in-out;
 }
+
+
+ /* Messages */
+#messages article {
+    transform: translateY(30px);
+}
+#messages .error {
+    animation: fade-in 5s linear;
+}
+
+#messages .success {
+    animation: fade-in 2s linear;
+}
+
+@keyframes fade-in {
+    5% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    95% {
+        opacity:1;
+        transform: translateY(0);
+    }
+}
+
+.error .message-progress {
+    animation: progress 5s 0s linear;
+}
+
+.success .message-progress {
+    animation: progress 2s 0s linear;
+}
+
+@keyframes progress {
+    to {
+        transform: scaleX(1);
+    }
+}

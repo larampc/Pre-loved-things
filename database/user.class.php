@@ -44,6 +44,14 @@ class User
         return !empty($row);
     }
 
+    public static function verify_username(PDO $dbh, string $username): bool {
+        $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
+        $stmt->execute(array($username));
+        $row = $stmt->fetch();
+        return !empty($row);
+    }
+
+
     public static function like_item(PDO $dbh, int $id, int $item): void
     {
         $stmt = $dbh->prepare('INSERT INTO favorites VALUES (?, ?)');
@@ -68,10 +76,11 @@ class User
         $stmt->execute(array($id, $item));
     }
 
-    public static function get_user(PDO $dbh, int $id): User {
+    public static function get_user(PDO $dbh, int $id): ?User {
         $stmt = $dbh->prepare('SELECT * FROM users WHERE user_id = ?');
         $stmt->execute(array($id));
         $user = $stmt->fetch();
+        if (!$user) return null;
         return new User((int)$user['user_id'], $user['username'], $user['email'],$user['name'], $user['photoPath'], $user['phone']);
     }
 
@@ -82,10 +91,10 @@ class User
     }
 
 
-    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $photo): void
+    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $photo): bool
     {
         $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, photoPath=?, username=? WHERE user_id = ?');
-        $stmt->execute(array($email, $phone, $name, $photo, $username,$id));
+        return $stmt->execute(array($email, $phone, $name, $photo, $username,$id));
     }
 
     public static function get_cart_items(PDO $dbh, int $user_id): array

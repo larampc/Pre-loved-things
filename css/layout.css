@@ -604,35 +604,21 @@ main .pfPage{
     display: block;
 }
 
-#messages article{
-    position: absolute;
+#messages {
+    position: fixed;
+    width: max-content;
     left: 0;
     right: 0;
     bottom: 24px;
-    transform: translateY(30px);
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+}
+
+#messages article {
+    position: relative;
+    visibility: hidden;
     display: flex;
     align-items: center;
-}
-
-@keyframes fade-in {
-    5% {
-        transform: translateY(0);
-    }
-    95% {
-        transform: translateY(0);
-    }
-}
-
-.message-progress {
-    position: absolute;
-    left: 4px;
-    bottom: 4px;
-    transform: scaleX(0);
-    transform-origin: left;
-}
-
-@keyframes progress {
-    to {
-        transform: scaleX(1);
-    }
+    margin-top: 0.5rem;
 }
