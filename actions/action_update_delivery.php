@@ -10,6 +10,11 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-TrackItem::update_delivery($dbh, intval($_POST["item"]), $_POST['new-date']);
+if (TrackItem::update_delivery($dbh, intval($_POST["item"]), $_POST['new-date'])) {
+    $session->addMessage('success', 'Delivery updated successfully.');
+}
+else {
+    $session->addMessage('error', 'Unable to update delivery.');
+}
 
-header('Location: ../pages/track_item.php?item-track=' . $_POST["item"]);
+header('Location: ' . $_SERVER['HTTP_REFERER']);

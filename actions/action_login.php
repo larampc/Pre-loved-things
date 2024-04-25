@@ -10,7 +10,7 @@
 
     $dbh = get_database_connection();
     if ( !$_POST['email'] || !$_POST['password']) {
-            $session->addMessage('error', 'empty fields');
+        $session->addMessage('error', 'empty fields');
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
     $user = User::verify_user($dbh, $_POST['email'], $_POST['password']);
@@ -19,8 +19,8 @@
       $session->setId($user);
       if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $user);
       $session->addMessage('success', 'Login successful!');
-      die(header('Location: '. ($checkout? '../pages/checkout.php':'../index.php')));
+      header('Location: '. ($checkout? '../pages/checkout.php':'../index.php'));
     } else {
-        $session->addMessage('error', 'Wrong password!');
-        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        $session->addMessage('error', 'Wrong password or email!');
+        header('Location: ../pages/login.php'. ($checkout? '?checkout':''));
     }

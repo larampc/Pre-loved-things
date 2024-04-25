@@ -46,10 +46,10 @@ class Item {
         return $new_items;
     }
 
-    public static function update_item(PDO $dbh, int $id,  string $name, string $description, string $price, string $category)
+    public static function update_item(PDO $dbh, int $id,  string $name, string $description, string $price, string $category): bool
     {
         $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category=? WHERE id = ?');
-        $stmt->execute(array($name, $description, floatval(str_replace(',', '.', $price)), $category,$id));
+        return $stmt->execute(array($name, $description, floatval(str_replace(',', '.', $price)), $category,$id));
     }
 
     static function get_item_images(PDO $dbh, int $id) : array
@@ -72,13 +72,14 @@ class Item {
         $stmt->execute(array($category));
         return self::create_items($dbh, $stmt->fetchAll());
     }
-    static function get_item(PDO $dbh, int $id) : Item{
+    static function get_item(PDO $dbh, int $id) : ?Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
-
-        return self::create_item($dbh, $stmt->fetch());
-
+        $item = $stmt->fetch();
+        if (!$item) return null;
+        return self::create_item($dbh, $item);
     }
+
     static function get_user_items(PDO $dbh, int $user_id): array {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');
         $stmt->execute(array($user_id));
@@ -173,19 +174,20 @@ class Item {
         return self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage) {
+    static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage): int {
         $stmt = $db->prepare('INSERT INTO items (name, description, price, category, creator, mainImage) VALUES (?, ?, ?, ?, ?, ?)');
-        $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $category, $user_id, $mainImage]);
-    }
-    static function register_item_images(PDO $db, array $images)
-    {
+        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $category, $user_id, $mainImage]);
         $stmt = $db->prepare('SELECT last_insert_rowid()');
         $stmt->execute();
-        $id = $stmt->fetchColumn();
+        return $ret ? $stmt->fetchColumn() : -1;
+    }
+    static function register_item_images(PDO $db, array $images, int $item_id): bool
+    {
         foreach ($images as $image) {
             $stmt = $db->prepare('INSERT INTO item_images (item, imagePath) VALUES (?, ?)');
-            $stmt->execute([$id, $image]);
+            if (!$stmt->execute([$item_id, $image])) return false;
         }
+        return true;
     }
     static function sort_by_user(array $items): array
     {
