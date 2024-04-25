@@ -109,9 +109,9 @@ INSERT INTO users (password, name, email, phone, username)
 VALUES
     ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', '1234567890', 'johny'),
     ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Jane Smith', 'jane@example.com', '9876543210', 'janey'),
-    ('mypassword', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful'),
-    ('letmein', 'Bob Green', 'bob@example.com', '4447890123', 'bobby'),
-    ('p@ssw0rd', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Bob Green', 'bob@example.com', '4447890123', 'bobby'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita'),
     ('password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse'),
     ('brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii'),
     ('king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall'),

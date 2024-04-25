@@ -12,92 +12,15 @@ async function updateUserChatrooms(chatroom_id) {
     text.innerText = last_message.message
 }
 
+async function addClickListeners() {
+    const chatrooms = document.querySelectorAll('.chat')
 
-const chatrooms = document.querySelectorAll('.chat')
-
-if (chatrooms) {
-    for (const chatroom of chatrooms) {
-        chatroom.addEventListener("click", async () => {
-            const curr = document.querySelector('.current-chat')
-            if(curr) curr.classList.remove("current-chat");
-            chatroom.classList.add("current-chat");
-            const chatPage = document.querySelector('.chat-page')
-
-            const header = document.createElement('header')
-            header.classList.add("message-header")
-            const figure = document.createElement('figure')
-            figure.classList.add("item-info")
-
-            const item_image = document.createElement('img')
-            item_image.classList.add("item-msg-img")
-            item_image.alt = "item image"
-
-            //to be changeddddddd --> make dynamic
-
-            item_image.src = "../images/flower.png"
-            const figure_caption = document.createElement('figcaption')
-            figure_caption.innerText = "Item"
-            figure.appendChild(item_image)
-            figure.appendChild(figure_caption)
-
-            const aside = document.createElement('aside')
-            aside.classList.add("user-info")
-
-            const addressee_image = document.createElement('img')
-            addressee_image.classList.add("addressee-img")
-            addressee_image.alt = "addressee profile image"
-            addressee_image.src = "../images/profile.png"
-
-            const addressee_name = document.createElement('p')
-            addressee_name.innerText = "User Name"
-
-            aside.appendChild(addressee_image)
-            aside.appendChild(addressee_name)
-            header.appendChild(figure)
-            header.appendChild(aside)
-
-            const response = await fetch('../api/api_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4))
-            const messages = await response.json()
-            const user_response = await fetch('../api/api_user.php')
-            const user = await user_response.json()
-            const msg_inbox = document.createElement('article')
-            msg_inbox.classList.add("msg-inbox")
-            const message_section = fill_messages(messages, user)
-            msg_inbox.appendChild(message_section)
-
-            const send_msg_div = document.createElement('div')
-            send_msg_div.classList.add("input-group")
-            const input = document.createElement('input')
-            input.classList.add("form-control")
-            input.type = "text"
-            input.placeholder = "Write message..."
-            const button = document.createElement('button')
-            button.type = "button"
-            button.classList.add("send-icon")
-            button.addEventListener("click", async () => {
-                const text = input.value.trim()
-                if(!text.length) return;
-                await fetch("../api/api_send_messages.php?chatroom=" + chatroom.id.substring(4) + "&sender=" + user + "&message=" + text)
-                input.value = ''
-                const msg_section = document.querySelector('section.scroll')
-                msg_section.insertBefore(create_message(user,text, user, Date.now()), msg_section.firstChild)
-                msg_section.scrollTo(0, msg_section.scrollHeight)
-                await updateUserChatrooms(chatroom.id.substring(4))
-            })
-            const send_icon = document.createElement('i')
-            send_icon.classList.add("material-symbols-outlined")
-            send_icon.classList.add("filled-color")
-            send_icon.innerText = "send"
-            button.appendChild(send_icon)
-            send_msg_div.appendChild(input)
-            send_msg_div.appendChild(button)
-            msg_inbox.appendChild(send_msg_div)
-
-            chatPage.innerHTML = ''
-            chatPage.appendChild(header)
-            chatPage.appendChild(msg_inbox)
-            message_section.scrollTo(0, message_section.scrollHeight)
-        })
+    if (chatrooms) {
+        const user_response = await fetch('../api/api_user.php');
+        const user = await user_response.json();
+        for (const chatroom of chatrooms) {
+            chatroom.addEventListener("click", async () => handleClick(chatroom, user))
+        }
     }
 }
 
@@ -144,3 +67,132 @@ function formatDateTime(date) {
     const formattedDate = new Intl.DateTimeFormat('en-US', dateOptions).format(date);
     return `${formattedTime} | ${formattedDate}`
 }
+
+async function handleClick(chatroom, user) {
+    updateCurrentChatroom(chatroom);
+    const response = await fetch('../api/api_get_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4))
+    const chatroom_data = await response.json()
+    const chatPage = document.querySelector('.chat-page');
+    chatPage.innerHTML = '';
+
+    const header = createChatHeader(chatroom_data, user);
+    const msgInbox = await createMessageInbox(chatroom, user);
+
+    chatPage.appendChild(header);
+    chatPage.appendChild(msgInbox);
+}
+
+function updateCurrentChatroom(chatroom) {
+    const curr = document.querySelector('.current-chat');
+    if (curr) curr.classList.remove("current-chat");
+    chatroom.classList.add("current-chat");
+}
+
+function createChatHeader(chatroom_data, user) {
+    const header = document.createElement('header');
+    header.classList.add("message-header");
+
+    const figure = createFigure(chatroom_data);
+    const aside = createUserAside(chatroom_data, user);
+
+    header.appendChild(figure);
+    header.appendChild(aside);
+
+    return header;
+}
+
+function createFigure(chatroom) {
+    const figure = document.createElement('figure');
+    figure.classList.add("item-info");
+
+    const item_image = document.createElement('img');
+    item_image.classList.add("item-msg-img");
+    item_image.alt = "item image";
+    item_image.src = "../images/" + chatroom.item.mainImage;
+
+    const figure_caption = document.createElement('figcaption');
+    figure_caption.innerText = chatroom.item.name;
+
+    figure.appendChild(item_image);
+    figure.appendChild(figure_caption);
+
+    return figure;
+}
+
+function createUserAside(chatroom, user) {
+    const aside = document.createElement('aside');
+    aside.classList.add("user-info");
+
+    const addressee = chatroom.buyer.id === user ? chatroom.seller : chatroom.buyer
+    const addressee_image = document.createElement('img');
+    addressee_image.classList.add("addressee-img");
+    addressee_image.alt = "addressee profile image";
+    addressee_image.src = "../images/" + addressee.photoPath;
+
+    const addressee_name = document.createElement('p');
+    addressee_name.innerText = addressee.name;
+
+    aside.appendChild(addressee_image);
+    aside.appendChild(addressee_name);
+
+    return aside;
+}
+
+async function createMessageInbox(chatroom, user) {
+    const response = await fetch('../api/api_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4));
+    const messages = await response.json();
+
+    const msg_inbox = document.createElement('article');
+    msg_inbox.classList.add("msg-inbox");
+
+    const message_section = fill_messages(messages, user);
+    msg_inbox.appendChild(message_section);
+    msg_inbox.appendChild(createSendMessageDiv(chatroom, user));
+
+    message_section.scrollTo(0, message_section.scrollHeight);
+
+    return msg_inbox;
+}
+
+function createSendMessageDiv(chatroom, user) {
+    const send_msg_div = document.createElement('div');
+    send_msg_div.classList.add("input-group");
+
+    const input = document.createElement('input');
+    input.classList.add("form-control");
+    input.type = "text";
+    input.placeholder = "Write message...";
+
+    const button = createSendButton(chatroom, user, input);
+
+    send_msg_div.appendChild(input);
+    send_msg_div.appendChild(button);
+
+    return send_msg_div;
+}
+
+function createSendButton(chatroom, user, input) {
+    const button = document.createElement('button');
+    button.type = "button";
+    button.classList.add("send-icon");
+    button.addEventListener("click", async () => {
+        const text = input.value.trim();
+        if (!text.length) return;
+        await fetch("../api/api_send_messages.php?chatroom=" + chatroom.id.substring(4) + "&sender=" + user + "&message=" + text);
+        input.value = '';
+        const msg_section = document.querySelector('section.scroll');
+        msg_section.insertBefore(create_message(user, text, user, Date.now()/1000), msg_section.firstChild);
+        msg_section.scrollTo(0, msg_section.scrollHeight);
+        await updateUserChatrooms(chatroom.id.substring(4));
+    });
+
+    const send_icon = document.createElement('i');
+    send_icon.classList.add("material-symbols-outlined");
+    send_icon.classList.add("filled-color");
+    send_icon.innerText = "send";
+    button.appendChild(send_icon);
+
+    return button;
+}
+
+addClickListeners()

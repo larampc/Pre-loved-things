@@ -18,7 +18,9 @@
 
     $db = get_database_connection();
     $chatrooms = Chatroom::get_user_chatrooms($db, $session->getId());
-
+    usort($chatrooms, function ($a, $b) {
+        return $a->last_message->sentTime < $b->last_message->sentTime;
+    });
     draw_header("inbox", $session);
     draw_user_chatrooms($chatrooms, User::get_user($db, $session->getId()));
     ?>
@@ -27,7 +29,6 @@
                 <i class="material-symbols-outlined">inbox</i>
                 <p>Click on a message to open</p>
             </article>
-
         </section>
     <?php
 

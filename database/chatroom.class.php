@@ -9,8 +9,8 @@ class Chatroom {
     public User $seller;
     public User $buyer;
     public int $unread_message_count;
-    public Message $last_message;
-    public function __construct(int $chatroom_id, Item $item, User $seller, User $buyer, int $unread_message_count, Message $last_message) {
+    public ?Message $last_message;
+    public function __construct(int $chatroom_id, Item $item, User $seller, User $buyer, int $unread_message_count, ?Message $last_message) {
         $this->chatroomId = $chatroom_id;
         $this->item = $item;
         $this->seller = $seller;
@@ -41,10 +41,11 @@ class Chatroom {
         $stmt->execute([$chatroom_id, $user_id]);
         return $stmt->fetchColumn();
     }
-    public static function get_last_message(PDO $dbh, int $chatroom_id) : Message {
+    public static function get_last_message(PDO $dbh, int $chatroom_id) : ?Message {
         $stmt = $dbh->prepare('SELECT * FROM messages WHERE chatroom = ? ORDER BY sentTime DESC LIMIT 1');
         $stmt->execute([$chatroom_id]);
         $message = $stmt->fetch();
+        if($message === false) return null;
         return new Message($chatroom_id , $message['sender'] , $message['sentTime'], $message['readTime'], $message['message']);
     }
 
