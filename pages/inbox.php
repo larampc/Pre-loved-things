@@ -11,6 +11,7 @@
     require_once(__DIR__ . '/../database/message.class.php');
     require_once(__DIR__ . '/../database/chatroom.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../database/tags.class.php');
 
     require_once(__DIR__ . '/../templates/messages.tpl.php');
     require_once(__DIR__ . '/../templates/common.tpl.php');
@@ -21,7 +22,8 @@
     usort($chatrooms, function ($a, $b) {
         return $a->last_message->sentTime < $b->last_message->sentTime;
     });
-    draw_header("inbox", $session);
+    $categories = Tag::get_categories($db);
+    draw_header("inbox", $session, $categories);
     draw_user_chatrooms($chatrooms, User::get_user($db, $session->getId()));
     ?>
         <section class="chat-page">
@@ -29,6 +31,7 @@
                 <i class="material-symbols-outlined">inbox</i>
                 <p>Click on a message to open</p>
             </article>
+
         </section>
     <?php
 

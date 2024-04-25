@@ -13,8 +13,8 @@
     require_once(__DIR__ . '/../templates/common.tpl.php');
 
     $db = get_database_connection();
+    $categories = Tag::get_categories($db);
     $item = Item::get_item($db, intval($_GET['id']));
-
-    draw_header("item", $session);
+    draw_header("item", $session, $categories);
     draw_item_page($db, $item, $session);
     draw_footer();

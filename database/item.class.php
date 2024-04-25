@@ -1,5 +1,7 @@
 <?php
 declare(strict_types = 1);
+
+require_once ('tags.class.php');
 class Item {
     public int $id;
     public string $name;
@@ -8,10 +10,8 @@ class Item {
     public float $price;
     public string $description;
     public string $category;
-    public string $model;
-    public string $brand;
+    public array $tags;
     public string $condition;
-    public string $size;
     public string $date;
     public int $creator;
     public function __construct(PDO $db, int $id)
@@ -23,17 +23,14 @@ class Item {
     public static function create_item(PDO $dbh, array $item): Item
     {
         $new_item = new Item($dbh, $item['id']);
-        $new_item->brand = $item['brand'] != null ? $item['brand'] : "";
         $new_item->condition = $item['condition'] != null ? $item['condition'] : "";
         $new_item->price = $item['price'] != null ? $item['price'] : 0.0;
         $new_item->description = $item['description'] != null ? $item['description'] : "";
-        $new_item->category = $item['category'] != null ? $item['category'] : "";
-        $new_item->model = $item['model'] != null ? $item['model'] : "";
-        $new_item->size = $item['size'] != null ? $item['size'] : "";
         $new_item->name = $item['name'] != null ? $item['name'] : "";
-        $new_item->creator = $item['creator'];
+        $new_item->creator =$item['creator'];
         $new_item->mainImage = $item['mainImage']!= null ? $item['mainImage'] : "";;
-
+        $new_item->category = Tag::get_item_category($dbh, $item['id']);
+        $new_item->tags = Tag::get_item_tags($dbh, $item['id']);
         return $new_item;
     }
 
@@ -46,10 +43,10 @@ class Item {
         return $new_items;
     }
 
-    public static function update_item(PDO $dbh, int $id,  string $name, string $description, string $price, string $category): bool
+    public static function update_item(PDO $dbh, int $id,  string $name, string $description, string $price): bool
     {
-        $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category=? WHERE id = ?');
-        return $stmt->execute(array($name, $description, floatval(str_replace(',', '.', $price)), $category,$id));
+        $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ? WHERE id = ?');
+        return $stmt->execute(array($name, $description, floatval(str_replace(',', '.', $price)),$id));
     }
 
     static function get_item_images(PDO $dbh, int $id) : array
@@ -68,9 +65,10 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
     static function get_items_category(PDO $dbh, string $category) : array {
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE category = ?');
+        $stmt = $dbh->prepare('SELECT item FROM tags_values join tags on tags.id = tags_values.tag join categories on categories.id = tags.category where categories.category = ?');
         $stmt->execute(array($category));
-        return self::create_items($dbh, $stmt->fetchAll());
+        $res = $stmt->fetchAll();
+        return  $res? self::create_items($dbh, self::get_items_in_array($dbh, $res)) : array();
     }
     static function get_item(PDO $dbh, int $id) : ?Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
@@ -95,6 +93,14 @@ class Item {
         );
         $stmt->execute(array("%$q%"));
 
+        return self::create_items($dbh, $stmt->fetchAll());
+    }
+
+    static function get_items_in_page(PDO $dbh, int $page): array
+    {
+        $offset = 18 * ($page-1);
+        $stmt = $dbh->prepare('SELECT * FROM items LIMIT 18 OFFSET ?');
+        $stmt->execute(array($offset));
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
@@ -169,9 +175,10 @@ class Item {
         foreach ($items as $item) {
             $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
             $stmt->execute(array($item));
-            $res[] = $stmt->fetch();
+            $it =  $stmt->fetch();
+            if ($it) $res[] = $it;
         }
-        return self::create_items($dbh, $res);
+        return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
     static function register_item(PDO $db, string $name, string $description, string $price, string $category, int $user_id, string $mainImage): int {

@@ -75,25 +75,27 @@ async function getFilteredItems() {
 function addItemSection(items) {
     const itm = document.createElement('section');
     itm.className = "items";
-    for (let i = 0; i < items.length; i++) {
-        const main = document.createElement('a');
-        main.href = "item.php?id=" + items.at(i).id;
-        main.className = "item-main";
-        const img = document.createElement("img")
-        img.src = "../images/flower.png"
-        main.appendChild(img);
-        const div = document.createElement("div")
-        div.className = "item-info"
-        const name = document.createElement("p")
-        name.innerText = items.at(i).name;
-        name.className = "name"
-        div.appendChild(name);
-        const price = document.createElement("p")
-        price.innerText = items.at(i).price;
-        price.className = "price"
-        div.appendChild(price);
-        main.appendChild(div);
-        itm.appendChild(main);
-    }
+    items.forEach(item => itm.appendChild(createItem(item)))
     return itm;
+}
+
+function createItem(item) {
+    const main = document.createElement('a');
+    main.href = "item.php?id=" + item.id;
+    main.className = "item";
+    const img = document.createElement("img")
+    img.src = "../images/flower.png"
+    main.appendChild(img);
+    const div = document.createElement("div")
+    div.className = "item-info"
+    const name = document.createElement("p")
+    name.innerText = item.name;
+    name.className = "name"
+    div.appendChild(name);
+    const price = document.createElement("p")
+    price.innerText = item.price;
+    price.className = "price"
+    div.appendChild(price);
+    main.appendChild(div);
+    return main;
 }

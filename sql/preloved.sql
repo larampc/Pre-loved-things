@@ -7,7 +7,32 @@ DROP TABLE IF EXISTS user_cart;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS chatrooms;
 DROP TABLE IF EXISTS purchases;
+DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS tags_predefined;
+DROP TABLE IF EXISTS tags_values;
 
+CREATE TABLE categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category VARCHAR UNIQUE
+);
+
+CREATE TABLE tags (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    category INTEGER REFERENCES categories,
+    tag VARCHAR
+);
+
+CREATE TABLE tags_predefined (
+    tag INTEGER references tags,
+    value VARCHAR
+);
+
+CREATE TABLE tags_values (
+    item INTEGER references items,
+    tag INTEGER references tags,
+    value VARCHAR
+);
 
 CREATE TABLE item_images (
     imagePath VARCHAR,
@@ -32,11 +57,7 @@ CREATE TABLE items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL,
     price REAL NOT NULL,
-    category VARCHAR,       
-    condition VARCHAR,                      
-    size VARCHAR,                      
-    brand VARCHAR,                      
-    model VARCHAR,                      
+    condition VARCHAR,
     date INTEGER,                             -- date the item was published
     description VARCHAR,
     mainImage VARCHAR,
@@ -118,28 +139,29 @@ VALUES
     ('sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro'),
     ('lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa');
 
-INSERT INTO items (name, price, category, condition, size, brand, model, date, description, creator, mainImage)
+INSERT INTO items (name, price, condition, date, description, creator, mainImage)
 VALUES
-    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png'),
-    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2, 'flower.png'),
-    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png'),
-    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5,'flower.png'),
-    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png'),
-    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png'),
-    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png'),
-    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png'),
-    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9 ,'flower.png'),
-    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10 ,'flower.png'),
-    ('Guitar', 299.99, 'Musical Instruments', 'Used', 'Medium', 'Fender', 'Stratocaster', '2024-04-10', 'Classic electric guitar.', 1,'flower.png'),
-    ('Laptop', 899.99, 'Electronics', 'New', 'Large', 'Apple', 'MacBook Pro', '2024-04-10', 'High-performance laptop.', 2,'flower.png'),
-    ('Camera', 499.50, 'Electronics', 'Refurbished', 'Small', 'Canon', 'EOS Rebel T7i', '2024-04-10', 'Great DSLR camera for beginners.', 3,'flower.png'),
-    ('Watch', 199.99, 'Accessories', 'Used', 'One Size', 'Rolex', 'Submariner', '2024-04-10', 'Luxury watch with timeless design.', 4,'flower.png'),
-    ('Bicycle', 399.00, 'Sports', 'New', 'Large', 'Giant', 'Talon 29', '2024-04-10', 'Mountain bike for all terrains.', 5,'flower.png'),
-    ('Smartphone', 599.99, 'Electronics', 'New', 'Medium', 'Samsung', 'Galaxy S20', '2024-04-10', 'Latest smartphone with advanced features.', 6,'flower.png'),
-    ('Television', 799.99, 'Electronics', 'New', 'Large', 'Sony', 'Bravia X900H', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,'flower.png'),
-    ('Desk', 149.50, 'Furniture', 'Used', 'Medium', 'IKEA', 'LINNMON', '2024-04-10', 'Simple desk for home office.', 8,'flower.png'),
-    ('Headphones', 99.99, 'Electronics', 'New', 'One Size', 'Sony', 'WH-1000XM4', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,'flower.png'),
-    ('Backpack', 49.99, 'Accessories', 'New', 'One Size', 'North Face', 'Jester', '2024-04-10', 'Durable backpack for everyday use.', 10,'flower.png');
+    ('Guitar', 299.99, 'Used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png'),
+    ('Laptop', 899.99, 'New', '2024-04-10', 'High-performance laptop.', 2, 'flower.png'),
+    ('Watch', 199.99, 'Used', '2024-04-10', 'Luxury watch with timeless design.', 3, 'flower.png'),
+    ('Bicycle', 399.00, 'New', '2024-04-10', 'Mountain bike for all terrains.', 4, 'flower.png'),
+    ('Camera', 499.50, 'Refurbished', '2024-04-10', 'Great DSLR camera for beginners.', 5, 'flower.png'),
+    ('Smartphone', 599.99, 'New', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png'),
+    ('Television', 799.99, 'New', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png'),
+    ('Desk', 149.50, 'Used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png'),
+    ('Headphones', 99.99, 'New', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png'),
+    ('Backpack', 49.99, 'New', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png'),
+    ('Guitar', 299.99, 'Used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png'),
+    ('Laptop', 899.99, 'New', '2024-04-10', 'High-performance laptop.', 2, 'flower.png'),
+    ('Camera', 499.50, 'Refurbished', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png'),
+    ('Watch', 199.99, 'Used', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png'),
+    ('Bicycle', 399.00, 'New', '2024-04-10', 'Mountain bike for all terrains.', 5, 'flower.png'),
+    ('Smartphone', 599.99, 'New', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png'),
+    ('Television', 799.99, 'New', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png'),
+    ('Desk', 149.50, 'Used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png'),
+    ('Headphones', 99.99, 'New', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png'),
+    ('Backpack', 49.99, 'New', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png');
+
 
 INSERT INTO comments (mainuser, userc, date, text, rating)
 VALUES
@@ -240,3 +262,28 @@ INSERT INTO purchases (buyer, item, deliveryDate, state, code) VALUES
     (1, 3, '10/10/2024', 'preparing', 'ABCDEF'),
     (4, 11, '10/10/2024', 'preparing', 'ABCDEFH'),
     (2, 1, '10/10/2025', 'delivered', 'ABCDEFG');
+
+
+INSERT INTO categories (category) VALUES
+                                      ('clothes'),
+                                      ('technology'),
+                                      ('toys'),
+                                      ('cars'),
+                                      ('books'),
+                                      ('furniture'),
+                                      ('sports');
+INSERT INTO tags (category, tag) VALUES
+                                     (1, 'size'),
+                                     (1, 'brand'),
+                                     (2, 'model'),
+                                     (2, 'brand'),
+                                     (5, 'author');
+
+INSERT INTO tags_predefined (tag, value) VALUES
+                                    (1, 'S'),
+                                    (1, 'M'),
+                                    (1, 'L');
+
+INSERT INTO tags_values (item, tag, value) VALUES
+                                     (1, 4, 'Suzuki'),
+                                     (2, 5, 'Cassandra Clare');

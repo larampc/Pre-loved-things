@@ -17,7 +17,7 @@ if (Item::get_item($dbh, $item) !== null) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
-if (!Item::update_item($dbh, $item, $_POST['iname'], $_POST['description'],  $_POST['price'], $_POST['category'])) {
+if (!Item::update_item($dbh, $item, $_POST['iname'], $_POST['description'],  $_POST['price'])) {
     $session->addMessage('error', 'Could not update item.');
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }

@@ -8,13 +8,15 @@
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/connection.db.php');
+    require_once(__DIR__ . '/../database/tags.class.php');
 
     require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/common.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $db = get_database_connection();
-    draw_header("user", $session);
+    $categories = Tag::get_categories($db);
+    draw_header("user", $session, $categories);
     ?>
     <article class="userPage">
     <?php

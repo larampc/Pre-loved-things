@@ -85,9 +85,9 @@ function draw_item(Item $item) { ?>
                 <li>
                     Category: <?= $item->category ?>
                 </li>
-                <li>
-                    Size: <?= $item->size ?>
-                </li>
+                <?php foreach($item->tags as $tag) { ?>
+                    <li><?= $tag['tag'] . ': ' . $tag['value']?> </li>
+                <?php } ?>
                 <li>
                     Condition: <?= $item->condition ?>
                 </li>
@@ -96,7 +96,7 @@ function draw_item(Item $item) { ?>
     </article>
 <?php }
 
-function draw_new_item_form() { ?>
+function draw_new_item_form(PDO $db, array $categories) { ?>
     <article class="newItemPage">
         <h2>New item</h2>
         <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
@@ -105,14 +105,36 @@ function draw_new_item_form() { ?>
 
             <label for="category">category</label>
             <select id="category" name="category">
-                <option value="other">Other</option>
-                <option value="clothes">Clothes</option>
-                <option value="tech">Technology</option>
-                <option value="toys">Toys</option>
-                <option value="cars">Cars</option>
-                <option value="books">Books</option>
-                <option value="sports">Sports</option>
+                <option value="">Other</option>
+                <?php foreach ($categories as $category) { ?>
+                    <option value="<?=$category['category']?>"><?=ucfirst($category['category'])?></option>
+                <?php }?>
             </select>
+            <script src="../scripts/new.js" defer></script>
+            <?php foreach ($categories as $category) {
+                $tags = Tag::get_category_tags($db, $category['category']);
+                if ($tags) { ?>
+                <div class="tags <?=$category['category']?>">
+                    <?php
+                    foreach ($tags as $tag) {
+                        $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
+                        if ($options) { ?>
+                            <label><?=$tag['tag']?>
+                                <select name="<?=$tag['tag']?>">
+                                <?php
+                                foreach ($options as $option) { ?>
+                                    <option value="<?=$option['value']?>"><?=$option['value']?></option>
+                                <?php } ?>
+                                </select>
+                            </label>
+                        <?php }
+                        else { ?>
+                            <label for="<?=$tag['tag']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['tag']?>" name="<?=$tag['tag']?>">
+                        <?php }
+                    } ?>
+                </div>
+            <?php }} ?>
+
 
             <label for="price">Price</label>
             <input type="number" id="price" name="price" placeholder="The price of your item" required>
@@ -162,18 +184,39 @@ function draw_edit_item_form(Item $item) { ?>
     </article>
 <?php }
 
-function draw_page_filters(array $items) { ?>
+function draw_page_filters(array $items, string $category, PDO $dbh) { ?>
     <article class="searchPage">
             <section class="filter">
                 <h2>Filters</h2>
-                <div class="options" id="Price">
-                    <p>Prices</p>
-                    <label><input type="checkbox" name="0-5" autocomplete='off'>0-5€</label>
-                    <label><input type="checkbox" name="5-10" autocomplete='off'>5-10€</label>
-                    <label><input type="checkbox" name="10-20" autocomplete='off'>10-20€</label>
-                    <label><input type="checkbox" name="20-50" autocomplete='off'>20-50€</label>
-                    <label><input type="checkbox" name="50-9999999" autocomplete='off'>50€</label>
+                <p>Price</p>
+                <div class="price-input">
+                    <label> Minimum
+                        <input type="number"
+                               class="min-input"
+                               value="0">
+                    </label>
+                    <label> Maximum
+                        <input type="number"
+                               class="max-input"
+                               value="8500">
+                    </label>
                 </div>
+                <?php
+                $tags = Tag::get_category_tags($dbh, $category);
+                foreach ($tags as $tag) { ?>
+                    <div class="options" id="<?=$tag['tag']?>">
+                        <p><?=$tag['tag']?></p>
+                        <?php
+                        $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
+                        if ($options) {
+                            foreach ($options as $option) {?>
+                            <label><input type="checkbox" name="<?=$option['value']?>" autocomplete='off'><?=$option['value']?></label>
+                        <?php }}
+                        else { ?>
+                            <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
                 <div class="options" id="Condition">
                     <p>Condition</p>
                     <label><input type="checkbox" name="New" autocomplete='off'>New</label>
@@ -181,8 +224,8 @@ function draw_page_filters(array $items) { ?>
                     <label><input type="checkbox" name="Old" autocomplete='off'>Old</label>
                 </div>
             </section>
-        <section id="searchres">
-            <?php draw_items($items); ?>
+        <script src="../scripts/infinite_scroll.js" defer></script>
+        <section class="items searchresult">
         </section>
         </article>
 <?php } ?>

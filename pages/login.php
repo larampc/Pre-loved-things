@@ -6,10 +6,13 @@
     $session = new Session();
 
     require_once(__DIR__ . '/../templates/users.tpl.php');
+    require_once(__DIR__ . '/../database/tags.class.php');
+    require_once(__DIR__ . '/../database/connection.db.php');
 
     $checkout = isset($_GET['checkout']);
 
-    draw_header("login", $session);
-    //draw_login_form($checkout);
+    $db = get_database_connection();
+    $categories = Tag::get_categories($db);
+    draw_header("login", $session, $categories);
     draw_login_register_form($checkout);
     draw_footer();

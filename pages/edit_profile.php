@@ -9,10 +9,12 @@
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/user.class.php');
+    require_once(__DIR__ . '/../database/tags.class.php');
 
     require_once(__DIR__ . '/../templates/user.tpl.php');
 
     $db = get_database_connection();
-    draw_header("editprofile", $session);
+    $categories = Tag::get_categories($db);
+    draw_header("editprofile", $session, $categories);
     draw_edit_profile(User::get_user($db, $session->getId()));
     draw_footer();
