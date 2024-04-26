@@ -232,25 +232,33 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 <?php } ?>
 
 <?php  function draw_user_options(PDO $db, Session $session) { ?>
+    <script src="../scripts/profileNav.js" defer></script>
     <section class="display-item">
         <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
-        <button type="button" class="collapsible">Pending purchases</button>
-        <section class="items">
+        <div class="navbar">
+            <button type="button" class="navOption" onclick="openNav('my')">My items</button>
+            <button type="button" class="navOption" onclick="openNav('sales')">Pending sales</button>
+            <button type="button" class="navOption" onclick="openNav('purchased')">Pending purchases</button>
+        </div>
+        <section class="items" id="purchased">
             <?php
             $items = TrackItem::get_purchased_items($db, $session->getId());
             foreach ($items as $item) {
                 draw_item_to_track($item->tracking);
             } ?>
             </section>
-        <button type="button" class="collapsible">Pending sales</button>
-        <section class="items">
+        <section class="items" id="sales">
             <?php
             $items = TrackItem::get_selling_items($db, $session->getId());
             foreach ($items as $item) {
                 draw_item_to_track($item->tracking);
             } ?>
             </section>
-        <button type="button" class="collapsible">My items</button>
-            <?php draw_items(Item::get_user_items($db, $session->getId())); ?>
+        <section class="items" id="my">
+            <?php $items = Item::get_user_items($db, $session->getId());
+            foreach($items as $item) {
+                draw_item($item);
+            } ?>
+        </section>
     </section>
 <?php } ?>

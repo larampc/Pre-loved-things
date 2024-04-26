@@ -332,7 +332,9 @@ main .userPage{
 }
 
 .userPage .user img, .pfPage .user img {
-    float: left;
+    margin-top: 1rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 .userPage .comment img {
@@ -536,6 +538,10 @@ main .userPage{
     overflow: hidden;
     max-height: 0;
     transition-duration: 500ms;
+}
+
+.pfPage .items#my {
+    max-height: 100%;
 }
 
 .pfPage .collapsible {

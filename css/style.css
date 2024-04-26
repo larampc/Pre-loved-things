@@ -984,3 +984,11 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 .searchPage .items {
     padding: 0 1rem;
 }
+
+.navOption {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    border-style: none;
+    border-radius: 0.5rem;
+    background-color: #F1F1F1;
+}
