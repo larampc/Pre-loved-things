@@ -15,7 +15,8 @@ $dbh = get_database_connection();
 upload_image('img1');
 upload_image('img2');
 
-$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price'], Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $_FILES['img1']['name']);
+$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price'], Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $_FILES['img1']['name'],
+      $_POST['condition']);
 
 if ($item_id == -1) {
     //remove images

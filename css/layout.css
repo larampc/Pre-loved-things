@@ -58,7 +58,7 @@ header nav {
     align-items: center;
 }
 
-.items {
+.mainMain .items {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -264,10 +264,16 @@ header nav {
 }
 
 main .searchPage{
+    margin-top: 5rem;
     display: grid;
     grid-template-columns: auto 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: "filter items";
+    grid-template-rows: auto auto;
+    grid-template-areas: "filter category"
+                        "filter items";
+}
+
+.category-search {
+    grid-area: category;
 }
 
 .searchPage .filter {
@@ -278,6 +284,8 @@ main .searchPage{
     grid-area: items;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
 }
 
 /* USER PAGE */
@@ -315,10 +323,12 @@ main .userPage{
     justify-content: center;
 }
 
-.userPage .items {
+.userPage .items, .pfPage .items, .favoriteMain .items {
     grid-area: items;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem
 }
 
 .userPage .user img, .pfPage .user img {
@@ -633,4 +643,8 @@ main .pfPage{
 
 .tags {
     display: none;
+}
+
+.other {
+    display: block;
 }

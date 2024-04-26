@@ -1,78 +1,87 @@
-const search = document.querySelector('.search-container')
+let pageNum = 1;
+let isLoading = false;
+const container = document;
+const resultContainer =
+    document.querySelector(".searchresult");
+let categories = Array();
+let price_range = Array();
+let conditions = Array();
+let tags = Array();
+const mainCat = document.querySelector('.category-search');
+categories.push(mainCat.innerHTML)
+if (mainCat.innerHTML) {
+    const categorySelector = document.querySelector('.dropdown-content ' +'#' + mainCat.innerHTML)
+    categorySelector.selected = true;
+}
 
-if (search) {
-    const input = search.querySelector('input')
-    input.addEventListener('input', async () => {
-        const response = await fetch('../api/api_search.php?' + encodeForAjax({ q: input.value }))
-        const items = await response.json()
+let all = false;
 
-        const suggestions = search.querySelector('#search-suggestions');
-        suggestions.innerHTML = '';
-        for (const item of items) {
-            const row = document.createElement('option')
-            row.value = item.name;
-            suggestions.appendChild(row);
-        }
+async function getFilteredItems() {
+    if (isLoading) return;
+    isLoading = true;
+    const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}))
+    console.log(response)
+    const items = await response.json();
+    if (items.length === 0) {
+        all = true;
+        isLoading = false;
+        return;
+    }
+    items.forEach(item => resultContainer.appendChild(createItem(item)));
+    isLoading = false;
+}
+
+document.onscroll = async () => {
+    if (isLoading || all) return;
+    if (
+        window.scrollY > (document.body.offsetHeight - window.outerHeight)
+    ) {
+        pageNum++;
+        await getFilteredItems();
+    }
+};
+
+const optionsPrice = document.querySelector('.price-input');
+if (optionsPrice) {
+    const min = optionsPrice.querySelector('.price-input .min-input');
+    price_range.push(min.value)
+    const max = optionsPrice.querySelector('.price-input .max-input');
+    price_range.push(max.value)
+    console.log(price_range)
+    min.addEventListener("input", async() => {
+        price_range[0] = min.value
+        cleanSearch()
+        await getFilteredItems();
+    })
+    max.addEventListener("input", async() => {
+        price_range[1] = max.value
+        cleanSearch()
+        await getFilteredItems();
     })
 }
-let categories = Array();
-let conditions = Array();
 
-const optionsPrice = document.querySelector('#Price');
-if (optionsPrice) {
-    const input = optionsPrice.querySelectorAll('input');
-    input.forEach(function(elem) {
-        if (elem.checked) categories.push();
-    });
-    input.forEach(function(elem) {
-        elem.addEventListener("input", async () => {
-            const index = categories.indexOf(elem.name);
-            if (index === -1) categories.push(elem.name);
-            else categories.splice(index, 1);
-            await getFilteredItems();
-        });
-    });
-}
+getFilteredItems();
 
 const optionsConditions = document.querySelector('#Condition');
 if (optionsConditions) {
-    const input = optionsConditions.querySelectorAll('input');
+    const input = optionsConditions.querySelectorAll('#Condition input');
     input.forEach(function(elem) {
         elem.addEventListener("input", async () => {
             const index = conditions.indexOf(elem.name);
             if (index === -1 && elem.checked) conditions.push(elem.name);
             else if (!elem.checked) conditions.splice(index, 1);
+            cleanSearch()
             await getFilteredItems();
         });
     });
 }
 
-function encodeForAjax(data) {
+function encodeForAjaxArray(data) {
     return Object.keys(data).map(function (k) {
-        return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+        let str = ""
+        data[k].forEach((elem) => str += "-"+elem)
+        return encodeURIComponent(k) + '=' + encodeURIComponent(str)
     }).join('&')
-}
-
-document.body.addEventListener('mouseup', noDisplay, true);
-
-function noDisplay() {
-    document.getElementById("suggestions").style.display = "none";
-}
-
-async function getFilteredItems() {
-    console.log(encodeForAjax({cat: categories, cond: conditions}));
-    const response = await fetch('../api/api_search_range.php?' + encodeForAjax({cat: categories, cond: conditions}))
-    const items = await response.json();
-    const searchres = document.querySelector('#searchres');
-    searchres.innerHTML = '';
-    searchres.appendChild(addItemSection(items));
-}
-
-function addItemSection(items) {
-    const itm = document.createElement('section');
-    itm.className = "items";
-    items.forEach(item => itm.appendChild(createItem(item)))
-    return itm;
 }
 
 function createItem(item) {
@@ -95,3 +104,33 @@ function createItem(item) {
     main.appendChild(div);
     return main;
 }
+
+const tags2 = document.querySelectorAll('.tag input');
+
+tags2.forEach(tag => tag.addEventListener("input", async () => {
+        const index = tags.findIndex((elem) => elem[0] === tag.name && elem[1] === tag.value);
+        if (index === -1 && tag.type === "checkbox" && tag.checked) {
+            const indexTag = tags.findIndex((elem) => elem[0] === tag.name);
+            if (indexTag === -1) tags.push(Array(tag.name, Array(tag.value)));
+            else tags[indexTag][1].push(tag.value)
+        }
+        else if (!tag.checked && tag.type === "checkbox") {
+            const indexTag = tags.findIndex((elem) => elem[0] === tag.name);
+            const toRemove = tags[indexTag][1].findIndex((elem) => elem === tag.value);
+            tags[indexTag][1].splice(toRemove, 1);
+            if (tags[indexTag][1].length === 0) tags.splice(indexTag, 1);
+        }
+        if (tag.type === "text") {
+            tags = tags.filter((elem) => elem[0] !== tag.name)
+            if (tag.value) tags.push(Array(tag.name, tag.value))
+        }
+        cleanSearch()
+        await getFilteredItems();
+    }))
+
+function cleanSearch() {
+    pageNum = 1;
+    all = false;
+    resultContainer.innerHTML = "";
+}
+

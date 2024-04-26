@@ -10,33 +10,63 @@ require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $cat = $_GET['cat'];
-$cond = $_GET['cond'];
+$cond = $_GET['cond'] ?: "";
+$tag = $_GET['tag'] ?: "";
+$page = $_GET['page'];
+$range = $_GET['price'];
 $dbh = get_database_connection();
-$itemsCat = array();
 
-if ($cat === '') $itemsCat = Item::get_items($dbh, 18);
-else {
-    $values = explode(',', $cat);
+$checkTag = !empty($_GET['tag']);
+$tagOptions = explode('-', $tag);
+unset($tagOptions[0]);
+$itemsTags = array();
+foreach ($tagOptions as $tagOption) {
+    $values = explode(',', $tagOption);
+    $id = Tag::get_tag_id($dbh, $_GET['cat'], $values[0]);
+    unset($values[0]);
+    $optionTags = array();
     foreach ($values as $value) {
-        $range = explode('-', $value);
-        $items2 = Item::get_items_by_range($dbh, (int)$range[0], (int)$range[1]);
-        $itemsCat = array_merge($itemsCat, $items2);
+        $options = Tag::get_items_with_tags($dbh, $id, $value);
+        foreach ($options as $option) {
+            $optionTags[] = $option;
+        }
     }
+    if ($itemsTags) $itemsTags = array_intersect($itemsTags, $optionTags);
+    else $itemsTags = $optionTags;
 }
+
+$rangeops = explode(',', $range);
+$min = intval($rangeops[0]);
+$max = intval($rangeops[1]);
 
 $itemsCond = array();
-if ($cond === '') $itemsCond = Item::get_items($dbh, 18);
-else {
+if ($cond !== '') {
     $values = explode(',', $cond);
     foreach ($values as $value) {
-        $items2 = Item::get_items_by_condition($dbh, $value);
-        $itemsCond = array_merge($itemsCond, $items2);
+        array_push($itemsCond,  $value);
+    }
+}
+else {
+    $values = Tag::get_conditions($dbh);
+    foreach ($values as $value) {
+        array_push($itemsCond, $value['condition']);
     }
 }
 
-$res = array();
-foreach ($itemsCat as $item) {
-    if (in_array($item, $itemsCond)) array_push($res, $item);
+$itemsCat = array();
+if ($cat !== '')  {
+    $values = explode(',', $cat);
+    foreach ($values as $value) {
+        array_push($itemsCat, Tag::get_category_id($dbh, $cat));
+    }
 }
+else {
+    $values = Tag::get_categories($dbh);
+    foreach ($values as $value) {
+        array_push($itemsCat, Tag::get_category_id($dbh, $value['category']));
+    }
+}
+
+$res = Item::get_filtered_items($dbh, $itemsCat, $itemsCond, $itemsTags, intval($page), $checkTag, $min, $max);
 
 echo json_encode($res);

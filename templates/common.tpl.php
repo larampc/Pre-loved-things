@@ -9,7 +9,7 @@
     <link href="../css/layout.css" rel="stylesheet">
     <link href="../css/responsive.css" rel="stylesheet">
     <link href="../css/icons.css" rel="stylesheet">
-    <script src="../scripts/search.js" defer></script>
+    <script src="../scripts/suggestions.js" defer></script>
     <script src="../scripts/header.js" defer></script>
     <script src="../scripts/like.js" defer></script>
     <script src="../scripts/add_cart.js" defer></script>
@@ -23,9 +23,8 @@
         <a href="../index.php"><img src="../images/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="../pages/search.php">
                 <select name="category" class="dropdown-content">
-                    <option value="">All Categories</option>
                     <?php foreach ($categories as $category) { ?>
-                        <option value="<?=$category['category']?>"><?=$category['category']?></option>
+                        <option id="<?=$category['category']?>" value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?></option>
                     <?php }?>
                 </select>
                 <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off"></label>

@@ -14,7 +14,7 @@ $q = $_GET['q'];
 if ($q === '') $items = array();
 else {
     $dbh = get_database_connection();
-    $items = Item::get_items_by_search($dbh, $q);
+    $items = Item::get_items_suggestion($dbh, $q);
 }
 
 echo json_encode($items);

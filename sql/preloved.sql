@@ -32,7 +32,7 @@ CREATE TABLE tags_predefined (
 CREATE TABLE tags_values (
     item INTEGER references items,
     tag INTEGER references tags,
-    value VARCHAR
+    data VARCHAR
 );
 
 CREATE TABLE item_images (
@@ -147,26 +147,65 @@ VALUES
 
 INSERT INTO items (name, price, condition, date, description, creator, mainImage, category)
 VALUES
-    ('Guitar', 299.99, 'Used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 1),
-    ('Laptop', 899.99, 'New', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 2),
-    ('Watch', 199.99, 'Used', '2024-04-10', 'Luxury watch with timeless design.', 3, 'flower.png', 3),
-    ('Bicycle', 399.00, 'New', '2024-04-10', 'Mountain bike for all terrains.', 4, 'flower.png', 4),
-    ('Camera', 499.50, 'Refurbished', '2024-04-10', 'Great DSLR camera for beginners.', 5, 'flower.png', 5),
-    ('Smartphone', 599.99, 'New', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 6),
-    ('Television', 799.99, 'New', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 7),
-    ('Desk', 149.50, 'Used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 1),
-    ('Headphones', 99.99, 'New', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 2),
-    ('Backpack', 49.99, 'New', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 3),
-    ('Guitar', 299.99, 'Used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 4),
-    ('Laptop', 899.99, 'New', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 5),
-    ('Camera', 499.50, 'Refurbished', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png', 6),
-    ('Watch', 199.99, 'Used', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png', 7),
-    ('Bicycle', 399.00, 'New', '2024-04-10', 'Mountain bike for all terrains.', 5, 'flower.png', 1),
-    ('Smartphone', 599.99, 'New', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 2),
-    ('Television', 799.99, 'New', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 3),
-    ('Desk', 149.50, 'Used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 4),
-    ('Headphones', 99.99, 'New', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 5),
-    ('Backpack', 49.99, 'New', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 6);
+    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 1),
+    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 2),
+    ('Watch', 199.99, 'used', '2024-04-10', 'Luxury watch with timeless design.', 3, 'flower.png', 2),
+    ('Bicycle', 399.00, 'new', '2024-04-10', 'Mountain bike for all terrains.', 4, 'flower.png', 2),
+    ('Camera', 499.50, 'new', '2024-04-10', 'Great DSLR camera for beginners.', 5, 'flower.png', 2),
+    ('Smartphone', 599.99, 'new', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 6),
+    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 7),
+    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 1),
+    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 2),
+    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 3),
+    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 4),
+    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 5),
+    ('Camera', 499.50, 'use', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png', 6),
+    ('Watch', 199.99, 'new', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png', 7),
+    ('Bicycle', 399.00, 'old', '2024-04-10', 'Mountain bike for all terrains.', 5, 'flower.png', 1),
+    ('Smartphone', 599.99, 'old', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 2),
+    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 3),
+    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 4),
+    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 5), ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 1),
+    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 2),
+    ('Watch', 199.99, 'used', '2024-04-10', 'Luxury watch with timeless design.', 3, 'flower.png', 3),
+    ('Bicycle', 399.00, 'new', '2024-04-10', 'Mountain bike for all terrains.', 4, 'flower.png', 2),
+    ('Camera', 499.50, 'new', '2024-04-10', 'Great DSLR camera for beginners.', 5, 'flower.png', 2),
+    ('Smartphone', 599.99, 'new', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 6),
+    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 7),
+    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 1),
+    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 2),
+    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 3),
+    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 4),
+    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 5),
+    ('Camera', 499.50, 'use', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png', 6),
+    ('Watch', 199.99, 'new', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png', 7),
+    ('Bicycle', 399.00, 'old', '2024-04-10', 'Mountain bike for all terrains.', 5, 'flower.png', 1),
+    ('Smartphone', 599.99, 'old', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 2),
+    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 3),
+    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 4),
+    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 5),
+    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 6),
+    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 1),
+    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 2),
+    ('Watch', 199.99, 'used', '2024-04-10', 'Luxury watch with timeless design.', 3, 'flower.png', 3),
+    ('Bicycle', 399.00, 'new', '2024-04-10', 'Mountain bike for all terrains.', 4, 'flower.png', 2),
+    ('Camera', 499.50, 'new', '2024-04-10', 'Great DSLR camera for beginners.', 5, 'flower.png', 2),
+    ('Smartphone', 599.99, 'new', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 6),
+    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 7),
+    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 1),
+    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 2),
+    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 3),
+    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1, 'flower.png', 4),
+    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2, 'flower.png', 5),
+    ('Camera', 499.50, 'use', '2024-04-10', 'Great DSLR camera for beginners.', 3, 'flower.png', 6),
+    ('Watch', 199.99, 'new', '2024-04-10', 'Luxury watch with timeless design.', 4, 'flower.png', 7),
+    ('Bicycle', 399.00, 'old', '2024-04-10', 'Mountain bike for all terrains.', 5, 'flower.png', 1),
+    ('Smartphone', 599.99, 'old', '2024-04-10', 'Latest smartphone with advanced features.', 6, 'flower.png', 2),
+    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7, 'flower.png', 3),
+    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8, 'flower.png', 4),
+    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9, 'flower.png', 5),
+    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 6),
+    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10, 'flower.png', 6);
 
 
 INSERT INTO comments (mainuser, userc, date, text, rating)
@@ -271,6 +310,7 @@ INSERT INTO purchases (buyer, item, deliveryDate, state, code) VALUES
 
 
 INSERT INTO categories (category) VALUES
+                                      (''),
                                       ('clothes'),
                                       ('technology'),
                                       ('toys'),
@@ -279,20 +319,27 @@ INSERT INTO categories (category) VALUES
                                       ('furniture'),
                                       ('sports');
 INSERT INTO tags (category, tag) VALUES
-                                     (1, 'size'),
-                                     (1, 'brand'),
-                                     (2, 'model'),
+                                     (1, 'tag'),
+                                     (2, 'size'),
                                      (2, 'brand'),
+                                     (3, 'model'),
+                                     (3, 'brand'),
                                      (5, 'author');
 
-INSERT INTO tags_predefined (tag, value) VALUES
-                                    (1, 'S'),
-                                    (1, 'M'),
-                                    (1, 'L');
 
-INSERT INTO tags_values (item, tag, value) VALUES
+INSERT INTO tags_predefined (tag, value) VALUES
+                                    (2, 'S'),
+                                    (2, 'M'),
+                                    (2, 'L');
+
+INSERT INTO tags_values (item, tag, data) VALUES
                                      (1, 4, 'Suzuki'),
-                                     (2, 5, 'Cassandra Clare');
+                                     (2, 5, 'Cassandra Clare'),
+                                     (3, 2, 'S'),
+                                     (4, 2, 'S'),
+                                     (5, 2, 'M'),
+                                     (4, 3, 'bela'),
+                                     (3, 3, 'bel');
 
 INSERT INTO conditions (condition) VALUES
                                       ('new'),

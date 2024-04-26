@@ -96,6 +96,17 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
+    static function get_items_suggestion(PDO $dbh, string $q): array
+    {
+        $stmt = $dbh->prepare(
+            'SELECT items.name 
+                FROM items 
+                WHERE name LIKE ? OR name LIKE ?'
+        );
+        $stmt->execute(array("$q%", "% $q%"));
+        return array_unique($stmt->fetchAll());
+    }
+
     static function get_items_in_page(PDO $dbh, int $page): array
     {
         $offset = 18 * ($page-1);
@@ -181,9 +192,9 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $db, string $name, string $description, string $price, int $category, int $user_id, string $mainImage): int {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category) VALUES (?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category]);
+    static function register_item(PDO $db, string $name, string $description, string $price, int $category, int $user_id, string $mainImage, string $condition): int {
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition]);
         $stmt = $db->prepare('SELECT last_insert_rowid()');
         $stmt->execute();
         return $ret ? $stmt->fetchColumn() : -1;
@@ -204,5 +215,23 @@ class Item {
             else return 1;
         });
         return $items;
+    }
+    static function get_filtered_items(PDO $dbh, array $categories, array $conditions, array $itemTags, int $page, bool $checkTag, int $min, int $max): array {
+        $page = 18 * ($page - 1);
+        if ($checkTag) {
+            $stmt = $dbh->prepare("SELECT * FROM items 
+             WHERE category IN (".implode(',', $categories) . " ) 
+             AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
+             AND id IN (".implode(',', $itemTags) . " )
+             AND price >= ? AND price <= ?  LIMIT 18 OFFSET ? ");
+        }
+        else {
+            $stmt = $dbh->prepare("SELECT * FROM items 
+             WHERE category IN (".implode(',', $categories) . " ) 
+             AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
+             AND price >= ? AND price <= ? LIMIT 18 OFFSET ?");
+        }
+        $stmt->execute(array($min, $max, $page));
+        return self::create_items($dbh, $stmt->fetchAll());
     }
 }

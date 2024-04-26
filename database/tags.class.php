@@ -19,7 +19,7 @@ class Tag
     }
 
     public static function get_item_tags(PDO $dbh, int $item):  array {
-        $stmt = $dbh->prepare('SELECT tags.tag, tags_values.value FROM tags_values join tags on tags.id = tags_values.tag where tags_values.item = ?');
+        $stmt = $dbh->prepare('SELECT tags.tag, tags_values.data FROM tags_values join tags on tags.id = tags_values.tag where tags_values.item = ?');
         $stmt->execute(array($item));
         return $stmt->fetchAll();
     }
@@ -55,7 +55,7 @@ class Tag
     }
 
     static function register_item_tags(PDO $db, int $tag_id, int $item, string $value) {
-        $stmt = $db->prepare('INSERT INTO tags_values (item, tag, value) VALUES (?, ?, ?)');
+        $stmt = $db->prepare('INSERT INTO tags_values (item, tag, data) VALUES (?, ?, ?)');
         $stmt->execute(array($item, $tag_id, $value));
     }
 
@@ -63,5 +63,17 @@ class Tag
         $stmt = $dbh->prepare('SELECT * FROM conditions');
         $stmt->execute(array());
         return $stmt->fetchAll();
+    }
+
+    static function get_items_with_tags(PDO $dbh, int $tag, string $value):  array
+    {
+        $stmt = $dbh->prepare('SELECT item FROM tags_values WHERE data LIKE ? and tag = ?');
+        $stmt->execute(array("$value%", $tag));
+        $res = $stmt->fetchAll();
+        $items = array();
+        foreach ($res as $item) {
+            $items[] = $item['item'];
+        }
+        return $items;
     }
 }

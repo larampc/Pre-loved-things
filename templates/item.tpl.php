@@ -45,7 +45,7 @@ function draw_item(Item $item) { ?>
                 <form method="post" action="../pages/edit_item.php">
                     <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                 </form>
-            <?php } if ($session->isLoggedIn() && !$item->creator == $session->getId()) { ?>
+            <?php } if ($session->isLoggedIn() && $item->creator !== $session->getId()) { ?>
                 <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
         </header>
         <div class="item-images">
@@ -82,11 +82,12 @@ function draw_item(Item $item) { ?>
         </a>
         <section class="itemTags">
             <ul>
+                <?php if ($item->category) { ?>
                 <li>
-                    Category: <?= $item->category ?>
-                </li>
+                    Category: <?=$item->category?>
+                </li> <?php } ?>
                 <?php foreach($item->tags as $tag) { ?>
-                    <li><?= $tag['tag'] . ': ' . $tag['value']?> </li>
+                    <li><?= $tag['tag'] . ': ' . $tag['data']?> </li>
                 <?php } ?>
                 <li>
                     Condition: <?= $item->condition ?>
@@ -105,16 +106,15 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
 
             <label for="category">Category</label>
             <select id="category" name="category">
-                <option value="">Other</option>
                 <?php foreach ($categories as $category) { ?>
-                    <option value="<?=$category['category']?>"><?=ucfirst($category['category'])?></option>
+                    <option value="<?=$category['category']?>"><?=ucfirst($category['category'])?: "Other"?></option>
                 <?php }?>
             </select>
             <script src="../scripts/new.js" defer></script>
             <?php foreach ($categories as $category) {
                 $tags = Tag::get_category_tags($db, $category['category']);
                 if ($tags) { ?>
-                <div class="tags <?=$category['category']?>">
+                <div class="tags <?=$category['category'] ?: "other"?>">
                     <?php
                     foreach ($tags as $tag) {
                         $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
@@ -192,7 +192,8 @@ function draw_edit_item_form(Item $item) { ?>
     </article>
 <?php }
 
-function draw_page_filters(array $items, string $category, PDO $dbh) { ?>
+function draw_page_filters(string $category, PDO $dbh) { ?>
+    <script src="../scripts/search.js" defer></script>
     <article class="searchPage">
             <section class="filter">
                 <h2>Filters</h2>
@@ -212,13 +213,13 @@ function draw_page_filters(array $items, string $category, PDO $dbh) { ?>
                 <?php
                 $tags = Tag::get_category_tags($dbh, $category);
                 foreach ($tags as $tag) { ?>
-                    <div class="options" id="<?=$tag['tag']?>">
+                    <div class="options tag" id="<?=$tag['tag']?>">
                         <p><?=$tag['tag']?></p>
                         <?php
                         $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
                         if ($options) {
                             foreach ($options as $option) {?>
-                            <label><input type="checkbox" name="<?=$option['value']?>" autocomplete='off'><?=$option['value']?></label>
+                            <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>" autocomplete='off'><?=$option['value']?></label>
                         <?php }}
                         else { ?>
                             <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
@@ -234,6 +235,7 @@ function draw_page_filters(array $items, string $category, PDO $dbh) { ?>
                 </div>
             </section>
         <script src="../scripts/infinite_scroll.js" defer></script>
+        <p class="category-search"><?=$category?></p>
         <section class="items searchresult">
         </section>
         </article>
