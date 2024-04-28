@@ -13,6 +13,7 @@ DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS tags_predefined;
 DROP TABLE IF EXISTS tags_values;
 DROP TABLE IF EXISTS conditions;
+DROP TABLE IF EXISTS roles;
 
 CREATE TABLE categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -82,7 +83,12 @@ CREATE TABLE users (
   name VARCHAR,                       -- real name
   email VARCHAR UNIQUE,
   phone VARCHAR,
-  photoPath VARCHAR DEFAULT 'profile.png'
+  photoPath VARCHAR DEFAULT 'profile.png',
+  role VARCHAR(30) REFERENCES roles(name) DEFAULT 'user'
+);
+
+CREATE TABLE roles (
+    name VARCHAR(30) PRIMARY KEY
 );
 
 CREATE TABLE comments (
@@ -117,6 +123,8 @@ CREATE TABLE chatrooms (
 CREATE TABLE conditions (
     condition VARCHAR PRIMARY KEY
 );
+
+INSERT INTO roles VALUES ('user'), ('admin');
 
 INSERT INTO item_images (item, imagePath) VALUES
     (1,'flower.png'),
@@ -153,6 +161,9 @@ VALUES
     ('king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall'),
     ('sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro'),
     ('lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa');
+
+INSERT INTO users (password, name, email, phone, username, role) VALUES
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin');
 
 INSERT INTO items (name, price, condition, date, description, creator, mainImage, category)
 VALUES
@@ -219,26 +230,12 @@ VALUES
 
 INSERT INTO comments (mainuser, userc, date, text, rating)
 VALUES
-    ('john_doe', 'jane_smith', '2024-04-10', 'Great guitar!', 5),
-    ('jane_smith', 'john_doe', '2024-04-10', 'Excellent laptop.', 4),
-    ('alice_wonder', 'bob_green', '2024-04-10', 'Nice camera!', 4),
-    ('bob_green', 'sarah_jones', '2024-04-10', 'Awesome watch.', 5),
-    ('sarah_jones', 'mike_andrews', '2024-04-10', 'Love this bike!', 5),
-    ('mike_andrews', 'emily_brown', '2024-04-10', 'Fantastic phone.', 4),
-    ('emily_brown', 'alex_king', '2024-04-10', 'Impressive TV.', 4),
-    ('alex_king', 'sam_carter', '2024-04-10', 'Good desk.', 3),
-    ('sam_carter', 'lisa_adams', '2024-04-10', 'Great headphones!', 5),
-    ('lisa_adams', 'john_doe', '2024-04-10', 'Nice backpack.', 4),
-    ('john_doe', 'jane_smith', '2024-04-10', 'Great guitar!', 5),
-    ('jane_smith', 'john_doe', '2024-04-10', 'Excellent laptop.', 4),
-    ('alice_wonder', 'bob_green', '2024-04-10', 'Nice camera!', 4),
-    ('bob_green', 'sarah_jones', '2024-04-10', 'Awesome watch.', 5),
-    ('sarah_jones', 'mike_andrews', '2024-04-10', 'Love this bike!', 5),
-    ('mike_andrews', 'emily_brown', '2024-04-10', 'Fantastic phone.', 4),
-    ('emily_brown', 'alex_king', '2024-04-10', 'Impressive TV.', 4),
-    ('alex_king', 'sam_carter', '2024-04-10', 'Good desk.', 3),
-    ('sam_carter', 'lisa_adams', '2024-04-10', 'Great headphones!', 5),
-    ('lisa_adams', 'john_doe', '2024-04-10', 'Nice backpack.', 4);
+    (1, 2, '2024-04-10', 'Great guitar!', 5),
+    (2, 1, '2024-04-10', 'Excellent laptop.', 4),
+    (3, 2, '2024-04-10', 'Nice camera!', 4),
+    (4, 3, '2024-04-10', 'Awesome watch.', 5),
+    (1, 2, '2024-04-10', 'Love this bike!', 5),
+    (1, 3, '2024-04-10', 'Fantastic phone.', 4);
 
 INSERT INTO favorites (user, item)
 VALUES

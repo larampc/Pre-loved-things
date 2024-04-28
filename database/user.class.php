@@ -10,8 +10,9 @@ class User
     public string $email;
     public string $phone;
     public string $photoPath;
+    public string $role;
 
-    public function __construct(int $user_id, string $username, string $email, string $name, string $photoPath, string $phone)
+    public function __construct(int $user_id, string $username, string $email, string $name, string $photoPath, string $phone, string $role)
     {
         $this->user_id = $user_id;
         $this->username = $username;
@@ -19,22 +20,24 @@ class User
         $this->photoPath = $photoPath;
         $this->email = $email;
         $this->phone = $phone;
+        $this->role = $role;
     }
 
-    public static function register_user(PDO $dbh, string $password, string $username, string $email, string $name, string $phone): int
+    public static function register_user(PDO $dbh, string $password, string $username, string $email, string $name, string $phone): ?User
     {
         $stmt = $dbh->prepare('INSERT INTO users(password, username, name, email, phone) VALUES (?, ?, ?, ?, ?)');
         $stmt->execute(array(sha1($password), $username, $name, $email, $phone));
         return self::verify_user($dbh, $email, $password);
     }
 
-    public static function verify_user(PDO $dbh, string $email, string $password): int
+    public static function verify_user(PDO $dbh, string $email, string $password): ?User
     {
         $stmt = $dbh->prepare('SELECT user_id FROM users WHERE email = ? AND password = ?');
         $stmt->execute(array($email, sha1($password)));
         $user = $stmt->fetchColumn();
-        if ($user === false) return -1;
-        return $user;
+
+        if ($user === false) return null;
+        return self::get_user($dbh, $user);
     }
 
     public static function verify_email(PDO $dbh, string $email): bool {
@@ -81,15 +84,18 @@ class User
         $stmt->execute(array($id));
         $user = $stmt->fetch();
         if (!$user) return null;
-        return new User((int)$user['user_id'], $user['username'], $user['email'],$user['name'], $user['photoPath'], $user['phone']);
+        return new User((int)$user['user_id'], $user['username'], $user['email'],$user['name'], $user['photoPath'], $user['phone'], $user['role']);
     }
 
     public static function get_user_feedback(PDO $dbh, int $id): array {
         $stmt = $dbh->prepare('SELECT * FROM comments WHERE mainuser = ?');
         $stmt->execute(array($id));
-        return $stmt->fetchAll();
+        $comments = array();
+        while ($comment = $stmt->fetch()) {
+            $comments[] = new Comment($dbh, $comment['mainuser'], $comment['userc'], $comment['text'], $comment['date'], $comment['rating']);
+        }
+        return $comments;
     }
-
 
     public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $photo): bool
     {

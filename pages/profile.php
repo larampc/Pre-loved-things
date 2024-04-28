@@ -16,18 +16,13 @@
     require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
+    $dbh = get_database_connection();
+    $categories = Tag::get_categories($dbh);
     draw_header("profile", $session, $categories);
-    ?>
-    <article class="pfPage">
-    <?php
-    $user = User::get_user($db, $session->getId());
-    $feedback = User::get_user_feedback($db, $session->getId());
-    $items = Item::get_user_items($db, $session->getId());
-    draw_profile_details($user);
-    draw_user_feedback($db, $user, $feedback, $session->getId());
-    draw_user_options($db, $session);
-    ?> </article>
-<?php
+
+    $user = User::get_user($dbh, $session->getId());
+    $feedback = User::get_user_feedback($dbh, $session->getId());
+    $items = Item::get_user_items($dbh, $session->getId());
+
+    draw_user_profile($dbh, $user, $feedback, $items, $session);
     draw_footer();

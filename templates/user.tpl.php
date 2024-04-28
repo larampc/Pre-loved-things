@@ -1,19 +1,33 @@
 <?php
 declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
-function draw_user_details($user) { ?>
+
+function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
+    <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
+        draw_user_details($user, $session);
+        draw_user_feedback($user, $feedback, $session);
+        draw_items($items);
+        if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
+        ?>
+    </article> <?php
+}
+
+function draw_user_details( User $user, Session $session) { ?>
     <section class="user">
         <img src="../uploads/profile_pics/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
-            <p class="username"><?=$user->username?></p>
+            <?php if ($session->getId() === $user->user_id) {?><p class="username"><?=$user->username?></p> <?php } ?>
             <p class="phone"><?=$user->phone?></p>
             <p class="email"><?=$user->email?></p>
+            <?php if ($session->getId() === $user->user_id) {?>
+            <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
+            <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
+            <?php } ?>
         </div>
     </section>
     <?php
 }
-
 function draw_edit_profile($user) { ?>
     <article class="edit-profile">
         <h2>Edit profile</h2>
@@ -34,7 +48,7 @@ function draw_edit_profile($user) { ?>
     <?php
 }
 
-function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
+function draw_user_feedback($user, $feedback, $session_id) { ?>
     <section class="feedback">
         <h2>Feedback</h2>
             <div class ="comment-box">
@@ -42,31 +56,18 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
                     if (empty($feedback)) { ?>
                         <p>There are no reviews for this user yet.</p>
                     <?php }
-                    foreach ($feedback as $comment) { ?>
+                    foreach ($feedback as $comment) {
+                        ?>
                     <article class="comment">
-                        <img src="../uploads/profile_pics/<?= User::get_user($db, $comment['userc'])->photoPath?>" class="profile-pic" alt="profile picture">
-                        <p class="uname"><?=$comment['userc']?></p>
-                        <time><?=$comment['date']?></time>
-                        <p class="content"><?=$comment['text']?></p>
+                        <img src="../uploads/profile_pics/<?= $comment->from->photoPath?>" class="profile-pic" alt="profile picture">
+                        <p class="uname"><?=$comment->from->name?></p>
+                        <time><?=$comment->date?></time>
+                        <p class="content"><?=$comment->message?></p>
                     </article>
                         <?php
                     } ?>
             </div>
         <?php if ($user->user_id!=$session_id) echo("<p>+ Add your review</p>"); ?>
-    </section>
-<?php } ?>
-
-<?php function draw_profile_details($user) {
-    ?>
-    <section class="user">
-        <img src="../resources/profile.png" class="profile-pic" alt="profile picture">
-        <div class="user-details">
-            <h2 class="name"><?=$user->name?></h2>
-            <p class="phone"><?=$user->phone?></p>
-            <p class="email"><?=$user->email?></p>
-            <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
-            <a href="edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
-        </div>
     </section>
 <?php } ?>
 
@@ -258,4 +259,5 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
             } ?>
         </section>
     </section>
-<?php } ?>
+<?php
+} ?>

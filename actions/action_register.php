@@ -13,7 +13,7 @@ $checkout = isset($_GET['checkout']);
 $email_available = !User::verify_email($dbh, $_POST['email']);
 $username_available = !User::verify_username($dbh, $_POST['username']);
 if ($email_available && $username_available) {
-    $session->setId(User::register_user($dbh, $_POST['password'], $_POST['username'], $_POST['email'], $_POST['name'], $_POST['phone']));
+    $session->setId(User::register_user($dbh, $_POST['password'], $_POST['username'], $_POST['email'], $_POST['name'], $_POST['phone'])->user_id);
     if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $session->getId());
     $session->addMessage('success', 'Account successfully created.');
     header('Location: ' . ($checkout ? '../pages/checkout.php':'../index.php'));
