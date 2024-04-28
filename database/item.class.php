@@ -64,12 +64,7 @@ class Item {
         $stmt->execute(array($count));
         return self::create_items($dbh, $stmt->fetchAll());
     }
-    static function get_items_category(PDO $dbh, string $category) : array {
-        $stmt = $dbh->prepare('SELECT item FROM tags_values join tags on tags.id = tags_values.tag join categories on categories.id = tags.category where categories.category = ?');
-        $stmt->execute(array($category));
-        $res = $stmt->fetchAll();
-        return  $res? self::create_items($dbh, self::get_items_in_array($dbh, $res)) : array();
-    }
+
     static function get_item(PDO $dbh, int $id) : ?Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
