@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($user, $session);
-        draw_user_feedback($user, $feedback, $session);
+        draw_user_feedback($user, $feedback, $session->getId());
         draw_items($items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
         ?>

@@ -337,7 +337,7 @@ main .userPage{
     height: 10rem;
 }
 
-.userPage .comment img {
+.userPage .comment img, .pfPage .comment img {
     float: left;
 }
 
