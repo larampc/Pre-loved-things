@@ -11,7 +11,8 @@
 
     $db = get_database_connection();
     $categories = Tag::get_categories($db);
-    $items = Item::get_items($db, 3);
+    $liked_items = Item::get_most_liked_items($db, 5);
+    $recent_items = Item::get_last_added_items($db, 5);
     draw_header("main", $session, $categories);
-    draw_items_main($items);
+    draw_items_main($liked_items, $recent_items);
     draw_footer();

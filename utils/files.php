@@ -1,8 +1,7 @@
 <?php
-function upload_image($img)
+function upload_item_image($img)
 {
-
-    $target_dir = "../images/";
+    $target_dir = "../uploads/item_pics/";
     $target_file = $target_dir . basename($_FILES[$img]["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

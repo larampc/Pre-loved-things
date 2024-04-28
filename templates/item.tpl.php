@@ -3,7 +3,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 
 function draw_item(Item $item) { ?>
     <a href="../pages/item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
-        <img src="<?="../images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
+        <img src="<?="../uploads/item_pics/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
             <p class="price"><?=$item->price?></p>
@@ -11,11 +11,11 @@ function draw_item(Item $item) { ?>
     </a>
 <?php }
 
-    function draw_items_main(array $items) { ?>
+    function draw_items_main(array $liked_items, array $recent_items) { ?>
     <h2>Last Added Items</h2>
-        <?php draw_items($items); ?>
+        <?php draw_items($recent_items); ?>
     <h2>Most liked</h2>
-        <?php draw_items($items); ?>
+        <?php draw_items($liked_items); ?>
     <?php }
 
     function draw_items(array $items) { ?>
@@ -33,7 +33,7 @@ function draw_item(Item $item) { ?>
     <?php } ?>
     </section>
     <?php foreach($images as $image) { ?>
-        <img class="slides" src="<?="../images/" . $image?>" alt="item">
+        <img class="slides" src="<?="../uploads/item_pics/" . $image?>" alt="item">
     <?php } ?>
 <?php } ?>
 
@@ -82,7 +82,7 @@ function draw_item(Item $item) { ?>
             </form>
         </section>
         <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=User::get_user($db, $item->creator)->name?>
-            <img src="../images/<?=User::get_user($db, $item->creator)->photoPath?>" alt="profile picture">
+            <img src="../uploads/profile_pics/<?=User::get_user($db, $item->creator)->photoPath?>" alt="profile picture">
         </a>
         <section class="itemTags">
             <ul>
@@ -273,7 +273,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 
 <?php function draw_item_to_track(PDO $db, Item $item) { ?>
     <a href="../pages/track_item.php?purchase=<?= Item::get_purchase_id($db, $item->id) ?>" class="item" id="<?=$item->id?>">
-        <img src="<?="../images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
+        <img src="<?="../uploads/item_pics/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
             <p class="price"><?=$item->price?></p>

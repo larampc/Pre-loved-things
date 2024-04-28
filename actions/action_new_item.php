@@ -12,8 +12,8 @@ require_once(__DIR__ . '/../utils/files.php');
 
 $dbh = get_database_connection();
 
-upload_image('img1');
-upload_image('img2');
+upload_item_image('img1');
+upload_item_image('img2');
 
 $item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price'], Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $_FILES['img1']['name'],
       $_POST['condition']);

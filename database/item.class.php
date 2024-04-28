@@ -130,8 +130,8 @@ class Item {
     }
 
     static function register_item(PDO $db, string $name, string $description, string $price, int $category, int $user_id, string $mainImage, string $condition): int {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition]);
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
         $stmt = $db->prepare('SELECT last_insert_rowid()');
         $stmt->execute();
         return $ret ? $stmt->fetchColumn() : -1;
@@ -173,6 +173,23 @@ class Item {
              LIMIT 18 OFFSET ?");
         }
         $stmt->execute(array($min, $max, "$search%", "% $search%", $page));
+        return self::create_items($dbh, $stmt->fetchAll());
+    }
+    static function get_most_liked_items(PDO $dbh, int $count = 5): array
+    {
+        $stmt = $dbh->prepare('SELECT items.id as id FROM items JOIN favorites ON favorites.item = items.id 
+         GROUP BY items.id ORDER BY count(favorites.user) DESC LIMIT ?');
+        $stmt->execute(array($count));
+        $items = array();
+        while($item = $stmt->fetch()) {
+            $items[] = self::get_item($dbh, $item['id']);
+        }
+        return $items;
+    }
+    static function get_last_added_items(PDO $dbh, int $count = 5): array
+    {
+        $stmt = $dbh->prepare('SELECT * FROM items ORDER BY date DESC LIMIT ?');
+        $stmt->execute(array($count));
         return self::create_items($dbh, $stmt->fetchAll());
     }
     static function get_purchase_id(PDO $dbh, int $item): int {

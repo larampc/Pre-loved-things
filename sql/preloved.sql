@@ -115,7 +115,7 @@ CREATE TABLE chatrooms (
 );
 
 CREATE TABLE conditions (
-                           condition VARCHAR PRIMARY KEY
+    condition VARCHAR PRIMARY KEY
 );
 
 INSERT INTO item_images (item, imagePath) VALUES
@@ -242,16 +242,17 @@ VALUES
 
 INSERT INTO favorites (user, item)
 VALUES
-    ('john_doe', 'Guitar'),
-    ('jane_smith', 'Laptop'),
-    ('alice_wonder', 'Camera'),
-    ('bob_green', 'Watch'),
-    ('sarah_jones', 'Bicycle'),
-    ('mike_andrews', 'Smartphone'),
-    ('emily_brown', 'Television'),
-    ('alex_king', 'Desk'),
-    ('sam_carter', 'Headphones'),
-    ('lisa_adams', 'Backpack');
+    ('john_doe', '1'),
+    ('jane_smith', '2'),
+    ('alice_wonder', '2'),
+    ('alice_wonder', '5'),
+    ('bob_green', '3'),
+    ('sarah_jones', '4'),
+    ('mike_andrews', '6'),
+    ('emily_brown', '7'),
+    ('alex_king', '8'),
+    ('sam_carter', '9'),
+    ('lisa_adams', '10');
 
 
 INSERT INTO user_cart (user, item)
