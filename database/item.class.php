@@ -178,7 +178,7 @@ class Item {
     static function get_most_liked_items(PDO $dbh, int $count = 5): array
     {
         $stmt = $dbh->prepare('SELECT items.id as id FROM items JOIN favorites ON favorites.item = items.id 
-         GROUP BY items.id ORDER BY count(favorites.user) DESC LIMIT ?');
+         where items.sold = 0 GROUP BY items.id ORDER BY count(favorites.user) DESC LIMIT ?');
         $stmt->execute(array($count));
         $items = array();
         while($item = $stmt->fetch()) {
@@ -188,7 +188,7 @@ class Item {
     }
     static function get_last_added_items(PDO $dbh, int $count = 5): array
     {
-        $stmt = $dbh->prepare('SELECT * FROM items ORDER BY date DESC LIMIT ?');
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE sold = 0 ORDER BY date DESC LIMIT ?');
         $stmt->execute(array($count));
         return self::create_items($dbh, $stmt->fetchAll());
     }

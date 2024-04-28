@@ -40,8 +40,8 @@ function draw_item(Item $item) { ?>
 <?php function draw_item_page(PDO $db, Item $item, Session $session) { ?>
     <article class="itemPage">
         <header>
+            <h2><?=$item->name?></h2>
             <?php if ($item->sold === false) { ?>
-                <h2><?=$item->name?></h2>
                 <?php if ($session->isLoggedIn() && $item->creator == $session->getId()) { ?>
                     <form method="post" action="../pages/edit_item.php">
                         <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
