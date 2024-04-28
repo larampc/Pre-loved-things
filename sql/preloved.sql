@@ -63,7 +63,8 @@ CREATE TABLE items (
     date INTEGER,                             -- date the item was published
     description VARCHAR,
     mainImage VARCHAR,
-    creator INTEGER REFERENCES users
+    creator INTEGER REFERENCES users,
+    sold INTEGER DEFAULT 0
 );
 
 CREATE TABLE users (
