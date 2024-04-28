@@ -2,6 +2,8 @@
 declare(strict_types = 1);
 
 require_once ('tags.class.php');
+require_once ('user.class.php');
+
 class Item {
     public int $id;
     public string $name;

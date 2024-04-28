@@ -8,7 +8,7 @@
 
 /* USER PAGE */
 
-.userPage .comment-box {
+.userPage .comment-box, .pfPage .comment-box {
     overflow:auto;
 }
 
