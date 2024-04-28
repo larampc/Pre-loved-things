@@ -27,7 +27,7 @@
                         <option id="<?=$category['category']?>" value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?></option>
                     <?php }?>
                 </select>
-                <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off"></label>
+                <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off" value="<?=$page == "search"? $_GET['search'] : ""?>"></label>
                 <button type="submit" class="searchbtn" ><i class="material-symbols-outlined">search</i></button>
                 <datalist id="search-suggestions"></datalist>
             </form>
@@ -42,7 +42,6 @@
             <?php } ?>
         </nav>
     </header>
-    <?php if ($session->getMessages()) { ?>
         <section id="messages">
             <?php foreach ($session->getMessages() as $messsage) { ?>
                 <article class="<?=$messsage['type']?>">
@@ -52,12 +51,11 @@
                     <?php } else if ($messsage['type'] == "error") { ?>
                         <i class="material-symbols-outlined red"> error </i>
                     <?php } ?>
-                    <?=$messsage['text']?>
+                    <p><?=$messsage['text']?></p>
                     <div class="message-progress"></div>
                 </article>
             <?php } ?>
         </section>
-    <?php } ?>
     <main class=<?=$page . "Main"?>>
 <?php } ?>
 

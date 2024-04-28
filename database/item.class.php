@@ -14,6 +14,7 @@ class Item {
     public string $condition;
     public string $date;
     public int $creator;
+    public bool $sold;
     public function __construct(PDO $db, int $id)
     {
         $this->id = $id;
@@ -31,6 +32,7 @@ class Item {
         $new_item->mainImage = $item['mainImage']!= null ? $item['mainImage'] : "";;
         $new_item->category = Tag::get_category_by_id($dbh, $item['category']);
         $new_item->tags = Tag::get_item_tags($dbh, $item['id']);
+        $new_item->sold = boolval($item['sold']);
         return $new_item;
     }
 
@@ -74,20 +76,8 @@ class Item {
     }
 
     static function get_user_items(PDO $dbh, int $user_id): array {
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ? AND sold = 0');
         $stmt->execute(array($user_id));
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
-
-    static function get_items_by_search(PDO $dbh, string $q): array
-    {
-        $stmt = $dbh->prepare(
-            'SELECT * 
-                FROM items 
-                WHERE name LIKE ?'
-        );
-        $stmt->execute(array("%$q%"));
-
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
@@ -101,47 +91,6 @@ class Item {
         $stmt->execute(array("$q%", "% $q%"));
         return array_unique($stmt->fetchAll());
     }
-
-    static function get_items_in_page(PDO $dbh, int $page): array
-    {
-        $offset = 18 * ($page-1);
-        $stmt = $dbh->prepare('SELECT * FROM items LIMIT 18 OFFSET ?');
-        $stmt->execute(array($offset));
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
-
-    static function get_items_by_category(PDO $dbh, string $q, string $cat): array
-    {
-        $stmt = $dbh->prepare(
-            'SELECT * 
-                FROM items 
-                WHERE name LIKE ? AND category = ?'
-        );
-        $stmt->execute(array("%$q%", $cat));
-
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
-
-    static function get_items_by_range(PDO $dbh, int $first, int $second): array
-    {
-         $stmt = $dbh->prepare(
-            'SELECT * 
-                FROM items 
-                WHERE price >= ? AND price <= ?'
-        );
-        $stmt->execute(array($first, $second));
-
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
-
-    static function get_items_by_condition(PDO $dbh, string $condition): array
-    {
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE condition = ?');
-        $stmt->execute(array($condition));
-
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
-
 
     static function get_favorite_items(PDO $dbh, int $user_id): array
     {
@@ -167,13 +116,6 @@ class Item {
         FROM user_cart WHERE user = ? AND item = ?');
         $stmt->execute(array($user_id, $item->id));
         return !empty($stmt->fetchAll());
-    }
-    static function get_items_user(PDO $dbh, string $user): array
-    {
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ?');
-        $stmt->execute(array($user));
-
-        return self::create_items($dbh, $stmt->fetchAll());
     }
 
     static function get_items_in_array(PDO $dbh, array $items): array
@@ -211,22 +153,62 @@ class Item {
         });
         return $items;
     }
-    static function get_filtered_items(PDO $dbh, array $categories, array $conditions, array $itemTags, int $page, bool $checkTag, int $min, int $max): array {
+    static function get_filtered_items(PDO $dbh, array $categories, array $conditions, array $itemTags, int $page, bool $checkTag, int $min, int $max, string $search): array {
         $page = 18 * ($page - 1);
         if ($checkTag) {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (".implode(',', $categories) . " ) 
              AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
              AND id IN (".implode(',', $itemTags) . " )
-             AND price >= ? AND price <= ?  LIMIT 18 OFFSET ? ");
+             AND price >= ? AND price <= ? 
+             AND (name LIKE ? OR name LIKE ?) AND sold = 0
+            LIMIT 18 OFFSET ? ");
         }
         else {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (".implode(',', $categories) . " ) 
              AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
-             AND price >= ? AND price <= ? LIMIT 18 OFFSET ?");
+             AND price >= ? AND price <= ? 
+             AND (name LIKE ? OR name LIKE ?) AND sold = 0
+             LIMIT 18 OFFSET ?");
         }
-        $stmt->execute(array($min, $max, $page));
+        $stmt->execute(array($min, $max, "$search%", "% $search%", $page));
         return self::create_items($dbh, $stmt->fetchAll());
+    }
+    static function get_purchase_id(PDO $dbh, int $item): int {
+        $stmt = $dbh->prepare('SELECT purchase FROM purchases WHERE item = ?');
+        $stmt->execute(array($item));
+        return $stmt->fetchColumn();
+    }
+
+    static function update_item_sold(PDO $dbh, array $items) {
+        foreach ($items as $item) {
+            $stmt = $dbh->prepare('UPDATE items SET sold = 1 WHERE id = ?');
+            $stmt->execute([$item->id]);
+        }
+    }
+
+    static function register_purchase(PDO $dbh, int $buyer, array $items, string $address, string $city, string $postalCode): int {
+        $stmt = $dbh->prepare("INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES(?, ?, ?, ?, ?, ?)");
+        $stmt->execute(array($buyer,date('d/m/Y', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
+        $stmt = $dbh->prepare('SELECT last_insert_rowid()');
+        $stmt->execute();
+        $purchase = $stmt->fetchColumn();
+        var_dump($purchase);
+        foreach ($items as $item) {
+            var_dump($item);
+            $stmt = $dbh->prepare('INSERT INTO purchases VALUES(?, ?)');
+            $stmt->execute(array($item->id, $purchase));
+        }
+        return $purchase;
+    }
+
+    static function remove_cart_favorite(PDO $dbh, array $items) {
+        foreach ($items as $item) {
+            $stmt = $dbh->prepare('DELETE FROM user_cart WHERE item = ?');
+            $stmt->execute(array($item->id));
+            $stmt = $dbh->prepare('DELETE FROM favorites WHERE item = ?');
+            $stmt->execute(array($item->id));
+        }
     }
 }

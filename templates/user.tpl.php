@@ -136,40 +136,40 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 <?php } ?>
 
 <?php function draw_checkout_form() { ?>
-    <form class="checkout">
+    <form class="checkout" method="post" action="../actions/action_purchase.php">
         <ul class="state">
-            <li>
+            <li class="current">
                 <button type="button" class="collapsible">Shipping information</button>
                 <div class="buy-form">
                     <label> Address
-                        <input type="text" name="address">
+                        <input type="text" name="address" required>
                     </label>
                     <label> City
-                        <input type="text" name="city">
+                        <input type="text" name="city" required>
                     </label>
                     <label> Postal code
-                        <input type="text" name="city">
+                        <input type="text" name="postalCode" required>
                     </label>
-                    <button type="button" class="next">Next</button>
+                    <button type="button" class="next shipping">Next</button>
                 </div>
             </li>
             <li>
                 <button type="button" class="collapsible">Billing information</button>
                 <div class="buy-form">
                     <label> Name
-                        <input type="text" name="address">
+                        <input type="text" name="billName">
                     </label>
                     <label> NIF
-                        <input type="text" name="address">
+                        <input type="text" name="NIF">
                     </label>
                     <label> Address
-                        <input type="text" name="address">
+                        <input type="text" name="billAddress">
                     </label>
                     <label> City
-                        <input type="text" name="city">
+                        <input type="text" name="billCity">
                     </label>
                     <label> Postal code
-                        <input type="text" name="city">
+                        <input type="text" name="billPostal">
                     </label>
                     <button type="button" class="next">Next</button>
                 </div>
@@ -184,19 +184,16 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
                         <label> Mbway
                             <input class="option" type="radio" name="option" id="mbway">
                         </label>
-                        <label> Paypal
-                            <input class="option" type="radio" name="option" id="paypal">
-                        </label>
                     </div>
                     <div id="credit-card" class="payment-form">
                         <label> Card number
-                            <input type="text" name="card-number">
+                            <input type="text" name="card-number" required>
                         </label>
                         <label> CVC
-                            <input type="text" name="cvc">
+                            <input type="text" name="cvc" required>
                         </label>
                         <label> Expiration date
-                            <input type="date" name="expire">
+                            <input type="date" name="expire" required>
                         </label>
                     </div>
                     <div id="mbway" class="payment-form">
@@ -244,14 +241,14 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
             <?php
             $items = TrackItem::get_purchased_items($db, $session->getId());
             foreach ($items as $item) {
-                draw_item_to_track($item->tracking);
+                draw_item_to_track($db, $item);
             } ?>
             </section>
         <section class="items" id="sales">
             <?php
             $items = TrackItem::get_selling_items($db, $session->getId());
             foreach ($items as $item) {
-                draw_item_to_track($item->tracking);
+                draw_item_to_track($db, $item);
             } ?>
             </section>
         <section class="items" id="my">

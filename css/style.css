@@ -884,7 +884,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: #FFF;
 }
 
-.state li.done::after {
+.item-track .state li.done::after, .checkout .state li.done > button::before {
     content: "✔";
     font-size: 13px;
     color: #FFF;
@@ -893,7 +893,7 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     background-color: #6A4806;
 }
 
-.state li.current::after {
+.item-track .state li.current::after, .checkout .state li.current > button::before {
     content: counter(list);
     padding-top: 1px;
     width: 1.2rem;
@@ -991,4 +991,9 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-style: none;
     border-radius: 0.5rem;
     background-color: #F1F1F1;
+}
+
+#messages p {
+    margin: 0;
+    padding: 0;
 }

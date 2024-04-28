@@ -40,13 +40,15 @@ function draw_item(Item $item) { ?>
 <?php function draw_item_page(PDO $db, Item $item, Session $session) { ?>
     <article class="itemPage">
         <header>
-            <h2><?=$item->name?></h2>
-            <?php if ($session->isLoggedIn() && $item->creator == $session->getId()) { ?>
-                <form method="post" action="../pages/edit_item.php">
-                    <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
-                </form>
-            <?php } if ($session->isLoggedIn() && $item->creator !== $session->getId()) { ?>
-                <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
+            <?php if ($item->sold === false) { ?>
+                <h2><?=$item->name?></h2>
+                <?php if ($session->isLoggedIn() && $item->creator == $session->getId()) { ?>
+                    <form method="post" action="../pages/edit_item.php">
+                        <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
+                    </form>
+                <?php } if ($session->isLoggedIn() && $item->creator !== $session->getId()) { ?>
+                    <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
+            <?php } ?>
         </header>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>
@@ -65,10 +67,12 @@ function draw_item(Item $item) { ?>
         </section>
         <section class="priceSection">
             <span class="price"><?= $item->price?></span>
-            <section class="buy-item">
-                <i class="material-symbols-outlined cart big"> local_mall </i>
-                <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
-            </section>
+            <?php if ($item->sold === false) { ?>
+                <section class="buy-item">
+                    <i class="material-symbols-outlined cart big"> local_mall </i>
+                    <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
+                </section>
+            <?php } ?>
         </section>
         <section class="sendMessage">
             <form>
@@ -234,7 +238,6 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                     <?php }?>
                 </div>
             </section>
-        <script src="../scripts/infinite_scroll.js" defer></script>
         <p class="category-search"><?=$category?></p>
         <section class="items searchresult">
         </section>
@@ -243,7 +246,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 
 <?php function draw_item_tracking(TrackItem $trackItem, Session $session) { ?>
     <section class="item-track">
-        <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking->creator == $session->getId()? "Contact buyer" : "") ?></button>
+        <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator == $session->getId()? "Contact buyer" : "") ?></button>
         <ul class="state">
             <li class="<?= ($trackItem->state == "preparing"? "current" : "done")?>">Preparing</li>
             <li class="<?=($trackItem->state == "shipping"? "current" : (($trackItem->state == "delivering" || $trackItem->state == "delivered") ? "done":""))?>">Shipping</li>
@@ -252,10 +255,10 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         </ul>
         <div id="delivery-date">
             <p>Estimated delivery date: </p>
-            <?php if ($trackItem->state != "delivered" && $trackItem->tracking->creator == $session->getId()) {?>
+            <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator == $session->getId()) {?>
                 <form method="post" action="../actions/action_update_delivery.php">
                     <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
-                    <input type="hidden" value="<?=$trackItem->tracking->id?>" name="item">
+                    <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
                     <button type="submit">Confirm</button>
                 </form>
             <?php }
@@ -263,13 +266,13 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                 <p><?=$trackItem->date?></p>
             <?php } ?>
         </div>
-        <?php draw_item($trackItem->tracking );?>
+        <?php draw_items($trackItem->tracking );?>
     </section>
 
 <?php } ?>
 
-<?php function draw_item_to_track(Item $item) { ?>
-    <a href="../pages/track_item.php?item-track=<?= $item->id ?>" class="item" id="<?=$item->id?>">
+<?php function draw_item_to_track(PDO $db, Item $item) { ?>
+    <a href="../pages/track_item.php?purchase=<?= Item::get_purchase_id($db, $item->id) ?>" class="item" id="<?=$item->id?>">
         <img src="<?="../images/" . $item->mainImage?>" alt="<?= explode($item->mainImage,'.')[0]?>">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>

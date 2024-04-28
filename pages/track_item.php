@@ -16,7 +16,7 @@
 
     $db = get_database_connection();
     $categories = Tag::get_categories($db);
-    $track_item = TrackItem::get_tracking_item($db, intval($_GET['item-track']));
+    $track_item = TrackItem::get_tracking_item($db, intval($_GET['purchase']));
     draw_header("new", $session, $categories);
     draw_item_tracking($track_item, $session);
     draw_footer();

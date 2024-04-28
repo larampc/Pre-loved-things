@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS user_cart;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS chatrooms;
 DROP TABLE IF EXISTS purchases;
+DROP TABLE IF EXISTS purchaseData;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS tags_predefined;
@@ -46,12 +47,19 @@ CREATE TABLE user_cart (
    item INTEGER references items
 );
 
-CREATE TABLE purchases (
+CREATE TABLE purchaseData (
    buyer INTEGER references users,
-   item INTEGER references items,
    deliveryDate INTEGER,
    state VARCHAR,
-   code VARCHAR PRIMARY KEY
+   address VARCHAR,
+   city VARCHAR,
+   postalCode VARCHAR,
+   id INTEGER PRIMARY KEY AUTOINCREMENT
+);
+
+CREATE TABLE purchases (
+    item     INTEGER references items,
+    purchase INTEGER references purchases
 );
 
 CREATE TABLE items (
@@ -303,12 +311,17 @@ VALUES
     (3, 1, 1648902234, NULL, 'See you soon.');
 
 
-INSERT INTO purchases (buyer, item, deliveryDate, state, code) VALUES
-    (1, 2, '2/10/2020', 'shipping', 'ABCDE'),
-    (1, 3, '10/10/2024', 'preparing', 'ABCDEF'),
-    (4, 11, '10/10/2024', 'preparing', 'ABCDEFH'),
-    (2, 1, '10/10/2025', 'delivered', 'ABCDEFG');
-
+-- INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES
+--     (1, '2/10/2020', 'shipping', 'Rua very', 'Valbom', '4420-150'),
+--     (1,'10/10/2024', 'preparing', 'Rua pocuo', 'Caniço', '4480-220'),
+--     (4, '10/10/2024', 'preparing', 'Rua muiro', 'Lisbon', '4500-209'),
+--     (2, '10/10/2025', 'delivered', 'Ruaaa', 'Porto', '6492-943');
+--
+-- INSERT INTO purchases (item, purchase) VALUES
+--                                            (2, 1),
+--                                            (3, 1),
+--                                            (4, 2),
+--                                            (1, 3);
 
 INSERT INTO categories (category) VALUES
                                       (''),

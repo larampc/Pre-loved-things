@@ -14,6 +14,7 @@ $cond = $_GET['cond'] ?: "";
 $tag = $_GET['tag'] ?: "";
 $page = $_GET['page'];
 $range = $_GET['price'];
+$search = $_GET['search'];
 $dbh = get_database_connection();
 
 $checkTag = !empty($_GET['tag']);
@@ -67,6 +68,5 @@ else {
     }
 }
 
-$res = Item::get_filtered_items($dbh, $itemsCat, $itemsCond, $itemsTags, intval($page), $checkTag, $min, $max);
-
+$res = Item::get_filtered_items($dbh, $itemsCat, $itemsCond, $itemsTags, intval($page), $checkTag, $min, $max, $search);
 echo json_encode($res);

@@ -14,12 +14,16 @@ if (mainCat.innerHTML) {
     categorySelector.selected = true;
 }
 
+console.log(document.querySelector('#searchbar').value)
+const searchres = document.querySelector('#searchbar').value;
+
+
 let all = false;
 
 async function getFilteredItems() {
     if (isLoading) return;
     isLoading = true;
-    const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}))
+    const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres)
     console.log(response)
     const items = await response.json();
     if (items.length === 0) {
@@ -47,7 +51,6 @@ if (optionsPrice) {
     price_range.push(min.value)
     const max = optionsPrice.querySelector('.price-input .max-input');
     price_range.push(max.value)
-    console.log(price_range)
     min.addEventListener("input", async() => {
         price_range[0] = min.value
         cleanSearch()
