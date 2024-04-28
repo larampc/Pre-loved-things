@@ -9,6 +9,9 @@ class TrackItem {
     public string $date;
     public string $state;
     public int $id;
+    public string $address;
+    public string $city;
+    public string $postalCode;
     public function __construct(PDO $db, array $info)
     {
         $items = array();
@@ -20,6 +23,9 @@ class TrackItem {
         $this->date = $info['deliveryDate'];
         $this->state = $info['state'];
         $this->id = $info['id'];
+        $this->address = $info['address'];
+        $this->city = $info['city'];
+        $this->postalCode = $info['postalCode'];
     }
     public static function get_tracking_item(PDO $dbh, int $item_track) : TrackItem {
         $stmt = $dbh->prepare('SELECT * FROM purchaseData WHERE id = ?');
@@ -56,5 +62,19 @@ class TrackItem {
         $stmt = $dbh->prepare('SELECT item FROM purchases WHERE purchase = ?');
         $stmt->execute(array($id));
         return $stmt->fetchAll();
+    }
+    public static function valid_code(PDO $dbh, string $code) : bool {
+        $stmt = $dbh->prepare('SELECT * FROM shippingCode WHERE code = ?');
+        $stmt->execute(array($code));
+        return !empty($stmt->fetchAll());
+    }
+    public static function update_shipping(PDO $dbh, int $purchase) {
+        $stmt = $dbh->prepare('UPDATE purchaseData SET state=? WHERE id = ?');
+        $sale = self::get_tracking_item($dbh, $purchase);
+        $state = $sale->state;
+        if ($sale->state === "preparing") {$state = "shipping";}
+        else if ($sale->state === "shipping") {$state = "delivering";}
+        else if ($sale->state === "delivering") {$state = "delivered";}
+        return $stmt->execute(array($state, $purchase));
     }
 }

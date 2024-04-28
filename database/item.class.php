@@ -162,7 +162,7 @@ class Item {
              AND id IN (".implode(',', $itemTags) . " )
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
-            LIMIT 18 OFFSET ? ");
+            ORDER BY date DESC LIMIT 18 OFFSET ? ");
         }
         else {
             $stmt = $dbh->prepare("SELECT * FROM items 
@@ -170,7 +170,7 @@ class Item {
              AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
-             LIMIT 18 OFFSET ?");
+             ORDER BY date DESC LIMIT 18 OFFSET ?");
         }
         $stmt->execute(array($min, $max, "$search%", "% $search%", $page));
         return self::create_items($dbh, $stmt->fetchAll());

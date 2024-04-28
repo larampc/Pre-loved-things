@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS tags_predefined;
 DROP TABLE IF EXISTS tags_values;
 DROP TABLE IF EXISTS conditions;
 DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS shippingCode;
 
 CREATE TABLE categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -125,6 +126,10 @@ CREATE TABLE conditions (
 );
 
 INSERT INTO roles VALUES ('user'), ('admin');
+
+CREATE TABLE shippingCode (
+    code VARCHAR
+);
 
 INSERT INTO item_images (item, imagePath) VALUES
     (1,'flower.png'),
@@ -309,17 +314,17 @@ VALUES
     (3, 1, 1648902234, NULL, 'See you soon.');
 
 
--- INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES
---     (1, '2/10/2020', 'shipping', 'Rua very', 'Valbom', '4420-150'),
---     (1,'10/10/2024', 'preparing', 'Rua pocuo', 'Caniço', '4480-220'),
---     (4, '10/10/2024', 'preparing', 'Rua muiro', 'Lisbon', '4500-209'),
---     (2, '10/10/2025', 'delivered', 'Ruaaa', 'Porto', '6492-943');
---
--- INSERT INTO purchases (item, purchase) VALUES
---                                            (2, 1),
---                                            (3, 1),
---                                            (4, 2),
---                                            (1, 3);
+INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES
+    (1, '2/10/2020', 'shipping', 'Rua very', 'Valbom', '4420-150'),
+    (1,'10/10/2024', 'preparing', 'Rua pocuo', 'Caniço', '4480-220'),
+    (4, '10/10/2024', 'preparing', 'Rua muiro', 'Lisbon', '4500-209'),
+    (2, '10/10/2025', 'delivered', 'Ruaaa', 'Porto', '6492-943');
+
+INSERT INTO purchases (item, purchase) VALUES
+                                           (2, 1),
+                                           (3, 1),
+                                           (4, 2),
+                                           (1, 3);
 
 INSERT INTO categories (category) VALUES
                                       (''),
@@ -357,3 +362,5 @@ INSERT INTO conditions (condition) VALUES
                                       ('new'),
                                       ('old'),
                                       ('used');
+
+INSERT INTO shippingCode (code) VALUES ('abc'), ('hey');

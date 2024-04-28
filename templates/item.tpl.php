@@ -13,6 +13,7 @@ function draw_item(Item $item) { ?>
 
     function draw_items_main(array $liked_items, array $recent_items) { ?>
     <h2>Last Added Items</h2>
+        <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
         <?php draw_items($recent_items); ?>
     <h2>Most liked</h2>
         <?php draw_items($liked_items); ?>
@@ -266,7 +267,10 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                 <p><?=$trackItem->date?></p>
             <?php } ?>
         </div>
-        <?php draw_items($trackItem->tracking );?>
+        <?php draw_items($trackItem->tracking );
+        if ($trackItem->tracking[0]->creator == $session->getId()) { ?>
+            <a href="../pages/saleInfo.php?purchase=<?=$trackItem->id?>">Get shipping form</a>
+        <?php } ?>
     </section>
 
 <?php } ?>
@@ -279,4 +283,44 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
             <p class="price"><?=$item->price?></p>
         </div>
     </a>
+<?php } ?>
+
+<?php function draw_sale_info(PDO $db, TrackItem $trackItem, int $seller) { ?>
+<script src=
+        "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+</script>
+    <div class="qrcode"></div>
+    <script src="../scripts/qrcode.js"></script>
+    <script>generateQr("http://localhost:9000/pages/confirmShip.php?purchase=3")</script>
+    <div class="shipInfo">
+        <?php $user = User::get_user($db, $trackItem->buyer)?>
+        <p>Addressee: <?=$user->name?></p>
+        <p>Email:<?=$user->email?> </p>
+        <p>Phone:<?=$user->phone?> </p>
+        <p>Destination: <?=$trackItem->address?></p>
+        <p>City:<?=$trackItem->city?> </p>
+        <p>Postal Code:<?=$trackItem->postalCode?> </p>
+    </div>
+    <div class="senderInfo">
+        <?php $user = User::get_user($db, $seller)?>
+        <p>Sender: <?=$user->name?></p>
+        <p>Email:<?=$user->email?> </p>
+        <p>Phone:<?=$user->phone?> </p>
+    </div>
+<?php } ?>
+
+<?php function draw_confirm_ship(TrackItem $trackItem) { ?>
+    <form action="../actions/action_update_sale.php" method="post">
+        <input name="confirmationCode" type="password" required>
+        <input name="purchase" type="hidden" value="<?=$trackItem->id?>">
+        <?php if ($trackItem->state=="preparing" || $trackItem->state=="shipping" || $trackItem->state=="delivering") {
+            $text = $trackItem->state=="preparing"? "order was shipped" : ($trackItem->state=="shipping"? "order is being delivered" : "order was delivered");
+            ?>
+
+            <button>Confirm <?=$text?> </button>
+
+        <?php }
+        ?>
+
+    </form>
 <?php } ?>

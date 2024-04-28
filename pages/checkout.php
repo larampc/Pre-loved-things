@@ -5,6 +5,7 @@
     $session = new Session();
 
     if (!$session->isLoggedIn()) die(header('Location: /'));
+    if (!$session->getItemCheckout()) die(header('Location: /'));
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/item.class.php');
