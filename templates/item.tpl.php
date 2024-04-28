@@ -11,11 +11,11 @@ function draw_item(Item $item) { ?>
     </a>
 <?php }
 
-    function draw_items_main(array $items) { ?>
+    function draw_items_main(array $liked_items, array $recent_items) { ?>
     <h2>Last Added Items</h2>
-        <?php draw_items($items); ?>
+        <?php draw_items($recent_items); ?>
     <h2>Most liked</h2>
-        <?php draw_items($items); ?>
+        <?php draw_items($liked_items); ?>
     <?php }
 
     function draw_items(array $items) { ?>
