@@ -43,11 +43,11 @@ function draw_item(Item $item) { ?>
         <header>
             <h2><?=$item->name?></h2>
             <?php if ($item->sold === false) { ?>
-                <?php if ($session->isLoggedIn() && $item->creator == $session->getId()) { ?>
+                <?php if ($session->isLoggedIn() && $item->creator->user_id == $session->getId()) { ?>
                     <form method="post" action="../pages/edit_item.php">
                         <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                     </form>
-                <?php } if ($session->isLoggedIn() && $item->creator !== $session->getId()) { ?>
+                <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
                     <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
             <?php }
             if (User::get_user($db, $session->getId())->role === "admin") { ?>
@@ -76,19 +76,19 @@ function draw_item(Item $item) { ?>
             <?php if ($item->sold === false) { ?>
                 <section class="buy-item">
                     <i class="material-symbols-outlined cart big"> local_mall </i>
-                    <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
+                    <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator->user_id) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
                 </section>
             <?php } ?>
         </section>
         <section class="sendMessage">
-            <form>
+            <form  method="post" action="../pages/inbox.php">
                 <label>
-                    <button class="sendMessage-btn" type="submit">Send Message</button>
+                    <button class="sendMessage-btn" type="submit" name="send-message" value="<?= $item->creator->user_id ?>">Send Message</button>
                 </label>
             </form>
         </section>
-        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator?>"><?=User::get_user($db, $item->creator)->name?>
-            <img src="../uploads/profile_pics/<?=User::get_user($db, $item->creator)->photoPath?>" alt="profile picture">
+        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator->user_id?>"><?=$item->creator->name?>
+            <img src="../uploads/profile_pics/<?=$item->creator->photoPath?>" alt="profile picture">
         </a>
         <section class="itemTags">
             <ul>

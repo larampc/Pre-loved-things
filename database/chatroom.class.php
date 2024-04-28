@@ -18,7 +18,7 @@ class Chatroom {
         $this->unread_message_count = $unread_message_count;
         $this->last_message = $last_message;
     }
-    public static function save(PDO $dbh, int $itemId, int $sellerId, int $buyerId) : void {
+    public static function save_chatroom(PDO $dbh, int $itemId, int $sellerId, int $buyerId) : void {
         $stmt = $dbh->prepare(
             'INSERT INTO chatrooms (item_id, seller_id, buyer_id) VALUES (?, ?, ?)');
         $stmt->execute([$itemId, $sellerId, $buyerId]);

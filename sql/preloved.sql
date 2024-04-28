@@ -270,11 +270,11 @@ VALUES
     ('sam_carter', 'Headphones'),
     ('lisa_adams', 'Backpack');
 
-INSERT INTO chatrooms (chatroom_id, item_id, seller_id, buyer_id)
+INSERT INTO chatrooms (item_id, seller_id, buyer_id)
 VALUES
-    (1, 10, 1, 2),
-    (2, 11, 3, 4),
-    (3, 12, 1, 4);
+    (10, 1, 2),
+    (11, 3, 4),
+    (12, 1, 4);
 
 INSERT INTO messages (chatroom, sender, sentTime, readTime, message)
 VALUES
