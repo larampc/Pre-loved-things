@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
-        draw_user_details($user, $session);
+        draw_user_details($dbh, $user, $session);
         draw_user_feedback($user, $feedback, $session->getId());
         draw_items($items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
@@ -12,7 +12,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     </article> <?php
 }
 
-function draw_user_details( User $user, Session $session) { ?>
+function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
     <section class="user">
         <img src="../uploads/profile_pics/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
@@ -23,6 +23,14 @@ function draw_user_details( User $user, Session $session) { ?>
             <?php if ($session->getId() === $user->user_id) {?>
             <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
+            <?php } ?>
+            <?php if ($session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
+                <form method="post" action="../actions/action_remove_user.php">
+                    <button type="submit" value="<?=$user->user_id?>" name="remove-user" class="edit" ><i class="material-symbols-outlined big"> person_remove </i></button>
+                </form>
+                <form method="post" action="../actions/action_change_role.php">
+                    <button type="submit" value="<?=$user->user_id?>" name="role-user" class="edit" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
+                </form>
             <?php } ?>
         </div>
     </section>

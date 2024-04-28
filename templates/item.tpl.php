@@ -51,7 +51,7 @@ function draw_item(Item $item) { ?>
                     <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
             <?php }
             if (User::get_user($db, $session->getId())->role === "admin") { ?>
-                <form method="post" action="../pages/remove_item.php">
+                <form method="post" action="../actions/action_remove_item.php">
                     <button type="submit" value="<?=$item->id?>" name="remove-item" class="edit" ><i class="material-symbols-outlined big"> delete </i></button>
                 </form>
             <?php } ?>

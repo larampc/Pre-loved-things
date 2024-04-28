@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+require_once('item.class.php');
 class User
 {
     public int $user_id;
@@ -92,7 +93,7 @@ class User
         $stmt->execute(array($id));
         $comments = array();
         while ($comment = $stmt->fetch()) {
-            $comments[] = new Comment($dbh, $comment['mainuser'], $comment['userc'], $comment['text'], $comment['date'], $comment['rating']);
+            $comments[] = new Comment($dbh, $comment['userc'], $comment['mainuser'], $comment['text'], $comment['date'], $comment['rating']);
         }
         return $comments;
     }
@@ -143,5 +144,24 @@ class User
         ON user_cart.item = items.id  WHERE user_cart.user = ? and items.creator = ?');
         $stmt->execute(array($buyer, $seller));
         return Item::create_items($dbh, $stmt->fetchAll());
+    }
+
+    public static function delete_user(PDO $dbh, int $user): bool
+    {
+        $stmt = $dbh->prepare('DELETE FROM users WHERE user_id = ?');
+        if (!$stmt->execute(array($user))) return false;
+        $stmt = $dbh->prepare('DELETE FROM comments WHERE mainuser = ? OR userc = ?');
+        if (!$stmt->execute(array($user, $user))) return false;
+        $stmt = $dbh->prepare('SELECT items.id FROM items WHERE creator = ?');
+        $stmt->execute(array($user));
+        $items = $stmt->fetchAll();
+        foreach ($items as $item) {
+            Item::delete_item($dbh, $item['id']);
+        }
+        return true;
+    }
+    public static function change_role(PDO $dbh, int $id, string $role): bool {
+        $stmt = $dbh->prepare('UPDATE users SET role = ? WHERE user_id = ?');
+        return $stmt->execute(array($role, $id));
     }
 }

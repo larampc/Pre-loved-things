@@ -230,4 +230,11 @@ class Item {
             $stmt->execute(array($item->id));
         }
     }
+
+    static function delete_item(PDO $dbh, int $id) {
+        $stmt = $dbh->prepare('DELETE FROM items WHERE id = ?');
+        if (!$stmt->execute(array($id))) return false;
+        self::remove_cart_favorite($dbh, array($id));
+        return true;
+    }
 }
