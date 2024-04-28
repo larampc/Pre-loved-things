@@ -188,8 +188,8 @@ class Item {
     }
 
     static function register_item(PDO $db, string $name, string $description, string $price, int $category, int $user_id, string $mainImage, string $condition): int {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition]);
+        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
         $stmt = $db->prepare('SELECT last_insert_rowid()');
         $stmt->execute();
         return $ret ? $stmt->fetchColumn() : -1;

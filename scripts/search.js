@@ -89,7 +89,7 @@ function createItem(item) {
     main.href = "item.php?id=" + item.id;
     main.className = "item";
     const img = document.createElement("img")
-    img.src = "../images/flower.png"
+    img.src = "../resources/flower.png"
     main.appendChild(img);
     const div = document.createElement("div")
     div.className = "item-info"

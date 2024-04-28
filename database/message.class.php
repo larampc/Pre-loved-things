@@ -14,10 +14,10 @@ class Message {
         $this->message = $message;
     }
 
-    static function read_messages (PDO $dbh, int $chatroom, int $sender, int $limit = 30) : array {
+    static function read_messages (PDO $dbh, int $chatroom, int $limit = 30) : array {
         $stmt = $dbh->prepare(
-            'UPDATE messages SET readTime = ? WHERE chatroom = ? AND sender = ? AND readTime IS NULL');
-        $stmt->execute(array(time(), $chatroom, $sender));
+            'UPDATE messages SET readTime = ? WHERE chatroom = ? AND readTime IS NULL');
+        $stmt->execute(array(time(), $chatroom));
         $stmt = $dbh->prepare('SELECT * FROM messages
                                       WHERE chatroom = ? ORDER BY sentTime DESC
                                       LIMIT ?');

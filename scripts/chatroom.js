@@ -69,14 +69,14 @@ function formatDateTime(date) {
 }
 
 async function handleClick(chatroom, user) {
-    updateCurrentChatroom(chatroom);
+    const msgInbox = await createMessageInbox(chatroom, user);
     const response = await fetch('../api/api_get_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4))
     const chatroom_data = await response.json()
+    updateCurrentChatroom(chatroom);
     const chatPage = document.querySelector('.chat-page');
     chatPage.innerHTML = '';
 
     const header = createChatHeader(chatroom_data, user);
-    const msgInbox = await createMessageInbox(chatroom, user);
 
     chatPage.appendChild(header);
     chatPage.appendChild(msgInbox);
@@ -86,6 +86,8 @@ function updateCurrentChatroom(chatroom) {
     const curr = document.querySelector('.current-chat');
     if (curr) curr.classList.remove("current-chat");
     chatroom.classList.add("current-chat");
+    const msg_count = document.querySelector('#message-count');
+    if(msg_count) chatroom.removeChild(msg_count)
 }
 
 function createChatHeader(chatroom_data, user) {
@@ -108,7 +110,7 @@ function createFigure(chatroom) {
     const item_image = document.createElement('img');
     item_image.classList.add("item-msg-img");
     item_image.alt = "item image";
-    item_image.src = "../images/" + chatroom.item.mainImage;
+    item_image.src = "../uploads/item_pics/" + chatroom.item.mainImage;
 
     const figure_caption = document.createElement('figcaption');
     figure_caption.innerText = chatroom.item.name;
@@ -127,7 +129,7 @@ function createUserAside(chatroom, user) {
     const addressee_image = document.createElement('img');
     addressee_image.classList.add("addressee-img");
     addressee_image.alt = "addressee profile image";
-    addressee_image.src = "../images/" + addressee.photoPath;
+    addressee_image.src = "../uploads/profile_pics/" + addressee.photoPath;
 
     const addressee_name = document.createElement('p');
     addressee_name.innerText = addressee.name;
@@ -141,7 +143,6 @@ function createUserAside(chatroom, user) {
 async function createMessageInbox(chatroom, user) {
     const response = await fetch('../api/api_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4));
     const messages = await response.json();
-
     const msg_inbox = document.createElement('article');
     msg_inbox.classList.add("msg-inbox");
 

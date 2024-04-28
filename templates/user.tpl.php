@@ -3,7 +3,7 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_details($user) { ?>
     <section class="user">
-        <img src="../images/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
+        <img src="../uploads/profile_pics/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
             <p class="username"><?=$user->username?></p>
@@ -44,7 +44,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
                     <?php }
                     foreach ($feedback as $comment) { ?>
                     <article class="comment">
-                        <img src="../images/<?= User::get_user($db, $comment['userc'])->photoPath?>" class="profile-pic" alt="profile picture">
+                        <img src="../uploads/profile_pics/<?= User::get_user($db, $comment['userc'])->photoPath?>" class="profile-pic" alt="profile picture">
                         <p class="uname"><?=$comment['userc']?></p>
                         <time><?=$comment['date']?></time>
                         <p class="content"><?=$comment['text']?></p>
@@ -59,7 +59,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
 <?php function draw_profile_details($user) {
     ?>
     <section class="user">
-        <img src="../images/profile.png" class="profile-pic" alt="profile picture">
+        <img src="../resources/profile.png" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
             <p class="phone"><?=$user->phone?></p>
@@ -107,7 +107,7 @@ function draw_user_feedback(PDO $db, $user, $feedback, $session_id) { ?>
             if ($user != $item->creator) { ?>
                 <section class="seller">
                     <a href="../pages/user.php?user_id=<?=$item->creator?>" class="seller-info">
-                        <img src="../images/<?=User::get_user($db, $item->creator)->photoPath?>" class="profile-pic" alt="profile-photo">
+                        <img src="../uploads/profile_pics/<?=User::get_user($db, $item->creator)->photoPath?>" class="profile-pic" alt="profile-photo">
                         <p><?=User::get_user($db, $item->creator)->name?></p>
                     </a>
                     <article class="seller-items">

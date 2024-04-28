@@ -20,7 +20,7 @@
 </head>
 <body> 
     <header>
-        <a href="../index.php"><img src="../images/logo.png" id="logo" alt="logo"></a>
+        <a href="../index.php"><img src="../resources/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="../pages/search.php">
                 <select name="category" class="dropdown-content">
                     <?php foreach ($categories as $category) { ?>

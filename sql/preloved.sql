@@ -107,7 +107,7 @@ CREATE TABLE chatrooms (
 );
 
 CREATE TABLE conditions (
-                           condition VARCHAR PRIMARY KEY
+    condition VARCHAR PRIMARY KEY
 );
 
 INSERT INTO item_images (item, imagePath) VALUES
