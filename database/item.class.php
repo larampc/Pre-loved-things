@@ -13,7 +13,7 @@ class Item {
     public array $tags;
     public string $condition;
     public string $date;
-    public int $creator;
+    public User $creator;
     public bool $sold;
     public function __construct(PDO $db, int $id)
     {
@@ -28,7 +28,7 @@ class Item {
         $new_item->price = $item['price'] != null ? $item['price'] : 0.0;
         $new_item->description = $item['description'] != null ? $item['description'] : "";
         $new_item->name = $item['name'] != null ? $item['name'] : "";
-        $new_item->creator =$item['creator'];
+        $new_item->creator = User::get_user($dbh, $item['creator']);
         $new_item->mainImage = $item['mainImage']!= null ? $item['mainImage'] : "";;
         $new_item->category = Tag::get_category_by_id($dbh, $item['category']);
         $new_item->tags = Tag::get_item_tags($dbh, $item['id']);
