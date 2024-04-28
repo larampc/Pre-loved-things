@@ -112,7 +112,7 @@ main > h2 {
 .items .item-info {
     color: black;
     p {
-        margin: 0.2rem; 
+        margin: 0.2rem;
     }
     .price {
         font-weight: bold;
@@ -996,4 +996,58 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 #messages p {
     margin: 0;
     padding: 0;
+}
+
+.mainMain .items {
+    margin: 0;
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.mainMain .items .item {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 10px 5px;
+    transition: 1000ms all;
+    transform-origin: center;
+    position: relative;
+    border-style: solid;
+    border-color: #F1F1F1;
+}
+
+.mainMain .items .item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-style: none;
+}
+
+.mainMain .items .item .item-info {
+    background: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0) 100%
+    );
+    font-size: 10px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 165px 10px 10px;
+}
+
+.mainMain .items .item .item-info:hover {
+    opacity: 1;
+}
+
+.mainMain .items .item .item-info p {
+    color: #fff;
+    margin: 5px 0;
+    font-size: 0.8rem;
+    max-width: 100px;
 }

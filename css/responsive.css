@@ -60,3 +60,20 @@
         transform: scaleX(1);
     }
 }
+
+.mainMain .items .item .item-info {
+    transition: 450ms opacity;
+}
+
+.mainMain .items .item:hover ~  .item {
+    transform: translate3d(10px, 0, 0);
+}
+
+.mainMain .items:hover .item {
+    opacity: 0.3;
+}
+
+.mainMain .items:hover .item:hover {
+    transform: scale(1.2);
+    opacity: 1;
+}
