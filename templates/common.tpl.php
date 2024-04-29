@@ -33,6 +33,8 @@
                 <datalist id="search-suggestions"></datalist>
             </form>
         <nav>
+
+            <p><?=$session->getCurrency()?></p>
             <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if ($session->isLoggedIn()) { ?>
                 <a href="../pages/favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>

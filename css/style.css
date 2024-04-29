@@ -641,9 +641,6 @@ i {
 
 .message-header .item-info {
     margin: 0;
-    figcaption {
-        font-weight: bold;
-    }
 }
 
 .item-msg-img {
@@ -654,10 +651,8 @@ i {
     margin-right: 1rem;
 }
 
-.message-header .user-info {
-    p {
-        font-weight: bold;
-    }
+.message-header {
+    font-weight: bold;
 }
 
 .addressee-img {
@@ -1123,6 +1118,11 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     display: flex;
     justify-content: right;
     align-content: baseline;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* saleInfo */

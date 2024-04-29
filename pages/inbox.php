@@ -25,14 +25,17 @@
     $categories = Tag::get_categories($db);
     draw_header("inbox", $session, $categories);
     draw_user_chatrooms($chatrooms, User::get_user($db, $session->getId()));
-    ?>
-        <section class="chat-page">
-            <article class="empty-msg-inbox">
-                <i class="material-symbols-outlined">inbox</i>
-                <p>Click on a message to open</p>
-            </article>
-
-        </section>
-    <?php
-
+    $to = $_GET["user_id"];
+    if(isset($to)){
+        $to = intval($to);
+        $to_chatroom = array_filter($chatrooms, function($chatroom) use($to) { return $chatroom->seller->user_id === $to && $chatroom->item->id === intval($_GET["item_id"]); });
+        if(empty($to_chatroom)) {
+            $item = intval($_GET["item_id"]);
+            draw_temporary_chatroom(User::get_user($db, $to), Item::get_item($db, $item));
+        }
+        else draw_big_chatroom($to_chatroom[0],User::get_user($db, $to), Message::read_messages($db, $to_chatroom[0]->chatroomId));
+    }
+    else {
+        draw_empty_chatroom();
+    }
     draw_footer();

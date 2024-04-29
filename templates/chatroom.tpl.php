@@ -26,3 +26,63 @@ function draw_small_chatroom(Chatroom $chatroom, User $from, User $to) : void { 
         <?php } ?>
     </div>
 <?php }
+
+function draw_big_chatroom(Chatroom $chatroom, User $to, array $messages){ ?>
+    <section class="chat-page" id="chat-page<?=$chatroom->chatroomId?>">
+        <header class="message-header">
+            <aside class="item-info">
+                <a href="../pages/item.php?id=<?=$chatroom->item->id?>"><img class="item-msg-img" alt="item image" src="../uploads/item_pics/<?=$chatroom->item->mainImage?>"></a>
+                <a href="../pages/item.php?id=<?=$chatroom->item->id?>"><p><?=$chatroom->item->name?></p></a>
+            </aside>
+            <aside class="user-info">
+                <a href="../pages/user.php?user_id=<?=$to->user_id?>"><img class="addressee-img" alt="addressee profile image" src="../uploads/profile_pics/<?=$to->photoPath?>"></a>
+                <a href="../pages/user.php?user_id=<?=$to->user_id?>"><p><?=$to->name?></p></a>
+            </aside>
+        </header>
+        <article class="msg-inbox">
+            <section class="scroll">
+                <?php foreach($messages as $message) {
+                    if($message->sender === $to) draw_received_message($message);
+                    else draw_sent_message($message);
+                }?>
+            </section>
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Write message...">
+                <button type="button" class="send-icon"><i class="material-symbols-outlined filled-color">send</i>
+                </button>
+            </div>
+        </article>
+    </section>
+<?php }
+function draw_temporary_chatroom(User $to, Item $item) { ?>
+    <section class="chat-page temporary" id="<?=$to->user_id?>&<?=$item->id?>">
+        <header class="message-header">
+            <aside class="item-info">
+                <a href="../pages/item.php?id=<?=$item->id?>"><img class="item-msg-img" alt="item image" src="../uploads/item_pics/<?=$item->mainImage?>"></a>
+                <a href="../pages/item.php?id=<?=$item->id?>"><p><?=$item->name?></p></a>
+            </aside>
+            <aside class="user-info">
+                <a href="../pages/user.php?user_id=<?=$to->user_id?>"><img class="addressee-img" alt="addressee profile image" src="../uploads/profile_pics/<?=$to->photoPath?>"></a>
+                <a href="../pages/user.php?user_id=<?=$to->user_id?>"><p><?=$to->name?></p></a>
+            </aside>
+        </header>
+        <article class="msg-inbox">
+            <section class="scroll">
+            </section>
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Write message...">
+                <button type="button" class="send-icon"><i class="material-symbols-outlined filled-color">send</i>
+                </button>
+            </div>
+        </article>
+    </section>
+<?php }
+
+function draw_empty_chatroom() { ?>
+    <section class="chat-page">
+        <article class="empty-msg-inbox">
+            <i class="material-symbols-outlined">inbox</i>
+            <p>Click on a message to open</p>
+        </article>
+    </section>
+<?php }

@@ -164,4 +164,10 @@ class User
         $stmt = $dbh->prepare('UPDATE users SET role = ? WHERE user_id = ?');
         return $stmt->execute(array($role, $id));
     }
+
+    public static function get_currency(PDO $dbh, int $user): string {
+        $stmt = $dbh->prepare('SELECT currency FROM users WHERE user_id = ?');
+        $stmt->execute(array($user));
+        return $stmt->fetch()['currency'];
+    }
 }

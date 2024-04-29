@@ -16,8 +16,8 @@
     $user = User::verify_user($dbh, $_POST['email'], $_POST['password']);
     $checkout = isset($_GET['checkout']);
     if ($user !== null) {
-        if($user->role == 'admin') $session->setAdmin();
       $session->setId($user->user_id);
+      $session->setCurrency(User::get_currency($dbh, $user->user_id));
       if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $user->user_id);
       $session->addMessage('success', 'Login successful!');
       header('Location: '. ($checkout? '../pages/checkout.php':'../index.php'));
