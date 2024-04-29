@@ -50,7 +50,7 @@ function draw_item(Item $item) { ?>
                 <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
                     <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
             <?php }
-            if (User::get_user($db, $session->getId())->role === "admin") { ?>
+            if ($session->isLoggedIn() && User::get_user($db, $session->getId())->role === "admin") { ?>
                 <form method="post" action="../actions/action_remove_item.php">
                     <button type="submit" value="<?=$item->id?>" name="remove-item" class="edit" ><i class="material-symbols-outlined big"> delete </i></button>
                 </form>
@@ -252,7 +252,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 
 <?php function draw_item_tracking(TrackItem $trackItem, Session $session) { ?>
     <section class="item-track">
-        <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator == $session->getId()? "Contact buyer" : "") ?></button>
+        <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "") ?></button>
         <ul class="state">
             <li class="<?= ($trackItem->state == "preparing"? "current" : "done")?>">Preparing</li>
             <li class="<?=($trackItem->state == "shipping"? "current" : (($trackItem->state == "delivering" || $trackItem->state == "delivered") ? "done":""))?>">Shipping</li>
@@ -261,7 +261,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         </ul>
         <div id="delivery-date">
             <p>Estimated delivery date: </p>
-            <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator == $session->getId()) {?>
+            <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->getId()) {?>
                 <form method="post" action="../actions/action_update_delivery.php">
                     <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
                     <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
@@ -273,7 +273,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
             <?php } ?>
         </div>
         <?php draw_items($trackItem->tracking );
-        if ($trackItem->tracking[0]->creator == $session->getId()) { ?>
+        if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
             <a href="../pages/saleInfo.php?purchase=<?=$trackItem->id?>">Get shipping form</a>
         <?php } ?>
     </section>
@@ -291,12 +291,23 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 <?php } ?>
 
 <?php function draw_sale_info(PDO $db, TrackItem $trackItem, int $seller) { ?>
-<script src=
-        "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
-</script>
-    <div class="qrcode"></div>
-    <script src="../scripts/qrcode.js"></script>
-    <script>generateQr("http://localhost:9000/pages/confirmShip.php?purchase=3")</script>
+    <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
+    <script src="../scripts/qrcode.js" defer></script>
+    <qr-code
+            id="qr1"
+            contents="http://localhost:9000/pages/confirmShip.php?purchase=<?=$trackItem->id?>"
+            module-color="#000000"
+            position-ring-color="#000000"
+            position-center-color="#000000"
+            mask-x-to-y-ratio="1.2"
+            style="
+    width: 200px;
+    height: 200px;
+    margin: 2em auto;
+    background-color: #F2E8D5;
+  "
+            ><img src="../resources/logo.png" slot="icon" style="width: 40px; margin:auto">
+    </qr-code>
     <div class="shipInfo">
         <?php $user = User::get_user($db, $trackItem->buyer)?>
         <p>Addressee: <?=$user->name?></p>

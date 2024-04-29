@@ -17,14 +17,14 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
         <img src="../uploads/profile_pics/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
-            <?php if ($session->getId() === $user->user_id) {?><p class="username"><?=$user->username?></p> <?php } ?>
+            <?php if ($session->isLoggedIn() &&  $session->getId() === $user->user_id) {?><p class="username"><?=$user->username?></p> <?php } ?>
             <p class="phone"><?=$user->phone?></p>
             <p class="email"><?=$user->email?></p>
-            <?php if ($session->getId() === $user->user_id) {?>
+            <?php if ($session->isLoggedIn() && $session->getId() === $user->user_id) {?>
             <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
             <?php } ?>
-            <?php if ($session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
+            <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
                 <form method="post" action="../actions/action_remove_user.php">
                     <button type="submit" value="<?=$user->user_id?>" name="remove-user" class="edit" ><i class="material-symbols-outlined big"> person_remove </i></button>
                 </form>
@@ -115,9 +115,9 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
             }
             if ($user != $item->creator) { ?>
                 <section class="seller">
-                    <a href="../pages/user.php?user_id=<?=$item->creator?>" class="seller-info">
-                        <img src="../uploads/profile_pics/<?=User::get_user($db, $item->creator)->photoPath?>" class="profile-pic" alt="profile-photo">
-                        <p><?=User::get_user($db, $item->creator)->name?></p>
+                    <a href="../pages/user.php?user_id=<?=$item->creator->user_id?>" class="seller-info">
+                        <img src="../uploads/profile_pics/<?= $item->creator->photoPath?>" class="profile-pic" alt="profile-photo">
+                        <p><?=$item->creator->name?></p>
                     </a>
                     <article class="seller-items">
             <?php }
@@ -134,7 +134,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                     <p class="total"><?=$sum?></p>
                 </div>
                 <form class="checkout-item" action="../actions/action_checkout.php" method="post">
-                    <input type="hidden" value="<?=$user?>" name="user_items">
+                    <input type="hidden" value="<?=$user->user_id?>" name="user_items">
                     <label>
                         <button class="checkout" type="submit">Buy now!</button>
                     </label>
