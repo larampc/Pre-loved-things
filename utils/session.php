@@ -16,12 +16,6 @@ class Session {
     public function logout() {
         session_destroy();
     }
-    public function isAdmin() : string {
-        return isset($_SESSION['admin']);
-    }
-    public function setAdmin() {
-        $_SESSION['admin'] = true;
-    }
 
     public function getId() : ?int {
         return $_SESSION['user_id'] ?? null;
@@ -62,6 +56,14 @@ class Session {
 
     public function getMessages() {
         return $this->messages;
+    }
+
+    public function setCurrency(string $currency) {
+        $_SESSION['currency'] = $currency;
+    }
+
+    public function getCurrency() : string {
+        return $_SESSION['currency'] ? : 'EUR';
     }
 }
 ?>

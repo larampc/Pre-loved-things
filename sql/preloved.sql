@@ -15,6 +15,7 @@ DROP TABLE IF EXISTS tags_values;
 DROP TABLE IF EXISTS conditions;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS shippingCode;
+DROP TABLE IF EXISTS currency;
 
 CREATE TABLE categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -84,6 +85,7 @@ CREATE TABLE users (
   name VARCHAR,                       -- real name
   email VARCHAR UNIQUE,
   phone VARCHAR,
+  currency VARCHAR references currency,
   photoPath VARCHAR DEFAULT 'profile.png',
   role VARCHAR(30) REFERENCES roles(name) DEFAULT 'user'
 );
@@ -131,6 +133,12 @@ CREATE TABLE shippingCode (
     code VARCHAR
 );
 
+CREATE TABLE currency (
+    code VARCHAR PRIMARY KEY,
+    value INTEGER,
+    symbol VARCHAR
+);
+
 INSERT INTO item_images (item, imagePath) VALUES
     (1,'flower.png'),
     (2,'flower.png'),
@@ -154,21 +162,21 @@ INSERT INTO item_images (item, imagePath) VALUES
     (20,'flower.png');
 
 
-INSERT INTO users (password, name, email, phone, username)
+INSERT INTO users (password, name, email, phone, username, currency)
 VALUES
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', '1234567890', 'johny'),
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Jane Smith', 'jane@example.com', '9876543210', 'janey'),
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful'),
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Bob Green', 'bob@example.com', '4447890123', 'bobby'),
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita'),
-    ('password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse'),
-    ('brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii'),
-    ('king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall'),
-    ('sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro'),
-    ('lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa');
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', '1234567890', 'johny', 'USD'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Jane Smith', 'jane@example.com', '9876543210', 'janey', 'EUR'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful', 'GBP'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Bob Green', 'bob@example.com', '4447890123', 'bobby', 'INR'),
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita', 'AUD'),
+    ('password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse', 'CAD'),
+    ('brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii', 'SGD'),
+    ('king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall', 'CHF'),
+    ('sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro', 'MYR'),
+    ('lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa', 'JPY');
 
-INSERT INTO users (password, name, email, phone, username, role) VALUES
-    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin');
+INSERT INTO users (password, name, email, phone, username, role, currency) VALUES
+    ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR');
 
 INSERT INTO items (name, price, condition, date, description, creator, mainImage, category)
 VALUES
@@ -364,3 +372,16 @@ INSERT INTO conditions (condition) VALUES
                                       ('used');
 
 INSERT INTO shippingCode (code) VALUES ('abc'), ('hey');
+
+INSERT INTO currency (code, value, symbol) VALUES
+                                               ('EUR', 1.000000, '€'),
+                                               ('USD', 1.070080, '$'),
+                                               ('GBP', 0.854439, '£'),
+                                               ('INR', 89.310771, '₹'),
+                                               ('AUD', 1.633299, '$'),
+                                               ('CAD', 1.462732, '$'),
+                                               ('SGD', 1.456636, '$'),
+                                               ('CHF', 0.977023, 'Fr'),
+                                               ('MYR', 5.102757, 'RM'),
+                                               ('JPY', 167.684120, '¥'),
+                                               ('CNY', 7.750000, '¥');

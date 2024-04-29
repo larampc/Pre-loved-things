@@ -25,11 +25,12 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
             <?php } ?>
             <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
+                <script src="../scripts/user_actions.js" defer></script>
                 <form method="post" action="../actions/action_remove_user.php">
-                    <button type="submit" value="<?=$user->user_id?>" name="remove-user" class="edit" ><i class="material-symbols-outlined big"> person_remove </i></button>
+                    <button type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirmAction" ><i class="material-symbols-outlined big"> person_remove </i></button>
                 </form>
                 <form method="post" action="../actions/action_change_role.php">
-                    <button type="submit" value="<?=$user->user_id?>" name="role-user" class="edit" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
+                    <button type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirmAction" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
                 </form>
             <?php } ?>
         </div>

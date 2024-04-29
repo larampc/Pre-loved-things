@@ -21,4 +21,4 @@ else {
     $session->addMessage('error', 'Unable to change user role.');
 }
 
-header('Location: ../pages' );
+header('Location: ' . $_SERVER['HTTP_REFERER']);

@@ -131,12 +131,10 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $db, string $name, string $description, string $price, int $category, int $user_id, string $mainImage, string $condition): int {
-        $stmt = $db->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+    static function register_item(PDO $dbh, string $name, string $description, string $price, int $category, int $user_id, string $mainImage, string $condition): int {
+        $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
-        $stmt = $db->prepare('SELECT last_insert_rowid()');
-        $stmt->execute();
-        return $ret ? $stmt->fetchColumn() : -1;
+        return $ret ? intval($dbh->lastInsertId()) : -1;
     }
     static function register_item_images(PDO $db, array $images, int $item_id): bool
     {
@@ -210,9 +208,7 @@ class Item {
     static function register_purchase(PDO $dbh, int $buyer, array $items, string $address, string $city, string $postalCode): int {
         $stmt = $dbh->prepare("INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES(?, ?, ?, ?, ?, ?)");
         $stmt->execute(array($buyer,date('d/m/Y', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
-        $stmt = $dbh->prepare('SELECT last_insert_rowid()');
-        $stmt->execute();
-        $purchase = $stmt->fetchColumn();
+        $purchase = intval($dbh->lastInsertId());
         var_dump($purchase);
         foreach ($items as $item) {
             var_dump($item);
@@ -234,7 +230,7 @@ class Item {
     static function delete_item(PDO $dbh, int $id) {
         $stmt = $dbh->prepare('DELETE FROM items WHERE id = ?');
         if (!$stmt->execute(array($id))) return false;
-        self::remove_cart_favorite($dbh, array($id));
+        self::remove_cart_favorite($dbh, array(self::get_item($dbh, $id)));
         return true;
     }
 }

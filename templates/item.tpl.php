@@ -50,7 +50,7 @@ function draw_item(Item $item) { ?>
                 <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
                     <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
             <?php }
-            if ($session->isLoggedIn() && User::get_user($db, $session->getId())->role === "admin") { ?>
+            if ($session->isLoggedIn() && (User::get_user($db, $session->getId())->role === "admin" || $session->getId() == $item->creator->user_id)) { ?>
                 <form method="post" action="../actions/action_remove_item.php">
                     <button type="submit" value="<?=$item->id?>" name="remove-item" class="edit" ><i class="material-symbols-outlined big"> delete </i></button>
                 </form>
