@@ -81,10 +81,12 @@ function draw_item(Item $item) { ?>
             <?php } ?>
         </section>
         <section class="sendMessage">
-            <form  method="post" action="../pages/inbox.php">
+            <form method="get" action="../pages/inbox.php">
                 <label>
-                    <button class="sendMessage-btn" type="submit" name="send-message" value="<?= $item->creator->user_id ?>">Send Message</button>
+                    <button class="sendMessage-btn" type="submit">Send Message</button>
                 </label>
+                <input type="hidden" name="user_id" value="<?=$item->creator->user_id?>">
+                <input type="hidden" name="item_id" value="<?=$item->id?>">
             </form>
         </section>
         <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator->user_id?>"><?=$item->creator->name?>

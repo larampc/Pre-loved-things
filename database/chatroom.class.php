@@ -18,10 +18,11 @@ class Chatroom {
         $this->unread_message_count = $unread_message_count;
         $this->last_message = $last_message;
     }
-    public static function save_chatroom(PDO $dbh, int $itemId, int $sellerId, int $buyerId) : void {
+    public static function save_chatroom(PDO $dbh, int $itemId, int $sellerId, int $buyerId) : Chatroom {
         $stmt = $dbh->prepare(
             'INSERT INTO chatrooms (item_id, seller_id, buyer_id) VALUES (?, ?, ?)');
         $stmt->execute([$itemId, $sellerId, $buyerId]);
+        return new Chatroom(intval($dbh->lastInsertId()), Item::get_item($dbh, $itemId), User::get_user($dbh, $sellerId), User::get_user($dbh,$buyerId), 0, null);
     }
     public static function get_user_chatrooms(PDO $dbh, int $userId) : array {
         $stmt = $dbh->prepare('SELECT * FROM chatrooms WHERE buyer_id = ? OR seller_id = ?');

@@ -53,9 +53,16 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 
 <?php function draw_login_register_form(bool $checkout)
 { ?>
+
     <section class="flipLoginRegister">
         <?php draw_login_form($checkout); ?>
         <?php draw_register_form($checkout); ?>
     </section>
+    <h3 class="current-page">
+        <span>Log in</span>
+        <span>Sign up</span>
+    </h3>
+    <input class="checkboxLoginRegister" type="checkbox">
+    <label class="toggleLoginRegister"></label>
 
 <?php } ?>
