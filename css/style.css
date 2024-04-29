@@ -581,6 +581,7 @@ i {
     background-color: #F2E8D5;
 }
 .toggleLoginRegister:before {
+    box-shadow: 0 0 4px #c4c3ca;
     transition: all 0.5s ease;
     font-family: "Material Symbols Outlined";
     content: "\f1e2";
