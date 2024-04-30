@@ -11,8 +11,8 @@
 
     $checkout = isset($_GET['checkout']);
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    draw_header("login", $session, $categories);
+    $dbh = get_database_connection();
+
+    get_header("login", $dbh, $session);
     draw_login_register_form($checkout);
     draw_footer();

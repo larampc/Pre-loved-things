@@ -13,7 +13,7 @@
     require_once(__DIR__ . '/../database/connection.db.php');
 
     $dbh = get_database_connection();
-    $categories = Tag::get_categories($dbh);
-    draw_header("new", $session, $categories);
+
+    get_header("new", $dbh, $session);
     draw_edit_item_form(Item::get_item($dbh, intval($_POST["edit-item"])));
     draw_footer();

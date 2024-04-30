@@ -10,10 +10,11 @@
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/connection.db.php');
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    $liked_items = Item::get_most_liked_items($db, 5);
-    $recent_items = Item::get_last_added_items($db, 5);
-    draw_header("main", $session, $categories);
+    $dbh = get_database_connection();
+
+    $liked_items = Item::get_most_liked_items($dbh, 5);
+    $recent_items = Item::get_last_added_items($dbh, 5);
+    get_header("main", $dbh, $session);
+
     draw_items_main($liked_items, $recent_items);
     draw_footer();

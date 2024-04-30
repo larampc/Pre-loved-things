@@ -658,3 +658,7 @@ main .pfPage{
 .admin-actions {
     display: flex;
 }
+
+.change-currency {
+    display: none;
+}

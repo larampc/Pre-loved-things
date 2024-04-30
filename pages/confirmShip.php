@@ -14,9 +14,9 @@ require_once(__DIR__ . '/../database/item.class.php');
 require_once(__DIR__ . '/../database/tags.class.php');
 require_once(__DIR__ . '/../database/track_item.class.php');
 
-$db = get_database_connection();
-$categories = Tag::get_categories($db);
-$track_item = TrackItem::get_tracking_item($db, intval($_GET['purchase']));
-draw_header("saleInfo", $session, $categories);
+$dbh = get_database_connection();
+
+$track_item = TrackItem::get_tracking_item($dbh, intval($_GET['purchase']));
+get_header("saleInfo", $dbh, $session);
 draw_confirm_ship($track_item);
 draw_footer();

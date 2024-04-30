@@ -170,4 +170,14 @@ class User
         $stmt->execute(array($user));
         return $stmt->fetch()['currency'];
     }
+
+    public static function set_user_currency(PDO $dbh, int $user_id, string $currency): bool {
+        $stmt = $dbh->prepare('UPDATE users SET currency = ? WHERE user_id = ?');
+        return $stmt->execute(array($currency, $user_id));
+    }
+    public static function get_currencies(PDO $dbh): array {
+        $stmt = $dbh->prepare('SELECT * FROM currency');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

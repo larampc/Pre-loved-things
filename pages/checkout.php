@@ -15,11 +15,11 @@
     require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
-    $db = get_database_connection();
+    $dbh = get_database_connection();
 
-    $items = User::get_cart_items_from_user($db, $session->getId(), $session->getItemCheckout());
-    $categories = Tag::get_categories($db);
-    draw_header("cart-checkout", $session, $categories);
+    $items = User::get_cart_items_from_user($dbh, $session->getId(), $session->getItemCheckout());
+
+    get_header("cart-checkout", $dbh, $session);
     draw_checkout_form();
     draw_checkout_summary($items);
     draw_footer();

@@ -10,8 +10,7 @@
     require_once(__DIR__ . '/../database/connection.db.php');
 
     $checkout = isset($_GET['checkout']);
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    draw_header("register", $session, $categories);
+    $dbh = get_database_connection();
+    get_header("register", $dbh, $session);
     draw_register_form($checkout);
     draw_footer();

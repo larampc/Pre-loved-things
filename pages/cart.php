@@ -12,18 +12,18 @@
     require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
+    $dbh = get_database_connection();
+
     $items = array();
     if ($session->isLoggedIn()) {
-        $items = User::get_cart_items($db, $session->getId());
+        $items = User::get_cart_items($dbh, $session->getId());
     }
     else {
-        if ($session->hasItemsCart()) $items = Item::get_items_in_array($db, $session->getCart());
+        if ($session->hasItemsCart()) $items = Item::get_items_in_array($dbh, $session->getCart());
     }
     $items = Item::sort_by_user($items);
-    draw_header("cart", $session, $categories);
-    draw_cart($db, $items, $session);
+    get_header("cart", $dbh, $session);
+    draw_cart($dbh, $items, $session);
     draw_footer();
 
 

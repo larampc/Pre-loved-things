@@ -10,8 +10,8 @@
     if (!$session->isLoggedIn()) die(header('Location: /'));
 
     require_once(__DIR__ . '/../templates/item.tpl.php');
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    draw_header("new", $session, $categories);
-    draw_new_item_form($db, $categories);
+    $dbh = get_database_connection();
+    get_header("new", $dbh, $session);
+    $categories = Tag::get_categories($dbh);
+    draw_new_item_form($dbh, $categories);
     draw_footer();
