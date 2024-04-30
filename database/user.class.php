@@ -10,15 +10,15 @@ class User
     public string $name;
     public string $email;
     public string $phone;
-    public string $photoPath;
+    public int $image;
     public string $role;
 
-    public function __construct(int $user_id, string $username, string $email, string $name, string $photoPath, string $phone, string $role)
+    public function __construct(int $user_id, string $username, string $email, string $name, int $image, string $phone, string $role)
     {
         $this->user_id = $user_id;
         $this->username = $username;
         $this->name = $name;
-        $this->photoPath = $photoPath;
+        $this->image = $image;
         $this->email = $email;
         $this->phone = $phone;
         $this->role = $role;
@@ -85,7 +85,7 @@ class User
         $stmt->execute(array($id));
         $user = $stmt->fetch();
         if (!$user) return null;
-        return new User((int)$user['user_id'], $user['username'], $user['email'],$user['name'], $user['photoPath'], $user['phone'], $user['role']);
+        return new User((int)$user['user_id'], $user['username'], $user['email'],$user['name'], $user['image'], $user['phone'], $user['role']);
     }
 
     public static function get_user_feedback(PDO $dbh, int $id): array {
@@ -98,10 +98,10 @@ class User
         return $comments;
     }
 
-    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $photo): bool
+    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $image): bool
     {
-        $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, photoPath=?, username=? WHERE user_id = ?');
-        return $stmt->execute(array($email, $phone, $name, $photo, $username,$id));
+        $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, image=?, username=? WHERE user_id = ?');
+        return $stmt->execute(array($email, $phone, $name, $image, $username,$id));
     }
 
     public static function get_cart_items(PDO $dbh, int $user_id): array

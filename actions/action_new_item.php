@@ -12,10 +12,10 @@ require_once(__DIR__ . '/../utils/files.php');
 
 $dbh = get_database_connection();
 
-upload_item_image('img1');
-upload_item_image('img2');
+$img1_id = upload_item_image('img1');
+$img2_id = upload_item_image('img2');
 
-$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price'], Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $_FILES['img1']['name'],
+$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price'], Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $img1_id,
       $_POST['condition']);
 
 if ($item_id == -1) {
@@ -31,7 +31,7 @@ foreach ($tags as $tag) {
     }
 }
 
-if (!Item::register_item_images($dbh, array($_FILES['img1']['name'], $_FILES['img2']['name']), $item_id)) {
+if (!Item::register_item_images($dbh, array($img1_id, $img2_id), $item_id)) {
     $session->addMessage('error', 'Error creating item.');
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }

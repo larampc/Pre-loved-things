@@ -59,7 +59,7 @@ function createSmallChatroom(chatroom, buyer,seller,  message){
     chat_div.id = "chat" + chatroom['chatroomId']
 
     const seller_img = document.createElement('img')
-    seller_img.src = "../uploads/profile_pics/" + seller['photoPath']
+    seller_img.src = "../uploads/profile_pics/" + seller['image']
 
     const last_msg_div = document.createElement('div')
     last_msg_div.classList.add('chat-content')
@@ -162,7 +162,7 @@ function createItemInfo(chatroom_json) {
     const item_image = document.createElement('img');
     item_image.classList.add("item-msg-img");
     item_image.alt = "item image";
-    item_image.src = "../uploads/item_pics/" + chatroom_json['item']['mainImage'];
+    item_image.src = "../uploads/thumbnails/" + chatroom_json['item']['mainImage'];
     const item_link = document.createElement('a')
     item_link.href = "../pages/item.php?id=" + chatroom_json['item']['id']
     const item_link2 = item_link.cloneNode()
@@ -185,7 +185,7 @@ function createUserInfo(chatroom_json, user) {
     const addressee_image = document.createElement('img');
     addressee_image.classList.add("addressee-img");
     addressee_image.alt = "addressee profile image";
-    addressee_image.src = "../uploads/profile_pics/" + addressee['photoPath'];
+    addressee_image.src = "../uploads/profile_pics/" + addressee['image'];
     const addressee_link = document.createElement('a')
     addressee_link.href = "../pages/user.php?user_id=" + addressee['user_id']
     const addressee_link2 = addressee_link.cloneNode()
