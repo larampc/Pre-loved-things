@@ -26,10 +26,10 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
             <?php } ?>
             <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
                 <script src="../scripts/user_actions.js" defer></script>
-                <form method="post" action="../actions/action_remove_user.php">
+                <form method="post" action="../actions/action_remove_user.php" class="admin">
                     <button type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirmAction" ><i class="material-symbols-outlined big"> person_remove </i></button>
                 </form>
-                <form method="post" action="../actions/action_change_role.php">
+                <form method="post" action="../actions/action_change_role.php" class="admin">
                     <button type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirmAction" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
                 </form>
             <?php } ?>

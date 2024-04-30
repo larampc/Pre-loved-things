@@ -1008,8 +1008,21 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-radius: inherit;
 }
 
-.error .message-progress {
+.error .message-progress, .admin .message-progress {
     background: linear-gradient(to right, var(--error-background), var(--error-primary));
+}
+
+
+
+.admin {
+    margin: 0.5rem;
+    position: relative;
+    border-radius: 0.5rem;
+    button {
+        border-style: none;
+        padding-bottom: 0.5rem;
+        border-radius: 0.5rem;
+    }
 }
 
 .success .message-progress {

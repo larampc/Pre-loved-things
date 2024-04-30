@@ -47,8 +47,12 @@
     }
 }
 
-.error .message-progress {
+.error .message-progress{
     animation: progress 5s 0s linear;
+}
+
+.admin .message-progress {
+    animation: progress 3s 0s linear;
 }
 
 .success .message-progress {
