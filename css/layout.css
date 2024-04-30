@@ -654,3 +654,7 @@ main .pfPage{
 .other {
     display: block;
 }
+
+.admin-actions {
+    display: flex;
+}

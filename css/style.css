@@ -977,6 +977,8 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     --error-primary: #5a1410;
     --success-background: rgba(169, 232, 127, 0.66);
     --success-primary: #105a11;
+    --confirm-background: rgba(243, 223, 169, 0.66);
+    --confirm-primary: #6A4806;
 }
 #messages article{
     border-radius: 6px;
@@ -1008,20 +1010,27 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-radius: inherit;
 }
 
-.error .message-progress, .admin .message-progress {
+.error .message-progress {
     background: linear-gradient(to right, var(--error-background), var(--error-primary));
 }
 
+.admin .message-progress {
+    background: linear-gradient(to right, var(--confirm-background), var(--confirm-primary));
+}
 
 
 .admin {
-    margin: 0.5rem;
+    margin: 0 0.5rem 0 0;
     position: relative;
     border-radius: 0.5rem;
     button {
+        background-color: white;
         border-style: none;
         padding-bottom: 0.5rem;
         border-radius: 0.5rem;
+        i {
+            padding-bottom: 1rem;
+        }
     }
 }
 
