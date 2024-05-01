@@ -3,12 +3,16 @@
     declare(strict_types=1);
 
     require_once(__DIR__ . '/../utils/session.php');
+    require_once(__DIR__ . '/../utils/files.php');
     $session = new Session();
 
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/connection.db.php');
 
     $dbh = get_database_connection();
+    if(isset($_FILES['profilePhoto'])) {
+        $image_id = upload_user_image("profilePhoto");
+    }
 
     $user = User::get_user($dbh, $session->getId());
     if ($user == null) {
@@ -16,7 +20,7 @@
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
     if (!User::update_user($dbh, $session->getId(), $_POST['username'], $_POST['email'], $_POST['phone'], $_POST['name'],
-        empty($_POST['profilePhoto'])? $user->photoPath: $_POST['profilePhoto'])) {
+        $image_id ?? $user->image)) {
         $session->addMessage('error', 'Error editing profile. Please try again.');
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
