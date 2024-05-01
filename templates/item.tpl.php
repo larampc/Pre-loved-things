@@ -110,6 +110,8 @@ function draw_item(PDO $dbh, Session $session, Item $item) { ?>
 <?php }
 
 function draw_new_item_form(PDO $db, array $categories) { ?>
+    <script src="../scripts/preview_image.js" defer></script>
+    <link href="../css/upload.css" rel="stylesheet">
     <article class="newItemPage">
         <h2>New item</h2>
         <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
@@ -159,14 +161,20 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             <label for="price">Price</label>
             <input type="number" step="0.01" id="price" name="price" placeholder="The price of your item" required>
 
-            <label for="description">Desciption</label>
+            <label for="description">Description</label>
             <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
 
-            <label for="images">images</label>
-            <input type="file" id="img1" name="img1" accept="image/*" required>
-            <input type="file" id="img2" name="img2" accept="image/*" required>
-
-
+            <section class="item-image-uploads">
+                <h4>Upload Images</h4>
+                <div class="item-upload main-item-upload">
+                    <h5>Main Image</h5>
+                    <i class="material-symbols-outlined upload-icon">add_a_photo</i>
+                    <input type="file" id="img1" class="item-uploader" name="img1" accept="image/*" required onchange="upload(this.id)">
+                </div>
+                <div class="item-image-adder">
+                    <i class="material-symbols-outlined">add</i>
+                </div>
+            </section>
             <button type="submit" >Submit</button>
         </form>
     </article>
