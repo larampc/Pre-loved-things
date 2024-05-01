@@ -138,3 +138,16 @@ function cleanSearch() {
     resultContainer.innerHTML = "";
 }
 
+const filter = document.getElementsByClassName("filter");
+
+function openFilters() {
+    filter[0].style.width = "12rem";
+    filter[0].style.padding = "1rem 1rem 2rem";
+    filter[0].style.marginRight = "1rem";
+}
+
+function closeFilters() {
+    filter[0].style.width = "0";
+    filter[0].style.padding = "0";
+    filter[0].style.margin = "0";
+}

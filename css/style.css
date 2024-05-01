@@ -376,6 +376,8 @@ main .searchPage  h2 {
     padding: 1rem 1rem 2rem;
     background-color: #F2E8D5;
     margin-right: 1rem;
+    width: auto;
+    z-index: 3;
 }
 .category-search {
     text-align: center;
@@ -383,6 +385,21 @@ main .searchPage  h2 {
 
 .searchPage #searchres {
     padding: 5rem 0 2rem;
+}
+
+#open-filters {
+    display: none;
+    width: 3rem;
+    background-color: #D9D9D9;
+    border-radius: 0 2rem 2rem 0;
+    height: 3rem;
+    border: none;
+    z-index: 2;
+}
+#close-filters {
+    display: none;
+    background-color: transparent;
+    border: none;
 }
 
 
@@ -1097,6 +1114,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 .index-main .items .item {
     width: 200px;
     height: 200px;
+    min-width: 200px;
     border-radius: 20px;
     overflow: hidden;
     margin: 10px 5px;

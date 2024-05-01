@@ -78,10 +78,70 @@
 }
 
 .index-main .items:hover .item:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     opacity: 1;
 }
 
 .index-main .item:has(~ .item:hover), .index-main .item:hover ~ .item {
     opacity: 0.3;
+}
+
+
+
+/* TABLET VIEW */
+@media (max-width: 60em) {
+    .searchPage .filter {
+        grid-area: unset;
+        transition: width 0.1s;
+        width: 0;
+        padding: 0;
+        margin: 0;
+        clip-path: border-box;
+        position: absolute;
+        border-bottom-right-radius: 2rem;
+    }
+    #close-filters {
+        display: block;
+    }
+    #open-filters {
+        display: block;
+    }
+}
+
+/* PHONE VIEW */
+@media (max-width: 30em) {
+    body > header {
+        height: 8rem;
+        display: grid;
+        grid-template-columns:  1rem auto 1fr 1rem;
+        grid-template-rows:  auto auto;
+        grid-template-areas: "none logo buttons"
+                            "none search search";
+        a {
+            grid-area: logo;
+        }
+        #logo {
+            height: 4rem;
+        }
+    }
+    nav {
+        grid-area: buttons;
+        justify-content: right;
+    }
+    .search-container {
+        grid-area: search;
+        margin-bottom: 1rem;
+    }
+
+    main {
+        margin: 10rem 0 2rem;
+    }
+
+    main .searchPage {
+        margin-top: 8rem;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+        grid-template-areas: "category"
+                        "items";
+    }
 }

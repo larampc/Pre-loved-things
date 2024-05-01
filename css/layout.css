@@ -60,7 +60,8 @@ header nav {
 
 .index-main .items {
     display: flex;
-    flex-wrap: wrap;
+    overflow: auto;
+    overflow-y: hidden;
     justify-content: space-evenly;
 }
 
@@ -286,6 +287,15 @@ main .searchPage{
     flex-wrap: wrap;
     justify-content: center;
     gap: 1.2rem;
+}
+
+.filter_header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#open-filters {
+    grid-area: category;
 }
 
 /* USER PAGE */

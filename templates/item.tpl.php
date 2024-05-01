@@ -208,7 +208,10 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
     <script src="../scripts/search.js" defer></script>
     <article class="searchPage">
             <section class="filter">
-                <h2>Filters</h2>
+                <div class="filter_header">
+                    <h2>Filters</h2>
+                    <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined filled">close</i></button>
+                </div>
                 <p>Price</p>
                 <div class="price-input">
                     <label> Minimum
@@ -246,6 +249,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                     <?php }?>
                 </div>
             </section>
+        <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined filled">filter_list</i></button>
         <p class="category-search"><?=$category?></p>
         <section class="items searchresult">
         </section>
