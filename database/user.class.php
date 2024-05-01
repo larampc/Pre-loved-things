@@ -37,7 +37,13 @@ class User
         $stmt->execute(array($email, sha1($password)));
         $user = $stmt->fetchColumn();
 
-        if ($user === false) return null;
+        if ($user === false) {
+            $stmt = $dbh->prepare('SELECT user_id FROM users WHERE username = ? AND password = ?');
+            $stmt->execute(array($email, sha1($password)));
+            $user = $stmt->fetchColumn();
+
+            if ($user === false) return null;
+        }
         return self::get_user($dbh, $user);
     }
 

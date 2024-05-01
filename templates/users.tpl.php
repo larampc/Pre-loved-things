@@ -38,7 +38,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
         <h2>Log in</h2>
         <form class="login-form" action="../actions/action_login.php<?=$checkout? "?checkout": ""?>" method="POST">
             <label>
-                <input type="email" name="email" placeholder="Your email">
+                <input type="text" name="email" placeholder="Your email or username">
             </label>
             <label>
                 <input type="password" name="password" placeholder="Your password" autocomplete="off">
