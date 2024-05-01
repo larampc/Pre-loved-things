@@ -8,7 +8,7 @@ class Item {
     public int $id;
     public string $name;
     public array $images;
-    public string $mainImage;
+    public int $mainImage;
     public float $price;
     public string $description;
     public string $category;
@@ -20,18 +20,18 @@ class Item {
     public function __construct(PDO $db, int $id)
     {
         $this->id = $id;
-        $this->images = get_item_images($db, $id);
+        $this->images = self::get_item_images($db, $id);
     }
 
     public static function create_item(PDO $dbh, array $item): Item
     {
         $new_item = new Item($dbh, $item['id']);
-        $new_item->condition = $item['condition'] != null ? $item['condition'] : "";
-        $new_item->price = $item['price'] != null ? $item['price'] : 0.0;
-        $new_item->description = $item['description'] != null ? $item['description'] : "";
-        $new_item->name = $item['name'] != null ? $item['name'] : "";
+        $new_item->condition = $item['condition'] ??  "";
+        $new_item->price = $item['price'] ?? 0.0;
+        $new_item->description = $item['description'] ?? "";
+        $new_item->name = $item['name'] ?? "";
         $new_item->creator = User::get_user($dbh, $item['creator']);
-        $new_item->mainImage = $item['mainImage']!= null ? $item['mainImage'] : "";;
+        $new_item->mainImage = $item['mainImage'] ?? "";;
         $new_item->category = Tag::get_category_by_id($dbh, $item['category']);
         $new_item->tags = Tag::get_item_tags($dbh, $item['id']);
         $new_item->sold = boolval($item['sold']);
@@ -55,20 +55,14 @@ class Item {
 
     static function get_item_images(PDO $dbh, int $id) : array
     {
-        $stmt = $dbh->prepare('SELECT imagePath FROM item_images WHERE item = ?');
+        $stmt = $dbh->prepare('SELECT image FROM item_images WHERE item = ?');
         $stmt->execute(array($id));
         $images = array();
         while ($image = $stmt->fetch()) {
-            $images[] = $image['imagePath'];
+            $images[] = $image['image'];
         }
         return $images;
     }
-    static function get_items(PDO $dbh, int $count) : array {
-        $stmt = $dbh->prepare('SELECT * FROM items LIMIT ?');
-        $stmt->execute(array($count));
-        return self::create_items($dbh, $stmt->fetchAll());
-    }
-
     static function get_item(PDO $dbh, int $id) : ?Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
@@ -131,7 +125,7 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $dbh, string $name, string $description, string $price, int $category, int $user_id, string $mainImage, string $condition): int {
+    static function register_item(PDO $dbh, string $name, string $description, string $price, int $category, int $user_id, int $mainImage, string $condition): int {
         $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
         return $ret ? intval($dbh->lastInsertId()) : -1;
@@ -139,7 +133,7 @@ class Item {
     static function register_item_images(PDO $db, array $images, int $item_id): bool
     {
         foreach ($images as $image) {
-            $stmt = $db->prepare('INSERT INTO item_images (item, imagePath) VALUES (?, ?)');
+            $stmt = $db->prepare('INSERT INTO item_images (item, image) VALUES (?, ?)');
             if (!$stmt->execute([$item_id, $image])) return false;
         }
         return true;

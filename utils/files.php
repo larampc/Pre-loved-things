@@ -1,36 +1,57 @@
 <?php
-function upload_item_image($img)
-{
-    $target_dir = "../uploads/item_pics/";
-    $target_file = $target_dir . basename($_FILES[$img]["name"]);
-    $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-// Check if image file is an actual image or fake image
-    if (isset($_POST["submit"])) {
-        $check = getimagesize($_FILES[$img]["tmp_name"]);
-        if ($check !== false) {
-            $uploadOk = 1;
-        } else {
-            echo "File is not an image.";
-            $uploadOk = 0;
-        }
+
+require_once ('../database/connection.db.php');
+
+function upload_item_image($img) : int {
+    $dbh = get_database_connection();
+
+    // PHP saves the file temporarily here
+    // Image is the name of the file input in the form
+    $tempFileName = $_FILES[$img]['tmp_name'];
+
+    // Create an image representation of the original image
+    // @ before function is to prevent warning messages
+    $original = @imagecreatefromjpeg($tempFileName);
+    if (!$original) $original = @imagecreatefrompng($tempFileName);
+    if (!$original) $original = @imagecreatefromgif($tempFileName);
+
+    if (!$original) die('Unknown image format!');
+
+    // Insert image data into database
+    $stmt = $dbh->prepare("INSERT INTO images VALUES (NULL)");
+    $stmt->execute();
+
+    // Get image ID
+    $id = $dbh->lastInsertId();
+
+    // Generate filenames for original, small and medium files
+    $thumbnailFileName = "../uploads/thumbnails/$id.png";
+    $mediumFileName = "../uploads/medium/$id.png";
+
+    $width = imagesx($original);     // width of the original image
+    $height = imagesy($original);    // height of the original image
+    $square = min($width, $height);  // size length of the maximum square
+
+
+    // We could also copy the file directly without converting to jpeg
+    // move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
+
+    // Create and save a small square thumbnail
+    $small = imagecreatetruecolor(200, 200);
+    imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
+    imagejpeg($small, $thumbnailFileName);
+
+    // Calculate width and height of medium sized image (max width: 400)
+    $medium_width = $width;
+    $medium_height = $height;
+    if ($medium_width > 400) {
+        $medium_width = 400;
+        $medium_height = $medium_height * ( $medium_width / $width );
     }
 
-// Check if file already exists
-    if (file_exists($target_file)) {
-        $uploadOk = 0;
-    }
-
-// Check file size
-    if ($_FILES[$img]["size"] > 500000) {
-        $uploadOk = 0;
-    }
-
-// Check if $uploadOk is set to 0 by an error
-    if ($uploadOk == 1) {
-        if (!move_uploaded_file($_FILES[$img]["tmp_name"], $target_file)) {
-            echo "Sorry, there was an error uploading your file.";
-        }
-    }
-
+    // Create and save a medium image
+    $medium = imagecreatetruecolor($medium_width, $medium_height);
+    imagecopyresized($medium, $original, 0, 0, 0, 0, $medium_width, $medium_height, $width, $height);
+    imagejpeg($medium, $mediumFileName);
+    return $id;
 }

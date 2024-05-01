@@ -9,4 +9,4 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-User::like_item($dbh, $session->getId(), (int)$_GET['item']);
+User::like_item($dbh, $session->getId(), intval($_GET['item']));

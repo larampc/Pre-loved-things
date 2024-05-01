@@ -14,7 +14,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
 
 function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
     <section class="user">
-        <img src="../uploads/profile_pics/<?=$user->photoPath?>" class="profile-pic" alt="profile picture">
+        <img src="../uploads/profile_pics/<?=$user->image?>.png" class="profile-pic" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
             <?php if ($session->isLoggedIn() &&  $session->getId() === $user->user_id) {?><p class="username"><?=$user->username?></p> <?php } ?>
@@ -26,12 +26,15 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
             <?php } ?>
             <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
                 <script src="../scripts/user_actions.js" defer></script>
-                <form method="post" action="../actions/action_remove_user.php">
-                    <button type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirmAction" ><i class="material-symbols-outlined big"> person_remove </i></button>
-                </form>
-                <form method="post" action="../actions/action_change_role.php">
-                    <button type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirmAction" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
-                </form>
+                <div class="admin-actions">
+                    <form method="post" action="../actions/action_remove_user.php" class="admin">
+                        <button title="Remove user" type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirmAction" ><i class="material-symbols-outlined big"> person_remove </i></button>
+                    </form>
+                    <form method="post" action="../actions/action_change_role.php" class="admin">
+                        <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirmAction" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
+                    </form>
+                </div>
+
             <?php } ?>
         </div>
     </section>
@@ -68,7 +71,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                     foreach ($feedback as $comment) {
                         ?>
                     <article class="comment">
-                        <img src="../uploads/profile_pics/<?= $comment->from->photoPath?>" class="profile-pic" alt="profile picture">
+                        <img src="../uploads/profile_pics/<?= $comment->from->image?>.png" class="profile-pic" alt="profile picture">
                         <p class="uname"><?=$comment->from->name?></p>
                         <time><?=$comment->date?></time>
                         <p class="content"><?=$comment->message?></p>
@@ -117,7 +120,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
             if ($user != $item->creator) { ?>
                 <section class="seller">
                     <a href="../pages/user.php?user_id=<?=$item->creator->user_id?>" class="seller-info">
-                        <img src="../uploads/profile_pics/<?= $item->creator->photoPath?>" class="profile-pic" alt="profile-photo">
+                        <img src="../uploads/profile_pics/<?= $item->creator->image?>.png" class="profile-pic" alt="profile-photo">
                         <p><?=$item->creator->name?></p>
                     </a>
                     <article class="seller-items">

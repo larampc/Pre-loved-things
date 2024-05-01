@@ -1,7 +1,6 @@
 function openNav(option) {
-    var i;
-    var x = document.querySelectorAll(".display-item .items");
-    console.log(x)
+    let i;
+    const x = document.querySelectorAll(".display-item .items");
     for (i = 0; i < x.length; i++) {
         x[i].style.maxHeight = "0"
         x[i].style.borderRadius = "1rem";

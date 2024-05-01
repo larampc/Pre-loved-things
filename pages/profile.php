@@ -19,9 +19,7 @@
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $dbh = get_database_connection();
-    $categories = Tag::get_categories($dbh);
-    draw_header("profile", $session, $categories);
-
+    get_header("profile", $dbh, $session);
     $user = User::get_user($dbh, $session->getId());
     $feedback = User::get_user_feedback($dbh, $session->getId());
     $items = Item::get_user_items($dbh, $session->getId());
