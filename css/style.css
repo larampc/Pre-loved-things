@@ -682,7 +682,7 @@ i {
     border-radius: 1rem;
     padding: 0.8rem;
     margin-left: 2rem;
-    margin-top: 0.4rem;
+    margin-top: 1rem;
     p {
         margin: 0;
     }
@@ -697,7 +697,7 @@ i {
     border-radius: 1rem;
     padding: 0.8rem;
     margin-right: 2rem;
-    margin-top: 0.4rem;
+    margin-top: 1rem;
     p {
         margin: 0;
     }
@@ -706,8 +706,19 @@ i {
     }
 }
 
-.received-message + .sent-message, .sent-message + .received-message {
-    margin-top: 1rem;
+.sent-message:has( + .sent-message) {
+    margin-top: 0.2rem;
+    border-top-right-radius: 0.5rem;
+}
+.sent-message + .sent-message {
+    border-bottom-right-radius: 0.5rem;
+}
+.received-message:has( + .received-message) {
+    margin-top: 0.2rem;
+    border-top-left-radius: 0.5rem;
+}
+.received-message + .received-message {
+    border-bottom-left-radius: 0.5rem;
 }
 
 .input-group {
