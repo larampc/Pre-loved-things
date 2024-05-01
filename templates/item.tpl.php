@@ -276,7 +276,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         </div>
         <?php draw_items($dbh, $session, $trackItem->tracking );
         if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
-            <button id="print" class="../pages/saleInfo.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
+            <button id="print" class="../pages/sale_info.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
         <?php } ?>
     </section>
 
@@ -296,7 +296,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
     <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
     <qr-code
             id="qr1"
-            contents="http://localhost:9000/pages/confirmShip.php?purchase=<?=$trackItem->id?>"
+            contents="http://localhost:9000/pages/confirm_ship.php?purchase=<?=$trackItem->id?>"
             module-color="#000000"
             position-ring-color="#000000"
             position-center-color="#000000"

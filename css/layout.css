@@ -11,7 +11,7 @@ main {
     flex-grow: 1;
 }
 
-main.inboxMain {
+main.inbox-main {
     display: grid;
     grid-template-columns:  2fr 3fr;
     grid-template-areas: "inbox message"
@@ -58,7 +58,7 @@ header nav {
     align-items: center;
 }
 
-.mainMain .items {
+.index-main .items {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -323,7 +323,7 @@ main .userPage{
     justify-content: center;
 }
 
-.userPage .items, .pfPage .items, .favoriteMain .items {
+.userPage .items, .pfPage .items, .favorite-main .items {
     grid-area: items;
     display: flex;
     flex-wrap: wrap;
@@ -442,7 +442,7 @@ main .userPage{
 
 
 
-.cart-checkoutMain {
+.cart-checkout-main {
     display: flex;
     flex-direction: row;
     margin-left: 2rem;

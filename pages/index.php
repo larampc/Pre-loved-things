@@ -14,7 +14,7 @@
 
     $liked_items = Item::get_most_liked_items($dbh, 5);
     $recent_items = Item::get_last_added_items($dbh, 5);
-    get_header("main", $dbh, $session);
+    get_header("index", $dbh, $session);
 
     draw_items_main($dbh, $session, $liked_items, $recent_items);
     draw_footer();

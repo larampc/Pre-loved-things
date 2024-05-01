@@ -4,13 +4,13 @@ main {
     margin: 7rem 0 2rem;
 }
 
-main.newMain, main.editprofileMain {
+main.new-main, main.edit-profile-main {
     margin: 0;
     padding: 7rem 0 2rem;
     background-color: #F2E8D5;
 }
 
-main.searchMain {
+main.search-main {
     margin: 0;
 }
 
@@ -539,7 +539,7 @@ i {
     text-decoration: none;
 }
 
-.loginMain {
+.login-main {
     width: 40%;
     height: 0;
     margin-right: auto;
@@ -613,14 +613,14 @@ i {
     transform: rotateZ(-270deg);
     left: 2.5rem;
 }
-.loginMain h3 {
+.login-main h3 {
     margin: 1rem 0 0;
     text-align: center;
     span {
         margin: 1rem;
     }
 }
-.loginMain {
+.login-main {
     justify-content: center;
 }
 
@@ -808,22 +808,22 @@ i {
     min-width: 1.3rem;
 }
 
-main.inboxMain ::-webkit-scrollbar {
+main.inbox-main ::-webkit-scrollbar {
     width: 20px;
 }
 
-main.inboxMain ::-webkit-scrollbar-track {
+main.inbox-main ::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-main.inboxMain ::-webkit-scrollbar-thumb {
+main.inbox-main ::-webkit-scrollbar-thumb {
     background: #F2E8D5;
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
 }
 
-main.inboxMain ::-webkit-scrollbar-thumb:hover {
+main.inbox-main ::-webkit-scrollbar-thumb:hover {
     background-color: #efdab4cd;
 }
 
@@ -1077,14 +1077,14 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     padding: 0;
 }
 
-.mainMain .items {
+.index-main .items {
     margin: 0;
     width: 100%;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-.mainMain .items .item {
+.index-main .items .item {
     width: 200px;
     height: 200px;
     border-radius: 20px;
@@ -1097,14 +1097,14 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     border-color: #F1F1F1;
 }
 
-.mainMain .items .item img {
+.index-main .items .item img {
     width: 200px;
     height: 200px;
     object-fit: cover;
     border-style: none;
 }
 
-.mainMain .items .item .item-info {
+.index-main .items .item .item-info {
     background: linear-gradient(
             to top,
             rgba(0, 0, 0, 0.9) 0%,
@@ -1120,11 +1120,11 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
     padding: 165px 10px 10px;
 }
 
-.mainMain .items .item .item-info:hover {
+.index-main .items .item .item-info:hover {
     opacity: 1;
 }
 
-.mainMain .items .item .item-info p {
+.index-main .items .item .item-info p {
     color: #fff;
     margin: 5px 0;
     font-size: 0.8rem;
@@ -1174,7 +1174,7 @@ a {
     }
 }
 
-.saleInfoMain {
+.sale-info-main {
     align-items: center;
 }
 
@@ -1183,4 +1183,8 @@ a {
     border-top: 2px solid black;
     padding: 2rem;
     margin-bottom: 2rem;
+}
+
+.profile-picture {
+    border-radius: 100%;
 }

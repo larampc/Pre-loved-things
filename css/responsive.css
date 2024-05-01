@@ -65,23 +65,23 @@
     }
 }
 
-.mainMain .items .item .item-info {
+.index-main .items .item .item-info {
     transition: 450ms opacity;
 }
 
-.mainMain .items .item:hover ~  .item {
+.index-main .items .item:hover ~  .item {
     transform: translate3d(10px, 0, 0);
 }
 
-.mainMain .item:has(~ .item:hover) {
+.index-main .item:has(~ .item:hover) {
     transform: translate3d(-10px, 0, 0);
 }
 
-.mainMain .items:hover .item:hover {
+.index-main .items:hover .item:hover {
     transform: scale(1.2);
     opacity: 1;
 }
 
-.mainMain .item:has(~ .item:hover), .mainMain .item:hover ~ .item {
+.index-main .item:has(~ .item:hover), .index-main .item:hover ~ .item {
     opacity: 0.3;
 }

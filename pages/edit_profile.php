@@ -15,6 +15,6 @@
 
     $dbh = get_database_connection();
 
-    get_header("editProfile", $dbh, $session);
+    get_header("edit-profile", $dbh, $session);
     draw_edit_profile(User::get_user($dbh, $session->getId()));
     draw_footer();

@@ -68,7 +68,7 @@ function draw_header(string $page, Session $session, array $categories, array $c
                 </article>
             <?php } ?>
         </section>
-    <main class=<?=$page . "Main"?>>
+    <main class=<?=$page . "-main"?>>
 <?php } ?>
 
 <?php function draw_footer() { ?>
