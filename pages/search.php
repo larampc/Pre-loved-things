@@ -12,6 +12,6 @@
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $dbh = get_database_connection();
-    get_header("search.php", $dbh, $session);
+    get_header("search", $dbh, $session);
     draw_page_filters($_GET['category'], $dbh);
     draw_footer();
