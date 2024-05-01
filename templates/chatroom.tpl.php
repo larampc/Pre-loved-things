@@ -15,8 +15,8 @@ function draw_user_chatrooms(array $chatrooms, User $from) : void { ?>
     <?php
 }
 function draw_small_chatroom(Chatroom $chatroom, User $from, User $to) : void { ?>
-    <div class="chat" id=<?= "chat" . $chatroom->chatroomId ?>>
-        <img src=../uploads/profile_pics/"<?=$to->image?>.png" />
+    <div class="chat" id="caht<?=$chatroom->chatroomId ?>">
+        <img src="../uploads/profile_pics/<?=$to->image?>.png" />
         <div class="chat-content">
             <h4><?= $to->name?></h4>
             <p> <?php echo $chatroom->last_message->message ?? " " ?></p>

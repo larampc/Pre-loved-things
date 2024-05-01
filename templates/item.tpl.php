@@ -90,7 +90,7 @@ function draw_item(PDO $dbh, Session $session, Item $item) { ?>
             </form>
         </section>
         <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator->user_id?>"><?=$item->creator->name?>
-            <img src="../uploads/profile_pics/<?=$item->creator->image?>.png" alt="profile picture">
+            <img src="../uploads/profile_pics/<?=$item->creator->image?>.png" class="profile-picture" alt="profile picture">
         </a>
         <section class="itemTags">
             <ul>
@@ -192,7 +192,7 @@ function draw_edit_item_form(Item $item) { ?>
             <label for="price">Price</label>
             <input type="number" step="0.01" id="price" name="price" value="<?= $item->price ?>" required>
 
-            <label for="description">Desciption</label>
+            <label for="description">Description</label>
             <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40">
 
             <label for="images">images</label>
