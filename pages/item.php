@@ -12,9 +12,9 @@
     require_once(__DIR__ . '/../templates/item.tpl.php');
     require_once(__DIR__ . '/../templates/common.tpl.php');
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    $item = Item::get_item($db, intval($_GET['id']));
-    draw_header("item", $session, $categories);
-    draw_item_page($db, $item, $session);
+    $dbh = get_database_connection();
+
+    $item = Item::get_item($dbh, intval($_GET['id']));
+    get_header("item", $dbh, $session);
+    draw_item_page($dbh, $item, $session);
     draw_footer();

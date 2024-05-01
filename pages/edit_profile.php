@@ -13,8 +13,8 @@
 
     require_once(__DIR__ . '/../templates/user.tpl.php');
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    draw_header("editprofile", $session, $categories);
-    draw_edit_profile(User::get_user($db, $session->getId()));
+    $dbh = get_database_connection();
+
+    get_header("editProfile", $dbh, $session);
+    draw_edit_profile(User::get_user($dbh, $session->getId()));
     draw_footer();

@@ -1,4 +1,7 @@
-<?php function draw_header(string $page, Session $session, array $categories) { ?>
+<?php
+require_once ("../database/user.class.php");
+
+function draw_header(string $page, Session $session, array $categories, array $currencies) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -16,6 +19,8 @@
     <script src="../scripts/remove_cart.js" defer></script>
     <script src="../scripts/checkout.js" defer></script>
     <script src="../scripts/flip.js" defer></script>
+    <script src="../scripts/print.js" defer></script>
+    <script src="../scripts/set_currency.js" defer></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body> 
@@ -32,8 +37,14 @@
                 <datalist id="search-suggestions"></datalist>
             </form>
         <nav>
-
-            <p><?=$session->getCurrency()?></p>
+            <form method="GET" action="../actions/action_change_currency.php">
+                <select class="currency" name="currency" >
+                    <?php foreach ($currencies as $currency) { ?>
+                        <option id="<?=$currency['code']?>" value="<?=$currency['code']?>" <?=$currency['code'] == $session->getCurrency()? "selected":""?>><?=$currency['code']?></option>
+                    <?php } ?>
+                </select>
+                <button type="submit" class="change-currency"></button>
+            </form>
             <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if ($session->isLoggedIn()) { ?>
                 <a href="../pages/favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
@@ -69,3 +80,9 @@
   </body>
 </html>
 <?php } ?>
+
+<?php function get_header(string $name,PDO $dbh, Session $session) {
+    $categories = Tag::get_categories($dbh);
+    $currencies = User::get_currencies($dbh);
+    draw_header($name, $session, $categories, $currencies);
+}

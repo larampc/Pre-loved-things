@@ -73,11 +73,15 @@
     transform: translate3d(10px, 0, 0);
 }
 
-.mainMain .items:hover .item {
-    opacity: 0.3;
+.mainMain .item:has(~ .item:hover) {
+    transform: translate3d(-10px, 0, 0);
 }
 
 .mainMain .items:hover .item:hover {
     transform: scale(1.2);
     opacity: 1;
+}
+
+.mainMain .item:has(~ .item:hover), .mainMain .item:hover ~ .item {
+    opacity: 0.3;
 }

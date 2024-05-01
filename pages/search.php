@@ -11,8 +11,7 @@
 
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
-    $db = get_database_connection();
-    $categories = Tag::get_categories($db);
-    draw_header("search", $session, $categories);
-    draw_page_filters($_GET['category'], $db);
+    $dbh = get_database_connection();
+    get_header("search", $dbh, $session);
+    draw_page_filters($_GET['category'], $dbh);
     draw_footer();

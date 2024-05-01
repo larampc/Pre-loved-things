@@ -276,7 +276,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         </div>
         <?php draw_items($trackItem->tracking );
         if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
-            <a href="../pages/saleInfo.php?purchase=<?=$trackItem->id?>">Get shipping form</a>
+            <button id="print" class="../pages/saleInfo.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
         <?php } ?>
     </section>
 
@@ -294,7 +294,6 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 
 <?php function draw_sale_info(PDO $db, TrackItem $trackItem, int $seller) { ?>
     <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
-    <script src="../scripts/qrcode.js" defer></script>
     <qr-code
             id="qr1"
             contents="http://localhost:9000/pages/confirmShip.php?purchase=<?=$trackItem->id?>"
@@ -303,12 +302,13 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
             position-center-color="#000000"
             mask-x-to-y-ratio="1.2"
             style="
-    width: 200px;
-    height: 200px;
+    width: 40%;
+    height: 40%;
     margin: 2em auto;
-    background-color: #F2E8D5;
+    border: 1rem solid #F2E8D5;
+    border-radius: 2rem;
   "
-            ><img src="../resources/logo.png" slot="icon" style="width: 40px; margin:auto">
+            ><img src="../resources/logo.png" slot="icon" style="width: 100%">
     </qr-code>
     <div class="shipInfo">
         <?php $user = User::get_user($db, $trackItem->buyer)?>

@@ -347,6 +347,16 @@ main .cartPage  h2 {
     height: 20rem;
 }
 
+/* TRACK ITEM */
+#print {
+    background-color: #E5CFA4;
+    width: 50%;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-top:0.5rem;
+    border-style: none;
+    color: #6A4806;
+}
 
 /* SEARCH PAGE */
 
@@ -1135,4 +1145,42 @@ main.inboxMain ::-webkit-scrollbar-thumb:hover {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+/* saleInfo */
+@media print {
+    /* All your print styles go here */
+    header {
+        display: none !important;
+    }
+    #messages {
+        display: none !important;
+    }
+    main {
+        margin: 0 !important;
+    }
+    footer {
+        display: none !important;
+    }
+    @page {
+        @bottom-left {
+            content: none;
+        }
+        @bottom-left-corner {
+            content: none;
+        }
+        size: A5 portrait;
+        margin: 0;
+    }
+}
+
+.saleInfoMain {
+    align-items: center;
+}
+
+.shipInfo {
+    border-bottom: 2px solid black;
+    border-top: 2px solid black;
+    padding: 2rem;
+    margin-bottom: 2rem;
 }
