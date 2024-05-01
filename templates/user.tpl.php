@@ -6,7 +6,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
         draw_user_feedback($user, $feedback, $session->getId());
-        draw_items($items);
+        draw_items($dbh, $session, $items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
         ?>
     </article> <?php
@@ -125,7 +125,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                     </a>
                     <article class="seller-items">
             <?php }
-            draw_item($item);
+            draw_item($db, $session, $item);
             $num_items += 1;
             $sum += $item->price;
             $user = $item->creator;
@@ -149,6 +149,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
 <?php } ?>
 
 <?php function draw_checkout_form() { ?>
+    <script src="../scripts/checkout.js" defer></script>
     <form class="checkout" method="post" action="../actions/action_purchase.php">
         <ul class="state">
             <li class="current">
@@ -241,7 +242,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
     </div>
 <?php } ?>
 
-<?php  function draw_user_options(PDO $db, Session $session) { ?>
+<?php  function draw_user_options(PDO $dbh, Session $session) { ?>
     <script src="../scripts/profileNav.js" defer></script>
     <section class="display-item">
         <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
@@ -252,22 +253,22 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
         </div>
         <section class="items" id="purchased">
             <?php
-            $items = TrackItem::get_purchased_items($db, $session->getId());
+            $items = TrackItem::get_purchased_items($dbh, $session->getId());
             foreach ($items as $item) {
-                draw_item_to_track($db, $item);
+                draw_item_to_track($dbh, $item);
             } ?>
             </section>
         <section class="items" id="sales">
             <?php
-            $items = TrackItem::get_selling_items($db, $session->getId());
+            $items = TrackItem::get_selling_items($dbh, $session->getId());
             foreach ($items as $item) {
-                draw_item_to_track($db, $item);
+                draw_item_to_track($dbh, $item);
             } ?>
             </section>
         <section class="items" id="my">
-            <?php $items = Item::get_user_items($db, $session->getId());
+            <?php $items = Item::get_user_items($dbh, $session->getId());
             foreach($items as $item) {
-                draw_item($item);
+                draw_item($dbh, $session, $item);
             } ?>
         </section>
     </section>

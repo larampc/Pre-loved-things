@@ -68,5 +68,9 @@ else {
     }
 }
 
-$res = Item::get_filtered_items($dbh, $itemsCat, $itemsCond, $itemsTags, intval($page), $checkTag, $min, $max, $search);
+    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsCond, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search);
+    foreach ($res as $item) {
+    $item->price = round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()), 2);
+}
+
 echo json_encode($res);

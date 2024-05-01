@@ -1,28 +1,28 @@
 <?php declare(strict_types = 1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
-function draw_item(Item $item) { ?>
+function draw_item(PDO $dbh, Session $session, Item $item) { ?>
     <a href="../pages/item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
         <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
-            <p class="price"><?=$item->price?></p>
+            <p class="price"><?=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2) . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
         </div>
     </a>
 <?php }
 
-    function draw_items_main(array $liked_items, array $recent_items) { ?>
+    function draw_items_main( PDO $dbh, Session $session, array $liked_items, array $recent_items) { ?>
     <h2>Last Added Items</h2>
         <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
-        <?php draw_items($recent_items); ?>
+        <?php draw_items($dbh, $session, $recent_items); ?>
     <h2>Most liked</h2>
-        <?php draw_items($liked_items); ?>
+        <?php draw_items($dbh, $session, $liked_items); ?>
     <?php }
 
-    function draw_items(array $items) { ?>
+    function draw_items(PDO $dbh, Session $session, array $items) { ?>
     <section class="items">
         <?php foreach($items as $item) {
-            draw_item($item);
+            draw_item($dbh, $session, $item);
         } ?>
     </section>
 <?php } ?>
@@ -72,7 +72,7 @@ function draw_item(Item $item) { ?>
             <p><?= $item->description ?></p>
         </section>
         <section class="priceSection">
-            <span class="price"><?= $item->price?></span>
+            <span class="price"><?= round($item->price * User::get_currency_conversion($db, $session->getCurrency()),2) . User::get_currency_symbol($db, $session->getCurrency())?></span>
             <?php if ($item->sold === false) { ?>
                 <section class="buy-item">
                     <i class="material-symbols-outlined cart big"> local_mall </i>
@@ -157,7 +157,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             </select>
 
             <label for="price">Price</label>
-            <input type="number" id="price" name="price" placeholder="The price of your item" required>
+            <input type="number" step="0.01" id="price" name="price" placeholder="The price of your item" required>
 
             <label for="description">Desciption</label>
             <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
@@ -190,7 +190,7 @@ function draw_edit_item_form(Item $item) { ?>
             </select>
 
             <label for="price">Price</label>
-            <input type="number" id="price" name="price" value="<?= $item->price ?>" required>
+            <input type="number" step="0.01" id="price" name="price" value="<?= $item->price ?>" required>
 
             <label for="description">Desciption</label>
             <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40">
@@ -252,7 +252,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         </article>
 <?php } ?>
 
-<?php function draw_item_tracking(TrackItem $trackItem, Session $session) { ?>
+<?php function draw_item_tracking(PDO $dbh, TrackItem $trackItem, Session $session) { ?>
     <section class="item-track">
         <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "") ?></button>
         <ul class="state">
@@ -274,7 +274,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                 <p><?=$trackItem->date?></p>
             <?php } ?>
         </div>
-        <?php draw_items($trackItem->tracking );
+        <?php draw_items($dbh, $session, $trackItem->tracking );
         if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
             <button id="print" class="../pages/saleInfo.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
         <?php } ?>

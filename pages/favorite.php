@@ -25,5 +25,5 @@
             <p>You have no favorite items yet</p>
         </section>
     <?php }
-    else draw_items($items);
+    else draw_items($dbh, $session, $items);
     draw_footer();

@@ -24,14 +24,15 @@ async function getFilteredItems() {
     if (isLoading) return;
     isLoading = true;
     const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres)
-    console.log(response)
     const items = await response.json();
     if (items.length === 0) {
         all = true;
         isLoading = false;
         return;
     }
-    items.forEach(item => resultContainer.appendChild(createItem(item)));
+    const response_currency = await fetch('../api/api_get_currency.php')
+    const currency = await response_currency.json();
+    items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
     isLoading = false;
 }
 
@@ -87,7 +88,7 @@ function encodeForAjaxArray(data) {
     }).join('&')
 }
 
-function createItem(item) {
+function createItem(item, symbol) {
     const main = document.createElement('a');
     main.href = "item.php?id=" + item.id;
     main.className = "item";
@@ -101,7 +102,7 @@ function createItem(item) {
     name.className = "name"
     div.appendChild(name);
     const price = document.createElement("p")
-    price.innerText = item.price;
+    price.innerText = item.price + symbol;
     price.className = "price"
     div.appendChild(price);
     main.appendChild(div);

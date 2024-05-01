@@ -139,7 +139,7 @@ CREATE TABLE shippingCode (
 
 CREATE TABLE currency (
     code VARCHAR PRIMARY KEY,
-    value INTEGER,
+    value REAL,
     symbol VARCHAR
 );
 

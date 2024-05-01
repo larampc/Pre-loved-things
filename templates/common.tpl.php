@@ -17,7 +17,6 @@ function draw_header(string $page, Session $session, array $categories, array $c
     <script src="../scripts/like.js" defer></script>
     <script src="../scripts/add_cart.js" defer></script>
     <script src="../scripts/remove_cart.js" defer></script>
-    <script src="../scripts/checkout.js" defer></script>
     <script src="../scripts/flip.js" defer></script>
     <script src="../scripts/print.js" defer></script>
     <script src="../scripts/set_currency.js" defer></script>

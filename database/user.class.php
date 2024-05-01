@@ -180,4 +180,14 @@ class User
         $stmt->execute();
         return $stmt->fetchAll();
     }
+    public static function get_currency_conversion(PDO $dbh, string $currency) : float {
+        $stmt = $dbh->prepare('SELECT value FROM currency WHERE code = ?');
+        $stmt->execute(array($currency));
+        return $stmt->fetch()['value'];
+    }
+    public static function get_currency_symbol(PDO $dbh, string $currency) : string {
+        $stmt = $dbh->prepare('SELECT symbol FROM currency WHERE code = ?');
+        $stmt->execute(array($currency));
+        return $stmt->fetch()['symbol'];
+    }
 }

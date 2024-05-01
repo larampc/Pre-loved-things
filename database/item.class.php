@@ -125,9 +125,9 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $dbh, string $name, string $description, string $price, int $category, int $user_id, int $mainImage, string $condition): int {
+    static function register_item(PDO $dbh, string $name, string $description, float $price, int $category, int $user_id, int $mainImage, string $condition): int {
         $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, floatval(str_replace(',', '.', $price)), $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
+        $ret = $stmt->execute([$name, $description, $price, $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
         return $ret ? intval($dbh->lastInsertId()) : -1;
     }
     static function register_item_images(PDO $db, array $images, int $item_id): bool

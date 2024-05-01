@@ -15,7 +15,7 @@ $dbh = get_database_connection();
 $img1_id = upload_item_image('img1');
 $img2_id = upload_item_image('img2');
 
-$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price'], Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $img1_id,
+$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()) , Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $img1_id,
       $_POST['condition']);
 
 if ($item_id == -1) {
