@@ -203,9 +203,7 @@ class Item {
         $stmt = $dbh->prepare("INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES(?, ?, ?, ?, ?, ?)");
         $stmt->execute(array($buyer,date('d/m/Y', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
         $purchase = intval($dbh->lastInsertId());
-        var_dump($purchase);
         foreach ($items as $item) {
-            var_dump($item);
             $stmt = $dbh->prepare('INSERT INTO purchases VALUES(?, ?)');
             $stmt->execute(array($item->id, $purchase));
         }

@@ -358,6 +358,11 @@ main .cartPage  h2 {
     color: #6A4806;
 }
 
+.item-track .items {
+    display: flex;
+    justify-content: center;
+}
+
 /* SEARCH PAGE */
 
 .searchPage .item-info {

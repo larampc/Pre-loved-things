@@ -160,7 +160,7 @@ header nav {
 .slider-btns {
     position: absolute;
     z-index: 2;
-    width:24rem;
+    width:25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;

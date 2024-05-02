@@ -25,6 +25,35 @@ function draw_item(PDO $dbh, Session $session, Item $item) { ?>
             draw_item($dbh, $session, $item);
         } ?>
     </section>
+<?php }
+function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
+    <section class="items">
+        <div class="image-slide">
+            <?php if (count($items) > 1) { ?>
+                <div class="slider-btns">
+                    <i class="material-symbols-outlined" id="prev-btn"> chevron_left </i>
+                    <i class="material-symbols-outlined" id="next-btn"> chevron_right </i>
+                </div>
+            <?php } ?>
+            <section class="dots">
+                <?php for($i = 0; $i < sizeof($items); $i++) { ?>
+                    <div class="dot" style="opacity: 0.2;"></div>
+                <?php } ?>
+            </section>
+            <?php foreach($items as $item) {
+                ?>
+                <a href="../pages/item.php?id=<?= $item->id ?>" class="slides item" id="<?=$item->id?>">
+                    <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
+                    <div class="item-info">
+                        <p class="name"><?=$item->name?></p>
+                        <p class="price"><?=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2) . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
+                    </div>
+                </a>
+                <?php
+            } ?>
+        </div>
+        <script src="../scripts/slide.js" defer></script>
+    </section>
 <?php } ?>
 
 <?php function draw_item_images(array $images) { ?>
@@ -286,7 +315,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                 <p><?=$trackItem->date?></p>
             <?php } ?>
         </div>
-        <?php draw_items($dbh, $session, $trackItem->tracking );
+        <?php draw_sliding_items($dbh, $session, $trackItem->tracking );
         if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
             <button id="print" class="../pages/sale_info.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
         <?php } ?>
