@@ -328,7 +328,7 @@ main .cartPage  h2 {
     padding: 0.5rem;
 }
 
-.newItemPage input[type=text], .newItemPage input[type=number], select, .edit-profile input[type=text] {
+.newItemPage input[type=text], .newItemPage input[type=number], select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
     background-color: #F1F1F1;
     border-style: none;
     border-radius: 0.5rem;

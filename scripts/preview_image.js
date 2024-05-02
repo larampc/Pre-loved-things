@@ -14,9 +14,9 @@ if(imageAdder){
 }
 
 function onchangeHandler() {
-    upload(this.id);
+    previewImage(this.id);
 }
-function upload(imageId) {
+function previewImage(imageId) {
 
     const fileUploadInput = document.querySelector('.item-uploader#' + imageId)
     const itemPicture = fileUploadInput.parentElement

@@ -49,9 +49,9 @@ function draw_edit_profile($user) { ?>
             <label for="username"> Username </label>
             <input type="text" id="username" name="username" value="<?=$user->username?>" required>
             <label for="email"> Email </label>
-            <input type="text" id="email" name="email" value="<?=$user->email?>" required>
+            <input type="email" id="email" name="email" value="<?=$user->email?>" required>
             <label for="phone"> Phone </label>
-            <input type="text" id="phone" name="phone" value="<?=$user->phone?>" required>
+            <input type="tel" id="phone" name="phone" value="<?=$user->phone?>" required>
             <label for="pf">Profile photo</label>
             <input type="file" id="pf" name="profilePhoto" accept="image/*">
             <button type="submit">Submit</button>
@@ -106,7 +106,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                             <p class="total"><?=$sum?></p>
                         </div>
                         <form class="checkout-item" action="../actions/action_checkout.php" method="post">
-                            <input type="hidden" value="<?=$user?>" name="user_items">
+                            <input type="hidden" value="<?=$user->user_id?>" name="user_items">
                             <label>
                                 <button class="checkout" type="submit">Buy now!</button>
                             </label>
