@@ -4,12 +4,14 @@ const imageAdder = document.querySelector('.item-image-adder')
 let lastLoadedImageId = 0;
 let allImagesAreLoaded = false
 
-imageAdder.addEventListener('click', () => {
-    if (allImagesAreLoaded){
-        uploadSection.insertBefore(createItemImageUploader(), imageAdder)
-        allImagesAreLoaded = false
-    }
-})
+if(imageAdder){
+    imageAdder.addEventListener('click', () => {
+        if (allImagesAreLoaded){
+            uploadSection.insertBefore(createItemImageUploader(), imageAdder)
+            allImagesAreLoaded = false
+        }
+    })
+}
 
 function onchangeHandler() {
     upload(this.id);
