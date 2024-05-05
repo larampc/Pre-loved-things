@@ -106,6 +106,40 @@
     #open-filters {
         display: block;
     }
+
+    .itemPage {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        grid-template-rows: auto auto auto auto auto auto;
+        grid-template-areas:
+        "header header"
+        "picture picture"
+        "picture picture"
+        "priceSection priceSection"
+        "description description"
+        "tags tags"
+        "sendMessage userProfile";
+        padding: 1rem 3rem 0 3rem;
+    }
+    .slides, .item-images, .image-slide {
+        margin: 0;
+        justify-self: center;
+        width: 20rem;
+        height: 20rem;
+        border-radius: 2rem;
+    }
+    .slider-btns {
+        width: 20rem;
+    }
+    .priceSection {
+        margin-top: 1rem;
+    }
+    .itemPage .sendMessage {
+        width: 8rem;
+    }
+    .itemPage .userProfile {
+        margin-right: 0;
+    }
 }
 
 /* PHONE VIEW */
@@ -143,5 +177,23 @@
         grid-template-rows: auto auto;
         grid-template-areas: "category"
                         "items";
+    }
+
+
+    .slides, .item-images, .image-slide {
+        margin: 0;
+        justify-self: center;
+        width: 80dvw;
+        height: 80dvw;
+        border-radius: 2rem;
+    }
+    .slider-btns {
+        width: 80dvw;
+    }
+    .itemPage .price {
+        font-size: 1.5rem;
+    }
+    .itemPage {
+        padding: 0 1rem;
     }
 }
