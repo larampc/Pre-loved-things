@@ -2,6 +2,11 @@
 
 .cartPage .sum {
     position: sticky;
+}
+.header-hidden ~ .cart-main  .cartPage .sum {
+    top: 2rem;
+}
+.header-visible ~ .cart-main  .cartPage .sum {
     top: 6rem;
 }
 
@@ -140,6 +145,62 @@
     .itemPage .userProfile {
         margin-right: 0;
     }
+
+
+    .cartPage .seller {
+        grid-template-columns: auto auto;
+        grid-template-areas:
+        "seller-info sum"
+        "seller-items seller-items";
+    }
+    .cartPage .sum {
+        align-items: center;
+        justify-content: space-between;
+    }
+    .cartPage .sum p {
+        margin: 0;
+    }
+    .cartPage .sum .num-items {
+        grid-area: number-items;
+    }
+    .cartPage .sum .sum-price {
+        grid-area: total;
+    }
+    .cartPage .sum .checkout-item {
+        grid-area: buy-now;
+    }
+    .sum {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+        "number-items buy-now"
+        "total buy-now";
+        margin: 0;
+        padding: 0.5rem 0;
+        border-top-style: solid;
+        border-bottom-style: solid;
+        flex-direction: row;
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+    .cartPage .checkout {
+        margin: 0;
+    }
+    .cartPage .seller-info {
+        position: sticky;
+        transition-duration: 0.2s;
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+    .header-hidden ~ .cart-main  .cartPage .seller-info {
+        top: 2rem;
+    }
+    .header-visible ~ .cart-main  .cartPage .seller-info {
+        top: 6rem;
+    }
 }
 
 /* PHONE VIEW */
@@ -195,5 +256,43 @@
     }
     .itemPage {
         padding: 0 1rem;
+    }
+
+
+    .cartPage .seller {
+        margin: 2rem 1rem;
+    }
+    .header-hidden ~ .cart-main  .cartPage .seller-info, .header-hidden ~ .cart-main  .cartPage .sum {
+        top: 2rem;
+    }
+    .header-visible ~ .cart-main  .cartPage .seller-info, .header-visible ~ .cart-main  .cartPage .sum {
+        top: 9rem;
+    }
+    main .cartPage h2 {
+        padding-top: 0;
+    }
+    .sum {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+        "number-items"
+        "total"
+        "buy-now";
+    }
+    .cartPage .sum .num-items {
+        flex-grow: 1;
+    }
+    .cartPage .sum .sum-price {
+        grid-area: total;
+    }
+    .cartPage .sum .checkout-item {
+        grid-area: buy-now;
+    }
+    .cartPage .sum p {
+        margin: 0.5rem 0;
+    }
+    .item img {
+        width: 40dvw;
+        height: 40dvw;
     }
 }

@@ -10,12 +10,19 @@ window.onscroll = function() {
   
     if (prevScrollpos <= currentScrollPos) {
         header.style.top = (prevScrollpos-currentScrollPos).toString() + "px";
-        if (prevScrollpos <= currentScrollPos-(header.offsetHeight/2) && currentScrollPos > header.offsetHeight) hidden = true;
-        else hidden = false;
+        if (prevScrollpos <= currentScrollPos-(header.offsetHeight/2) && currentScrollPos > header.offsetHeight) {
+            hidden = true;
+            header.className = "header-hidden";
+        }
+        else {
+            hidden = false;
+            header.className = "header-visible";
+        }
     }
     else{  
         hidden = false;
         header.style.top = "0";
+        header.className = "header-visible";
     }
 }
 
@@ -24,9 +31,11 @@ window.onscrollend = function() {
     if (hidden) {
         prevScrollpos = window.scrollY - header.offsetHeight;
         header.style.top = (-header.offsetHeight).toString() + "px";
+        header.className = "header-hidden";
     }
     else {
         prevScrollpos = window.scrollY;
         header.style.top = "0";
+        header.className = "header-visible";
     }
 }
