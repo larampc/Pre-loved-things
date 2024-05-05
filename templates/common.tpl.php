@@ -47,7 +47,7 @@ function draw_header(string $page, Session $session, array $categories, array $c
             <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
             <?php if ($session->isLoggedIn()) { ?>
                 <a href="../pages/favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
-                <a href="../pages/inbox.php"><i class="material-symbols-outlined <?= $page=="chat"? "filled": "big"?>"> chat </i></a>
+                <a href="../pages/inbox.php"><i class="material-symbols-outlined <?= $page=="inbox"? "filled": "big"?>"> chat </i></a>
                 <a href="../pages/profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
             <?php } else { ?>
                 <a href="../pages/login.php" id="login">Log in</a>
