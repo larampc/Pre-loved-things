@@ -12,10 +12,13 @@ require_once(__DIR__ . '/../utils/files.php');
 
 $dbh = get_database_connection();
 
-$img1_id = upload_item_image('img1');
-$img2_id = upload_item_image('img2');
 
-$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()) , Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $img1_id,
+$img_ids = array();
+foreach ($_FILES as $name => $file) {
+    $img_ids[] = upload_item_image($name);
+}
+
+$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  $_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()) , Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $img_ids[0],
       $_POST['condition']);
 
 if ($item_id == -1) {
@@ -31,7 +34,7 @@ foreach ($tags as $tag) {
     }
 }
 
-if (!Item::register_item_images($dbh, array($img1_id, $img2_id), $item_id)) {
+if (!Item::register_item_images($dbh, $img_ids, $item_id)) {
     $session->addMessage('error', 'Error creating item.');
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }

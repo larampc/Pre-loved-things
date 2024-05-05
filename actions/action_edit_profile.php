@@ -10,8 +10,8 @@
     require_once(__DIR__ . '/../database/connection.db.php');
 
     $dbh = get_database_connection();
-    if(isset($_FILES['profilePhoto'])) {
-        $image_id = upload_user_image("profilePhoto");
+    if(isset($_FILES['img1'])) {
+        $image_id = upload_user_image("img1");
     }
 
     $user = User::get_user($dbh, $session->getId());

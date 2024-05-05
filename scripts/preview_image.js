@@ -1,5 +1,5 @@
 const uploadSection = document.querySelector('section.item-image-uploads')
-const imageAdder = document.querySelector('.item-image-adder')
+const imageAdder = document.querySelector('.image-upload-adder')
 
 let lastLoadedImageId = 0;
 let allImagesAreLoaded = false
@@ -7,7 +7,7 @@ let allImagesAreLoaded = false
 if(imageAdder){
     imageAdder.addEventListener('click', () => {
         if (allImagesAreLoaded){
-            uploadSection.insertBefore(createItemImageUploader(), imageAdder)
+            uploadSection.insertBefore(createImageUploader(), imageAdder)
             allImagesAreLoaded = false
         }
     })
@@ -18,8 +18,8 @@ function onchangeHandler() {
 }
 function previewImage(imageId) {
 
-    const fileUploadInput = document.querySelector('.item-uploader#' + imageId)
-    const itemPicture = fileUploadInput.parentElement
+    const fileUploadInput = document.querySelector('.uploader#' + imageId)
+    const imagePreviewer = fileUploadInput.parentElement
 
     if (!fileUploadInput.value) {
         return;
@@ -38,7 +38,7 @@ function previewImage(imageId) {
     fileReader.readAsDataURL(image)
 
     fileReader.onload = (fileReaderEvent) => {
-        itemPicture.style.backgroundImage = `url(${fileReaderEvent.target.result})`
+        imagePreviewer.style.backgroundImage = `url(${fileReaderEvent.target.result})`
     }
     const id = parseInt(imageId.substring(3))
     if(id > lastLoadedImageId) lastLoadedImageId = id
@@ -61,7 +61,7 @@ function createRemoveButton(id) {
 
 function shiftImages() {
     const removedId = parseInt(this.id.substring(6))
-    const fileUploadInputToRemove = document.querySelector('.item-uploader#img' + removedId)
+    const fileUploadInputToRemove = document.querySelector('.uploader#img' + removedId)
     if(lastLoadedImageId === 1){
         fileUploadInputToRemove.value = ''
         fileUploadInputToRemove.parentElement.style.backgroundImage = ''
@@ -71,7 +71,7 @@ function shiftImages() {
     uploadSection.removeChild(fileUploadInputToRemove.parentNode)
 
     for (let i = removedId + 1; i <= lastLoadedImageId; i++) {
-        const fileUploadInputToShift = document.querySelector('.item-uploader#img' + i)
+        const fileUploadInputToShift = document.querySelector('.uploader#img' + i)
         const removeButtonToShift = fileUploadInputToShift.parentNode.querySelector('#delete' + i)
         fileUploadInputToShift.id = fileUploadInputToShift.name = "img" + (i-1)
         removeButtonToShift.id = 'delete' + (i-1)
@@ -81,29 +81,29 @@ function shiftImages() {
     if(removedId === 1){
         const mainImageHeader = document.createElement('h5')
         mainImageHeader.innerText = 'Main Image'
-        const mainImageDiv = document.querySelector('.item-uploader#img1').parentElement
-        mainImageDiv.classList.add('main-item-upload')
+        const mainImageDiv = document.querySelector('.uploader#img1').parentElement
+        mainImageDiv.classList.add('main-photo-upload')
         mainImageDiv.insertBefore(mainImageHeader, mainImageHeader.querySelector('i.upload-icon'))
     }
 }
-function createItemImageUploader() {
-    const itemUploadDiv = document.createElement('div')
-    itemUploadDiv.classList.add('item-upload')
+function createImageUploader() {
+    const uploadDiv = document.createElement('div')
+    uploadDiv.classList.add('photo-upload')
 
     const addPhotoIcon = document.createElement('i')
     addPhotoIcon.classList.add('material-symbols-outlined')
     addPhotoIcon.classList.add('upload-icon')
     addPhotoIcon.innerText = 'add_a_photo'
 
-    const itemUploaderInput = document.createElement('input')
-    itemUploaderInput.type = 'file'
-    itemUploaderInput.name = itemUploaderInput.id = 'img' + (lastLoadedImageId+1) //changed
-    itemUploaderInput.classList.add('item-uploader')
-    itemUploaderInput.accept = 'image/*'
-    itemUploaderInput.onchange = this.onchangeHandler
+    const uploaderInput = document.createElement('input')
+    uploaderInput.type = 'file'
+    uploaderInput.name = uploaderInput.id = 'img' + (lastLoadedImageId+1) //changed
+    uploaderInput.classList.add('uploader')
+    uploaderInput.accept = 'image/*'
+    uploaderInput.onchange = this.onchangeHandler
 
-    itemUploadDiv.appendChild(addPhotoIcon)
-    itemUploadDiv.appendChild(itemUploaderInput)
+    uploadDiv.appendChild(addPhotoIcon)
+    uploadDiv.appendChild(uploaderInput)
 
-    return itemUploadDiv
+    return uploadDiv
 }

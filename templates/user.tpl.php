@@ -41,6 +41,7 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
     <?php
 }
 function draw_edit_profile($user) { ?>
+    <script src="../scripts/preview_image.js" defer></script>
     <article class="edit-profile">
         <h2>Edit profile</h2>
         <form action="../actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
@@ -52,8 +53,11 @@ function draw_edit_profile($user) { ?>
             <input type="email" id="email" name="email" value="<?=$user->email?>" required>
             <label for="phone"> Phone </label>
             <input type="tel" id="phone" name="phone" value="<?=$user->phone?>" required>
-            <label for="pf">Profile photo</label>
-            <input type="file" id="pf" name="profilePhoto" accept="image/*">
+            <label for="img1">Profile photo</label>
+            <div class="photo-upload">
+                <i class="material-symbols-outlined upload-icon">add_a_photo</i>
+                <input type="file" id="img1" class="uploader" name="img1" accept="image/*" onchange="previewImage(this.id)">
+            </div>
             <button type="submit">Submit</button>
         </form>
     </article>
