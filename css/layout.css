@@ -312,6 +312,7 @@ main .userPage{
 .userPage .user, .pfPage .user  {
     grid-area: user;
     display: flex;
+    align-items: center;
 }
 
 .userPage .feedback, .pfPage .feedback {
@@ -343,7 +344,6 @@ main .userPage{
 }
 
 .userPage .user img, .pfPage .user img {
-    margin-top: 1rem;
     width: 10rem;
     height: 10rem;
 }

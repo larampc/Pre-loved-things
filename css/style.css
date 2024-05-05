@@ -122,6 +122,7 @@ main > h2 {
 
 .items .item {
     text-decoration: none;
+    text-align: center;
 }
 
 .item img{
