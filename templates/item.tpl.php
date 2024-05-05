@@ -72,7 +72,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
         <header>
             <h2><?=$item->name?></h2>
             <?php if ($item->sold === false) { ?>
-                <?php if ($session->isLoggedIn() && $item->creator->user_id == $session->getId()) { ?>
+                <?php if ($session->isLoggedIn() && $item->creator->user_id === $session->getId()) { ?>
                     <form method="post" action="../pages/edit_item.php">
                         <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                     </form>
@@ -109,6 +109,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
                 </section>
             <?php } ?>
         </section>
+        <?php if( $item->creator->user_id !== $session->getId()) { ?>
         <section class="sendMessage">
             <form method="get" action="../pages/inbox.php">
                 <label>
@@ -121,6 +122,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
         <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator->user_id?>"><?=$item->creator->name?>
             <img src="../uploads/profile_pics/<?=$item->creator->image?>.png" class="profile-picture" alt="profile picture">
         </a>
+        <?php } ?>
         <section class="itemTags">
             <ul>
                 <?php if ($item->category) { ?>
