@@ -442,7 +442,7 @@ main .userPage, .pfPage{
     }
 }
 
-.userPage .items {
+.userPage .items, .pfPage .items {
     width: 23rem;
 }
 
@@ -493,6 +493,10 @@ main .userPage, .pfPage{
 .userPage .content, .pfPage .content {
     padding-left: 3.5rem;
     padding-bottom: 0.5rem;
+}
+
+.display-item .navbar {
+    text-align: center;
 }
 
 

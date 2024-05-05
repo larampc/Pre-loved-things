@@ -207,9 +207,9 @@
         top: 6rem;
     }
 
-    /* USER PAGE */
+    /* USER AND PROFILE PAGE */
 
-    main .userPage {
+    main .userPage, main .pfPage {
         grid-template-columns: auto;
         grid-template-rows: auto auto auto;
         grid-template-areas:
@@ -221,8 +221,19 @@
         margin-right: 0;
         margin-bottom: 2rem;
     }
-    .userPage .items {
+    .userPage .items, .pfPage .items {
         width: auto;
+    }
+    .userPage .user-details, .pfPage .user-details {
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+        i {
+            transform: none;
+        }
     }
 }
 
@@ -325,9 +336,9 @@
         height: 40dvw;
     }
 
-    /* USER PAGE */
+    /* USER AND PROFILE PAGE */
 
-    main .userPage, .pfPage {
+    main .userPage, main .pfPage {
         padding: 0 1rem;
     }
     .userPage .user, .pfPage .user {
@@ -341,5 +352,12 @@
         p {
             margin: 0;
         }
+    }
+    .navOption {
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border-style: none;
+        border-radius: 0.5rem;
+        background-color: #F1F1F1;
     }
 }
