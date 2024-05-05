@@ -40,18 +40,20 @@ function previewImage(imageId) {
     fileReader.onload = (fileReaderEvent) => {
         itemPicture.style.backgroundImage = `url(${fileReaderEvent.target.result})`
     }
-
-    lastLoadedImageId = parseInt(imageId.substring(3))
+    const id = parseInt(imageId.substring(3))
+    if(id > lastLoadedImageId) lastLoadedImageId = id
     allImagesAreLoaded = true
-
-    fileUploadInput.parentNode.appendChild(createRemoveButton(lastLoadedImageId))
+    const removeButton = createRemoveButton(id);
+    if(removeButton !== null)
+        fileUploadInput.parentNode.appendChild(removeButton)
 }
 
 function createRemoveButton(id) {
+    if(document.querySelector('i#delete' + id) !== null) return null;
     const removeButton = document.createElement('i')
     removeButton.classList.add('material-symbols-outlined')
     removeButton.innerText = 'delete'
-    removeButton.id = "delete" + id.toString()
+    removeButton.id = "delete" + id
     removeButton.addEventListener('click', shiftImages.bind(removeButton))
 
     return removeButton
