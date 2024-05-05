@@ -97,6 +97,7 @@ header nav {
     grid-area: priceSection;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .itemPage .description {
