@@ -219,6 +219,7 @@ main > h2 {
     padding: 0.3rem;
     list-style: none;
     height: 1rem;
+    width: max-content;
     margin-top: 0.5rem;
 }
 

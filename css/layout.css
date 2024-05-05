@@ -116,7 +116,6 @@ header nav {
 .itemPage .itemTags {
     grid-area: tags;
     display: flex;
-    flex-wrap: wrap;
 }
 
 .itemPage header {
@@ -137,6 +136,7 @@ header nav {
 
 .itemPage .itemTags ul {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .slides {
