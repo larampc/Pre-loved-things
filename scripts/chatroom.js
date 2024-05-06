@@ -25,7 +25,8 @@ async function addClickListeners() {
         }
     }
     const sendMessageInput = document.querySelector('.chat-page input')
-    const sendMessageButton = document.querySelector('.chat-page input')
+    const sendMessageButton = document.querySelector('.chat-page button.send-icon')
+    console.log(sendMessageButton)
     if(temporary) {
         sendMessageButton.addEventListener("click", async () => {
             const text = sendMessageInput.value.trim();
@@ -61,6 +62,7 @@ function createSmallChatroom(chatroom, buyer,seller,  message){
 
     const seller_img = document.createElement('img')
     seller_img.src = "../uploads/profile_pics/" + seller['image'] + ".png"
+    seller_img.classList.add('profile-picture')
 
     const last_msg_div = document.createElement('div')
     last_msg_div.classList.add('chat-content')
