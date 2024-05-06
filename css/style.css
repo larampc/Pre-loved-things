@@ -4,7 +4,7 @@ main {
     margin: 7rem 0 2rem;
 }
 
-main.new-main, main.edit-profile-main {
+main.new-main, main.edit-profile-main, main.new-category-main {
     margin: 0;
     padding: 7rem 0 2rem;
     background-color: #F2E8D5;
@@ -312,32 +312,32 @@ main .cartPage  h2 {
 
 /* NEW ITEM PAGE */
 
-.newItemPage, .edit-profile {
+.newItemPage, .edit-profile, .newCategoryPage {
     background-color: #F2E8D5;
 }
 
-.newItemPage form, .edit-profile form {
+.newItemPage form, .edit-profile form, .newCategoryPage form {
     background-color: white;
     padding: 1rem;
     margin: 0 1rem;
     border-radius: 1rem;
 }
 
-.newItemPage h2, main .edit-profile h2 {
+.newItemPage h2, main .edit-profile h2, .newCategoryPage h2 {
     text-align: center;
 }
 
-.newItemPage form > *, .edit-profile form > * {
+.newItemPage form > *, .edit-profile form > *, .newCategoryPage form * {
     padding: 0.5rem;
 }
 
-.newItemPage input[type=text], .newItemPage input[type=number], select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
+.newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
     background-color: #F1F1F1;
     border-style: none;
     border-radius: 0.5rem;
 }
 
-.newItemPage button, .edit-profile button {
+.newItemPage button, .edit-profile button, .newCategoryPage button {
     width: 10rem;
     margin: 1.5rem auto auto auto;
     border-style: none;
@@ -1312,4 +1312,23 @@ section.item-image-uploads {
     .main-photo-upload {
         box-shadow: 0 0 0 5px lightgoldenrodyellow;
     }
+}
+
+/* NEW CATEGORY */
+
+.new-tags {
+    margin-left: 2rem;
+}
+.newCategoryPage form > label input[type=text], .new-tag > label input[type=text] {
+    margin-left: 1rem;
+}
+.tag-options label {
+    margin: 0.2rem;
+    padding: 0;
+    input {
+        margin-left: 0;
+    }
+}
+.tag-options i {
+    padding: 0;
 }

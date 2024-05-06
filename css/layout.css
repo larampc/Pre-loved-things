@@ -239,7 +239,7 @@ header nav {
 
 /* NEW ITEM PAGE */
 
-.newItemPage form,  .edit-profile form{
+.newItemPage form, .edit-profile form{
     display: flex;
     flex-direction: column;
 }
@@ -678,4 +678,53 @@ main .pfPage{
 
 .change-currency {
     display: none;
+}
+
+/* NEW CATEGORY PAGE */
+
+.newCategoryPage form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: "name add"
+                        "tags tags"
+                        "submit submit";
+}
+.newCategoryPage form > label {
+    grid-area: name;
+}
+.newCategoryPage form > label + i {
+    grid-area: add;
+    align-content: center;
+}
+.newCategoryPage label {
+    align-content: center;
+}
+.new-tags {
+    grid-area: tags;
+}
+.new-tag {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "name type options";
+    :first-child {
+        grid-area: name;
+    }
+    :nth-child(2) {
+        grid-area: type;
+    }
+}
+.tag-options {
+    grid-area: options;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+.tag-options label {
+    display: flex;
+    align-items: center;
+}
+.newCategoryPage form > button {
+    grid-area: submit;
 }

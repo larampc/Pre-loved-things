@@ -11,8 +11,9 @@ function addTag(opt, j) {
     const all = document.querySelectorAll(".new-option")
     const more = all[all.length-1]
     more.addEventListener("click", () => {
-        const i = opt.parentElement.parentElement.id.split("-")[2]
+        const i = opt.parentElement.parentElement.parentElement.id.split("-")[2]
         opt.parentElement.parentElement.lastChild.removeChild(more);
+        console.log(more)
         const label2 = document.createElement("label")
         label2.classList.add(i.toString());
         const tagop2 = document.createElement("input")
@@ -82,15 +83,17 @@ function selectionType(option) {
         but.innerHTML = "add"
         but.title = "Add option"
         label.appendChild(tagop);
-        label.appendChild(but)
-        option.parentElement.parentElement.appendChild(label)
+        label.appendChild(but);
+        const options = document.createElement("section");
+        options.classList.add("tag-options");
+        options.appendChild(label);
+        option.parentElement.parentElement.appendChild(options)
         j++
-        addTag(option, j)
+        addTag(tagop, j)
     }
     if (option.value === "free") {
         const lab = document.getElementsByClassName(i.toString())
-        for (let k = lab.length-1; k >= 0; k--) {
-            option.parentElement.parentElement.removeChild(lab[k])
-        }
+        console.log(option)
+        option.parentElement.parentElement.lastChild.remove();
     }
 }
