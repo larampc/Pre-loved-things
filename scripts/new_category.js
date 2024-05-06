@@ -1,33 +1,23 @@
-const op = document.querySelectorAll(".type")
-let i = 0;
-
-for (let i = 0; i< op.length;i++) {
-    op[i].addEventListener("input", () => {
-        selectionType(op[i])
-    })
-}
-
-function addTag(opt, but) {
-    but.addEventListener("click", () => {
-        const i = opt.parentElement.parentElement.parentElement.id.split("-")[2]
-        const j = document.getElementsByClassName(i.toString()).length
-        opt.parentElement.parentElement.lastChild.removeChild(but);
-        const label2 = document.createElement("label")
-        label2.classList.add(i.toString());
-        const tagop2 = document.createElement("input")
-        tagop2.required = true
-        tagop2.type = "text"
-        tagop2.name = "option" + i + "[" + j +"]";
-        const but2 = document.createElement("i")
-        but2.classList.add("material-symbols-outlined")
-        but2.classList.add("new-option")
-        but2.innerHTML = "add"
-        but2.title = "Add option"
-        label2.appendChild(tagop2);
-        label2.appendChild(but2)
-        opt.parentElement.parentElement.appendChild(label2)
-        addTag(tagop2, but2)
-    })
+function addTagFinal(section, first) {
+    const tagNumber = section.id.split("-")[2]
+    const optionNumber = document.getElementsByClassName(tagNumber.toString()).length
+    if (!first) section.querySelector(".tag-options").lastChild.removeChild(section.querySelector(".tag-options").lastChild.lastChild)
+    const label = document.createElement("label")
+    label.classList.add(tagNumber.toString());
+    const input = document.createElement("input")
+    input.required = true
+    input.type = "text"
+    input.name = "option" + tagNumber + "[" + optionNumber +"]";
+    const more = document.createElement("i")
+    more.classList.add("material-symbols-outlined")
+    more.classList.add("new-option")
+    more.innerHTML = "add"
+    more.title = "Add option"
+    label.appendChild(input);
+    label.appendChild(more)
+    console.log(section.querySelector(".tag-options"))
+    section.querySelector(".tag-options").appendChild(label)
+    more.addEventListener("click", () => addTagFinal(label.parentElement.parentElement, false))
 }
 
 const addtag = document.querySelector(".add-tag")
@@ -55,41 +45,22 @@ addtag.addEventListener("click", () => {
     optionSelect.value = "select";
     select.appendChild(optionFree);
     select.appendChild(optionSelect);
+    const tagOptions = document.createElement("section")
+    tagOptions.classList.add("tag-options")
     type.appendChild(select)
     div.appendChild(type)
+    div.appendChild(tagOptions)
     document.querySelector(".new-tags").appendChild(div)
     select.addEventListener("input", () => {
         selectionType(select)
     })
 })
 
-
 function selectionType(option) {
     if (option.value === "select") {
-        const i = option.parentElement.parentElement.id.split("-")[2]
-        const j = document.getElementsByClassName(i.toString()).length;
-        const label = document.createElement("label")
-        label.classList.add(i.toString());
-        const tagop = document.createElement("input")
-        tagop.type = "text"
-        tagop.required = true
-        tagop.name = "option" + i + "[" + j +"]";
-        const but = document.createElement("i")
-        but.classList.add("material-symbols-outlined")
-        but.classList.add("new-option")
-        but.innerHTML = "add"
-        but.title = "Add option"
-        label.appendChild(tagop);
-        label.appendChild(but);
-        const options = document.createElement("section");
-        options.classList.add("tag-options");
-        options.appendChild(label);
-        option.parentElement.parentElement.appendChild(options)
-        addTag(tagop, but)
+        addTagFinal(option.parentElement.parentElement, true)
     }
     if (option.value === "free") {
-        const lab = document.getElementsByClassName(i.toString())
-        console.log(option)
         option.parentElement.parentElement.lastChild.remove();
     }
 }
