@@ -10,7 +10,6 @@ require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $cat = $_GET['cat'];
-$cond = $_GET['cond'] ?: "";
 $tag = $_GET['tag'] ?: "";
 $page = $_GET['page'];
 $range = $_GET['price'];
@@ -40,20 +39,6 @@ $rangeops = explode(',', $range);
 $min = intval($rangeops[0]);
 $max = intval($rangeops[1]);
 
-$itemsCond = array();
-if ($cond !== '') {
-    $values = explode(',', $cond);
-    foreach ($values as $value) {
-        array_push($itemsCond,  $value);
-    }
-}
-else {
-    $values = Tag::get_conditions($dbh);
-    foreach ($values as $value) {
-        array_push($itemsCond, $value['condition']);
-    }
-}
-
 $itemsCat = array();
 if ($cat !== '')  {
     $values = explode(',', $cat);
@@ -68,7 +53,7 @@ else {
     }
 }
 
-    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsCond, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search);
+    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search);
     foreach ($res as $item) {
     $item->price = round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()), 2);
 }

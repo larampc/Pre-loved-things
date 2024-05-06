@@ -132,9 +132,6 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
                 <?php foreach($item->tags as $tag) { ?>
                     <li><?= $tag['tag'] . ': ' . $tag['data']?> </li>
                 <?php } ?>
-                <li>
-                    Condition: <?= $item->condition ?>
-                </li>
             </ul>
         </section>
     </article>
@@ -180,14 +177,6 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                     } ?>
                 </div>
             <?php }} ?>
-
-            <label for="condition">Condition</label>
-            <select id="condition" name="condition">
-                <?php $conditions = Tag::get_conditions($db);
-                foreach ($conditions as $condition) { ?>
-                    <option value="<?=$condition['condition']?>"><?=ucfirst($condition['condition'])?></option>
-                <?php }?>
-            </select>
 
             <label for="price">Price</label>
             <input type="number" step="0.01" id="price" name="price" placeholder="The price of your item" required>
@@ -243,6 +232,23 @@ function draw_edit_item_form(Item $item) { ?>
     </article>
 <?php }
 
+function draw_category_tags(PDO $dbh, $category) {
+    $tags = Tag::get_category_tags($dbh, $category);
+    foreach ($tags as $tag) { ?>
+    <div class="options tag" id="<?=$tag['tag']?>">
+        <p><?=$tag['tag']?></p>
+        <?php
+        $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
+        if ($options) {
+            foreach ($options as $option) {?>
+                <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>" autocomplete='off'><?=$option['value']?></label>
+            <?php }}
+        else { ?>
+            <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
+        <?php } ?>
+    </div>
+<?php } }
+
 function draw_page_filters(string $category, PDO $dbh) { ?>
     <script src="../scripts/search.js" defer></script>
     <article class="searchPage">
@@ -265,28 +271,9 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                     </label>
                 </div>
                 <?php
-                $tags = Tag::get_category_tags($dbh, $category);
-                foreach ($tags as $tag) { ?>
-                    <div class="options tag" id="<?=$tag['tag']?>">
-                        <p><?=$tag['tag']?></p>
-                        <?php
-                        $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
-                        if ($options) {
-                            foreach ($options as $option) {?>
-                            <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>" autocomplete='off'><?=$option['value']?></label>
-                        <?php }}
-                        else { ?>
-                            <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-                <div class="options" id="Condition">
-                    <p>Condition</p>
-                    <?php $conditions = Tag::get_conditions($dbh);
-                    foreach ($conditions as $condition) { ?>
-                        <label><input type="checkbox" name="<?=$condition['condition']?>" autocomplete='off'><?=ucfirst($condition['condition'])?></label>
-                    <?php }?>
-                </div>
+                if ($category !== "") draw_category_tags($dbh, "");
+                draw_category_tags($dbh, $category);
+                 ?>
             </section>
         <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined filled">filter_list</i></button>
         <p class="category-search"><?=$category?></p>

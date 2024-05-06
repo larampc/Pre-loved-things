@@ -147,12 +147,11 @@ class Item {
         });
         return $items;
     }
-    static function get_filtered_items(PDO $dbh, array $categories, array $conditions, array $itemTags, int $page, bool $checkTag, int $min, int $max, string $search): array {
+    static function get_filtered_items(PDO $dbh, array $categories, array $itemTags, int $page, bool $checkTag, int $min, int $max, string $search): array {
         $page = 18 * ($page - 1);
         if ($checkTag) {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (".implode(',', $categories) . " ) 
-             AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
              AND id IN (".implode(',', $itemTags) . " )
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
@@ -161,7 +160,6 @@ class Item {
         else {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (".implode(',', $categories) . " ) 
-             AND condition IN (". "'" . implode("', '", $conditions) . "'". " ) 
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
              ORDER BY date DESC LIMIT 18 OFFSET ?");

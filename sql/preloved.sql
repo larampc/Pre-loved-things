@@ -73,7 +73,6 @@ CREATE TABLE items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name VARCHAR NOT NULL,
     price REAL NOT NULL,
-    condition VARCHAR references conditions,
     category INTEGER references categories,
     date INTEGER,                             -- date the item was published
     description VARCHAR,
@@ -125,10 +124,6 @@ CREATE TABLE chatrooms (
    item_id INTEGER NOT NULL REFERENCES items,
    seller_id INTEGER NOT NULL REFERENCES users,
    buyer_id INTEGER NOT NULL REFERENCES users
-);
-
-CREATE TABLE conditions (
-    condition VARCHAR PRIMARY KEY
 );
 
 INSERT INTO roles VALUES ('user'), ('admin');
@@ -186,67 +181,68 @@ VALUES
 INSERT INTO users (password, name, email, phone, username, role, currency) VALUES
     ('cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR');
 
-INSERT INTO items (name, price, condition, date, description, creator, mainImage, category)
+INSERT INTO items (name, price, date, description, creator, mainImage, category)
 VALUES
-    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1,1, 1),
-    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2,1, 2),
-    ('Watch', 199.99, 'used', '2024-04-10', 'Luxury watch with timeless design.', 3,1, 2),
-    ('Bicycle', 399.00, 'new', '2024-04-10', 'Mountain bike for all terrains.', 4,1, 2),
-    ('Camera', 499.50, 'new', '2024-04-10', 'Great DSLR camera for beginners.', 5,1, 2),
-    ('Smartphone', 599.99, 'new', '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 6),
-    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 7),
-    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8,1, 1),
-    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 2),
-    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10,1, 3),
-    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1,1, 4),
-    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2,1, 5),
-    ('Camera', 499.50, 'use', '2024-04-10', 'Great DSLR camera for beginners.', 3,1, 6),
-    ('Watch', 199.99, 'new', '2024-04-10', 'Luxury watch with timeless design.', 4,1, 7),
-    ('Bicycle', 399.00, 'old', '2024-04-10', 'Mountain bike for all terrains.', 5,1, 1),
-    ('Smartphone', 599.99, 'old', '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 2),
-    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 3),
-    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8,1, 4),
-    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 5), ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1,1, 1),
-    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2,1, 2),
-    ('Watch', 199.99, 'used', '2024-04-10', 'Luxury watch with timeless design.', 3,1, 3),
-    ('Bicycle', 399.00, 'new', '2024-04-10', 'Mountain bike for all terrains.', 4,1, 2),
-    ('Camera', 499.50, 'new', '2024-04-10', 'Great DSLR camera for beginners.', 5,1, 2),
-    ('Smartphone', 599.99, 'new', '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 6),
-    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 7),
-    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8,1, 1),
-    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 2),
-    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10,1, 3),
-    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1,1, 4),
-    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2,1, 5),
-    ('Camera', 499.50, 'use', '2024-04-10', 'Great DSLR camera for beginners.', 3,1, 6),
-    ('Watch', 199.99, 'new', '2024-04-10', 'Luxury watch with timeless design.', 4,1, 7),
-    ('Bicycle', 399.00, 'old', '2024-04-10', 'Mountain bike for all terrains.', 5,1, 1),
-    ('Smartphone', 599.99, 'old', '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 2),
-    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 3),
-    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8,1, 4),
-    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 5),
-    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10,1, 6),
-    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1,1, 1),
-    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2,1, 2),
-    ('Watch', 199.99, 'used', '2024-04-10', 'Luxury watch with timeless design.', 3,1, 3),
-    ('Bicycle', 399.00, 'new', '2024-04-10', 'Mountain bike for all terrains.', 4,1, 2),
-    ('Camera', 499.50, 'new', '2024-04-10', 'Great DSLR camera for beginners.', 5,1, 2),
-    ('Smartphone', 599.99, 'new', '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 6),
-    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 7),
-    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8,1, 1),
-    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 2),
-    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10,1, 3),
-    ('Guitar', 299.99, 'used', '2024-04-10', 'Classic electric guitar.', 1,1, 4),
-    ('Laptop', 899.99, 'new', '2024-04-10', 'High-performance laptop.', 2,1, 5),
-    ('Camera', 499.50, 'use', '2024-04-10', 'Great DSLR camera for beginners.', 3,1, 6),
-    ('Watch', 199.99, 'new', '2024-04-10', 'Luxury watch with timeless design.', 4,1, 7),
-    ('Bicycle', 399.00, 'old', '2024-04-10', 'Mountain bike for all terrains.', 5,1, 1),
-    ('Smartphone', 599.99, 'old', '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 2),
-    ('Television', 799.99, 'new', '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 3),
-    ('Desk', 149.50, 'used', '2024-04-10', 'Simple desk for home office.', 8,1, 4),
-    ('Headphones', 99.99, 'new', '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 5),
-    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10,1, 6),
-    ('Backpack', 49.99, 'new', '2024-04-10', 'Durable backpack for everyday use.', 10,1, 6);
+    ('Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', 1,1, 1),
+    ('Laptop', 899.99, '2024-04-10', 'High-performance laptop.', 2,1, 2),
+    ('Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', 3,1, 2),
+    ('Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', 4,1, 2),
+    ('Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', 5,1, 2),
+    ('Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 6),
+    ('Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 7),
+    ('Desk', 149.50, '2024-04-10', 'Simple desk for home office.', 8,1, 1),
+    ('Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 2),
+    ('Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', 10,1, 3),
+    ('Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', 1,1, 4),
+    ('Laptop', 899.99, '2024-04-10', 'High-performance laptop.', 2,1, 5),
+    ('Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', 3,1, 6),
+    ('Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', 4,1, 7),
+    ('Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', 5,1, 1),
+    ('Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 2),
+    ('Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 3),
+    ('Desk', 149.50, '2024-04-10', 'Simple desk for home office.', 8,1, 4),
+    ('Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 5),
+    ('Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', 1,1, 1),
+    ('Laptop', 899.99, '2024-04-10', 'High-performance laptop.', 2,1, 2),
+    ('Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', 3,1, 3),
+    ('Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', 4,1, 2),
+    ('Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', 5,1, 2),
+    ('Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 6),
+    ('Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 7),
+    ('Desk', 149.50, '2024-04-10', 'Simple desk for home office.', 8,1, 1),
+    ('Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 2),
+    ('Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', 10,1, 3),
+    ('Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', 1,1, 4),
+    ('Laptop', 899.99, '2024-04-10', 'High-performance laptop.', 2,1, 5),
+    ('Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', 3,1, 6),
+    ('Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', 4,1, 7),
+    ('Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', 5,1, 1),
+    ('Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 2),
+    ('Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 3),
+    ('Desk', 149.50, '2024-04-10', 'Simple desk for home office.', 8,1, 4),
+    ('Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 5),
+    ('Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', 10,1, 6),
+    ('Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', 1,1, 1),
+    ('Laptop', 899.99, '2024-04-10', 'High-performance laptop.', 2,1, 2),
+    ('Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', 3,1, 3),
+    ('Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', 4,1, 2),
+    ('Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', 5,1, 2),
+    ('Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 6),
+    ('Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 7),
+    ('Desk', 149.50, '2024-04-10', 'Simple desk for home office.', 8,1, 1),
+    ('Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 2),
+    ('Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', 10,1, 3),
+    ('Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', 1,1, 4),
+    ('Laptop', 899.99, '2024-04-10', 'High-performance laptop.', 2,1, 5),
+    ('Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', 3,1, 6),
+    ('Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', 4,1, 7),
+    ('Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', 5,1, 1),
+    ('Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', 6,1, 2),
+    ('Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', 7,1, 3),
+    ('Desk', 149.50, '2024-04-10', 'Simple desk for home office.', 8,1, 4),
+    ('Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', 9,1, 5),
+    ('Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', 10,1, 6),
+    ('Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', 10,1, 6);
 
 
 INSERT INTO comments (mainuser, userc, date, text, rating)
@@ -352,6 +348,7 @@ INSERT INTO categories (category) VALUES
                                       ('furniture'),
                                       ('sports');
 INSERT INTO tags (category, tag) VALUES
+                                     (1, 'condition'),
                                      (1, 'tag'),
                                      (2, 'size'),
                                      (2, 'brand'),
@@ -361,23 +358,27 @@ INSERT INTO tags (category, tag) VALUES
 
 
 INSERT INTO tags_predefined (tag, value) VALUES
-                                    (2, 'S'),
-                                    (2, 'M'),
-                                    (2, 'L');
+                                    (1, 'new'),
+                                    (1, 'old'),
+                                    (1, 'used'),
+                                    (3, 'S'),
+                                    (3, 'M'),
+                                    (3, 'L');
 
 INSERT INTO tags_values (item, tag, data) VALUES
-                                     (1, 4, 'Suzuki'),
                                      (2, 5, 'Cassandra Clare'),
-                                     (3, 2, 'S'),
-                                     (4, 2, 'S'),
-                                     (5, 2, 'M'),
-                                     (4, 3, 'bela'),
-                                     (3, 3, 'bel');
+                                     (3, 3, 'S'),
+                                     (4, 3, 'S'),
+                                     (5, 3, 'M'),
+                                     (4, 2, 'bela'),
+                                     (1, 1, 'new'),
+                                     (2, 1, 'old'),
+                                     (3, 1, 'new'),
+                                     (4, 1, 'used'),
+                                     (5, 1, 'new'),
+                                     (6, 1, 'old'),
+                                     (3, 2, 'bel');
 
-INSERT INTO conditions (condition) VALUES
-                                      ('new'),
-                                      ('old'),
-                                      ('used');
 
 INSERT INTO shippingCode (code) VALUES ('abc'), ('hey');
 
