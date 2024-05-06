@@ -571,6 +571,10 @@ main .pfPage{
     grid-area: items;
 }
 
+#back-inbox {
+    display: none;
+}
+
 
 /* CHECKOUT PAGE */
 

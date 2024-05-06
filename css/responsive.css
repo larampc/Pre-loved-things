@@ -235,6 +235,40 @@
             transform: none;
         }
     }
+
+    /* INBOX PAGE */
+
+    main.inbox-main {
+        grid-template-columns: auto;
+        grid-template-areas: "message";
+        margin-top: 5rem;
+    }
+    .chat-page {
+        margin-left: 3rem;
+    }
+    .chat-inbox {
+        grid-area: unset;
+        transition: width 0.1s;
+        clip-path: border-box;
+        position: absolute;
+        margin: 0;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        border-radius: 0 2rem 2rem 0;
+        background-color: #F1F1F1;
+    }
+    #back-inbox {
+        display: block;
+        justify-items: center;
+        text-align: center;
+        margin: 0;
+        width: 3rem;
+        background-color: transparent;
+        border: none;
+    }
+    .empty-msg-inbox {
+        border-left: none;
+    }
 }
 
 /* PHONE VIEW */
@@ -359,5 +393,17 @@
         border-style: none;
         border-radius: 0.5rem;
         background-color: #F1F1F1;
+    }
+
+    /* INBOX PAGE */
+
+    main.inbox-main {
+        grid-template-columns: auto;
+        grid-template-areas: "message";
+        margin-top: 8rem;
+    }
+    .chat-page {
+        margin-left: 1rem;
+        margin-right: 1rem;
     }
 }

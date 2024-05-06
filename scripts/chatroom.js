@@ -130,6 +130,7 @@ async function handleClick(chatroom, user) {
 
     chatPage.appendChild(header);
     chatPage.appendChild(msgInbox);
+    closeInbox();
 }
 
 function updateCurrentChatroom(chatroom) {
@@ -172,6 +173,15 @@ function createItemInfo(chatroom_json) {
     item_name.innerText = chatroom_json['item']['name'];
     item_link2.appendChild(item_name)
 
+    const back_inbox = document.createElement('button');
+    const back_inbox_icon = document.createElement('i');
+    back_inbox_icon.classList.add("material-symbols-outlined");
+    back_inbox.id = "back-inbox";
+    back_inbox_icon.append("arrow_back_ios");
+    back_inbox.append(back_inbox_icon);
+    back_inbox.onclick = function () {openInbox()}
+
+    aside.appendChild(back_inbox);
     aside.appendChild(item_link);
     aside.appendChild(item_link2);
 
@@ -261,6 +271,32 @@ function createSendButton(chatroom, user, input) {
     return button;
 }
 
+let inTableMode = window.matchMedia("(max-width: 60em)");
+let inPhoneMode = window.matchMedia("(max-width: 30em)");
+const inbox = document.getElementsByClassName("chat-inbox");
+
+function openInbox() {
+    if (inTableMode.matches) {
+        if (inPhoneMode.matches) inbox[0].style.width = "60dvw";
+        else inbox[0].style.width = "20rem";
+        inbox[0].style.paddingLeft = "2rem";
+        inbox[0].style.paddingRight = "2rem";
+    }
+}
+function closeInbox() {
+    if (inTableMode.matches) {
+        inbox[0].style.width = "0";
+        inbox[0].style.paddingLeft = "0";
+        inbox[0].style.paddingRight = "0";
+    }
+}
+document.onclick = function (event) {
+    if (!(event.target.id.includes("back-inbox") || event.target.parentElement.id.includes("back-inbox"))) {
+        if (((inTableMode.matches && inbox[0].style.width === "20rem") || (inPhoneMode.matches && inbox[0].style.width === "60dvw")) && event.target.closest('.chat-inbox') === null && event.target.closest('.inbox-main') !== null) {
+            closeInbox();
+        }
+    }
+};
 
 
 addClickListeners()
