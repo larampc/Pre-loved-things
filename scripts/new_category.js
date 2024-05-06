@@ -7,13 +7,11 @@ for (let i = 0; i< op.length;i++) {
     })
 }
 
-function addTag(opt, j) {
-    const all = document.querySelectorAll(".new-option")
-    const more = all[all.length-1]
-    more.addEventListener("click", () => {
+function addTag(opt, but) {
+    but.addEventListener("click", () => {
         const i = opt.parentElement.parentElement.parentElement.id.split("-")[2]
-        opt.parentElement.parentElement.lastChild.removeChild(more);
-        console.log(more)
+        const j = document.getElementsByClassName(i.toString()).length
+        opt.parentElement.parentElement.lastChild.removeChild(but);
         const label2 = document.createElement("label")
         label2.classList.add(i.toString());
         const tagop2 = document.createElement("input")
@@ -28,8 +26,7 @@ function addTag(opt, j) {
         label2.appendChild(tagop2);
         label2.appendChild(but2)
         opt.parentElement.parentElement.appendChild(label2)
-        j++
-        addTag(opt, j)
+        addTag(tagop2, but2)
     })
 }
 
@@ -68,9 +65,9 @@ addtag.addEventListener("click", () => {
 
 
 function selectionType(option) {
-    let j = 0;
     if (option.value === "select") {
         const i = option.parentElement.parentElement.id.split("-")[2]
+        const j = document.getElementsByClassName(i.toString()).length;
         const label = document.createElement("label")
         label.classList.add(i.toString());
         const tagop = document.createElement("input")
@@ -88,8 +85,7 @@ function selectionType(option) {
         options.classList.add("tag-options");
         options.appendChild(label);
         option.parentElement.parentElement.appendChild(options)
-        j++
-        addTag(tagop, j)
+        addTag(tagop, but)
     }
     if (option.value === "free") {
         const lab = document.getElementsByClassName(i.toString())
