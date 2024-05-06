@@ -389,4 +389,50 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
             <button type="submit">Submit</button>
         </form>
     </article>
+<?php } ?>
+
+<?php function draw_edit_category_form(PDO $dbh, string $category)
+{ ?>
+    <script src="../scripts/new_category.js" defer></script>
+    <article class="newCategoryPage">
+        <h2>Edit Category</h2>
+        <form action="../actions/action_edit_category.php?id=<?=Tag::get_category_id($dbh, $category)?>" method="POST" enctype="multipart/form-data">
+            <label> Category name
+                <input type="text" value="<?=$category?>" name="category" required>
+            </label>
+            <i class="material-symbols-outlined add-tag" title="Add tag">add</i>
+            <section class="new-tags">
+                <?php $tags = Tag::get_category_tags($dbh, $category);
+                for ($i = 0; $i < count($tags); $i++) { ?>
+                    <div class="new-tag" id="new-tag-<?=$i?>">
+                        <label> Tag name
+                            <input type="text" name="tags[<?=$i?>]" value="<?=$tags[$i]['tag']?>" required>
+                        </label>
+                        <i class="material-symbols-outlined delete-option" title="Delete tag">delete</i>
+                        <?php $tag_options = Tag::get_tag_options($dbh, $category, $tags[$i]['tag']);?>
+                        <label>
+                            <select class="type">
+                                <option value="free">Free</option>
+                                <option value="select" <?=$tag_options ? "selected" : ""?>>Select</option>
+                            </select>
+                        </label>
+                        <?php
+                        if ($tag_options) { ?>
+                            <section class="tag-options">
+                                <i class="material-symbols-outlined new-option" title="Add option">add</i>
+                                 <?php foreach ($tag_options as $key => $tag) {?>
+                                    <label class="<?=$i?>">
+                                        <input required type="text" name="option<?=$i?>[<?=$key?>]" value="<?=$tag['value']?>">
+                                        <i class="material-symbols-outlined remove-option" title="Remove option">close</i>
+                                    </label>
+                                <?php }?>
+                            </section>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+
+            </section>
+            <button type="submit">Submit</button>
+        </form>
+    </article>
 <?php }

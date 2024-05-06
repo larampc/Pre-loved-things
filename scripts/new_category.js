@@ -1,6 +1,11 @@
-function addTagFinal(section, first) {
+function addTagFinal(section) {
     const tagNumber = section.id.split("-")[2]
-    const optionNumber = document.getElementsByClassName(tagNumber.toString()).length
+    const options = document.getElementsByClassName(tagNumber.toString())
+    let optionNumber = 0;
+    if (options.length > 0) {
+        const lastOption = options[options.length - 1].querySelector("input").name
+        optionNumber = parseInt(lastOption[lastOption.length-2]) + 1;
+    }
     const label = document.createElement("label")
     label.classList.add(tagNumber.toString());
     const input = document.createElement("input")
@@ -14,21 +19,22 @@ function addTagFinal(section, first) {
     remove.title = "Remove option"
     label.appendChild(input);
     label.appendChild(remove)
-    console.log(section.querySelector(".tag-options"))
     section.querySelector(".tag-options").appendChild(label)
-    remove.addEventListener("click", () => {if (remove.parentElement.parentElement.children.length > 1) remove.parentElement.remove()})
+    remove.addEventListener("click", () => {remove.parentElement.remove()})
 }
 
 const addtag = document.querySelector(".add-tag")
 addtag.addEventListener("click", () => {
-    const tags = document.querySelectorAll(".new-tag").length
+    const tags = document.querySelectorAll(".new-tag")
+    const lastTag = tags[tags.length-1]
+    const tagNumber = parseInt(lastTag.id[lastTag.id.length-1]) +1
     const div = document.createElement("div")
     div.classList.add("new-tag")
-    div.id = "new-tag-" + tags.toString()
+    div.id = "new-tag-" + tagNumber.toString()
     const label = document.createElement("label")
     const name = document.createElement("input")
     name.type = "text"
-    name.name = "tags[" + tags.toString() + "]"
+    name.name = "tags[" + tagNumber.toString() + "]"
     name.required = true
     label.innerHTML = "Tag name"
     label.appendChild(name)
@@ -69,11 +75,20 @@ function selectionType(option) {
         more.innerHTML = "add"
         more.title = "Add option"
         tagOptions.appendChild(more)
-        more.addEventListener("click", () => addTagFinal(option.parentElement.parentElement, false))
+        more.addEventListener("click", () => addTagFinal(option.parentElement.parentElement))
         option.parentElement.parentElement.appendChild(tagOptions)
-        addTagFinal(option.parentElement.parentElement, true)
+        addTagFinal(option.parentElement.parentElement)
     }
     if (option.value === "free") {
         option.parentElement.parentElement.lastChild.remove();
     }
 }
+
+const removes = document.querySelectorAll(".delete-option")
+removes.forEach((elem) => elem.addEventListener("click", () => elem.parentElement.remove()))
+
+const optionRemove = document.querySelectorAll(".remove-option")
+optionRemove.forEach((elem) => elem.addEventListener("click", () => elem.parentElement.remove()))
+
+const addOption = document.querySelectorAll(".new-option")
+addOption.forEach((elem) => elem.addEventListener("click", () => addTagFinal(elem.parentElement.parentElement, false)))

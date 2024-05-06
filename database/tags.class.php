@@ -95,4 +95,24 @@ class Tag
             $stmt->execute(array($tag, $option));
         }
     }
+
+    static function update_category(PDO $dbh, int $id, string $category)
+    {
+        $stmt = $dbh->prepare('UPDATE categories SET category = ? WHERE id = ?');
+        $stmt->execute(array($category, $id));
+    }
+
+    static function delete_category_tags(PDO $dbh, int $id) {
+        $stmt = $dbh->prepare('SELECT id FROM tags where category = ?');
+        $stmt->execute(array($id));
+        $tags = $stmt->fetchAll();
+        foreach ($tags as $tag) {
+            $stmt = $dbh->prepare('DELETE FROM tags_values where tag = ?');
+            $stmt->execute(array($tag));
+            $stmt = $dbh->prepare('DELETE FROM tags_predefined where tag = ?');
+            $stmt->execute(array($tag));
+        }
+        $stmt = $dbh->prepare('DELETE FROM tags where category = ?');
+        $stmt->execute(array($id));
+    }
 }
