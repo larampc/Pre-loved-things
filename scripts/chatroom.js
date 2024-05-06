@@ -272,31 +272,25 @@ function createSendButton(chatroom, user, input) {
 }
 
 let inTableMode = window.matchMedia("(max-width: 60em)");
-let inPhoneMode = window.matchMedia("(max-width: 30em)");
 const inbox = document.getElementsByClassName("chat-inbox");
+const chat = document.getElementsByClassName("chat-page");
 
 function openInbox() {
     if (inTableMode.matches) {
-        if (inPhoneMode.matches) inbox[0].style.width = "60dvw";
-        else inbox[0].style.width = "20rem";
-        inbox[0].style.paddingLeft = "2rem";
-        inbox[0].style.paddingRight = "2rem";
+        chat[0].style.gridArea = "none";
+        chat[0].style.display = "none";
+        inbox[0].style.gridArea = "page";
+        inbox[0].style.display = "block";
     }
 }
 function closeInbox() {
     if (inTableMode.matches) {
-        inbox[0].style.width = "0";
-        inbox[0].style.paddingLeft = "0";
-        inbox[0].style.paddingRight = "0";
+        inbox[0].style.gridArea = "none";
+        inbox[0].style.display = "none";
+        chat[0].style.gridArea = "page";
+        chat[0].style.display = "block";
     }
 }
-document.onclick = function (event) {
-    if (!(event.target.id.includes("back-inbox") || event.target.parentElement.id.includes("back-inbox"))) {
-        if (((inTableMode.matches && inbox[0].style.width === "20rem") || (inPhoneMode.matches && inbox[0].style.width === "60dvw")) && event.target.closest('.chat-inbox') === null && event.target.closest('.inbox-main') !== null) {
-            closeInbox();
-        }
-    }
-};
 
 
 addClickListeners()

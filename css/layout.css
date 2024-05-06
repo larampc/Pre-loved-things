@@ -60,8 +60,7 @@ header nav {
 
 .index-main .items {
     display: flex;
-    overflow: auto;
-    overflow-y: hidden;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
@@ -361,10 +360,12 @@ main .userPage{
 /* IMBOX PAGE */
 .chat-inbox {
     grid-area: inbox;
+    display: block;
 }
 
 .chat-page {
     grid-area: message;
+    display: block;
 }
 
 .message-header{
