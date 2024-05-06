@@ -60,8 +60,7 @@ header nav {
 
 .index-main .items {
     display: flex;
-    overflow: auto;
-    overflow-y: hidden;
+    flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
