@@ -361,10 +361,12 @@ main .userPage{
 /* IMBOX PAGE */
 .chat-inbox {
     grid-area: inbox;
+    display: block;
 }
 
 .chat-page {
     grid-area: message;
+    display: block;
 }
 
 .message-header{

@@ -240,22 +240,19 @@
 
     main.inbox-main {
         grid-template-columns: auto;
-        grid-template-areas: "message";
-        margin-top: 5rem;
+        grid-template-areas: "page";
     }
     .chat-page {
         margin-left: 3rem;
+        grid-area: none;
+        display: none;
     }
     .chat-inbox {
-        grid-area: unset;
-        transition: width 0.1s;
-        clip-path: border-box;
-        position: absolute;
-        margin: 0;
-        padding-left: 2rem;
-        padding-right: 2rem;
-        border-radius: 0 2rem 2rem 0;
-        background-color: #F1F1F1;
+        grid-area: page;
+        margin: 0 3rem;
+        h2 {
+            text-align: center;
+        }
     }
     #back-inbox {
         display: block;
@@ -398,12 +395,13 @@
     /* INBOX PAGE */
 
     main.inbox-main {
-        grid-template-columns: auto;
-        grid-template-areas: "message";
         margin-top: 8rem;
     }
     .chat-page {
         margin-left: 1rem;
         margin-right: 1rem;
+    }
+    .chat-inbox {
+        margin: 0 1rem;
     }
 }
