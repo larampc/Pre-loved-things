@@ -385,3 +385,20 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 
     </form>
 <?php } ?>
+
+<?php function draw_new_category_form()
+{ ?>
+        <script src="../scripts/new_category.js" defer></script>
+    <article class="newCategoryPage">
+        <h2>New Category</h2>
+        <form action="../actions/action_new_category.php" method="POST" enctype="multipart/form-data">
+            <label> Category name
+                <input type="text" name="category" required>
+            </label>
+            <i class="material-symbols-outlined add-tag" title="Add tag">add</i>
+            <section class="new-tags">
+            </section>
+            <button type="submit">Submit</button>
+        </form>
+    </article>
+<?php }

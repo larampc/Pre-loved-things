@@ -21,5 +21,5 @@
 
     get_header("cart-checkout", $dbh, $session);
     draw_checkout_form();
-    draw_checkout_summary($items);
+    draw_checkout_summary($items, $session, $dbh);
     draw_footer();

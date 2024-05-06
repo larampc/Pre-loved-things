@@ -107,7 +107,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                         <p class="num-items">Number items: <?=$num_items?></p>
                         <div class="sum-price">
                             <p>Total: </p>
-                            <p class="total"><?=$sum?></p>
+                            <p class="total"><?=$sum . User::get_currency_symbol($db, $session->getCurrency())?></p>
                         </div>
                         <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                             <input type="hidden" value="<?=$user->user_id?>" name="user_items">
@@ -131,7 +131,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
             <?php }
             draw_item($db, $session, $item);
             $num_items += 1;
-            $sum += $item->price;
+            $sum += round($item->price * (User::get_currency_conversion($db, $session->getCurrency())), 2);
             $user = $item->creator;
         } ?>
             </article>
@@ -139,7 +139,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                 <p class="num-items">Number items: <?=$num_items?></p>
                 <div class="sum-price">
                     <p>Total: </p>
-                    <p class="total"><?=$sum?></p>
+                    <p class="total"><?=$sum . User::get_currency_symbol($db, $session->getCurrency())?></p>
                 </div>
                 <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                     <input type="hidden" value="<?=$user->user_id?>" name="user_items">
@@ -226,7 +226,7 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
     </form>
 <?php } ?>
 
-<?php function draw_checkout_summary(array $items) {?>
+<?php function draw_checkout_summary(array $items, Session $session, PDO $dbh) {?>
     <div class="checkoutSum">
         <p class="num-items">Number items: <?=count($items)?></p>
         <?php
@@ -234,14 +234,14 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
         foreach ($items as $item) { ?>
             <div class="item-info">
                 <p class="name"><?=$item->name?></p>
-                <p class="price"><?=$item->price?></p>
+                <p class="price"><?=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2) . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
             </div>
         <?php
-            $sum +=$item->price;
+            $sum +=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2);
         } ?>
         <div class="sum-price">
             <p>Total: </p>
-            <p class="total"><?=$sum?></p>
+            <p class="total"><?=$sum . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
         </div>
     </div>
 <?php } ?>

@@ -76,4 +76,23 @@ class Tag
         }
         return $items;
     }
+
+    static function add_category(PDO $dbh, string $category)
+    {
+        $stmt = $dbh->prepare('INSERT INTO categories (category) VALUES (?)');
+        $stmt->execute(array($category));
+        return $dbh->lastInsertId();
+    }
+    static function add_tags_category(PDO $dbh, int $category_id, array $tags) {
+        foreach ($tags as $tag) {
+            $stmt = $dbh->prepare('INSERT INTO tags (category, tag) VALUES (?, ?)');
+            $stmt->execute(array($category_id, $tag));
+        }
+    }
+    static function add_tag_options(PDO $dbh, array $options, int $tag) {
+        foreach ($options as $option) {
+            $stmt = $dbh->prepare('INSERT INTO tags_predefined (tag, value) VALUES (?, ?)');
+            $stmt->execute(array($tag, $option));
+        }
+    }
 }
