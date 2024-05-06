@@ -162,9 +162,10 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                         $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
                         if ($options) { ?>
                             <label><?=$tag['tag']?>
-                                <select name="<?=$tag['tag']?>">
-                                    <option value=""></option>
-                                <?php
+                                <select name="<?=$tag['tag']?>"  <?=$category['category'] ? "":"required" ?>>
+                                    <?php if ($category['category']) { ?>
+                                        <option value=""></option>
+                                    <?php }
                                 foreach ($options as $option) { ?>
                                     <option value="<?=$option['value']?>"><?=$option['value']?></option>
                                 <?php } ?>
@@ -172,7 +173,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                             </label>
                         <?php }
                         else { ?>
-                            <label for="<?=$tag['tag']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['tag']?>" name="<?=$tag['tag']?>">
+                            <label for="<?=$tag['tag']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['tag']?>" name="<?=$tag['tag']?>" <?=$category['category'] ? "":"required" ?>>
                         <?php }
                     } ?>
                 </div>
