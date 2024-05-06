@@ -3,7 +3,7 @@
 async function updateUserChatrooms(chatroom_id) {
     const inbox = document.querySelector('section.chat-rooms')
     const chat = document.querySelector('#chat' + chatroom_id)
-    const response = await fetch('../api/api_get_current_chatroom.php?chatroom_id=' + chatroom_id)
+    const response = await fetch('../api/api_get_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroom_id}))
     const chatroom = await response.json()
     const removed = inbox.removeChild(chat)
     inbox.insertBefore(removed, inbox.firstChild)
@@ -25,8 +25,9 @@ async function addClickListeners() {
         }
     }
     const sendMessageInput = document.querySelector('.chat-page input')
+    const sendMessageButton = document.querySelector('.chat-page input')
     if(temporary) {
-        temporary.addEventListener("click", async () => {
+        sendMessageButton.addEventListener("click", async () => {
             const text = sendMessageInput.value.trim();
             if (!text.length) return;
             const id = temporary.id.split('&')
@@ -45,7 +46,7 @@ async function addClickListeners() {
     if(existing){
         const small_chatroom = document.querySelector('#chat' + existing_chatroom.id.substring(9))
         updateCurrentChatroom(small_chatroom)
-        small_chatroom.addEventListener("click", async () => {
+        sendMessageButton.addEventListener("click", async () => {
             const text = sendMessageInput.value.trim();
             if (!text.length) return;
             const id = existing_chatroom.id.substring(9)
@@ -59,7 +60,7 @@ function createSmallChatroom(chatroom, buyer,seller,  message){
     chat_div.id = "chat" + chatroom['chatroomId']
 
     const seller_img = document.createElement('img')
-    seller_img.src = "../uploads/profile_pics/" + seller['image']
+    seller_img.src = "../uploads/profile_pics/" + seller['image'] + ".png"
 
     const last_msg_div = document.createElement('div')
     last_msg_div.classList.add('chat-content')
@@ -119,7 +120,7 @@ function formatDateTime(date) {
 }
 
 async function handleClick(chatroom, user) {
-    const response = await fetch('../api/api_get_current_chatroom.php?chatroom_id=' + chatroom.id.substring(4))
+    const response = await fetch('../api/api_get_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroom.id.substring(4)}))
     const chatroom_data = await response.json()
     const msgInbox = await createMessageInbox(chatroom.id.substring(4), user);
     updateCurrentChatroom(chatroom);
@@ -163,7 +164,7 @@ function createItemInfo(chatroom_json) {
     const item_image = document.createElement('img');
     item_image.classList.add("item-msg-img");
     item_image.alt = "item image";
-    item_image.src = "../uploads/thumbnails/" + chatroom_json['item']['mainImage'];
+    item_image.src = "../uploads/thumbnails/" + chatroom_json['item']['mainImage'] + ".png";
     const item_link = document.createElement('a')
     item_link.href = "../pages/item.php?id=" + chatroom_json['item']['id']
     const item_link2 = item_link.cloneNode()
@@ -195,7 +196,7 @@ function createUserInfo(chatroom_json, user) {
     const addressee_image = document.createElement('img');
     addressee_image.classList.add("addressee-img");
     addressee_image.alt = "addressee profile image";
-    addressee_image.src = "../uploads/profile_pics/" + addressee['image'];
+    addressee_image.src = "../uploads/profile_pics/" + addressee['image'] + ".png";
     const addressee_link = document.createElement('a')
     addressee_link.href = "../pages/user.php?user_id=" + addressee['user_id']
     const addressee_link2 = addressee_link.cloneNode()
@@ -211,15 +212,15 @@ function createUserInfo(chatroom_json, user) {
     return aside;
 }
 
-async function createMessageInbox(chatroom, user) {
-    const response = await fetch('../api/api_current_chatroom.php?chatroom_id=' + chatroom);
+async function createMessageInbox(chatroomId, user) {
+    const response = await fetch('../api/api_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroomId}));
     const messages = await response.json();
     const msg_inbox = document.createElement('article');
     msg_inbox.classList.add("msg-inbox");
 
     const message_section = fill_messages(messages, user);
     msg_inbox.appendChild(message_section);
-    msg_inbox.appendChild(createSendMessageDiv(chatroom, user));
+    msg_inbox.appendChild(createSendMessageDiv(chatroomId, user));
 
     message_section.scrollTo(0, message_section.scrollHeight);
 
@@ -245,7 +246,7 @@ function createSendMessageDiv(chatroom, user) {
 async function  sendMessage(chatroom, user, input) {
     const text = input.value.trim();
     if (!text.length) return;
-    await fetch("../api/api_send_messages.php?" + encodeForAjax({chatroom: chatroom, sender: user, message: text}))
+    await fetch("../api/api_send_messages.php?" + encodeForAjax({chatroom_id: chatroom, sender: user, message: text}))
     input.value = '';
     const msg_section = document.querySelector('section.scroll');
     msg_section.insertBefore(create_message(user, text, user, Date.now() / 1000), msg_section.firstChild);
