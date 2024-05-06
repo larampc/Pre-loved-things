@@ -1123,6 +1123,25 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     box-sizing: border-box;
 }
 
+.index-main .items::-webkit-scrollbar {
+    width: 20px;
+}
+
+.index-main .items::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.index-main .items::-webkit-scrollbar-thumb {
+    background: #F2E8D5;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+.index-main .items::-webkit-scrollbar-thumb:hover {
+    background-color: #efdab4cd;
+}
+
 .index-main .items .item {
     width: 200px;
     height: 200px;
