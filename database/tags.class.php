@@ -48,7 +48,7 @@ class Tag
         return $stmt->fetchColumn();
     }
 
-    public static function get_category_id(PDO $dbh, string $category):  int {
+    public static function get_category_id(PDO $dbh, string $category) {
         $stmt = $dbh->prepare('SELECT id FROM categories where category = ? ');
         $stmt->execute(array($category));
         return $stmt->fetchColumn();
