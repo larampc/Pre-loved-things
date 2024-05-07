@@ -75,12 +75,14 @@ function selectionType(option) {
         more.classList.add("new-option")
         more.innerHTML = "add"
         more.title = "Add option"
-        tagOptions.appendChild(more)
+        //tagOptions.appendChild(more)
         more.addEventListener("click", () => addTagFinal(option.parentElement.parentElement))
         option.parentElement.parentElement.appendChild(tagOptions)
+        option.parentElement.parentElement.appendChild(more)
         addTagFinal(option.parentElement.parentElement)
     }
     if (option.value === "free") {
+        option.parentElement.parentElement.lastChild.remove();
         option.parentElement.parentElement.lastChild.remove();
     }
 }
@@ -92,4 +94,4 @@ const optionRemove = document.querySelectorAll(".remove-option")
 optionRemove.forEach((elem) => elem.addEventListener("click", () => elem.parentElement.remove()))
 
 const addOption = document.querySelectorAll(".new-option")
-addOption.forEach((elem) => elem.addEventListener("click", () => addTagFinal(elem.parentElement.parentElement, false)))
+addOption.forEach((elem) => elem.addEventListener("click", () => addTagFinal(elem.parentElement, false)))

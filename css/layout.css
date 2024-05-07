@@ -705,19 +705,18 @@ main .pfPage{
 }
 .new-tag {
     display: grid;
-    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    grid-template-columns: auto auto auto auto 1fr;
     grid-template-rows: auto;
-    grid-template-areas: "name type options";
-    :first-child {
-        grid-area: name;
-    }
-    :nth-child(2) {
-        grid-area: type;
+    grid-template-areas: "name delete type add options";
+    .new-option {
+        padding: 0;
     }
 }
 .tag-options {
     grid-area: options;
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     justify-content: left;
 }
