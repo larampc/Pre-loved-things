@@ -52,6 +52,7 @@ function createRemoveButton(id) {
     if(document.querySelector('i#delete' + id) !== null) return null;
     const removeButton = document.createElement('i')
     removeButton.classList.add('material-symbols-outlined')
+    removeButton.classList.add('bolder')
     removeButton.innerText = 'delete'
     removeButton.id = "delete" + id
     removeButton.addEventListener('click', shiftImages.bind(removeButton))
@@ -92,6 +93,7 @@ function createImageUploader() {
 
     const addPhotoIcon = document.createElement('i')
     addPhotoIcon.classList.add('material-symbols-outlined')
+    addPhotoIcon.classList.add('bolder')
     addPhotoIcon.classList.add('upload-icon')
     addPhotoIcon.innerText = 'add_a_photo'
 

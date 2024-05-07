@@ -12,6 +12,14 @@
             'GRAD' 0,
             'opsz' 24
 }
+.material-symbols-outlined.bolder {
+    font-size: 40px;
+    font-variation-settings:
+            'FILL' 0,
+            'wght' 600,
+            'GRAD' 0,
+            'opsz' 24
+}
 .material-symbols-outlined.filled {
     font-variation-settings:
             'FILL' 100,

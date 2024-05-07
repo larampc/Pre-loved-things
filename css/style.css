@@ -376,6 +376,79 @@ main .cartPage  h2 {
     height: 20rem;
 }
 
+.uploader {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.upload-icon {
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+    color: black;
+}
+
+.photo-upload {
+    opacity: 0.75;
+    overflow: hidden;
+
+    box-shadow: 0 8px 6px -6px;
+}
+
+/* toggle icon state */
+.photo-upload:hover .upload-icon {
+    opacity: 1;
+}
+
+.photo-upload {
+    width: 200px;
+    height: 200px;
+    background-color: #D9D9D9;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 2rem;
+    i {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        align-content: center;
+        text-align: center;
+    }
+    h5 {
+        position: absolute;
+        text-align: center;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        font-size: medium;
+    }
+}
+
+.edit-profile .photo-upload{
+    border-radius: 100%;
+}
+
+section.item-image-uploads {
+    display: flex;
+    flex-flow: row wrap;
+    h4 {
+        width: 100%;
+    }
+    .main-photo-upload {
+        box-shadow: 0 0 0 5px lightgoldenrodyellow;
+    }
+}
+
 /* TRACK ITEM */
 #print {
     background-color: #E5CFA4;
@@ -1277,72 +1350,6 @@ a {
 
 .profile-picture {
     border-radius: 100%;
-}
-.uploader {
-    /* make it invisible */
-    opacity: 0;
-    /* make it take the full height and width of the parent container */
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-}
-
-.upload-icon {
-    opacity: 0.5;
-    transition: opacity 0.3s ease;
-    color: rgb(147, 147, 147);
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #bbb;
-}
-
-.photo-upload {
-    opacity: 0.75;
-    overflow: hidden;
-
-    box-shadow: 0 8px 6px -6px;
-}
-
-/* toggle icon state */
-.photo-upload:hover .upload-icon {
-    opacity: 1;
-}
-
-.photo-upload {
-    width: 200px;
-    height: 200px;
-    background-color: #0a0a23;
-    position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0.5em;
-    padding: 0.5em;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    i {
-        position: absolute;
-        top: 45%;
-        left: 45%;
-    }
-    h5 {
-        position: absolute;
-    }
-}
-
-.edit-profile .photo-upload{
-    border-radius: 100%;
-}
-
-section.item-image-uploads {
-    display: flex;
-    flex-flow: row wrap;
-    h4 {
-        width: 100%;
-    }
-    .main-photo-upload {
-        box-shadow: 0 0 0 5px lightgoldenrodyellow;
-    }
 }
 
 /* NEW CATEGORY */

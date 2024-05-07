@@ -193,7 +193,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                 <h4>Upload Images</h4>
                 <div class="photo-upload main-photo-upload">
                     <h5>Main Image</h5>
-                    <i class="material-symbols-outlined upload-icon">add_a_photo</i>
+                    <i class="material-symbols-outlined bolder upload-icon">add_a_photo</i>
                     <input type="file" id="img1" class="uploader" name="img1" accept="image/*" required onchange="previewImage(this.id)">
                 </div>
                 <div class="image-upload-adder">
