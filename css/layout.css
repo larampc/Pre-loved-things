@@ -737,3 +737,8 @@ main .pfPage{
     align-items: center;
     justify-content: space-between;
 }
+
+.new-review {
+    display: flex;
+    justify-content: space-between;
+}

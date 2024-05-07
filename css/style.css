@@ -1398,3 +1398,21 @@ section.item-image-uploads {
 .star-review input:checked ~ label {
     background: var(--star-colour);
 }
+
+.write-review {
+    height: 2rem;
+    padding: 0 0.5rem;
+    border: 2px solid rgba(25, 25, 25, 0.56);
+    border-radius: 2rem;
+}
+.new-review button {
+    height: 2.2rem;
+    width: 2.2rem;
+    border-width: 0;
+    background-color: rgba(25, 25, 25, 0.3);
+    border-radius: 3rem;
+}
+
+.new-review {
+    padding:1rem;
+}

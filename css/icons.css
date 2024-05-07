@@ -47,6 +47,15 @@
     color: #6A4806
 }
 
+.material-symbols-outlined.filled-black {
+    font-variation-settings:
+            'FILL' 100,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 24;
+    color: #000000
+}
+
 .material-symbols-outlined.big {
     font-size: 30px;
 }

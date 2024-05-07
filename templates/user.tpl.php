@@ -104,7 +104,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, $session_id) { ?>
 
         <?php if ($user->user_id!=$session_id) { ?>
             <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
-                <input class="form-control" type="text" placeholder="Write your feedback..." name="review" required>
+                <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
                 <div class="star-review">
                     <input type="radio" name="stars" id="st5" value="5">
                     <label for="st5"></label>
@@ -117,7 +117,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, $session_id) { ?>
                     <input type="radio" name="stars" id="st1" value="1">
                     <label for="st1"></label>
                 </div>
-                <button type="submit" class="send-icon"><i class="material-symbols-outlined filled-color">prompt_suggestion</i>
+                <button type="submit" class="send-icon"><i class="material-symbols-outlined filled-black">send</i>
                 </button>
             </form>
         <?php } ?>
