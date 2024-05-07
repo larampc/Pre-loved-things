@@ -159,6 +159,7 @@ main > h2 {
     margin-right: 3rem;
     img {
         height: 2rem;
+        margin-left: 0.5rem;
     }
 }
 
@@ -186,6 +187,18 @@ main > h2 {
 .itemPage .edit img, .itemPage i, .like {
     height: 2rem;
     margin: 1rem 0;
+}
+
+.like {
+    text-align: center;
+    button {
+        height: 2rem;
+    }
+    p {
+        margin: 0;
+        font-weight: bold;
+        font-size: small;
+    }
 }
 
 .itemPage .priceSection {
