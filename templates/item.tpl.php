@@ -142,7 +142,6 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
 
 function draw_new_item_form(PDO $db, array $categories) { ?>
     <script src="../scripts/preview_image.js" defer></script>
-    <link href="../css/upload.css" rel="stylesheet">
     <article class="newItemPage">
         <h2>New item</h2>
         <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
