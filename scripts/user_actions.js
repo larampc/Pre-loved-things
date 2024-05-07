@@ -1,4 +1,4 @@
-const actions = document.querySelectorAll('.confirmAction ')
+const actions = document.querySelectorAll('.confirm-action ')
 
 let interval;
 const progressBar = document.createElement("div");
@@ -13,7 +13,7 @@ actions.forEach((action) => {
             }
         })
     }
-    else if (action.classList.contains("confirmAction")) {
+    else if (action.classList.contains("confirm-action")) {
         elem.preventDefault();
         actions.forEach((others) => {
             if (others !== action) {
@@ -26,16 +26,16 @@ actions.forEach((action) => {
         action.style.width = "100%";
         await new Promise(r => setTimeout(r, 300));
         action.classList.remove("wait")
-        action.classList.remove("confirmAction")
+        action.classList.remove("confirm-action")
         interval = setInterval(function() { changeButtonText(action); }, 2700);
     }
 })})
 
 function changeButtonText(currAction)
 {
-    if (!currAction.classList.contains("confirmAction")){
+    if (!currAction.classList.contains("confirm-action")){
         currAction.innerHTML = currAction.innerHTML.replace("Are you sure?", "")
-        currAction.classList.add("confirmAction")
+        currAction.classList.add("confirm-action")
         clearInterval(interval);
         currAction.parentElement.removeChild(progressBar)
         currAction.style.width = "auto";

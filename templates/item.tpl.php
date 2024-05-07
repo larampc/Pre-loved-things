@@ -83,8 +83,10 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
                     </div> <?php } ?>
             <?php }
             if ($session->isLoggedIn() && (User::get_user($db, $session->getId())->role === "admin" || $session->getId() == $item->creator->user_id)) { ?>
-                <form method="post" action="../actions/action_remove_item.php">
-                    <button type="submit" value="<?=$item->id?>" name="remove-item" class="edit" ><i class="material-symbols-outlined big"> delete </i></button>
+                <form method="post" action="../actions/action_remove_item.php" class="confirmation">
+                    <script src="../scripts/user_actions.js" defer></script>
+                    <button title="Remove item" type="submit" value="<?=$item->id?>" name="remove-item" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
+                    </button>
                 </form>
             <?php } ?>
         </header>

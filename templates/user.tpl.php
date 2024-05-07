@@ -27,11 +27,11 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
             <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
                 <script src="../scripts/user_actions.js" defer></script>
                 <div class="admin-actions">
-                    <form method="post" action="../actions/action_remove_user.php" class="admin">
-                        <button title="Remove user" type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirmAction" ><i class="material-symbols-outlined big"> person_remove </i></button>
+                    <form method="post" action="../actions/action_remove_user.php" class="confirmation">
+                        <button title="Remove user" type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirm-action" ><i class="material-symbols-outlined big"> person_remove </i></button>
                     </form>
-                    <form method="post" action="../actions/action_change_role.php" class="admin">
-                        <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirmAction" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
+                    <form method="post" action="../actions/action_change_role.php" class="confirmation">
+                        <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirm-action" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
                     </form>
                 </div>
 

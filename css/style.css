@@ -1094,12 +1094,11 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(to right, var(--error-background), var(--error-primary));
 }
 
-.admin .message-progress {
+.confirmation .message-progress {
     background: linear-gradient(to right, var(--confirm-background), var(--confirm-primary));
 }
 
-
-.admin {
+.confirmation {
     margin: 0 0.5rem 0 0;
     position: relative;
     border-radius: 0.5rem;
