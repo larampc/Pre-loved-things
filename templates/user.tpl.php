@@ -68,7 +68,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, $session_id) { ?>
         <div class="feedback-sum">
             <h2>Feedback</h2>
             <section class="stars">
-                <?php $average = round(Comment::get_user_average($dbh, $user->user_id), 0, PHP_ROUND_HALF_UP);
+                <?php $average = round(floatval(Comment::get_user_average($dbh, $user->user_id)), 0, PHP_ROUND_HALF_UP);
                 for ($i = 0; $i < $average; $i++) { ?>
                     <i class="material-symbols-outlined filled"> grade </i>
                 <?php }
