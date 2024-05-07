@@ -77,7 +77,10 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
                         <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                     </form>
                 <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
-                    <span class="like"><button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button></span> <?php } ?>
+                    <div class="like">
+                        <button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button>
+                        <p>Liked by <?=Item::get_number_likes($db, $item)?></p>
+                    </div> <?php } ?>
             <?php }
             if ($session->isLoggedIn() && (User::get_user($db, $session->getId())->role === "admin" || $session->getId() == $item->creator->user_id)) { ?>
                 <form method="post" action="../actions/action_remove_item.php">

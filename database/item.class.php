@@ -226,4 +226,10 @@ class Item {
         self::remove_cart_favorite($dbh, array(self::get_item($dbh, $id)));
         return true;
     }
+    static function get_number_likes(PDO $dbh, Item $item) {
+        $stmt = $dbh->prepare('SELECT count(*) FROM items JOIN favorites ON favorites.item = items.id 
+         where items.id = ? ');
+        $stmt->execute(array($item->id));
+        return $stmt->fetchColumn();
+    }
 }
