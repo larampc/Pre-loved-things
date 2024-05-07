@@ -25,6 +25,12 @@ body > header {
     height: 5rem;
     background-color: #F2E8D5;
     position: fixed;
+    .currency {
+        padding: 0.3rem 0;
+        background-color: #EBEBEB;
+        border-style: none;
+        border-radius: 0.5rem;
+    }
 }
 
 .search-container {
@@ -331,7 +337,14 @@ main .cartPage  h2 {
     padding: 0.5rem;
 }
 
-.newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
+.tags {
+    padding: 0;
+    * {
+        padding: 0.5rem;
+    }
+}
+
+.newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], .newItemPage select, .newCategoryPage select, .edit-profile select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
     background-color: #F1F1F1;
     border-style: none;
     border-radius: 0.5rem;
@@ -410,7 +423,12 @@ main .searchPage  h2 {
     border: none;
 }
 
-
+#order {
+    padding: 0.3rem 0;
+    background-color: #EBEBEB;
+    border-style: none;
+    border-radius: 0.5rem;
+}
 
 
 
