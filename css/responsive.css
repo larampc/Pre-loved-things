@@ -299,6 +299,27 @@
     .empty-msg-inbox {
         border-left: none;
     }
+
+    /* FEEDBACK */
+
+    .new-review {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        column-gap: 1rem;
+        grid-template-rows: auto auto;
+        grid-template-areas: "feedback send"
+                            "stars send";
+        .write-review {
+            grid-area: feedback;
+        }
+        .star-review {
+            grid-area: stars;
+            padding: 0;
+        }
+        .send-icon {
+            grid-area: send;
+        }
+    }
 }
 
 /* PHONE VIEW */
@@ -436,5 +457,13 @@
     }
     .chat-inbox {
         margin: 0 1rem;
+    }
+
+    /* FEEDBACK */
+
+    .userPage .comment .stars, .pfPage .comment .stars {
+        position: unset;
+        right: 0.5rem;
+        top: 0.5rem;
     }
 }
