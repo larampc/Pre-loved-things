@@ -261,17 +261,31 @@
         grid-template-columns: auto;
         grid-template-areas: "page";
     }
+    .chat-inbox :has( + .temporary) {
+        grid-template-columns: none;
+        grid-template-areas: none;
+    }
     .chat-page {
         margin-left: 3rem;
         grid-area: none;
         display: none;
     }
-    .chat-inbox {
+    .temporary {
+        display: block;
         grid-area: page;
+    }
+    .chat-inbox {
         margin: 0 3rem;
         h2 {
             text-align: center;
         }
+    }
+    .chat-inbox:not(:has( + .temporary)) {
+        grid-area: page;
+    }
+    .chat-inbox:has( + .temporary) {
+        grid-area: none;
+        display: none;
     }
     #back-inbox {
         display: block;
