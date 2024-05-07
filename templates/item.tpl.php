@@ -78,7 +78,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
                     </form>
                 <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
                     <div class="like">
-                        <button value="<?=$item->id?>" class="material-symbols-outlined <?= Item::check_favorite($db, $session->getId(), $item)? "filled": "big"?>"> favorite </button>
+                        <button value="<?=$item->id?>" class="material-symbols-outlined big <?= Item::check_favorite($db, $session->getId(), $item)? "filled": ""?>"> favorite </button>
                         <p>Liked by <?=Item::get_number_likes($db, $item)?></p>
                     </div> <?php } ?>
             <?php }
@@ -281,7 +281,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
             <section class="filter">
                 <div class="filter_header">
                     <h2>Filters</h2>
-                    <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined filled">close</i></button>
+                    <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined big filled">close</i></button>
                 </div>
                 <p>Order by</p>
                 <label for="order"></label>
@@ -308,7 +308,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                 draw_category_tags($dbh, $category);
                  ?>
             </section>
-        <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined filled">filter_list</i></button>
+        <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
         <p class="category-search"><?=$category?></p>
         <section class="items searchresult">
         </section>

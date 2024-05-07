@@ -1362,3 +1362,38 @@ section.item-image-uploads {
 .tag-options i {
     padding: 0;
 }
+
+:root{
+    --primary-colour: rgba(25, 25, 25, 0.56);
+    --star-colour: rgba(227, 192, 135, 0.93);
+}
+
+.star-review{
+    position: relative;
+    width: 40%;
+    height: auto;
+    transform: rotateY(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 .5em;
+}
+
+.star-review input{
+    display: none;
+}
+
+.star-review  label  {
+    aspect-ratio: 1;
+    width: 100%;
+    background: var(--primary-colour);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.star-review input:hover ~ label ,.star-review input:checked ~ label {
+    background: var(--star-colour);
+}
+
+.star-review input:checked ~ label {
+    background: var(--star-colour);
+}

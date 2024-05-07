@@ -44,11 +44,11 @@ function draw_header(string $page, Session $session, array $categories, array $c
                 </select>
                 <button type="submit" class="change-currency"></button>
             </form>
-            <a href="../pages/cart.php"><i class="material-symbols-outlined <?= $page=="cart"? "filled": "big"?>"> local_mall </i></a>
+            <a href="../pages/cart.php"><i class="material-symbols-outlined big <?= $page=="cart"? "filled": ""?>"> local_mall </i></a>
             <?php if ($session->isLoggedIn()) { ?>
-                <a href="../pages/favorite.php"><i class="material-symbols-outlined <?= $page=="favorite"? "filled": "big"?>"> favorite </i></a>
-                <a href="../pages/inbox.php"><i class="material-symbols-outlined <?= $page=="inbox"? "filled": "big"?>"> chat </i></a>
-                <a href="../pages/profile.php"><i class="material-symbols-outlined <?= $page=="profile"? "filled": "big"?>"> person </i> </a>
+                <a href="../pages/favorite.php"><i class="material-symbols-outlined big <?= $page=="favorite"? "filled": ""?>"> favorite </i></a>
+                <a href="../pages/inbox.php"><i class="material-symbols-outlined big<?= $page=="inbox"? "filled": ""?>"> chat </i></a>
+                <a href="../pages/profile.php"><i class="material-symbols-outlined big<?= $page=="profile"? "filled": ""?>"> person </i> </a>
             <?php } else { ?>
                 <a href="../pages/login.php" id="login">Log in</a>
             <?php } ?>

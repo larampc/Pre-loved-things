@@ -125,7 +125,7 @@ class Item {
 
     static function register_item(PDO $dbh, string $name, string $description, float $price, int $category, int $user_id, int $mainImage): int {
         $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, date) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, $price, $user_id, $mainImage, $category, date('Y/m/d', time())]);
+        $ret = $stmt->execute([$name, $description, $price, $user_id, $mainImage, $category, date('d/m/Y', time())]);
         return $ret ? intval($dbh->lastInsertId()) : -1;
     }
     static function register_item_images(PDO $db, array $images, int $item_id): bool

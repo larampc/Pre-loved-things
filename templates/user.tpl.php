@@ -34,7 +34,6 @@ function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
                         <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirm-action" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
                     </form>
                 </div>
-
             <?php } ?>
         </div>
     </section>
@@ -78,12 +77,39 @@ function draw_user_feedback($user, $feedback, $session_id) { ?>
                         <img src="../uploads/profile_pics/<?= $comment->from->image?>.png" class="profile-picture" alt="profile picture">
                         <p class="uname"><?=$comment->from->name?></p>
                         <time><?=$comment->date?></time>
+                        <section class="stars">
+                            <?php for ($i = 0; $i < $comment->rating; $i++) { ?>
+                                <i class="material-symbols-outlined filled"> grade </i>
+                            <?php }
+                            for ($i = $comment->rating; $i < 5; $i++) { ?>
+                                <i class="material-symbols-outlined"> grade </i>
+                            <?php } ?>
+                        </section>
                         <p class="content"><?=$comment->message?></p>
                     </article>
                         <?php
                     } ?>
             </div>
-        <?php if ($user->user_id!=$session_id) echo("<p>+ Add your review</p>"); ?>
+
+        <?php if ($user->user_id!=$session_id) { ?>
+            <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
+                <input class="form-control" type="text" placeholder="Write your feedback..." name="review" required>
+                <div class="star-review">
+                    <input type="radio" name="stars" id="st5" value="5">
+                    <label for="st5"></label>
+                    <input type="radio" name="stars" id="st4" value="4">
+                    <label for="st4"></label>
+                    <input type="radio" name="stars" id="st3" value="3">
+                    <label for="st3"></label>
+                    <input type="radio" name="stars" id="st2" value="2">
+                    <label for="st2"></label>
+                    <input type="radio" name="stars" id="st1" value="1">
+                    <label for="st1"></label>
+                </div>
+                <button type="submit" class="send-icon"><i class="material-symbols-outlined filled-color">prompt_suggestion</i>
+                </button>
+            </form>
+        <?php } ?>
     </section>
 <?php } ?>
 

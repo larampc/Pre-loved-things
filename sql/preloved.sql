@@ -98,7 +98,7 @@ CREATE TABLE roles (
 );
 
 CREATE TABLE comments (
-  id INTEGER PRIMARY KEY,            -- comment id
+  id INTEGER PRIMARY KEY AUTOINCREMENT,            -- comment id
   mainuser INTEGER REFERENCES users,   -- user this comment is about
   userc INTEGER REFERENCES users, -- user that wrote the comment
   date INTEGER,                 -- date when news item was published in epoch format
