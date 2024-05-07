@@ -42,6 +42,7 @@ async function addClickListeners() {
             chatroom_section.insertBefore(new_chatroom, chatroom_section.firstChild)
             updateCurrentChatroom(new_chatroom)
             new_chatroom.addEventListener("click", async () => handleClick(new_chatroom, user))
+            closeInbox()
         })
     }
     if(existing){
