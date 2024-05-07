@@ -258,6 +258,13 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                     <h2>Filters</h2>
                     <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined filled">close</i></button>
                 </div>
+                <p>Order by</p>
+                <label for="order"></label>
+                <select id="order">
+                    <option value="recent">Most recent</option>
+                    <option value="price-asc">Ascending Price</option>
+                    <option value="price-desc">Descending Price</option>
+                </select>
                 <p>Price</p>
                 <div class="price-input">
                     <label> Minimum

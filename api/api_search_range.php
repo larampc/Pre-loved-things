@@ -14,6 +14,7 @@ $tag = $_GET['tag'] ?: "";
 $page = $_GET['page'];
 $range = $_GET['price'];
 $search = $_GET['search'];
+$order = $_GET['order'];
 $dbh = get_database_connection();
 
 $checkTag = !empty($_GET['tag']);
@@ -53,7 +54,7 @@ else {
     }
 }
 
-    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search);
+    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search, $order);
     foreach ($res as $item) {
     $item->price = round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()), 2);
 }

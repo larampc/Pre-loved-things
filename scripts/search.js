@@ -7,6 +7,7 @@ let categories = Array();
 let price_range = Array();
 let conditions = Array();
 let tags = Array();
+let order = "recent"
 const mainCat = document.querySelector('.category-search');
 categories.push(mainCat.innerHTML)
 if (mainCat.innerHTML) {
@@ -17,13 +18,20 @@ if (mainCat.innerHTML) {
 console.log(document.querySelector('#searchbar').value)
 const searchres = document.querySelector('#searchbar').value;
 
-
 let all = false;
+
+const selectOrder = document.querySelector("#order")
+selectOrder.addEventListener("input", async () => {
+    order = selectOrder.value;
+    console.log(order)
+    cleanSearch();
+    await getFilteredItems();
+})
 
 async function getFilteredItems() {
     if (isLoading) return;
     isLoading = true;
-    const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres)
+    const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order)
     const items = await response.json();
     if (items.length === 0) {
         all = true;
