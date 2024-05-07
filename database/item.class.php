@@ -13,7 +13,6 @@ class Item {
     public string $description;
     public string $category;
     public array $tags;
-    public string $condition;
     public string $date;
     public User $creator;
     public bool $sold;
@@ -26,7 +25,6 @@ class Item {
     public static function create_item(PDO $dbh, array $item): Item
     {
         $new_item = new Item($dbh, $item['id']);
-        $new_item->condition = $item['condition'] ??  "";
         $new_item->price = $item['price'] ?? 0.0;
         $new_item->description = $item['description'] ?? "";
         $new_item->name = $item['name'] ?? "";
@@ -47,10 +45,10 @@ class Item {
         return $new_items;
     }
 
-    public static function update_item(PDO $dbh, int $id,  string $name, string $description, string $price): bool
+    public static function update_item(PDO $dbh, int $id,  string $name, string $description, float $price, int $category): bool
     {
-        $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ? WHERE id = ?');
-        return $stmt->execute(array($name, $description, floatval(str_replace(',', '.', $price)),$id));
+        $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category = ? WHERE id = ?');
+        return $stmt->execute(array($name, $description, $price, $category,$id));
     }
 
     static function get_item_images(PDO $dbh, int $id) : array
@@ -125,9 +123,9 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $dbh, string $name, string $description, float $price, int $category, int $user_id, int $mainImage, string $condition): int {
-        $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, condition, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, $price, $user_id, $mainImage, $category, $condition, date('Y/m/d', time())]);
+    static function register_item(PDO $dbh, string $name, string $description, float $price, int $category, int $user_id, int $mainImage): int {
+        $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, date) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $ret = $stmt->execute([$name, $description, $price, $user_id, $mainImage, $category, date('Y/m/d', time())]);
         return $ret ? intval($dbh->lastInsertId()) : -1;
     }
     static function register_item_images(PDO $db, array $images, int $item_id): bool
@@ -224,6 +222,7 @@ class Item {
         $stmt = $dbh->prepare('DELETE FROM items WHERE id = ?');
         if (!$stmt->execute(array($id))) return false;
         self::remove_cart_favorite($dbh, array(self::get_item($dbh, $id)));
+        Tag::remove_item_tags($dbh, $id);
         return true;
     }
     static function get_number_likes(PDO $dbh, Item $item) {

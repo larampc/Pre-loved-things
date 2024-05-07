@@ -164,7 +164,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                         $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
                         if ($options) { ?>
                             <label><?=$tag['tag']?>
-                                <select name="<?=$tag['tag']?>"  <?=$category['category'] ? "":"required" ?>>
+                                <select name="<?=$tag['id']?>"  <?=$category['category'] ? "":"required" ?>>
                                     <?php if ($category['category']) { ?>
                                         <option value=""></option>
                                     <?php }
@@ -175,7 +175,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                             </label>
                         <?php }
                         else { ?>
-                            <label for="<?=$tag['tag']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['tag']?>" name="<?=$tag['tag']?>" <?=$category['category'] ? "":"required" ?>>
+                            <label for="<?=$tag['id']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['id']?>" name="<?=$tag['id']?>" <?=$category['category'] ? "":"required" ?>>
                         <?php }
                     } ?>
                 </div>
@@ -203,7 +203,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
     </article>
 <?php }
 
-function draw_edit_item_form(Item $item) { ?>
+function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categories) { ?>
     <article class="newItemPage">
         <h2>Edit item</h2>
         <form action="../actions/action_edit_item.php" method="POST" enctype="multipart/form-data">
@@ -211,22 +211,43 @@ function draw_edit_item_form(Item $item) { ?>
             <input type="text" id="iname" name="iname" value="<?= $item->name ?>" required>
             <label for="category">category</label>
             <select id="category" name="category">
-                <option value="other" <?=$item->category=="other"? "selected":""?>>Other</option>
-                <option value="clothes" <?=$item->category=="clothes"? "selected":""?>>Clothes</option>
-                <option value="tech" <?=$item->category=="technology"? "selected":""?>>Technology</option>
-                <option value="toys" <?=$item->category=="toys"? "selected":""?>>Toys</option>
-                <option value="cars" <?=$item->category=="cars"? "selected":""?>>Cars</option>
-                <option value="books" <?=$item->category=="books"? "selected":""?>>Books</option>
-                <option value="sports" <?=$item->category=="sports"? "selected":""?>>Sports</option>
+                <?php foreach ($categories as $category) { ?>
+                    <option value="<?=$category['category']?:"other"?>" <?=$item->category == $category['category']? "selected":""?>><?=ucfirst($category['category'])?: "Other"?></option>
+                <?php }?>
             </select>
+            <script src="../scripts/new.js" defer></script>
+            <?php foreach ($categories as $category) {
+                $tags = Tag::get_category_tags($db, $category['category']);
+                if ($tags) { ?>
+                    <div class="tags <?=$category['category'] ?: "other"?> <?=$category['category']==$item->category? "visible":""?>">
+                        <?php
+                        foreach ($tags as $tag) {
+                            $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
+                            if ($options) { ?>
+                                <label><?=$tag['tag']?>
+                                    <select name="<?=$tag['id']?>"  <?=$category['category'] ? "":"required" ?>>
+                                        <?php if ($category['category']) { ?>
+                                            <option value=""></option>
+                                        <?php }
+                                        foreach ($options as $option) { ?>
+                                            <option value="<?=$option['value']?>" <?=Tag::get_tag_value_item($db, $tag['id'], $item->id) == $option['value']? "selected": ""?>><?=$option['value']?></option>
+                                        <?php } ?>
+                                    </select>
+                                </label>
+                            <?php }
+                            else { ?>
+                                <label for="<?=$tag['id']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['id']?>" name="<?=$tag['id']?>" <?=$category['category'] ? "":"required" ?> value="<?=Tag::get_tag_value_item($db, $tag['id'], $item->id)?>">
+                            <?php }
+                        } ?>
+                    </div>
+                <?php }} ?>
 
             <label for="price">Price</label>
-            <input type="number" step="0.01" id="price" name="price" value="<?= $item->price ?>" required>
+            <input type="number" step="0.01" id="price" name="price" value="<?= round($item->price * User::get_currency_conversion($db, $session->getCurrency())) ?>" required>
 
             <label for="description">Description</label>
             <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40">
 
-            <label for="images">images</label>
             <input type="file" id="img1" name="img1" accept="image/*">
             <input type="file" id="img2" name="img2" accept="image/*">
 

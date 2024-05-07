@@ -668,6 +668,10 @@ main .pfPage{
     display: none;
 }
 
+.visible {
+    display: block;
+}
+
 .other {
     display: block;
 }

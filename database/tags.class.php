@@ -25,7 +25,7 @@ class Tag
     }
 
     public static function get_category_tags(PDO $dbh, string $category):  array {
-        $stmt = $dbh->prepare('SELECT tags.tag FROM tags join categories on tags.category = categories.id where categories.category = ?');
+        $stmt = $dbh->prepare('SELECT tags.tag, tags.id FROM tags join categories on tags.category = categories.id where categories.category = ?');
         $stmt->execute(array($category));
         return $stmt->fetchAll();
     }
@@ -114,5 +114,15 @@ class Tag
         }
         $stmt = $dbh->prepare('DELETE FROM tags where category = ?');
         $stmt->execute(array($id));
+    }
+    static function get_tag_value_item(PDO $dbh, int $tag_id, int $item_id) {
+        $stmt = $dbh->prepare('SELECT data FROM tags_values where tag = ? and item = ?');
+        $stmt->execute(array($tag_id, $item_id));
+        return $stmt->fetchColumn() ? :"";
+    }
+
+    static function remove_item_tags(PDO $dbh, int $item_id) {
+        $stmt = $dbh->prepare('DELETE FROM tags_values where item = ?');
+        $stmt->execute(array($item_id));
     }
 }

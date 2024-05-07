@@ -7,7 +7,6 @@ if (category) {
         for (let i = 0; i < allOptions.length; i++) {
             if (!allOptions[i].classList.contains("other")) allOptions[i].style.display = "none";
         }
-
         if (options.length !== 0) {
             options[0].style.display = "block";
         }
