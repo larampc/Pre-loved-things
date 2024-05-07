@@ -96,7 +96,9 @@
 /* TABLET VIEW */
 @media (max-width: 60em) {
     /* SEARCH PAGE */
-
+    .searchPage {
+        position: relative;
+    }
     .searchPage .filter {
         grid-area: unset;
         transition: width 0.1s;
@@ -105,7 +107,24 @@
         margin: 0;
         clip-path: border-box;
         position: absolute;
+        max-height: calc(100% - 3rem);
+        overflow-y: scroll;
         border-bottom-right-radius: 2rem;
+    }
+    .searchPage .filter::-webkit-scrollbar {
+        width: 20px;
+    }
+    .searchPage .filter::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+    .searchPage .filter::-webkit-scrollbar-thumb {
+        background: #efdab4cd;
+        border-radius: 20px;
+        border: 6px solid transparent;
+        background-clip: content-box;
+    }
+    .searchPage .filter::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(225, 193, 159, 0.8);
     }
     #close-filters {
         display: block;
