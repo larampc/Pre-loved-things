@@ -27,7 +27,8 @@ const addtag = document.querySelector(".add-tag")
 addtag.addEventListener("click", () => {
     const tags = document.querySelectorAll(".new-tag")
     const lastTag = tags[tags.length-1]
-    const tagNumber = parseInt(lastTag.id[lastTag.id.length-1]) +1
+    let tagNumber = 0;
+    if (tags.length > 0) tagNumber = parseInt(lastTag.id[lastTag.id.length-1]) +1
     const div = document.createElement("div")
     div.classList.add("new-tag")
     div.id = "new-tag-" + tagNumber.toString()
