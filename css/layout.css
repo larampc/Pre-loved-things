@@ -731,3 +731,9 @@ main .pfPage{
 .newCategoryPage form > button {
     grid-area: submit;
 }
+
+.feedback-sum {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

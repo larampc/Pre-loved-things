@@ -460,17 +460,18 @@ main .userPage, .pfPage{
     background-color: #D9D9D9;
     margin-right: 1rem;
     border-radius: 1rem;
-    h2 {
-        border-bottom-style: solid;
-        border-bottom-color: black;
-        padding-bottom: 1rem;
-    }
     > * {
         padding-left:1rem;
     }
     > p {
         text-decoration:underline;
     }
+}
+
+.feedback-sum {
+    border-bottom-style: solid;
+    border-bottom-color: black;
+    margin-bottom: 1rem;
 }
 
 .userPage .items, .pfPage .items {

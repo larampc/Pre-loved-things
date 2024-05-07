@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
-        draw_user_feedback($user, $feedback, $session->getId());
+        draw_user_feedback($dbh, $user, $feedback, $session->getId());
         draw_items($dbh, $session, $items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
         ?>
@@ -63,9 +63,20 @@ function draw_edit_profile($user) { ?>
     <?php
 }
 
-function draw_user_feedback($user, $feedback, $session_id) { ?>
+function draw_user_feedback(PDO $dbh, $user, $feedback, $session_id) { ?>
     <section class="feedback">
-        <h2>Feedback</h2>
+        <div class="feedback-sum">
+            <h2>Feedback</h2>
+            <section class="stars">
+                <?php $average = round(Comment::get_user_average($dbh, $user->user_id), 0, PHP_ROUND_HALF_UP);
+                for ($i = 0; $i < $average; $i++) { ?>
+                    <i class="material-symbols-outlined filled"> grade </i>
+                <?php }
+                for ($i = $average; $i < 5; $i++) { ?>
+                    <i class="material-symbols-outlined"> grade </i>
+                <?php } ?>
+            </section>
+        </div>
             <div class ="comment-box">
                 <?php
                     if (empty($feedback)) { ?>

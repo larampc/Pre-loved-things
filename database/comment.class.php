@@ -16,4 +16,13 @@ class Comment
         $this->date = $date;
         $this->rating = $rating;
     }
+    public static function add_review(PDO $dbh, int $user_id, int $id,string $review, int $rating) {
+        $stmt = $dbh->prepare('INSERT INTO comments (mainuser, userc, text, rating, date) VALUES (?,?,?,?,?)');
+        $stmt->execute(array($user_id, $id, $review, $rating, date('d/m/Y', time())));
+    }
+    public static function get_user_average(PDO $dbh, int $user_id) {
+        $stmt = $dbh->prepare('SELECT AVG(rating) FROM comments WHERE mainuser = ?');
+        $stmt->execute(array($user_id));
+        return $stmt->fetchColumn();
+    }
 }
