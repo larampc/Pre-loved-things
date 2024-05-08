@@ -24,12 +24,12 @@ const selectOrder = document.querySelector("#order")
 selectOrder.addEventListener("input", async () => {
     order = selectOrder.value;
     console.log(order)
-    cleanSearch();
-    await getFilteredItems();
+    await getFilteredItems(true);
 })
 
-async function getFilteredItems() {
-    if (isLoading) return;
+async function getFilteredItems(clean) {
+    //if (isLoading) return;
+    if (clean) cleanSearch();
     isLoading = true;
     const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order)
     const items = await response.json();
@@ -42,6 +42,7 @@ async function getFilteredItems() {
     }
     const response_currency = await fetch('../api/api_get_currency.php')
     const currency = await response_currency.json();
+    if (clean) cleanSearch();
     items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
     loader = document.querySelector(".loader");
     if (loader) {
@@ -60,7 +61,7 @@ document.onscroll = async () => {
         window.scrollY > (document.body.offsetHeight - window.outerHeight)
     ) {
         pageNum++;
-        await getFilteredItems();
+        await getFilteredItems(false);
     }
 };
 
@@ -72,17 +73,15 @@ if (optionsPrice) {
     price_range.push(max.value)
     min.addEventListener("input", async() => {
         price_range[0] = min.value
-        cleanSearch()
-        await getFilteredItems();
+        await getFilteredItems(true);
     })
     max.addEventListener("input", async() => {
         price_range[1] = max.value
-        cleanSearch()
-        await getFilteredItems();
+        await getFilteredItems(true);
     })
 }
 
-getFilteredItems();
+getFilteredItems(true);
 
 const optionsConditions = document.querySelector('#Condition');
 if (optionsConditions) {
@@ -92,8 +91,7 @@ if (optionsConditions) {
             const index = conditions.indexOf(elem.name);
             if (index === -1 && elem.checked) conditions.push(elem.name);
             else if (!elem.checked) conditions.splice(index, 1);
-            cleanSearch()
-            await getFilteredItems();
+            await getFilteredItems(true);
         });
     });
 }
@@ -146,8 +144,7 @@ tags2.forEach(tag => tag.addEventListener("input", async () => {
             tags = tags.filter((elem) => elem[0] !== tag.name)
             if (tag.value) tags.push(Array(tag.name, tag.value))
         }
-        cleanSearch()
-        await getFilteredItems();
+        await getFilteredItems(true);
     }))
 
 function cleanSearch() {
