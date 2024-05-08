@@ -1466,7 +1466,7 @@ a {
     padding:1rem;
 }
 
-/* HTML: <div class="loader"></div> */
+/* LOADER */
 .loader {
     height: 14px;
     margin: calc((10rem - 14px) / 2) calc((10rem - 56px) / 2);

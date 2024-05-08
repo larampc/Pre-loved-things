@@ -5,20 +5,19 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
-        draw_user_feedback($dbh, $user, $feedback, $session);
+        draw_user_feedback($dbh, $user, $feedback, $session); ?>
+        <div id="curve_chart"></div>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="//www.google.com/jsapi"></script>
+        <script src="../scripts/draw_chart.js"></script>
+        <?php echo('<script>drawChart('.$user->user_id.')</script>');
         draw_items($dbh, $session, $items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
         ?>
     </article>
-    <div id="curve_chart"></div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="//www.google.com/jsapi"></script>
-    <script src="../scripts/draw_chart.js"></script>
-    <?php
-    echo('<script>drawChart('.$user->user_id.')</script>');
-}
+<?php } ?>
 
-function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
+<?php function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
     <section class="user">
         <img src="../uploads/profile_pics/<?=$user->image?>.png" class="profile-picture" alt="profile picture">
         <div class="user-details">
@@ -74,15 +73,13 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <div class="feedback-sum">
             <h2>Feedback</h2>
             <section class="stars">
-                <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
-                $average = round($avg, 0, PHP_ROUND_HALF_UP);
+                <?php $average = round(floatval(Comment::get_user_average($dbh, $user->user_id)), 0, PHP_ROUND_HALF_UP);
                 for ($i = 0; $i < $average; $i++) { ?>
                     <i class="material-symbols-outlined filled"> grade </i>
                 <?php }
                 for ($i = $average; $i < 5; $i++) { ?>
                     <i class="material-symbols-outlined"> grade </i>
                 <?php } ?>
-                <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
             </section>
         </div>
             <div class ="comment-box">

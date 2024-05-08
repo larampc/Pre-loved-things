@@ -564,13 +564,18 @@ main .userPage{
 main .pfPage{
     display: grid;
     grid-template-columns:  1fr auto;
-    grid-template-rows:  auto 1fr;
+    grid-template-rows:  auto 1fr auto;
     grid-template-areas: "user items"
-                         "feedback items";
+                         "feedback items"
+                         "stats items";
 }
 
 .pfPage .display-item {
     grid-area: items;
+}
+
+.pfPage #curve_chart {
+    grid-area: stats;
 }
 
 #back-inbox {

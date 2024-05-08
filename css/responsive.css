@@ -228,12 +228,21 @@
 
     /* USER AND PROFILE PAGE */
 
-    main .userPage, main .pfPage {
+    main .userPage {
         grid-template-columns: auto;
         grid-template-rows: auto auto auto;
         grid-template-areas:
         "user"
         "feedback"
+        "items";
+    }
+    main .pfPage {
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto;
+        grid-template-areas:
+        "user"
+        "feedback"
+        "stats"
         "items";
     }
     .userPage .feedback, .pfPage .feedback {
