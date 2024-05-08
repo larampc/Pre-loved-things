@@ -544,6 +544,15 @@ main .userPage, .pfPage{
     border-bottom-color: black;
     margin-bottom: 1rem;
     padding: 0 1rem;
+    .stars {
+        height: 24px;
+        p {
+            margin: 0;
+            text-align: center;
+            font-size: small;
+            font-weight: bold;
+        }
+    }
 }
 
 .userPage .items, .pfPage .items {
