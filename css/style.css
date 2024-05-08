@@ -526,6 +526,7 @@ main .userPage, .pfPage{
 
 .userPage .user, .pfPage .user {
     margin-bottom: 2rem;
+    column-gap: 1rem;
 }
 
 .userPage .feedback, .pfPage .feedback {
@@ -598,6 +599,26 @@ main .userPage, .pfPage{
     }
 }
 
+
+.userPage .comment-box::-webkit-scrollbar, .pfPage .comment-box::-webkit-scrollbar {
+    width: 20px;
+}
+
+.userPage .comment-box::-webkit-scrollbar-track, .pfPage .comment-box::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+.userPage .comment-box::-webkit-scrollbar-thumb, .pfPage .comment-box::-webkit-scrollbar-thumb {
+    background: rgba(25, 25, 25, 0.2);
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+}
+
+.userPage .comment-box::-webkit-scrollbar-thumb:hover, .pfPage .comment-box::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(25, 25, 25, 0.3);
+}
+
 .userPage .comment p, .pfPage .comment p{
     padding-top: 0.5rem;
     margin: 0;
@@ -610,6 +631,7 @@ main .userPage, .pfPage{
     padding-left: 3.5rem;
     padding-bottom: 0.5rem;
     padding-right: 0.5rem;
+    word-break: break-word;
 }
 
 .display-item .navbar {

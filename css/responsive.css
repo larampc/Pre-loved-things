@@ -445,6 +445,12 @@
         border-radius: 0.5rem;
         background-color: #F1F1F1;
     }
+    .admin-actions {
+        justify-content: center;
+        > * {
+            margin-right: 0;
+        }
+    }
 
     /* INBOX PAGE */
 
