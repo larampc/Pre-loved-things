@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
-        draw_user_feedback($dbh, $user, $feedback, $session->getId());
+        draw_user_feedback($dbh, $user, $feedback, $session);
         draw_items($dbh, $session, $items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
         ?>
@@ -63,7 +63,7 @@ function draw_edit_profile($user) { ?>
     <?php
 }
 
-function draw_user_feedback(PDO $dbh, $user, $feedback, $session_id) { ?>
+function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     <section class="feedback">
         <div class="feedback-sum">
             <h2>Feedback</h2>
@@ -102,7 +102,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, $session_id) { ?>
                     } ?>
             </div>
 
-        <?php if ($user->user_id!=$session_id) { ?>
+        <?php if ($session->isLoggedIn() && $user->user_id!=$session->getId()) { ?>
             <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
                 <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
                 <div class="star-review">
