@@ -311,6 +311,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
         <p class="category-search"><?=$category?></p>
         <section class="items searchresult">
+            <div class="loader"></div>
         </section>
         </article>
 <?php } ?>

@@ -33,14 +33,20 @@ async function getFilteredItems() {
     isLoading = true;
     const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order)
     const items = await response.json();
+    let loader = document.querySelector(".loader");
     if (items.length === 0) {
         all = true;
         isLoading = false;
+        if (loader) loader.style.display = 'none';
         return;
     }
+    if (items.length < 18) all = true;
     const response_currency = await fetch('../api/api_get_currency.php')
     const currency = await response_currency.json();
     items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
+    if (loader) resultContainer.appendChild(loader);
+    if (all) loader.style.display = 'none';
+    else loader.style.display = 'grid';
     isLoading = false;
 }
 
@@ -144,6 +150,10 @@ function cleanSearch() {
     pageNum = 1;
     all = false;
     resultContainer.innerHTML = "";
+    let loader = document.querySelector(".loader");
+    const loaderDIV = document.createElement("div");
+    loaderDIV.classList.add("loader");
+    if (!loader) resultContainer.appendChild(loaderDIV);
 }
 
 const filter = document.getElementsByClassName("filter");
