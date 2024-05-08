@@ -40,12 +40,11 @@ async function getFilteredItems() {
         if (loader) loader.style.display = 'none';
         return;
     }
-    if (items.length < 18) all = true;
     const response_currency = await fetch('../api/api_get_currency.php')
     const currency = await response_currency.json();
     items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
     if (loader) resultContainer.appendChild(loader);
-    if (all) loader.style.display = 'none';
+    if (items.length < 18) loader.style.display = 'none';
     else loader.style.display = 'grid';
     isLoading = false;
 }
