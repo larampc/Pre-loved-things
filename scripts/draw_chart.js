@@ -1,9 +1,7 @@
-google.charts.load('current', {'packages': ['corechart']});
 async function drawChart(user) {
+    google.charts.load('current', {'packages': ['corechart']});
     const response = await fetch('../api/api_get_statistics.php?user='+user)
-    console.log(response)
     const items = await response.json();
-    console.log(items)
     let data = google.visualization.arrayToDataTable(items);
 
     let options = {
