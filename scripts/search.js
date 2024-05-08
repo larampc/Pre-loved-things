@@ -9,6 +9,7 @@ let conditions = Array();
 let tags = Array();
 let order = "recent"
 let request = 0;
+let controller = new AbortController();
 const mainCat = document.querySelector('.category-search');
 categories.push(mainCat.innerHTML)
 if (mainCat.innerHTML) {
@@ -31,9 +32,21 @@ selectOrder.addEventListener("input", async () => {
 async function getFilteredItems(clean) {
     //if (isLoading) return;
     if (clean) cleanSearch();
+    if (request > 0) {
+        controller.abort();
+        controller = new AbortController();
+    }
     request++;
     isLoading = true;
-    const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order)
+    let response;
+    try {
+        response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order, {
+            signal: controller.signal,
+        });
+    } catch (error) {
+        request--;
+        return;
+    }
     const items = await response.json();
     let loader = document.querySelector(".loader");
     if (items.length === 0) {
