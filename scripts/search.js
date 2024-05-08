@@ -8,6 +8,7 @@ let price_range = Array();
 let conditions = Array();
 let tags = Array();
 let order = "recent"
+let request = 0;
 const mainCat = document.querySelector('.category-search');
 categories.push(mainCat.innerHTML)
 if (mainCat.innerHTML) {
@@ -30,6 +31,7 @@ selectOrder.addEventListener("input", async () => {
 async function getFilteredItems(clean) {
     //if (isLoading) return;
     if (clean) cleanSearch();
+    request++;
     isLoading = true;
     const response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order)
     const items = await response.json();
@@ -42,17 +44,15 @@ async function getFilteredItems(clean) {
     }
     const response_currency = await fetch('../api/api_get_currency.php')
     const currency = await response_currency.json();
-    if (clean) cleanSearch();
-    items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
-    loader = document.querySelector(".loader");
-    if (loader) {
-        resultContainer.appendChild(loader);
-        console.log("AAAAAAAAAAAAAAAAAA")
-        console.log(loader)
+    if (request === 1) {
+        items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
+        loader = document.querySelector(".loader");
+        if (loader) resultContainer.appendChild(loader);
+        if (items.length < 18) loader.style.display = 'none';
+        else loader.style.display = 'grid';
+        isLoading = false;
     }
-    if (items.length < 18) loader.style.display = 'none';
-    else loader.style.display = 'grid';
-    isLoading = false;
+    request--;
 }
 
 document.onscroll = async () => {
@@ -150,11 +150,12 @@ tags2.forEach(tag => tag.addEventListener("input", async () => {
 function cleanSearch() {
     pageNum = 1;
     all = false;
-    resultContainer.innerHTML = "";
-    let loader = document.querySelector(".loader");
-    const loaderDIV = document.createElement("div");
-    loaderDIV.classList.add("loader");
-    if (loader == null) resultContainer.appendChild(loaderDIV);
+    const items = resultContainer.children;
+    while (!resultContainer.firstElementChild.classList.contains("loader")) {
+        resultContainer.removeChild(resultContainer.firstElementChild);
+    }
+    const loader = document.querySelector(".loader");
+    loader.style.display = 'grid';
 }
 
 const filter = document.getElementsByClassName("filter");
