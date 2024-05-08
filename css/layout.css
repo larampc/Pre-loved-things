@@ -571,7 +571,7 @@ main .pfPage{
                          "stats items";
 }
 
-.pfPage .display-item {
+.pfPage .display-item, .userPage .display-item {
     grid-area: items;
 }
 
