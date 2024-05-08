@@ -149,21 +149,21 @@ class Item {
         $getOrder = "date ASC";
         if ($order == "price-asc") $getOrder = "price ASC";
         if ($order == "price-desc") $getOrder = "price DESC";
-        $page = 18 * ($page - 1);
+        $page = 20 * ($page - 1);
         if ($checkTag) {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (".implode(',', $categories) . " ) 
              AND id IN (".implode(',', $itemTags) . " )
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
-            ORDER BY ". $getOrder ." LIMIT 18 OFFSET ? ");
+            ORDER BY ". $getOrder ." LIMIT 20 OFFSET ? ");
         }
         else {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (".implode(',', $categories) . " ) 
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
-             ORDER BY ". $getOrder ." LIMIT 18 OFFSET ?");
+             ORDER BY ". $getOrder ." LIMIT 20 OFFSET ?");
         }
         $stmt->execute(array($min, $max, "$search%", "% $search%", $page));
         return self::create_items($dbh, $stmt->fetchAll());

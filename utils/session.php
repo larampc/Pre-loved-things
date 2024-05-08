@@ -63,7 +63,7 @@ class Session {
     }
 
     public function getCurrency() : string {
-        return $_SESSION['currency'] ? : 'EUR';
+        return $_SESSION['currency'] ?? 'EUR';
     }
 }
 ?>
