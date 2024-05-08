@@ -12,6 +12,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     </article>
     <div id="curve_chart"></div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="//www.google.com/jsapi"></script>
     <script src="../scripts/draw_chart.js"></script>
     <?php
     echo('<script>drawChart('.$user->user_id.')</script>');
@@ -73,13 +74,15 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <div class="feedback-sum">
             <h2>Feedback</h2>
             <section class="stars">
-                <?php $average = round(floatval(Comment::get_user_average($dbh, $user->user_id)), 0, PHP_ROUND_HALF_UP);
+                <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
+                $average = round($avg, 0, PHP_ROUND_HALF_UP);
                 for ($i = 0; $i < $average; $i++) { ?>
                     <i class="material-symbols-outlined filled"> grade </i>
                 <?php }
                 for ($i = $average; $i < 5; $i++) { ?>
                     <i class="material-symbols-outlined"> grade </i>
                 <?php } ?>
+                <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
             </section>
         </div>
             <div class ="comment-box">

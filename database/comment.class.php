@@ -25,4 +25,9 @@ class Comment
         $stmt->execute(array($user_id));
         return $stmt->fetchColumn();
     }
+    public static function get_number_comments(PDO $dbh, int $user_id) {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM comments WHERE mainuser = ?');
+        $stmt->execute(array($user_id));
+        return $stmt->fetchColumn();
+    }
 }

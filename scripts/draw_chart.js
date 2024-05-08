@@ -1,5 +1,6 @@
+google.charts.load('current', {'packages': ['corechart']});
+
 async function drawChart(user) {
-    google.charts.load('current', {'packages': ['corechart']});
     const response = await fetch('../api/api_get_statistics.php?user='+user)
     const items = await response.json();
     let data = google.visualization.arrayToDataTable(items);
