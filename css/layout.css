@@ -306,7 +306,8 @@ main .userPage{
     grid-template-columns:  1fr auto;
     grid-template-rows:  auto 1fr;
     grid-template-areas: "user items"
-                         "feedback items";
+                         "feedback items"
+                         "stats items";
 }
 
 .userPage .user, .pfPage .user  {
