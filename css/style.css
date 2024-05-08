@@ -547,7 +547,7 @@ main .userPage, .pfPage{
 }
 
 .userPage .items, .pfPage .items {
-    width: 23rem;
+    width: 24rem;
 }
 
 .userPage .user-details, .pfPage .user-details {
@@ -632,6 +632,9 @@ main .userPage, .pfPage{
     padding-bottom: 0.5rem;
     padding-right: 0.5rem;
     word-break: break-word;
+}
+.display-item {
+    justify-content: center;
 }
 
 .display-item .navbar {
