@@ -43,7 +43,12 @@ async function getFilteredItems() {
     const response_currency = await fetch('../api/api_get_currency.php')
     const currency = await response_currency.json();
     items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
-    if (loader) resultContainer.appendChild(loader);
+    loader = document.querySelector(".loader");
+    if (loader) {
+        resultContainer.appendChild(loader);
+        console.log("AAAAAAAAAAAAAAAAAA")
+        console.log(loader)
+    }
     if (items.length < 18) loader.style.display = 'none';
     else loader.style.display = 'grid';
     isLoading = false;
@@ -152,7 +157,7 @@ function cleanSearch() {
     let loader = document.querySelector(".loader");
     const loaderDIV = document.createElement("div");
     loaderDIV.classList.add("loader");
-    if (!loader) resultContainer.appendChild(loaderDIV);
+    if (loader == null) resultContainer.appendChild(loaderDIV);
 }
 
 const filter = document.getElementsByClassName("filter");
