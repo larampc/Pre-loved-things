@@ -9,7 +9,12 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
         draw_items($dbh, $session, $items);
         if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
         ?>
-    </article> <?php
+    </article>
+    <div id="curve_chart"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="../scripts/draw_chart.js"></script>
+    <?php
+    echo('<script>drawChart('.$user->user_id.')</script>');
 }
 
 function draw_user_details(PDO $dbh, User $user, Session $session) { ?>

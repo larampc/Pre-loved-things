@@ -197,4 +197,14 @@ class User
         return $stmt->fetch()['symbol'];
     }
 
+    public static function get_sold_items(PDO $dbh, int $user_id, string $month): int {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE items.creator = ?  AND purchaseData.deliveryDate LIKE ?');
+        $stmt->execute(array($user_id, "%/$month/".date("Y", time())));
+        return $stmt->fetchColumn();
+    }
+    public static function get_bought_items(PDO $dbh, int $user_id, string $month): int {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE purchaseData.buyer = ? AND purchaseData.deliveryDate LIKE ?');
+        $stmt->execute(array($user_id, "%/$month/".date("Y", time())));
+        return $stmt->fetchColumn();
+    }
 }
