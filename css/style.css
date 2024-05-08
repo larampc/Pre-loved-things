@@ -638,6 +638,10 @@ main .userPage, .pfPage{
     text-align: center;
 }
 
+.navOption.my {
+    border: 2px solid #D9D9D9;
+}
+
 
 /* LOGIN AND REGISTER */
 .login, .register {

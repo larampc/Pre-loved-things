@@ -59,7 +59,7 @@ function draw_edit_profile($user) { ?>
             <input type="tel" id="phone" name="phone" value="<?=$user->phone?>" required>
             <label for="img1">Profile photo</label>
             <div class="photo-upload">
-                <i class="material-symbols-outlined upload-icon">add_a_photo</i>
+                <i class="material-symbols-outlined bolder upload-icon">add_a_photo</i>
                 <input type="file" id="img1" class="uploader" name="img1" accept="image/*" onchange="previewImage(this.id)">
             </div>
             <button type="submit">Submit</button>
@@ -293,9 +293,9 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     <section class="display-item">
         <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
         <div class="navbar">
-            <button type="button" class="navOption" onclick="openNav('my')">My items</button>
-            <button type="button" class="navOption" onclick="openNav('sales')">Pending sales</button>
-            <button type="button" class="navOption" onclick="openNav('purchased')">Pending purchases</button>
+            <button type="button" class="navOption my" onclick="openNav('my')">My items</button>
+            <button type="button" class="navOption sales" onclick="openNav('sales')">Pending sales</button>
+            <button type="button" class="navOption purchased" onclick="openNav('purchased')">Pending purchases</button>
         </div>
         <section class="items" id="purchased">
             <?php
