@@ -547,14 +547,14 @@ main .userPage{
     }
 }
 
-.pfPage .items {
+.pfPage .items, .userPage .display-item .items{
     display: flex;
     overflow: hidden;
     max-height: 0;
     transition-duration: 500ms;
 }
 
-.pfPage .items#my {
+.pfPage .items#my,  .userPage .items#my{
     max-height: 100%;
 }
 

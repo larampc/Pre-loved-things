@@ -6,13 +6,13 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
-        <div id="curve_chart"></div>
-        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-        <script src="//www.google.com/jsapi"></script>
-        <script src="../scripts/draw_chart.js"></script>
-        <?php echo('<script>drawChart('.$user->user_id.')</script>');
-        draw_items($dbh, $session, $items);
-        if ($session->getId() === $user->user_id) draw_user_options($dbh, $session);
+        <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && User::get_user($dbh, $session->getId())->role === "admin")) { ?>
+            <div id="curve_chart"></div>
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="../scripts/draw_chart.js"></script>
+            <?php echo('<script>drawChart('.$user->user_id.')</script>');
+            draw_user_options($dbh, $user, $session);
+        } else draw_items($dbh, $session, $items);
         ?>
     </article>
 <?php } ?>
@@ -73,13 +73,15 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <div class="feedback-sum">
             <h2>Feedback</h2>
             <section class="stars">
-                <?php $average = round(floatval(Comment::get_user_average($dbh, $user->user_id)), 0, PHP_ROUND_HALF_UP);
+                <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
+                $average = round($avg, 0, PHP_ROUND_HALF_UP);
                 for ($i = 0; $i < $average; $i++) { ?>
                     <i class="material-symbols-outlined filled"> grade </i>
                 <?php }
                 for ($i = $average; $i < 5; $i++) { ?>
                     <i class="material-symbols-outlined"> grade </i>
                 <?php } ?>
+                <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
             </section>
         </div>
             <div class ="comment-box">
@@ -288,31 +290,33 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     </div>
 <?php } ?>
 
-<?php  function draw_user_options(PDO $dbh, Session $session) { ?>
+<?php  function draw_user_options(PDO $dbh, User $user, Session $session) { ?>
     <script src="../scripts/profileNav.js" defer></script>
     <section class="display-item">
-        <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
+        <?php if ($user->user_id === $session->getId()) {?>
+            <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
+        <?php } ?>
         <div class="navbar">
-            <button type="button" class="navOption my" onclick="openNav('my')">My items</button>
+            <button type="button" class="navOption my" onclick="openNav('my')"> <?=$user->user_id === $session->getId() ? "My " : "User "?> items</button>
             <button type="button" class="navOption sales" onclick="openNav('sales')">Pending sales</button>
-            <button type="button" class="navOption purchased" onclick="openNav('purchased')">Pending purchases</button>
+            <button type="button" class="navOption purchase" onclick="openNav('purchased')">Pending purchases</button>
         </div>
         <section class="items" id="purchased">
             <?php
-            $items = TrackItem::get_purchased_items($dbh, $session->getId());
+            $items = TrackItem::get_purchased_items($dbh, $user->user_id);
             foreach ($items as $item) {
                 draw_item_to_track($dbh, $item);
             } ?>
             </section>
         <section class="items" id="sales">
             <?php
-            $items = TrackItem::get_selling_items($dbh, $session->getId());
+            $items = TrackItem::get_selling_items($dbh, $user->user_id);
             foreach ($items as $item) {
                 draw_item_to_track($dbh, $item);
             } ?>
             </section>
         <section class="items" id="my">
-            <?php $items = Item::get_user_items($dbh, $session->getId());
+            <?php $items = Item::get_user_items($dbh, $user->user_id);
             foreach($items as $item) {
                 draw_item($dbh, $session, $item);
             } ?>
