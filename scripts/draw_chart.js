@@ -4,9 +4,9 @@ async function drawChart(user) {
     console.log(response)
     const items = await response.json();
     console.log(items)
-    var data = google.visualization.arrayToDataTable(items);
+    let data = google.visualization.arrayToDataTable(items);
 
-    var options = {
+    let options = {
         title: 'Sales statistics in '+ new Date().getFullYear() ,
         curveType: 'function',
         vAxis: {
@@ -21,7 +21,7 @@ async function drawChart(user) {
         },
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+    let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
 
     chart.draw(data, options);
 }
