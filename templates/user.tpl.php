@@ -299,7 +299,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <div class="navbar">
             <button type="button" class="navOption my" onclick="openNav('my')"> <?=$user->user_id === $session->getId() ? "My " : "User "?> items</button>
             <button type="button" class="navOption sales" onclick="openNav('sales')">Pending sales</button>
-            <button type="button" class="navOption purchase" onclick="openNav('purchased')">Pending purchases</button>
+            <button type="button" class="navOption purchased" onclick="openNav('purchased')">Pending purchases</button>
         </div>
         <section class="items" id="purchased">
             <?php
