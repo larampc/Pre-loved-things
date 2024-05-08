@@ -7,7 +7,7 @@ async function drawChart(user) {
     var data = google.visualization.arrayToDataTable(items);
 
     var options = {
-        title: 'Sales statistics',
+        title: 'Sales statistics in '+ new Date().getFullYear() ,
         curveType: 'function',
         vAxis: {
             viewWindow: {
