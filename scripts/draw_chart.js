@@ -1,5 +1,6 @@
 google.charts.load('current', {'packages': ['corechart']});
 const width = document.getElementsByClassName("feedback")[0].width;
+google.charts.setOnLoadCallback();
 
 async function drawChart(user) {
     const response = await fetch('../api/api_get_statistics.php?user='+user)
