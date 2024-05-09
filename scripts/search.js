@@ -17,7 +17,6 @@ if (mainCat.innerHTML) {
     categorySelector.selected = true;
 }
 
-console.log(document.querySelector('#searchbar').value)
 const searchres = document.querySelector('#searchbar').value;
 
 let all = false;
@@ -25,7 +24,6 @@ let all = false;
 const selectOrder = document.querySelector("#order")
 selectOrder.addEventListener("input", async () => {
     order = selectOrder.value;
-    console.log(order)
     await getFilteredItems(true);
 })
 
@@ -35,7 +33,6 @@ async function getFilteredItems(clean) {
     if (request > 0) {
         controller.abort();
         controller = new AbortController();
-        console.log("AAAAAAAAAAAAAAAAAAAAAAA")
     }
     request++;
     isLoading = true;
