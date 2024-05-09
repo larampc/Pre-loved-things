@@ -35,6 +35,7 @@ async function getFilteredItems(clean) {
     if (request > 0) {
         controller.abort();
         controller = new AbortController();
+        console.log("AAAAAAAAAAAAAAAAAAAAAAA")
     }
     request++;
     isLoading = true;
@@ -53,6 +54,7 @@ async function getFilteredItems(clean) {
         all = true;
         isLoading = false;
         if (loader) loader.style.display = 'none';
+        request--;
         return;
     }
     const response_currency = await fetch('../api/api_get_currency.php')
@@ -61,7 +63,7 @@ async function getFilteredItems(clean) {
         items.forEach(item => resultContainer.appendChild(createItem(item, currency)));
         loader = document.querySelector(".loader");
         if (loader) resultContainer.appendChild(loader);
-        if (items.length < 18) loader.style.display = 'none';
+        if (items.length < 20) loader.style.display = 'none';
         else loader.style.display = 'grid';
         isLoading = false;
     }
