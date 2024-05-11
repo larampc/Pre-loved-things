@@ -318,7 +318,13 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
 
 <?php function draw_item_tracking(PDO $dbh, TrackItem $trackItem, Session $session) { ?>
     <section class="item-track">
-        <button id="contact-seller"><?= $trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "") ?></button>
+        <form method="get" action="../pages/inbox.php">
+            <label>
+                <button class="sendMessage-btn" id="contact-seller" type="submit"><?=$trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "")?></button>
+            </label>
+            <input type="hidden" name="user_id" value="<?=$trackItem->buyer == $session->getId()? $trackItem->tracking[0]->creator->user_id : ($trackItem->tracking[0]->creator->user_id == $session->getId()? $trackItem->buyer : "")?>">
+            <input type="hidden" name="item_id" value="<?=$trackItem->tracking[0]->id?>">
+        </form>
         <ul class="state">
             <li class="<?= ($trackItem->state == "preparing"? "current" : "done")?>">Preparing</li>
             <li class="<?=($trackItem->state == "shipping"? "current" : (($trackItem->state == "delivering" || $trackItem->state == "delivered") ? "done":""))?>">Shipping</li>

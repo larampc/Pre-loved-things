@@ -22,18 +22,11 @@ function upload_user_image($img) : int {
 
     $width = imagesx($original);     // width of the original image
     $height = imagesy($original);    // height of the original image
+    $square = min($width, $height);  // size length of the maximum square
 
-    $medium_width = $width;
-    $medium_height = $height;
-    if ($medium_width > 400) {
-        $medium_width = 400;
-        $medium_height = $medium_height * ( $medium_width / $width );
-    }
-
-    // Create and save a medium image
-    $medium = imagecreatetruecolor($medium_width, $medium_height);
-    imagecopyresized($medium, $original, 0, 0, 0, 0, $medium_width, $medium_height, $width, $height);
-    imagejpeg($medium, $FileName);
+    $small = imagecreatetruecolor(200, 200);
+    imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
+    imagejpeg($small, $FileName);
     return $id;
 }
 
