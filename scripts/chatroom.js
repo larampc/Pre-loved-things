@@ -2,7 +2,7 @@
 
 async function updateUserChatrooms(chatroom_id) {
     const inbox = document.querySelector('section.chat-rooms')
-    const chat = document.querySelector('#chat' + chatroom_id)
+    const chat = document.getElementById('chat' + chatroom_id)
     const response = await fetch('../api/api_get_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroom_id}))
     const chatroom = await response.json()
     const removed = inbox.removeChild(chat)
@@ -12,6 +12,40 @@ async function updateUserChatrooms(chatroom_id) {
     text.innerText = last_message.message
 }
 
+
+async function handleTemporary() {
+    const sendMessageInput = document.querySelector('.chat-page input')
+    const sendMessageButton = document.querySelector('.chat-page button.send-icon')
+    const temporary = document.querySelector('.temporary')
+    const user_response = await fetch('../api/api_user.php');
+    const user = await user_response.json();
+    const text = sendMessageInput.value.trim();
+    if (!text.length) return;
+    const id = temporary.id.split('&')
+    const response = await fetch('../api/api_register_chatroom.php?' + encodeForAjax({item_id: id[1], seller_id: id[0]}))
+    const chatroom = await response.json();
+    await sendMessage(chatroom['chatroomId'], chatroom['buyer']['user_id'], sendMessageInput)
+    const new_chatroom = createSmallChatroom(chatroom, chatroom['buyer'], chatroom['seller'],text)
+    const chatroom_section = document.querySelector('section .chat-rooms')
+    temporary.classList.remove("temporary")
+    temporary.id = "chat-page" + chatroom['chatroomId']
+    chatroom_section.insertBefore(new_chatroom, chatroom_section.firstChild)
+    updateCurrentChatroom(new_chatroom)
+    new_chatroom.addEventListener("click", async () => handleClick(new_chatroom, user))
+    sendMessageButton.removeEventListener("click",handleTemporary)
+    const old_element = sendMessageInput;
+    const new_element = old_element.cloneNode(true);
+    old_element.parentNode.replaceChild(new_element, old_element);
+    sendMessageButton.addEventListener("click", async () => {
+        await handleButtonClick(chatroom['chatroomId'], user, new_element)
+    })
+    new_element.addEventListener("keypress", async (event) => {
+        if (event.key === "Enter") {
+            await handleButtonClick(chatroom['chatroomId'], user, new_element)
+        }
+    })
+    closeInbox()
+}
 async function addClickListeners() {
     const chatrooms = document.querySelectorAll('.chat')
     const temporary = document.querySelector('.temporary')
@@ -26,33 +60,26 @@ async function addClickListeners() {
     }
     const sendMessageInput = document.querySelector('.chat-page input')
     const sendMessageButton = document.querySelector('.chat-page button.send-icon')
-    console.log(sendMessageButton)
     if(temporary) {
-        sendMessageButton.addEventListener("click", async () => {
-            const text = sendMessageInput.value.trim();
-            if (!text.length) return;
-            const id = temporary.id.split('&')
-            const response = await fetch('../api/api_register_chatroom.php?' + encodeForAjax({item_id: id[1], seller_id: id[0]}))
-            const chatroom = await response.json();
-            await sendMessage(chatroom['chatroomId'], chatroom['buyer']['user_id'], sendMessageInput)
-            const new_chatroom = createSmallChatroom(chatroom, chatroom['buyer'], chatroom['seller'],text)
-            const chatroom_section = document.querySelector('section .chat-rooms')
-            temporary.classList.remove("temporary")
-            temporary.id = "chat-page" + chatroom['chatroomId']
-            chatroom_section.insertBefore(new_chatroom, chatroom_section.firstChild)
-            updateCurrentChatroom(new_chatroom)
-            new_chatroom.addEventListener("click", async () => handleClick(new_chatroom, user))
-            closeInbox()
+        sendMessageButton.addEventListener("click", handleTemporary)
+        sendMessageInput.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                handleTemporary();
+            }
         })
     }
     if(existing){
         const small_chatroom = document.querySelector('#chat' + existing_chatroom.id.substring(9))
         updateCurrentChatroom(small_chatroom)
         sendMessageButton.addEventListener("click", async () => {
-            const text = sendMessageInput.value.trim();
-            if (!text.length) return;
             const id = existing_chatroom.id.substring(9)
-            await handleButtonClick(id, user, text)
+            await handleButtonClick(id, user, sendMessageInput)
+        })
+        sendMessageInput.addEventListener("keypress", async (event) => {
+            if (event.key === "Enter") {
+                const id = existing_chatroom.id.substring(9)
+                await handleButtonClick(id, user, sendMessageInput)
+            }
         })
     }
 }
@@ -238,7 +265,9 @@ function createSendMessageDiv(chatroom, user) {
     input.classList.add("form-control");
     input.type = "text";
     input.placeholder = "Write message...";
-
+    input.addEventListener("keypress", async (event) => {
+        if (event.key === "Enter") await handleButtonClick(chatroom, user, input);
+    })
     const button = createSendButton(chatroom, user, input);
 
     send_msg_div.appendChild(input);
