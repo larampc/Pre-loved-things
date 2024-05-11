@@ -204,36 +204,15 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                 <button type="button" class="collapsible">Shipping information</button>
                 <div class="buy-form">
                     <label> Address
-                        <input type="text" name="address" required>
+                        <input type="text" name="address" required autocomplete="on">
                     </label>
                     <label> City
-                        <input type="text" name="city" required>
+                        <input type="text" name="city" required autocomplete="on">
                     </label>
                     <label> Postal code
-                        <input type="text" name="postalCode" required>
+                        <input type="text" name="postalCode" required autocomplete="on">
                     </label>
                     <button type="button" class="next shipping">Next</button>
-                </div>
-            </li>
-            <li>
-                <button type="button" class="collapsible">Billing information</button>
-                <div class="buy-form">
-                    <label> Name
-                        <input type="text" name="billName">
-                    </label>
-                    <label> NIF
-                        <input type="text" name="NIF">
-                    </label>
-                    <label> Address
-                        <input type="text" name="billAddress">
-                    </label>
-                    <label> City
-                        <input type="text" name="billCity">
-                    </label>
-                    <label> Postal code
-                        <input type="text" name="billPostal">
-                    </label>
-                    <button type="button" class="next">Next</button>
                 </div>
             </li>
             <li>
@@ -260,7 +239,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     </div>
                     <div id="mbway" class="payment-form">
                         <label> Phone number
-                            <input type="text" name="phone">
+                            <input type="text" name="phone" autocomplete="on">
                         </label>
                     </div>
                     <button type="submit" class="confirm">Confirm payment</button>
