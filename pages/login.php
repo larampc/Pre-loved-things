@@ -10,9 +10,10 @@
     require_once(__DIR__ . '/../database/connection.db.php');
 
     $checkout = isset($_GET['checkout']);
+    $message = isset($_GET['user']);
 
     $dbh = get_database_connection();
 
     get_header("login", $dbh, $session);
-    draw_login_register_form($checkout);
+    draw_login_register_form($checkout, $message, intval($_GET['user']), intval($_GET['item']));
     draw_footer();

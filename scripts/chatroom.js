@@ -36,6 +36,7 @@ async function handleTemporary() {
     const old_element = sendMessageInput;
     const new_element = old_element.cloneNode(true);
     old_element.parentNode.replaceChild(new_element, old_element);
+    new_element.focus();
     sendMessageButton.addEventListener("click", async () => {
         await handleButtonClick(chatroom['chatroomId'], user, new_element)
     })
@@ -264,6 +265,7 @@ function createSendMessageDiv(chatroom, user) {
     const input = document.createElement('input');
     input.classList.add("form-control");
     input.type = "text";
+    input.name = "message"
     input.placeholder = "Write message...";
     input.addEventListener("keypress", async (event) => {
         if (event.key === "Enter") await handleButtonClick(chatroom, user, input);
@@ -291,6 +293,7 @@ async function handleButtonClick(chatroom, user, input) {
 function createSendButton(chatroom, user, input) {
     const button = document.createElement('button');
     button.type = "button";
+    button.name = "send"
     button.classList.add("send-icon");
     button.addEventListener("click", async () => {
         await handleButtonClick(chatroom, user, input)

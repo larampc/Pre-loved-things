@@ -17,6 +17,7 @@
 
     $user = User::verify_user($dbh, $_POST['email'], $_POST['password']);
     $checkout = isset($_GET['checkout']);
+    $message = isset($_GET['user']);
 
     if ($user !== null) {
       $session->setId($user->user_id);
@@ -25,9 +26,9 @@
       if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $user->user_id);
 
       $session->addMessage('success', 'Login successful!');
-      header('Location: '. ($checkout? '../pages/checkout.php':'../index.php'));
+      header('Location: '. ($checkout? '../pages/checkout.php':($message? '../pages/inbox.php?user_id='.$_GET['user'].'&item_id='.$_GET['item'] : '../index.php')));
 
     } else {
         $session->addMessage('error', 'Wrong password or email!');
-        header('Location: ../pages/login.php'. ($checkout? '?checkout':''));
+        header('Location: ../pages/login.php'. ($checkout? '?checkout':($message? '?user='.$_GET['user'].'&item='.$_GET['item']:'')));
     }

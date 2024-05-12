@@ -5,7 +5,7 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
 
-    if (!$session->isLoggedIn()) die(header('Location: /'));
+    if (!$session->isLoggedIn()) die(header('Location: login.php?user='.$_GET["user_id"].'&item='.$_GET["item_id"]));
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/message.class.php');
