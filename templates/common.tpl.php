@@ -20,7 +20,7 @@ function draw_header(string $page, Session $session, array $categories, array $c
     <script src="../scripts/flip.js" defer></script>
     <script src="../scripts/print.js" defer></script>
     <script src="../scripts/set_currency.js" defer></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
 </head>
 <body> 
     <header class="header-visible">
@@ -55,15 +55,15 @@ function draw_header(string $page, Session $session, array $categories, array $c
         </nav>
     </header>
         <section id="messages">
-            <?php foreach ($session->getMessages() as $messsage) { ?>
-                <article class="<?=$messsage['type']?>">
+            <?php foreach ($session->getMessages() as $message) { ?>
+                <article class="<?=$message['type']?>">
                     <?php
-                    if ($messsage['type'] == "success") { ?>
+                    if ($message['type'] == "success") { ?>
                         <i class="material-symbols-outlined green"> check_circle</i>
-                    <?php } else if ($messsage['type'] == "error") { ?>
+                    <?php } else if ($message['type'] == "error") { ?>
                         <i class="material-symbols-outlined red"> error </i>
                     <?php } ?>
-                    <p><?=$messsage['text']?></p>
+                    <p><?=$message['text']?></p>
                     <div class="message-progress"></div>
                 </article>
             <?php } ?>

@@ -13,8 +13,10 @@
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/tags.class.php');
     require_once(__DIR__ . '/../database/track_item.class.php');
+    require_once(__DIR__ . '/../database/currency.class.php');
 
-    $dbh = get_database_connection();
+
+$dbh = get_database_connection();
     $track_item = TrackItem::get_tracking_item($dbh, $_GET['purchase']);
     $user_currency = new Currency($dbh, $session->getCurrency());
 
