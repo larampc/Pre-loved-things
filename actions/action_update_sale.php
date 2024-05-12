@@ -17,7 +17,7 @@ if (!TrackItem::valid_code($dbh, $confirmCode)) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
-if (TrackItem::update_shipping($dbh, intval($_POST["purchase"]))) {
+if (TrackItem::update_shipping($dbh, $_POST["purchase"])) {
     $session->addMessage('success', 'Shipping process updated successfully.');
 }
 else {

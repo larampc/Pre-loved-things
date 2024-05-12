@@ -19,7 +19,7 @@
     $dbh = get_database_connection();
     get_header("user", $dbh, $session);
 
-    $user_id = intval($_GET['user_id']);
+    $user_id = $_GET['user_id'];
     $user = User::get_user($dbh, $user_id);
     if (!$user) die(header('Location: /'));;
     $feedback = User::get_user_feedback($dbh, $user_id);

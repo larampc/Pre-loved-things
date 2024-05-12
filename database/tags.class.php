@@ -12,20 +12,20 @@ class Tag
         $this->value = $value;
     }
 
-    public static function get_category_by_id(PDO $dbh, int $id) {
-        $stmt = $dbh->prepare('SELECT category FROM categories where id = ?');
+    public static function get_category_by_id(PDO $dbh, string $id) {
+        $stmt = $dbh->prepare('SELECT category FROM categories where category = ?');
         $stmt->execute(array($id));
         return $stmt->fetchColumn() ?: "";
     }
 
-    public static function get_item_tags(PDO $dbh, int $item):  array {
+    public static function get_item_tags(PDO $dbh, string $item):  array {
         $stmt = $dbh->prepare('SELECT tags.tag, tags_values.data FROM tags_values join tags on tags.id = tags_values.tag where tags_values.item = ?');
         $stmt->execute(array($item));
         return $stmt->fetchAll();
     }
 
     public static function get_category_tags(PDO $dbh, string $category):  array {
-        $stmt = $dbh->prepare('SELECT tags.tag, tags.id FROM tags join categories on tags.category = categories.id where categories.category = ?');
+        $stmt = $dbh->prepare('SELECT tags.tag, tags.id FROM tags where category = ?');
         $stmt->execute(array($category));
         return $stmt->fetchAll();
     }
@@ -42,30 +42,18 @@ class Tag
         return $stmt->fetchAll();
     }
 
-    public static function get_tag_id(PDO $dbh, string $category, string $tag):  int {
+    public static function get_tag_id(PDO $dbh, string $category, string $tag):  string {
         $stmt = $dbh->prepare('SELECT tags.id FROM tags join categories on tags.category = categories.id where categories.category = ? and tags.tag = ?');
         $stmt->execute(array($category, $tag));
         return $stmt->fetchColumn();
     }
 
-    public static function get_category_id(PDO $dbh, string $category) {
-        $stmt = $dbh->prepare('SELECT id FROM categories where category = ? ');
-        $stmt->execute(array($category));
-        return $stmt->fetchColumn();
-    }
-
-    static function register_item_tags(PDO $db, int $tag_id, int $item, string $value) {
+    static function register_item_tags(PDO $db, string $tag_id, string $item, string $value) {
         $stmt = $db->prepare('INSERT INTO tags_values (item, tag, data) VALUES (?, ?, ?)');
         $stmt->execute(array($item, $tag_id, $value));
     }
 
-    static function get_conditions(PDO $dbh) {
-        $stmt = $dbh->prepare('SELECT * FROM conditions');
-        $stmt->execute(array());
-        return $stmt->fetchAll();
-    }
-
-    static function get_items_with_tags(PDO $dbh, int $tag, string $value):  array
+    static function get_items_with_tags(PDO $dbh, string $tag, string $value):  array
     {
         $stmt = $dbh->prepare('SELECT item FROM tags_values WHERE data LIKE ? and tag = ?');
         $stmt->execute(array("$value%", $tag));
@@ -81,28 +69,28 @@ class Tag
     {
         $stmt = $dbh->prepare('INSERT INTO categories (category) VALUES (?)');
         $stmt->execute(array($category));
-        return $dbh->lastInsertId();
+        return $category;
     }
-    static function add_tags_category(PDO $dbh, int $category_id, array $tags) {
+    static function add_tags_category(PDO $dbh, string $category_id, array $tags) {
         foreach ($tags as $tag) {
-            $stmt = $dbh->prepare('INSERT INTO tags (category, tag) VALUES (?, ?)');
-            $stmt->execute(array($category_id, $tag));
+            $stmt = $dbh->prepare('INSERT INTO tags (id, category, tag) VALUES (?, ?)');
+            $stmt->execute(array(generate_uuid(),$category_id, $tag));
         }
     }
-    static function add_tag_options(PDO $dbh, array $options, int $tag) {
+    static function add_tag_options(PDO $dbh, array $options, string $tag) {
         foreach ($options as $option) {
             $stmt = $dbh->prepare('INSERT INTO tags_predefined (tag, value) VALUES (?, ?)');
             $stmt->execute(array($tag, $option));
         }
     }
 
-    static function update_category(PDO $dbh, int $id, string $category)
+    static function update_category(PDO $dbh, string $id, string $category)
     {
-        $stmt = $dbh->prepare('UPDATE categories SET category = ? WHERE id = ?');
+        $stmt = $dbh->prepare('UPDATE categories SET category = ? WHERE category = ?');
         $stmt->execute(array($category, $id));
     }
 
-    static function delete_category_tags(PDO $dbh, int $id) {
+    static function delete_category_tags(PDO $dbh, string $id) {
         $stmt = $dbh->prepare('SELECT id FROM tags where category = ?');
         $stmt->execute(array($id));
         $tags = $stmt->fetchAll();
@@ -115,14 +103,20 @@ class Tag
         $stmt = $dbh->prepare('DELETE FROM tags where category = ?');
         $stmt->execute(array($id));
     }
-    static function get_tag_value_item(PDO $dbh, int $tag_id, int $item_id) {
+    static function get_tag_value_item(PDO $dbh, string $tag_id, string $item_id) {
         $stmt = $dbh->prepare('SELECT data FROM tags_values where tag = ? and item = ?');
         $stmt->execute(array($tag_id, $item_id));
         return $stmt->fetchColumn() ? :"";
     }
 
-    static function remove_item_tags(PDO $dbh, int $item_id) {
+    static function remove_item_tags(PDO $dbh, string $item_id) {
         $stmt = $dbh->prepare('DELETE FROM tags_values where item = ?');
         $stmt->execute(array($item_id));
+    }
+    static function check_category(PDO $dbh, string $category): bool {
+        $stmt = $dbh->prepare('SELECT category FROM categories where category = ?');
+        $stmt->execute(array($category));
+        $res = $stmt->fetchColumn();
+        return isset($res);
     }
 }

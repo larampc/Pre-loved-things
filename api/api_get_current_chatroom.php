@@ -10,6 +10,6 @@ require_once(__DIR__ . '/../database/message.class.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 $dbh = get_database_connection();
-$chatroom = Chatroom::get_chatroom_by_id($dbh, intval($_GET['chatroom_id']), intval($_SESSION['user_id']));
+$chatroom = Chatroom::get_chatroom_by_id($dbh, $_GET['chatroom_id'], $_SESSION['user_id']);
 
 echo json_encode($chatroom);

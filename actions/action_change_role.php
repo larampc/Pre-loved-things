@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-$user = User::get_user($dbh, intval($_POST['role-user']));
+$user = User::get_user($dbh, $_POST['role-user']);
 
 $role = $user->role=="admin"?"user":"admin";
 

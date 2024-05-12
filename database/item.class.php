@@ -3,12 +3,13 @@ declare(strict_types = 1);
 
 require_once ('tags.class.php');
 require_once ('user.class.php');
+require_once ('../utils/uuid.php');
 
 class Item {
-    public int $id;
+    public string $id;
     public string $name;
     public array $images;
-    public int $mainImage;
+    public string $mainImage;
     public float $price;
     public string $description;
     public string $category;
@@ -16,7 +17,7 @@ class Item {
     public string $date;
     public User $creator;
     public bool $sold;
-    public function __construct(PDO $db, int $id)
+    public function __construct(PDO $db, string $id)
     {
         $this->id = $id;
         $this->images = self::get_item_images($db, $id);
@@ -45,13 +46,13 @@ class Item {
         return $new_items;
     }
 
-    public static function update_item(PDO $dbh, int $id,  string $name, string $description, float $price, int $category): bool
+    public static function update_item(PDO $dbh, string $id,  string $name, string $description, float $price, int $category): bool
     {
         $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category = ? WHERE id = ?');
         return $stmt->execute(array($name, $description, $price, $category,$id));
     }
 
-    static function get_item_images(PDO $dbh, int $id) : array
+    static function get_item_images(PDO $dbh, string $id) : array
     {
         $stmt = $dbh->prepare('SELECT image FROM item_images WHERE item = ?');
         $stmt->execute(array($id));
@@ -61,7 +62,7 @@ class Item {
         }
         return $images;
     }
-    static function get_item(PDO $dbh, int $id) : ?Item{
+    static function get_item(PDO $dbh, string $id) : ?Item{
         $stmt = $dbh->prepare('SELECT * FROM items WHERE id = ?');
         $stmt->execute(array($id));
         $item = $stmt->fetch();
@@ -69,7 +70,7 @@ class Item {
         return self::create_item($dbh, $item);
     }
 
-    static function get_user_items(PDO $dbh, int $user_id): array {
+    static function get_user_items(PDO $dbh, string $user_id): array {
         $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ? AND sold = 0');
         $stmt->execute(array($user_id));
         return self::create_items($dbh, $stmt->fetchAll());
@@ -86,7 +87,7 @@ class Item {
         return array_unique($stmt->fetchAll());
     }
 
-    static function get_favorite_items(PDO $dbh, int $user_id): array
+    static function get_favorite_items(PDO $dbh, string $user_id): array
     {
         $stmt = $dbh->prepare('SELECT *
         FROM items LEFT JOIN favorites 
@@ -96,7 +97,7 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function check_favorite(PDO $dbh, int $user_id, Item $item): bool
+    static function check_favorite(PDO $dbh, string $user_id, Item $item): bool
     {
         $stmt = $dbh->prepare('SELECT *
         FROM favorites WHERE user = ? AND item = ?');
@@ -104,7 +105,7 @@ class Item {
         return !empty($stmt->fetchAll());
     }
 
-    static function check_cart(PDO $dbh, int $user_id, Item $item): bool
+    static function check_cart(PDO $dbh, string $user_id, Item $item): bool
     {
         $stmt = $dbh->prepare('SELECT *
         FROM user_cart WHERE user = ? AND item = ?');
@@ -123,12 +124,13 @@ class Item {
         return empty($res) ? $res: self::create_items($dbh, $res);
     }
 
-    static function register_item(PDO $dbh, string $name, string $description, float $price, int $category, int $user_id, int $mainImage): int {
-        $stmt = $dbh->prepare('INSERT INTO items (name, description, price, creator, mainImage, category, date) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$name, $description, $price, $user_id, $mainImage, $category, date('d/m/Y', time())]);
-        return $ret ? intval($dbh->lastInsertId()) : -1;
+    static function register_item(PDO $dbh, string $name, string $description, float $price, string $category, string $user_id, string $mainImage): string {
+        $id = generate_uuid();
+        $stmt = $dbh->prepare('INSERT INTO items (id, name, description, price, creator, mainImage, category, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $ret = $stmt->execute([$id,$name, $description, $price, $user_id, $mainImage, $category, date('d/m/Y', time())]);
+        return $ret ? $id : "";
     }
-    static function register_item_images(PDO $db, array $images, int $item_id): bool
+    static function register_item_images(PDO $db, array $images, string $item_id): bool
     {
         foreach ($images as $image) {
             $stmt = $db->prepare('INSERT INTO item_images (item, image) VALUES (?, ?)');
@@ -152,7 +154,7 @@ class Item {
         $page = 20 * ($page - 1);
         if ($checkTag) {
             $stmt = $dbh->prepare("SELECT * FROM items 
-             WHERE category IN (".implode(',', $categories) . " ) 
+             WHERE category IN (". "'". implode("' ,'", $categories). "'" . " ) 
              AND id IN (".implode(',', $itemTags) . " )
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
@@ -160,7 +162,7 @@ class Item {
         }
         else {
             $stmt = $dbh->prepare("SELECT * FROM items 
-             WHERE category IN (".implode(',', $categories) . " ) 
+             WHERE category IN (". "'". implode("' ,'", $categories). "'" . " ) 
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
              ORDER BY ". $getOrder ." LIMIT 20 OFFSET ?");
@@ -175,6 +177,7 @@ class Item {
         $stmt->execute(array($count));
         $items = array();
         while($item = $stmt->fetch()) {
+            var_dump($item);
             $items[] = self::get_item($dbh, $item['id']);
         }
         return $items;
@@ -185,7 +188,7 @@ class Item {
         $stmt->execute(array($count));
         return self::create_items($dbh, $stmt->fetchAll());
     }
-    static function get_purchase_id(PDO $dbh, int $item): int {
+    static function get_purchase_id(PDO $dbh, string $item): int {
         $stmt = $dbh->prepare('SELECT purchase FROM purchases WHERE item = ?');
         $stmt->execute(array($item));
         return $stmt->fetchColumn();
@@ -198,15 +201,15 @@ class Item {
         }
     }
 
-    static function register_purchase(PDO $dbh, int $buyer, array $items, string $address, string $city, string $postalCode): int {
-        $stmt = $dbh->prepare("INSERT INTO purchaseData (buyer, deliveryDate, state, address, city, postalCode) VALUES(?, ?, ?, ?, ?, ?)");
-        $stmt->execute(array($buyer,date('d/m/Y', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
-        $purchase = intval($dbh->lastInsertId());
+    static function register_purchase(PDO $dbh, string $buyer, array $items, string $address, string $city, string $postalCode): string {
+        $id = generate_uuid();
+        $stmt = $dbh->prepare("INSERT INTO purchaseData (id, buyer, deliveryDate, state, address, city, postalCode) VALUES(?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute(array($id, $buyer,date('d/m/Y', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
         foreach ($items as $item) {
             $stmt = $dbh->prepare('INSERT INTO purchases VALUES(?, ?)');
-            $stmt->execute(array($item->id, $purchase));
+            $stmt->execute(array($item->id, $id));
         }
-        return $purchase;
+        return $id;
     }
 
     static function remove_cart_favorite(PDO $dbh, array $items) {
@@ -218,7 +221,7 @@ class Item {
         }
     }
 
-    static function delete_item(PDO $dbh, int $id) {
+    static function delete_item(PDO $dbh, string $id) {
         $stmt = $dbh->prepare('DELETE FROM items WHERE id = ?');
         if (!$stmt->execute(array($id))) return false;
         self::remove_cart_favorite($dbh, array(self::get_item($dbh, $id)));

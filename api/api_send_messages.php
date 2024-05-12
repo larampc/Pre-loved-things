@@ -2,8 +2,8 @@
     require_once (__DIR__ . "/../database/message.class.php");
     require_once (__DIR__ . "/../database/connection.db.php");
 
-    $chatroom = intval($_GET['chatroom_id']);
-    $sender = intval($_GET['sender']);
+    $chatroom = $_GET['chatroom_id'];
+    $sender = $_GET['sender'];
     $message = $_GET['message'];
 
     $db = get_database_connection();

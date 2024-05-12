@@ -18,7 +18,7 @@ foreach ($_FILES as $name => $file) {
     $img_ids[] = upload_item_image($name);
 }
 
-$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2), Tag::get_category_id($dbh, $_POST['category']), $session->getId(), $img_ids[0]);
+$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2), $_POST['category']??"", $session->getId(), $img_ids[0]);
 
 if ($item_id == -1) {
     //remove images
@@ -26,13 +26,13 @@ if ($item_id == -1) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
-$tags = Tag::get_category_tags($dbh, $_POST['category']);
+$tags = Tag::get_category_tags($dbh, $_POST['category']??"");
 foreach ($tags as $tag) {
     if ($_POST[$tag['id']]) {
         Tag::register_item_tags($dbh, $tag['id'], $item_id, $_POST[$tag['id']]);
     }
 }
-if ($_POST['category']) {
+if (isset($_POST['category'])) {
     $tags = Tag::get_category_tags($dbh, "");
     foreach ($tags as $tag) {
         if ($_POST[$tag['id']]) {

@@ -5,10 +5,10 @@ require_once (__DIR__ . '/../database/item.class.php');
 class TrackItem {
 
     public array $tracking;
-    public int $buyer;
+    public string $buyer;
     public string $date;
     public string $state;
-    public int $id;
+    public string $id;
     public string $address;
     public string $city;
     public string $postalCode;
@@ -27,12 +27,12 @@ class TrackItem {
         $this->city = $info['city'];
         $this->postalCode = $info['postalCode'];
     }
-    public static function get_tracking_item(PDO $dbh, int $item_track) : TrackItem {
+    public static function get_tracking_item(PDO $dbh, string $item_track) : TrackItem {
         $stmt = $dbh->prepare('SELECT * FROM purchaseData WHERE id = ?');
         $stmt->execute(array($item_track));
         return new TrackItem($dbh, $stmt->fetch());
     }
-    public static function get_purchased_items(PDO $dbh, int $buyer) : array {
+    public static function get_purchased_items(PDO $dbh, string $buyer) : array {
         $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase WHERE purchaseData.buyer = ?');
         $stmt->execute(array($buyer));
         $items = $stmt->fetchAll();
@@ -42,7 +42,7 @@ class TrackItem {
         }
         return $result;
     }
-    public static function get_selling_items(PDO $dbh, int $seller) : array {
+    public static function get_selling_items(PDO $dbh, string $seller) : array {
         $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ?');
         $stmt->execute(array($seller));
         $items = $stmt->fetchAll();
@@ -53,12 +53,12 @@ class TrackItem {
         return $result;
     }
 
-    public static function update_delivery(PDO $dbh, int $purchase, string $date): bool {
+    public static function update_delivery(PDO $dbh, string $purchase, string $date): bool {
         $stmt = $dbh->prepare('UPDATE purchaseData SET deliveryDate=? WHERE id = ?');
         return $stmt->execute(array($date, $purchase));
     }
 
-    public static function get_purchase_items( PDO $dbh, int $id) : array {
+    public static function get_purchase_items( PDO $dbh, string $id) : array {
         $stmt = $dbh->prepare('SELECT item FROM purchases WHERE purchase = ?');
         $stmt->execute(array($id));
         return $stmt->fetchAll();
@@ -68,7 +68,7 @@ class TrackItem {
         $stmt->execute(array($code));
         return !empty($stmt->fetchAll());
     }
-    public static function update_shipping(PDO $dbh, int $purchase) {
+    public static function update_shipping(PDO $dbh, string $purchase) {
         $stmt = $dbh->prepare('UPDATE purchaseData SET state=? WHERE id = ?');
         $sale = self::get_tracking_item($dbh, $purchase);
         $state = $sale->state;

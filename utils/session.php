@@ -17,11 +17,11 @@ class Session {
         session_destroy();
     }
 
-    public function getId() : ?int {
+    public function getId() : ?string {
         return $_SESSION['user_id'] ?? null;
     }
 
-    public function setId(int $id) {
+    public function setId(string $id) {
         $_SESSION['user_id'] = $id;
     }
 
@@ -29,7 +29,7 @@ class Session {
         return isset($_SESSION['cart']);
     }
 
-    public function addToCart(int $id) {
+    public function addToCart(string $id) {
         $_SESSION['cart'][] = $id;
         $_SESSION['cart'] = array_unique($_SESSION['cart']);
     }
@@ -42,7 +42,7 @@ class Session {
         return isset($_SESSION['user_items']);
     }
 
-    public function getItemCheckout() : int {
+    public function getItemCheckout() : string {
         return $_SESSION['user_items'] ?? -1;
     }
 

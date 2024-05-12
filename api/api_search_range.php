@@ -9,8 +9,9 @@ require_once(__DIR__ . '/../database/item.class.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
-$cat = $_GET['cat'];
-$tag = $_GET['tag'] ?: "";
+$cat = $_GET['cat']??"";
+
+$tag = $_GET['tag']??"";
 $page = $_GET['page'];
 $range = $_GET['price'];
 $search = $_GET['search'];
@@ -44,18 +45,18 @@ $itemsCat = array();
 if ($cat !== '')  {
     $values = explode(',', $cat);
     foreach ($values as $value) {
-        array_push($itemsCat, Tag::get_category_id($dbh, $cat));
+        array_push($itemsCat, $cat);
     }
 }
 else {
     $values = Tag::get_categories($dbh);
     foreach ($values as $value) {
-        array_push($itemsCat, Tag::get_category_id($dbh, $value['category']));
+        array_push($itemsCat, $value['category']);
     }
 }
-
     $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search, $order);
-    foreach ($res as $item) {
+
+foreach ($res as $item) {
     $item->price = round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()), 2);
 }
 

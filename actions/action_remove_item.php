@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-$item = intval($_POST['remove-item']);
+$item = $_POST['remove-item'];
 
 
 if (Item::delete_item($dbh, $item)) {

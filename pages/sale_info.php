@@ -15,7 +15,7 @@ require_once(__DIR__ . '/../database/tags.class.php');
 require_once(__DIR__ . '/../database/track_item.class.php');
 
 $dbh = get_database_connection();
-$track_item = TrackItem::get_tracking_item($dbh, intval($_GET['purchase']));
+$track_item = TrackItem::get_tracking_item($dbh, $_GET['purchase']);
 if (!$_GET['purchase'] || $track_item->tracking[0]->creator->user_id !== $session->getId()) die(header('Location: /'));
 get_header("sale-info", $dbh, $session);
 draw_sale_info($dbh, $track_item, $session->getId());

@@ -15,5 +15,5 @@
     $dbh = get_database_connection();
 
     get_header("login", $dbh, $session);
-    draw_login_register_form($checkout, $message, intval($_GET['user']), intval($_GET['item']));
+    draw_login_register_form($checkout, $message, $_GET['user']??"", $_GET['item']??"");
     draw_footer();

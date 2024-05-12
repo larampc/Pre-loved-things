@@ -17,8 +17,7 @@ $message = isset($_GET['user']);
 
 if ($email_available && $username_available) {
 
-    $session->setId(User::register_user($dbh, $_POST['password'], $_POST['username'], $_POST['email'], $_POST['name'], $_POST['phone'])->user_id);
-
+    $session->setId(User::register_user($dbh, $_POST['password'], $_POST['username'], $_POST['email'], $_POST['name'], $_POST['phone'], $session->getCurrency())->user_id);
     if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $session->getId());
 
     $session->addMessage('success', 'Account successfully created.');

@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../database/item.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
-$user = intval($_GET['user']);
+$user = $_GET['user'];
 $january_sold = User::get_sold_items($dbh, $user, "01");
 $january_buy = User::get_bought_items($dbh, $user, "01");
 $february_sold = User::get_sold_items($dbh, $user, "02");

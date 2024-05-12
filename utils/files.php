@@ -1,8 +1,9 @@
 <?php
 
 require_once ('../database/connection.db.php');
+require_once ('uuid.php');
 
-function upload_user_image($img) : int {
+function upload_user_image($img) : string {
     $dbh = get_database_connection();
 
     $tempFileName = $_FILES[$img]['tmp_name'];
@@ -13,10 +14,9 @@ function upload_user_image($img) : int {
 
     if (!$original) die('Unknown image format!');
 
-    $stmt = $dbh->prepare("INSERT INTO images VALUES (NULL)");
-    $stmt->execute();
-
-    $id = $dbh->lastInsertId();
+    $id = generate_uuid();
+    $stmt = $dbh->prepare("INSERT INTO images(id) VALUES (?)");
+    $stmt->execute(array($id));
 
     $FileName = "../uploads/profile_pics/$id.png";
 
@@ -30,7 +30,7 @@ function upload_user_image($img) : int {
     return $id;
 }
 
-function upload_item_image($img) : int {
+function upload_item_image($img) : string {
     $dbh = get_database_connection();
 
     // PHP saves the file temporarily here
@@ -46,11 +46,9 @@ function upload_item_image($img) : int {
     if (!$original) die('Unknown image format!');
 
     // Insert image data into database
-    $stmt = $dbh->prepare("INSERT INTO images VALUES (NULL)");
-    $stmt->execute();
-
-    // Get image ID
-    $id = $dbh->lastInsertId();
+    $id = generate_uuid();
+    $stmt = $dbh->prepare("INSERT INTO images(id) VALUES (?)");
+    $stmt->execute(array($id));
 
     // Generate filenames for original, small and medium files
     $thumbnailFileName = "../uploads/thumbnails/$id.png";

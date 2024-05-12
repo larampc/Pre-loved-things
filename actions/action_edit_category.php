@@ -13,10 +13,10 @@ require_once(__DIR__ . '/../utils/files.php');
 $dbh = get_database_connection();
 
 
-Tag::update_category($dbh, intval($_GET['id']),$_POST['category']);
-Tag::delete_category_tags($dbh, intval($_GET['id']));
+Tag::update_category($dbh, $_GET['id'],$_POST['category']);
+Tag::delete_category_tags($dbh, $_GET['id']);
 $tags = array_filter($_POST['tags']);
-Tag::add_tags_category($dbh, intval($_GET['id']), $tags);
+Tag::add_tags_category($dbh, $_GET['id'], $tags);
 foreach ($tags as $key => $value) {
     if ($_POST['option' . $key] != NULL) {
         Tag::add_tag_options($dbh, array_filter($_POST['option' . $key]), Tag::get_tag_id($dbh, $_POST['category'],$value));

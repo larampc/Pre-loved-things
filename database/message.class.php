@@ -1,12 +1,12 @@
 <?php
     declare(strict_types=1);
 class Message {
-    public int $chatroom;
-    public int $sender;
+    public string $chatroom;
+    public string $sender;
     public int $sentTime;
     public ?int $readTime;
     public string $message;
-    function __construct (int $chatroom, int $sender, int $sentTime, ?int $readTime, string $message) {
+    function __construct (string $chatroom, string $sender, int $sentTime, ?int $readTime, string $message) {
         $this->sender = $sender;
         $this->chatroom = $chatroom;
         $this->sentTime = $sentTime;
@@ -14,7 +14,7 @@ class Message {
         $this->message = $message;
     }
 
-    static function read_messages (PDO $dbh, int $chatroom, int $limit = 30) : array {
+    static function read_messages (PDO $dbh, string $chatroom, int $limit = 30) : array {
         $stmt = $dbh->prepare(
             'UPDATE messages SET readTime = ? WHERE chatroom = ? AND readTime IS NULL');
         $stmt->execute(array(time(), $chatroom));
@@ -29,7 +29,7 @@ class Message {
         }
         return $messages;
     }
-    static function send_message (PDO $dbh, int $chatroom, int $sender, string $msg) : void {
+    static function send_message (PDO $dbh, string $chatroom, string $sender, string $msg) : void {
         $stmt = $dbh->prepare(
             'INSERT INTO messages (chatroom, sender, sentTime, message) VALUES (?,?,?,?)');
         $stmt->execute(array($chatroom, $sender, time(), $msg));

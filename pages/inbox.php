@@ -26,10 +26,9 @@
     draw_user_chatrooms($chatrooms, User::get_user($dbh, $session->getId()));
     $to = $_GET["user_id"];
     if(isset($to)){
-        $to = intval($to);
-        $to_chatroom = array_filter($chatrooms, function($chatroom) use($to) { return $chatroom->seller->user_id === $to && $chatroom->item->id === intval($_GET["item_id"]); });
+        $to_chatroom = array_filter($chatrooms, function($chatroom) use($to) { return $chatroom->seller->user_id === $to && $chatroom->item->id === $_GET["item_id"]; });
         if(empty($to_chatroom)) {
-            $item = intval($_GET["item_id"]);
+            $item = $_GET["item_id"];
             draw_temporary_chatroom(User::get_user($dbh, $to), Item::get_item($dbh, $item));
         }
         else draw_big_chatroom($to_chatroom[0],User::get_user($dbh, $to), Message::read_messages($dbh, $to_chatroom[0]->chatroomId));

@@ -151,11 +151,15 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 
             <label for="category">Category</label>
+            <?php
+                if (sizeof($categories) > 0) { ?>
             <select id="category" name="category">
-                <?php foreach ($categories as $category) { ?>
-                    <option value="<?=$category['category']?:"other"?>"><?=ucfirst($category['category'])?: "Other"?></option>
+                <?php
+                foreach ($categories as $category) { ?>
+                    <option value="<?=$category['category']?:""?>"><?=ucfirst($category['category'])?: "Other"?></option>
                 <?php }?>
             </select>
+                <?php } ?>
             <script src="../scripts/new.js" defer></script>
             <?php foreach ($categories as $category) {
                 $tags = Tag::get_category_tags($db, $category['category']);
@@ -309,7 +313,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                  ?>
             </section>
         <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
-        <p class="category-search"><?=$category?></p>
+        <p class="category-search"><?=$category?:""?></p>
         <section class="items searchresult">
             <div class="loader"></div>
         </section>
@@ -362,7 +366,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
     </a>
 <?php } ?>
 
-<?php function draw_sale_info(PDO $db, TrackItem $trackItem, int $seller) { ?>
+<?php function draw_sale_info(PDO $db, TrackItem $trackItem, string $seller) { ?>
     <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
     <qr-code
             id="qr1"
@@ -435,7 +439,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
     <script src="../scripts/new_category.js" defer></script>
     <article class="newCategoryPage">
         <h2>Edit Category</h2>
-        <form action="../actions/action_edit_category.php?id=<?=Tag::get_category_id($dbh, $category)?>" method="POST" enctype="multipart/form-data">
+        <form action="../actions/action_edit_category.php?id=<?=$category?>" method="POST" enctype="multipart/form-data">
             <label> Category name
                 <input type="text" value="<?=$category?>" name="category" required>
             </label>

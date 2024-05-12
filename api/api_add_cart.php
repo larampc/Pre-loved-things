@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-if (isset($_SESSION['user_id'])) User::add_cart($dbh, $session->getId(), intval($_GET['item']));
+if (isset($_SESSION['user_id'])) User::add_cart($dbh, $session->getId(), $_GET['item']);
 else {
-    $session->addToCart(intval($_GET['item']));
+    $session->addToCart($_GET['item']);
 }

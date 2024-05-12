@@ -15,7 +15,7 @@
     require_once(__DIR__ . '/../database/track_item.class.php');
 
     $dbh = get_database_connection();
-    $track_item = TrackItem::get_tracking_item($dbh, intval($_GET['purchase']));
+    $track_item = TrackItem::get_tracking_item($dbh, $_GET['purchase']);
     get_header("new", $dbh, $session);
     draw_item_tracking($dbh, $track_item, $session);
     draw_footer();

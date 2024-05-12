@@ -10,5 +10,5 @@ require_once(__DIR__ . '/../database/message.class.php');
 require_once(__DIR__ . '/../database/user.class.php');
 
 $dbh = get_database_connection();
-$messages = Message::read_messages($dbh, intval($_GET['chatroom_id']));
+$messages = Message::read_messages($dbh, $_GET['chatroom_id']);
 echo json_encode($messages);

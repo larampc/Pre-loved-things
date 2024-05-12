@@ -14,7 +14,7 @@
 
     $dbh = get_database_connection();
 
-    $item = Item::get_item($dbh, intval($_GET['id']));
+    $item = Item::get_item($dbh, $_GET['id']);
     get_header("item", $dbh, $session);
     draw_item_page($dbh, $item, $session);
     draw_footer();

@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-if (TrackItem::update_delivery($dbh, intval($_POST["purchase"]), $_POST['new-date'])) {
+if (TrackItem::update_delivery($dbh, $_POST["purchase"], $_POST['new-date'])) {
     $session->addMessage('success', 'Delivery updated successfully.');
 }
 else {

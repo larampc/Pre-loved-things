@@ -3,17 +3,18 @@
 declare(strict_types=1);
 
 require_once('item.class.php');
+require_once('../utils/uuid.php');
 class User
 {
-    public int $user_id;
+    public string $user_id;
     public string $username;
     public string $name;
     public string $email;
     public string $phone;
-    public int $image;
+    public string $image;
     public string $role;
 
-    public function __construct(int $user_id, string $username, string $email, string $name, int $image, string $phone, string $role)
+    public function __construct(string $user_id, string $username, string $email, string $name, string $image, string $phone, string $role)
     {
         $this->user_id = $user_id;
         $this->username = $username;
@@ -24,10 +25,10 @@ class User
         $this->role = $role;
     }
 
-    public static function register_user(PDO $dbh, string $password, string $username, string $email, string $name, string $phone): ?User
+    public static function register_user(PDO $dbh, string $password, string $username, string $email, string $name, string $phone, string $currency): ?User
     {
-        $stmt = $dbh->prepare('INSERT INTO users(password, username, name, email, phone) VALUES (?, ?, ?, ?, ?)');
-        $stmt->execute(array(sha1($password), $username, $name, $email, $phone));
+        $stmt = $dbh->prepare('INSERT INTO users(user_id, password, username, name, email, phone, currency) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $stmt->execute(array(generate_uuid(),sha1($password), $username, $name, $email, $phone, $currency));
         return self::verify_user($dbh, $email, $password);
     }
 
@@ -62,39 +63,39 @@ class User
     }
 
 
-    public static function like_item(PDO $dbh, int $id, int $item): void
+    public static function like_item(PDO $dbh, string $id, string $item): void
     {
         $stmt = $dbh->prepare('INSERT INTO favorites VALUES (?, ?)');
         $stmt->execute(array($id, $item));
     }
 
-    public static function dislike_item(PDO $dbh, int $id, int $item): void
+    public static function dislike_item(PDO $dbh, string $id, string $item): void
     {
         $stmt = $dbh->prepare('DELETE FROM favorites WHERE user = ? AND item = ?');
         $stmt->execute(array($id, $item));
     }
 
-    public static function add_cart(PDO $dbh, int $id, int $item): void
+    public static function add_cart(PDO $dbh, string $id, string $item): void
     {
         $stmt = $dbh->prepare('INSERT INTO user_cart VALUES (?, ?)');
         $stmt->execute(array($id, $item));
     }
 
-    public static function remove_cart(PDO $dbh, int $id, int $item): void
+    public static function remove_cart(PDO $dbh, string $id, string $item): void
     {
         $stmt = $dbh->prepare('DELETE FROM user_cart WHERE user = ? AND item = ?');
         $stmt->execute(array($id, $item));
     }
 
-    public static function get_user(PDO $dbh, int $id): ?User {
+    public static function get_user(PDO $dbh, string $id): ?User {
         $stmt = $dbh->prepare('SELECT * FROM users WHERE user_id = ?');
         $stmt->execute(array($id));
         $user = $stmt->fetch();
         if (!$user) return null;
-        return new User((int)$user['user_id'], $user['username'], $user['email'],$user['name'], $user['image'], $user['phone'], $user['role']);
+        return new User($user['user_id'], $user['username'], $user['email'],$user['name'], $user['image'], $user['phone'], $user['role']);
     }
 
-    public static function get_user_feedback(PDO $dbh, int $id): array {
+    public static function get_user_feedback(PDO $dbh, string $id): array {
         $stmt = $dbh->prepare('SELECT * FROM comments WHERE mainuser = ?');
         $stmt->execute(array($id));
         $comments = array();
@@ -104,13 +105,13 @@ class User
         return $comments;
     }
 
-    public static function update_user(PDO $dbh, int $id, $username,$email, $phone, $name, $image): bool
+    public static function update_user(PDO $dbh, string $id, $username,$email, $phone, $name, $image): bool
     {
         $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, image=?, username=? WHERE user_id = ?');
         return $stmt->execute(array($email, $phone, $name, $image, $username,$id));
     }
 
-    public static function get_cart_items(PDO $dbh, int $user_id): array
+    public static function get_cart_items(PDO $dbh, string $user_id): array
     {
         $stmt = $dbh->prepare('SELECT *
         FROM items LEFT JOIN user_cart 
@@ -119,7 +120,7 @@ class User
         return Item::create_items($dbh, $stmt->fetchAll());
     }
 
-    static function get_cart_items_ids(PDO $dbh, int $user_id): array
+    static function get_cart_items_ids(PDO $dbh, string $user_id): array
     {
         $stmt = $dbh->prepare('SELECT items.id
         FROM items LEFT JOIN user_cart 
@@ -133,7 +134,7 @@ class User
         return $ids;
     }
 
-    public static function add_to_cart(PDO $dbh, array $item_id, int $user): void
+    public static function add_to_cart(PDO $dbh, array $item_id, string $user): void
     {
         $in_cart = self::get_cart_items_ids($dbh, $user);
         foreach ($item_id as $id) {
@@ -144,7 +145,7 @@ class User
         }
     }
 
-    public static function get_cart_items_from_user(PDO $dbh, int $buyer, int $seller): array {
+    public static function get_cart_items_from_user(PDO $dbh, string $buyer, string $seller): array {
         $stmt = $dbh->prepare('SELECT *
         FROM items LEFT JOIN user_cart 
         ON user_cart.item = items.id  WHERE user_cart.user = ? and items.creator = ?');
@@ -152,7 +153,7 @@ class User
         return Item::create_items($dbh, $stmt->fetchAll());
     }
 
-    public static function delete_user(PDO $dbh, int $user): bool
+    public static function delete_user(PDO $dbh, string $user): bool
     {
         $stmt = $dbh->prepare('DELETE FROM users WHERE user_id = ?');
         if (!$stmt->execute(array($user))) return false;
@@ -166,18 +167,18 @@ class User
         }
         return true;
     }
-    public static function change_role(PDO $dbh, int $id, string $role): bool {
+    public static function change_role(PDO $dbh, string $id, string $role): bool {
         $stmt = $dbh->prepare('UPDATE users SET role = ? WHERE user_id = ?');
         return $stmt->execute(array($role, $id));
     }
 
-    public static function get_currency(PDO $dbh, int $user): string {
+    public static function get_currency(PDO $dbh, string $user): string {
         $stmt = $dbh->prepare('SELECT currency FROM users WHERE user_id = ?');
         $stmt->execute(array($user));
         return $stmt->fetch()['currency'];
     }
 
-    public static function set_user_currency(PDO $dbh, int $user_id, string $currency): bool {
+    public static function set_user_currency(PDO $dbh, string $user_id, string $currency): bool {
         $stmt = $dbh->prepare('UPDATE users SET currency = ? WHERE user_id = ?');
         return $stmt->execute(array($currency, $user_id));
     }
@@ -197,12 +198,12 @@ class User
         return $stmt->fetch()['symbol'];
     }
 
-    public static function get_sold_items(PDO $dbh, int $user_id, string $month): int {
+    public static function get_sold_items(PDO $dbh, string $user_id, string $month): int {
         $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE items.creator = ?  AND purchaseData.deliveryDate LIKE ?');
         $stmt->execute(array($user_id, "%/$month/".date("Y", time())));
         return $stmt->fetchColumn();
     }
-    public static function get_bought_items(PDO $dbh, int $user_id, string $month): int {
+    public static function get_bought_items(PDO $dbh, string $user_id, string $month): int {
         $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE purchaseData.buyer = ? AND purchaseData.deliveryDate LIKE ?');
         $stmt->execute(array($user_id, "%/$month/".date("Y", time())));
         return $stmt->fetchColumn();

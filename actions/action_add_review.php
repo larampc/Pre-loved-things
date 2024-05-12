@@ -10,7 +10,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-Comment::add_review($dbh, intval($_GET['user']) ,$session->getId(), $_POST['review'], $_POST['stars'] ? intval($_POST['stars']) : 0);
+Comment::add_review($dbh, $_GET['user'] ,$session->getId(), $_POST['review'], $_POST['stars'] ? intval($_POST['stars']) : 0);
 
 $session->addMessage("success", "Review added successfully");
 header('Location: ' . $_SERVER['HTTP_REFERER']);

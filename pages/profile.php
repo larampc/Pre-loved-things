@@ -21,6 +21,7 @@
     $dbh = get_database_connection();
     get_header("profile", $dbh, $session);
     $user = User::get_user($dbh, $session->getId());
+    if (!isset($user)) die(header('Location: ../actions/action_logout.php'));
     $feedback = User::get_user_feedback($dbh, $session->getId());
     $items = Item::get_user_items($dbh, $session->getId());
 
