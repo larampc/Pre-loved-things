@@ -267,6 +267,7 @@ function createSendMessageDiv(chatroom, user) {
     input.type = "text";
     input.name = "message"
     input.placeholder = "Write message...";
+    input.autocomplete = "off"
     input.addEventListener("keypress", async (event) => {
         if (event.key === "Enter") await handleButtonClick(chatroom, user, input);
     })

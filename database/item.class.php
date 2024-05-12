@@ -177,7 +177,6 @@ class Item {
         $stmt->execute(array($count));
         $items = array();
         while($item = $stmt->fetch()) {
-            var_dump($item);
             $items[] = self::get_item($dbh, $item['id']);
         }
         return $items;
@@ -188,7 +187,7 @@ class Item {
         $stmt->execute(array($count));
         return self::create_items($dbh, $stmt->fetchAll());
     }
-    static function get_purchase_id(PDO $dbh, string $item): int {
+    static function get_purchase_id(PDO $dbh, string $item): string {
         $stmt = $dbh->prepare('SELECT purchase FROM purchases WHERE item = ?');
         $stmt->execute(array($item));
         return $stmt->fetchColumn();

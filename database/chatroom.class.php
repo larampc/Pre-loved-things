@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 require_once (__DIR__ . '/../database/item.class.php');
 require_once (__DIR__ . '/../database/message.class.php');
+require_once (__DIR__ . '/../utils/uuid.php');
 class Chatroom {
     public string $chatroomId;
     public Item $item;
@@ -19,10 +20,10 @@ class Chatroom {
         $this->last_message = $last_message;
     }
     public static function save_chatroom(PDO $dbh, string $itemId, string $sellerId, string $buyerId) : Chatroom {
-        $id = $dbh->lastInsertId();
+        $id = generate_uuid();
         $stmt = $dbh->prepare(
-            'INSERT INTO chatrooms (chatroom_id,item_id, seller_id, buyer_id) VALUES (?, ?, ?)');
-        $stmt->execute([$itemId, $sellerId, $buyerId]);
+            'INSERT INTO chatrooms (chatroom_id,item_id, seller_id, buyer_id) VALUES (?, ?, ?, ?)');
+        $stmt->execute([$id,$itemId, $sellerId, $buyerId]);
         return new Chatroom($id, Item::get_item($dbh, $itemId), User::get_user($dbh, $sellerId), User::get_user($dbh,$buyerId), 0, null);
     }
     public static function get_user_chatrooms(PDO $dbh, string $userId) : array {
@@ -38,7 +39,7 @@ class Chatroom {
         }
         return $chatrooms;
     }
-    public static function get_unread_message_count(PDO $dbh, string $user_id, int $chatroom_id) : int {
+    public static function get_unread_message_count(PDO $dbh, string $user_id, string $chatroom_id) : int {
         $stmt = $dbh->prepare('SELECT COUNT(*) FROM messages WHERE chatroom = ? AND sender <> ? AND readTime is NULL');
         $stmt->execute([$chatroom_id, $user_id]);
         return $stmt->fetchColumn();

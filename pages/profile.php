@@ -19,9 +19,9 @@
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $dbh = get_database_connection();
-    get_header("profile", $dbh, $session);
     $user = User::get_user($dbh, $session->getId());
     if (!isset($user)) die(header('Location: ../actions/action_logout.php'));
+    get_header("profile", $dbh, $session);
     $feedback = User::get_user_feedback($dbh, $session->getId());
     $items = Item::get_user_items($dbh, $session->getId());
 
