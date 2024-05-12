@@ -14,7 +14,8 @@
 
     $dbh = get_database_connection();
 
-    $item = Item::get_item($dbh, $_GET['id']);
+    $item = Item::get_item($dbh,$_GET['id']);
+    $user_currency = new Currency( $dbh, $session->getCurrency());
     get_header("item", $dbh, $session);
-    draw_item_page($dbh, $item, $session);
+    draw_item_page($dbh, $item, $session, $user_currency);
     draw_footer();

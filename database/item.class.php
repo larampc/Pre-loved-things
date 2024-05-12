@@ -193,10 +193,13 @@ class Item {
         return $stmt->fetchColumn();
     }
 
-    static function update_item_sold(PDO $dbh, array $items) {
+    static function update_item_sold(PDO $dbh, string $id): void {
+        $stmt = $dbh->prepare('UPDATE items SET sold = 1 WHERE id = ?');
+        $stmt->execute([$id]);
+    }
+    static function update_items_sold(PDO $dbh, array $items) {
         foreach ($items as $item) {
-            $stmt = $dbh->prepare('UPDATE items SET sold = 1 WHERE id = ?');
-            $stmt->execute([$item->id]);
+            self::update_item_sold($dbh, $item->id);
         }
     }
 

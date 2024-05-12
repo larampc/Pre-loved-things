@@ -15,7 +15,7 @@ $city = $_POST["city"];
 $postalCode = $_POST["postalCode"];
 
 $items = User::get_cart_items_from_user($dbh, $session->getId(), $session->getItemCheckout());
-Item::update_item_sold($dbh, $items);
+Item::update_items_sold($dbh, $items);
 Item::remove_cart_favorite($dbh, $items);
 $purchase = Item::register_purchase($dbh, $session->getId(), $items,$address, $city, $postalCode);
 

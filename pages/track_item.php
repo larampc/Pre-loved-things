@@ -16,6 +16,8 @@
 
     $dbh = get_database_connection();
     $track_item = TrackItem::get_tracking_item($dbh, $_GET['purchase']);
+    $user_currency = new Currency($dbh, $session->getCurrency());
+
     get_header("new", $dbh, $session);
-    draw_item_tracking($dbh, $track_item, $session);
+    draw_item_tracking($track_item, $session, $user_currency);
     draw_footer();

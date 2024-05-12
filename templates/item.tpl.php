@@ -1,32 +1,32 @@
 <?php declare(strict_types = 1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
-function draw_item(PDO $dbh, Session $session, Item $item) { ?>
+function draw_item(Item $item, Currency $user_currency) { ?>
     <a href="../pages/item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
         <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
-            <p class="price"><?=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2) . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
+            <p class="price"><?=round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></p>
         </div>
     </a>
 <?php }
 
-    function draw_items_main( PDO $dbh, Session $session, array $liked_items, array $recent_items) { ?>
+function draw_items_main(array $liked_items, array $recent_items, Currency $user_currency) { ?>
     <h2>Last Added Items</h2>
-        <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
-        <?php draw_items($dbh, $session, $recent_items); ?>
+    <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
+    <?php draw_items($recent_items, $user_currency); ?>
     <h2>Most liked</h2>
-        <?php draw_items($dbh, $session, $liked_items); ?>
-    <?php }
+    <?php draw_items($liked_items, $user_currency); ?>
+<?php }
 
-    function draw_items(PDO $dbh, Session $session, array $items) { ?>
+function draw_items(array $items, Currency $user_currency) { ?>
     <section class="items">
         <?php foreach($items as $item) {
-            draw_item($dbh, $session, $item);
+            draw_item($item, $user_currency);
         } ?>
     </section>
 <?php }
-function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
+function draw_sliding_items(array $items, Currency $user_currency) { ?>
     <section class="items">
         <div class="image-slide">
             <?php if (count($items) > 1) { ?>
@@ -46,7 +46,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
                     <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
                     <div class="item-info">
                         <p class="name"><?=$item->name?></p>
-                        <p class="price"><?=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2) . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
+                        <p class="price"><?=round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></p>
                     </div>
                 </a>
                 <?php
@@ -67,7 +67,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
     <?php } ?>
 <?php } ?>
 
-<?php function draw_item_page(PDO $db, Item $item, Session $session) { ?>
+<?php function draw_item_page(PDO $db, Item $item, Session $session, Currency $user_currency) { ?>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
@@ -106,7 +106,7 @@ function draw_sliding_items(PDO $dbh, Session $session, array $items) { ?>
             <p><?= $item->description ?></p>
         </section>
         <section class="priceSection">
-            <span class="price"><?= round($item->price * User::get_currency_conversion($db, $session->getCurrency()),2) . User::get_currency_symbol($db, $session->getCurrency())?></span>
+            <span class="price"><?= round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></span>
             <?php if ($item->sold === false) { ?>
                 <section class="buy-item">
                     <i class="material-symbols-outlined cart big"> local_mall </i>
@@ -320,7 +320,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
         </article>
 <?php } ?>
 
-<?php function draw_item_tracking(PDO $dbh, TrackItem $trackItem, Session $session) { ?>
+<?php function draw_item_tracking(TrackItem $trackItem, Session $session, Currency $user_currency) { ?>
     <section class="item-track">
         <form method="get" action="../pages/inbox.php">
             <label>
@@ -348,7 +348,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                 <p><?=$trackItem->date?></p>
             <?php } ?>
         </div>
-        <?php draw_sliding_items($dbh, $session, $trackItem->tracking );
+        <?php draw_sliding_items($trackItem->tracking, $user_currency);
         if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
             <button id="print" class="../pages/sale_info.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
         <?php } ?>

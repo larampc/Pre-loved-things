@@ -15,6 +15,7 @@
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $dbh = get_database_connection();
+    $user_currency = new Currency($dbh, $session->getCurrency());
 
     get_header("favorite", $dbh, $session);
 
@@ -25,5 +26,5 @@
             <p>You have no favorite items yet</p>
         </section>
     <?php }
-    else draw_items($dbh, $session, $items);
+    else draw_items($items, $user_currency);
     draw_footer();

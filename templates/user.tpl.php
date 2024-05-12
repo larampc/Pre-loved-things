@@ -2,7 +2,7 @@
 declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
-function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session) { ?>
+function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
@@ -11,8 +11,8 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script src="../scripts/draw_chart.js"></script>
             <?php echo('<script>drawChart('.$user->user_id.')</script>');
-            draw_user_options($dbh, $user, $session);
-        } else draw_items($dbh, $session, $items);
+            draw_user_options($dbh, $user, $session, $user_currency);
+        } else draw_items($items, $user_currency);
         ?>
     </article>
 <?php } ?>
@@ -36,7 +36,9 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
                         <button title="Remove user" type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirm-action" ><i class="material-symbols-outlined big"> person_remove </i></button>
                     </form>
                     <form method="post" action="../actions/action_change_role.php" class="confirmation">
-                        <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirm-action" ><i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?> </i></button>
+                        <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirm-action" >
+                            <i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?></i>
+                        </button>
                     </form>
                 </div>
             <?php } ?>
@@ -131,7 +133,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     </section>
 <?php } ?>
 
-<?php function draw_cart(PDO $db, array $items, Session $session) { ?>
+<?php function draw_cart(PDO $db, array $items, Session $session, Currency $user_currency) { ?>
     <article class="cartPage">
         <h2>Your cart</h2>
         <?php
@@ -151,7 +153,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                         <p class="num-items">Number items: <?=$num_items?></p>
                         <div class="sum-price">
                             <p>Total: </p>
-                            <p class="total"><?=$sum . User::get_currency_symbol($db, $session->getCurrency())?></p>
+                            <p class="total"><?=$sum . $user_currency->symbol?></p>
                         </div>
                         <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                             <input type="hidden" value="<?=$user->user_id?>" name="user_items">
@@ -173,9 +175,9 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     </a>
                     <article class="seller-items">
             <?php }
-            draw_item($db, $session, $item);
+            draw_item($item, $user_currency);
             $num_items += 1;
-            $sum += round($item->price * (User::get_currency_conversion($db, $session->getCurrency())), 2);
+            $sum += round($item->price * $user_currency->conversion, 2);
             $user = $item->creator;
         } ?>
             </article>
@@ -183,7 +185,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                 <p class="num-items">Number items: <?=$num_items?></p>
                 <div class="sum-price">
                     <p>Total: </p>
-                    <p class="total"><?=$sum . User::get_currency_symbol($db, $session->getCurrency())?></p>
+                    <p class="total"><?=$sum . $user_currency->symbol?></p>
                 </div>
                 <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                     <input type="hidden" value="<?=$user->user_id?>" name="user_items">
@@ -249,7 +251,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     </form>
 <?php } ?>
 
-<?php function draw_checkout_summary(array $items, Session $session, PDO $dbh) {?>
+<?php function draw_checkout_summary(array $items, Currency $user_currency) {?>
     <div class="checkoutSum">
         <p class="num-items">Number items: <?=count($items)?></p>
         <?php
@@ -257,19 +259,19 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         foreach ($items as $item) { ?>
             <div class="item-info">
                 <p class="name"><?=$item->name?></p>
-                <p class="price"><?=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2) . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
+                <p class="price"><?=round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></p>
             </div>
         <?php
-            $sum +=round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()),2);
+            $sum +=round($item->price * $user_currency->conversion,2);
         } ?>
         <div class="sum-price">
             <p>Total: </p>
-            <p class="total"><?=$sum . User::get_currency_symbol($dbh, $session->getCurrency())?></p>
+            <p class="total"><?=$sum . $user_currency->symbol?></p>
         </div>
     </div>
 <?php } ?>
 
-<?php  function draw_user_options(PDO $dbh, User $user, Session $session) { ?>
+<?php  function draw_user_options(PDO $dbh, User $user, Session $session, Currency $user_currency) { ?>
     <script src="../scripts/profileNav.js" defer></script>
     <section class="display-item">
         <?php if ($user->user_id === $session->getId()) {?>
@@ -297,7 +299,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <section class="items" id="my">
             <?php $items = Item::get_user_items($dbh, $user->user_id);
             foreach($items as $item) {
-                draw_item($dbh, $session, $item);
+                draw_item($item, $user_currency);
             } ?>
         </section>
     </section>
