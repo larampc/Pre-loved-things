@@ -21,6 +21,7 @@
 
     if ($user !== null) {
       $session->setId($user->user_id);
+      if($user->role === "admin") $session->set_admin();
       $session->setCurrency(User::get_currency($dbh, $user->user_id));
 
       if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $user->user_id);

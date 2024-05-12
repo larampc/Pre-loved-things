@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
 $dbh = get_database_connection();
 
-if (!$session->isLoggedIn() || User::get_user($dbh, $session->getId())->role != "admin") die(header('Location: /'));
+if (!$session->isLoggedIn() || !$session->is_admin()) die(header('Location: /'));
 
 
 get_header("new-category", $dbh, $session);

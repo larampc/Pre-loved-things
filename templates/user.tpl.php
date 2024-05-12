@@ -6,7 +6,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
         draw_user_details($dbh, $user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
-        <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && User::get_user($dbh, $session->getId())->role === "admin")) { ?>
+        <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
             <div id="curve_chart"></div>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <script src="../scripts/draw_chart.js"></script>
@@ -29,7 +29,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
             <?php } ?>
-            <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && User::get_user($dbh, $session->getId())->role === "admin") {?>
+            <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && $session->is_admin()){?>
                 <script src="../scripts/user_actions.js" defer></script>
                 <div class="admin-actions">
                     <form method="post" action="../actions/action_remove_user.php" class="confirmation">

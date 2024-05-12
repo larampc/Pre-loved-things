@@ -24,7 +24,13 @@ class Session {
     public function setId(string $id) {
         $_SESSION['user_id'] = $id;
     }
+    public function is_admin(): bool {
+        return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+    }
 
+    public function set_admin() {
+        $_SESSION['user_role'] = 'admin';
+    }
     public function hasItemsCart(): bool {
         return isset($_SESSION['cart']);
     }

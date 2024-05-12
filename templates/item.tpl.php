@@ -82,7 +82,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
                         <p>Liked by <?=Item::get_number_likes($db, $item)?></p>
                     </div> <?php } ?>
             <?php }
-            if ($session->isLoggedIn() && (User::get_user($db, $session->getId())->role === "admin" || $session->getId() == $item->creator->user_id)) { ?>
+            if ($session->isLoggedIn() && ($session->is_admin() || $session->getId() == $item->creator->user_id)) { ?>
                 <form method="post" action="../actions/action_remove_item.php" class="confirmation">
                     <script src="../scripts/user_actions.js" defer></script>
                     <button title="Remove item" type="submit" value="<?=$item->id?>" name="remove-item" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
