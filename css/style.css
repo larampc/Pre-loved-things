@@ -9,6 +9,7 @@
     --primary: #F2E8D5;
     --secondary: #F1F1F1;
     --tertiary: #D9D9D9;
+    --quaternary: #FAFAFA;
     --accent-primary: #6A4806;
     --accent-secondary: #E5CFA4;
 
@@ -862,7 +863,7 @@ i {
 }
 
 .msg-inbox {
-    background-color: #FAFAFA;
+    background-color: var(--quaternary);
     border: 2px solid var(--tertiary);
     border-radius: 1rem;
 }
