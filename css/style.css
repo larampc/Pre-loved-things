@@ -402,9 +402,12 @@ main .cartPage  h2 {
     height: 100%;
     width: 100%;
     cursor: pointer;
+    + * {
+        cursor: pointer;
+    }
 }
 
-.upload-icon {
+.upload-icon, .delete-icon {
     opacity: 0.5;
     transition: opacity 0.3s ease;
     color: black;
@@ -418,8 +421,9 @@ main .cartPage  h2 {
 }
 
 /* toggle icon state */
-.photo-upload:hover .upload-icon {
+.photo-upload:hover .upload-icon, .delete-icon:hover {
     opacity: 1;
+    backdrop-filter: blur(2px);
 }
 
 .photo-upload {
@@ -449,6 +453,7 @@ main .cartPage  h2 {
         bottom: 0;
         left: 0;
         font-size: medium;
+        z-index: 1;
     }
 }
 
@@ -463,7 +468,7 @@ section.item-image-uploads {
         width: 100%;
     }
     .main-photo-upload {
-        box-shadow: 0 0 0 5px lightgoldenrodyellow;
+        box-shadow: 0 0 0 5px var(--primary);
     }
 }
 

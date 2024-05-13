@@ -53,6 +53,7 @@ function createRemoveButton(id) {
     const removeButton = document.createElement('i')
     removeButton.classList.add('material-symbols-outlined')
     removeButton.classList.add('bolder')
+    removeButton.classList.add('delete-icon')
     removeButton.innerText = 'delete'
     removeButton.id = "delete" + id
     removeButton.addEventListener('click', shiftImages.bind(removeButton))
