@@ -1246,7 +1246,21 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 
 .searchresult {
     margin-bottom: 1rem;
+    .item {
+        transition: 0.5s all;
+        img {
+            transition: 0.5s all;
+        }
+    }
 }
+
+.searchresult .item:hover {
+    transform: scale(1.05, 1.05);
+    img {
+        box-shadow: 0 0 5px #c4c3ca;
+    }
+}
+
 
 .price-input input {
     width: 3rem;
