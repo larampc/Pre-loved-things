@@ -269,7 +269,8 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
 <?php }
 
 function draw_category_tags(PDO $dbh, $category, bool $visible) {
-    $tags = Tag::get_category_tags($dbh, $category); ?>
+    $tags = Tag::get_category_tags($dbh, $category);
+    if (!empty($tags)) { ?>
     <div class="category-<?=$category?> <?=$visible? "" : "hide" ?> category-box">
         <p><?=$category?></p>
     <?php foreach ($tags as $tag) { ?>
@@ -285,7 +286,7 @@ function draw_category_tags(PDO $dbh, $category, bool $visible) {
             <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
         <?php } ?>
     </div>
-    <?php } ?> </div> <?php }
+    <?php } ?> </div> <?php }}
 
 function draw_page_filters(array $categories, string $visible, PDO $dbh, Session $session) { ?>
     <script src="../scripts/search.js" defer></script>

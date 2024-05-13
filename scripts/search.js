@@ -166,12 +166,12 @@ categorySelector.forEach(category => category.addEventListener("input", async ()
         const indexCategory = categories.findIndex((elem) => elem[0] === category.name);
         if (indexCategory === -1) categories.push(category.value);
         else category[indexCategory][1].push(category.value)
-        document.querySelector(".category-"+ category.value).classList.remove("hide");
+        document.querySelector(".category-"+ category.value)?.classList.remove("hide");
     }
     else if (!category.checked && category.type === "checkbox") {
         const indexCategory = categories.findIndex((elem) => elem === category.value);
         categories.splice(indexCategory, 1);
-        document.querySelector(".category-"+ category.value).classList.add("hide");
+        document.querySelector(".category-"+ category.value)?.classList.add("hide");
     }
     await getFilteredItems(true);
 }))
