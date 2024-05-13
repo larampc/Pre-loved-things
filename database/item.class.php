@@ -155,7 +155,7 @@ class Item {
         if ($checkTag) {
             $stmt = $dbh->prepare("SELECT * FROM items 
              WHERE category IN (". "'". implode("' ,'", $categories). "'" . " ) 
-             AND id IN (".implode(',', $itemTags) . " )
+             AND id IN (". "'". implode("' ,'", $itemTags). "'"  . " )
              AND price >= ? AND price <= ? 
              AND (name LIKE ? OR name LIKE ?) AND sold = 0
             ORDER BY ". $getOrder ." LIMIT 20 OFFSET ? ");

@@ -10,7 +10,6 @@ require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $cat = $_GET['cat']??"";
-
 $tag = $_GET['tag']??"";
 $page = $_GET['page'];
 $range = $_GET['price'];

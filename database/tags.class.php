@@ -31,7 +31,7 @@ class Tag
     }
 
     public static function get_tag_options(PDO $dbh, string $category, string $tag):  array {
-        $stmt = $dbh->prepare('SELECT tags_predefined.value FROM tags join categories on tags.category = categories.id join tags_predefined on tags_predefined.tag = tags.id where categories.category = ? and tags.tag = ?');
+        $stmt = $dbh->prepare('SELECT tags_predefined.value FROM tags join tags_predefined on tags_predefined.tag = tags.id where tags.category = ? and tags.tag = ?');
         $stmt->execute(array($category, $tag));
         return $stmt->fetchAll();
     }
@@ -43,7 +43,7 @@ class Tag
     }
 
     public static function get_tag_id(PDO $dbh, string $category, string $tag):  string {
-        $stmt = $dbh->prepare('SELECT tags.id FROM tags join categories on tags.category = categories.id where categories.category = ? and tags.tag = ?');
+        $stmt = $dbh->prepare('SELECT id FROM tags where category = ? and tag = ?');
         $stmt->execute(array($category, $tag));
         return $stmt->fetchColumn();
     }
