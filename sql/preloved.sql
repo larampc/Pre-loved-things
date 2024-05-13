@@ -182,16 +182,16 @@ INSERT INTO users (user_id, password, name, email, phone, username, role, curren
 
 INSERT INTO items (id, name, price, date, description, creator, mainImage, category, sold)
 VALUES
-    ('1','Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', '1','1', '1', 1),
-    ('2','Laptop', 899.99, '2024-04-10', 'High-performance laptop.', '2','1', '2', 1),
-    ('3','Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', '3','1', '2', 1),
-    ('4','Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', '4','1', '2', 1),
-    ('5','Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', '5','1', '2', 0),
-    ('6','Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', '6','1', '6', 0),
-    ('7','Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', '7','1', '7', 0),
-    ('8','Desk', 149.50, '2024-04-10', 'Simple desk for home office.', '8','1', '1', 0),
-    ('9','Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', '9','1', '2', 0),
-    ('10','Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', '10','1', '3', 0);
+    ('1','Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', '1','1', 'music', 1),
+    ('2','Laptop', 899.99, '2024-04-10', 'High-performance laptop.', '2','1', 'technology', 1),
+    ('3','Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', '3','1', 'technology', 1),
+    ('4','Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', '4','1', 'sports', 1),
+    ('5','Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', '5','1', '', 0),
+    ('6','Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', '6','1', 'technology', 0),
+    ('7','Television', 799.99, '2024-04-10', '4K HDR smart TV for immersive viewing.', '7','1', 'technology', 0),
+    ('8','Desk', 149.50, '2024-04-10', 'Simple desk for home office.', '8','1', 'furniture', 0),
+    ('9','Headphones', 99.99, '2024-04-10', 'Noise-cancelling wireless headphones.', '9','1', 'technology', 0),
+    ('10','Backpack', 49.99, '2024-04-10', 'Durable backpack for everyday use.', '10','1', '', 0);
 
 
 
@@ -297,6 +297,7 @@ INSERT INTO categories (category) VALUES
                                       ('cars'),
                                       ('books'),
                                       ('furniture'),
+                                      ('music'),
                                       ('sports');
 INSERT INTO tags (id, category, tag) VALUES
                                      ('1','', 'condition'),

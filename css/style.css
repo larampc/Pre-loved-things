@@ -1355,7 +1355,16 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     text-decoration: none;
     display: flex;
     justify-content: right;
-    align-content: baseline;
+    align-items: center;
+    i {
+        transition: 1000ms all;
+    }
+}
+
+#show-more:hover {
+    i {
+        margin-left: 0.5rem;
+    }
 }
 
 a {
