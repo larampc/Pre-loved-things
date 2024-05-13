@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Carrois+Gothic+SC&display=swap');
 
+:root {
+    --error-background: rgba(232, 133, 127, 0.66);
+    --error-primary: #5a1410;
+    --success-background: rgba(169, 232, 127, 0.66);
+    --success-primary: #105a11;
+    --confirm-background: rgba(243, 223, 169, 0.66);
+    --primary: #F2E8D5;
+    --secondary: #F1F1F1;
+    --tertiary: #D9D9D9;
+    --accent-primary: #6A4806;
+    --accent-secondary: #E5CFA4;
+
+}
+
 main {
     margin: 7rem 0 2rem;
 }
@@ -7,7 +21,7 @@ main {
 main.new-main, main.edit-profile-main, main.new-category-main {
     margin: 0;
     padding: 7rem 0 2rem;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
 }
 
 main.search-main {
@@ -23,11 +37,11 @@ body {
 body > header {
     width: 100%;
     height: 5rem;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     position: fixed;
     .currency {
         padding: 0.3rem 0;
-        background-color: #EBEBEB;
+        background-color: var(--secondary);
         border-style: none;
         border-radius: 0.5rem;
     }
@@ -81,7 +95,7 @@ button {
 
 
 .dropdown-content {
-    background-color: #D9D9D9;
+    background-color: var(--tertiary);
     color: black;
     border: none;
     cursor: pointer;
@@ -99,7 +113,7 @@ button {
 body > footer {
     padding: 0.5em;
     margin-bottom: 0;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     color: black;
     text-align: center;
 }
@@ -136,7 +150,7 @@ main > h2 {
     height: 10rem;
     border-radius: 0.5rem;
     border-style: solid;
-    border-color: #D9D9D9;
+    border-color: var(--tertiary);
 }
 
 
@@ -164,12 +178,12 @@ main > h2 {
 }
 
 .itemPage .sendMessage-btn {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     border-radius: 1rem;
     padding: 0.5rem;
     margin-top:0.5rem;
     border-style: none;
-    color: #6A4806;
+    color: var(--accent-primary);
 }
 
 .itemPage .userProfile-btn {
@@ -213,13 +227,13 @@ main > h2 {
 .itemPage .Buy {
     background-color: transparent;
     border-style: none;
-    color: #6A4806;
+    color: var(--accent-primary);
     padding: 0;
     margin-left: 5px;
 }
 
 .itemPage .buy-item {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     border-radius: 1rem;
     padding: 0.5rem;
     height: 2rem;
@@ -321,7 +335,7 @@ main .cartPage  h2 {
 
 .sum {
     height: fit-content;
-    background-color: #EBEBEB;
+    background-color: var(--secondary);
     padding: 0 1rem;
     margin-left: 1rem;
     margin-top: 1rem;
@@ -335,7 +349,7 @@ main .cartPage  h2 {
 /* NEW ITEM PAGE */
 
 .newItemPage, .edit-profile, .newCategoryPage {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
 }
 
 .newItemPage form, .edit-profile form, .newCategoryPage form {
@@ -361,7 +375,7 @@ main .cartPage  h2 {
 }
 
 .newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], .newItemPage select, .newCategoryPage select, .edit-profile select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     border-style: none;
     border-radius: 0.5rem;
 }
@@ -371,7 +385,7 @@ main .cartPage  h2 {
     margin: 1.5rem auto auto auto;
     border-style: none;
     border-radius: 0.5rem;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
 }
 
 .item-track img {
@@ -410,7 +424,7 @@ main .cartPage  h2 {
 .photo-upload {
     width: 200px;
     height: 200px;
-    background-color: #D9D9D9;
+    background-color: var(--tertiary);
     position: relative;
     background-position: center;
     background-repeat: no-repeat;
@@ -454,13 +468,13 @@ section.item-image-uploads {
 
 /* TRACK ITEM */
 #print {
-    background-color: #E5CFA4;
+    background-color: var(--accent-secondary);
     width: 50%;
     border-radius: 1rem;
     padding: 0.5rem;
     margin-top:0.5rem;
     border-style: none;
-    color: #6A4806;
+    color: var(--accent-primary);
 }
 
 .item-track .items {
@@ -484,7 +498,7 @@ main .searchPage  h2 {
 
 .searchPage .filter {
     padding: 1rem 1rem 2rem;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     margin-right: 1rem;
     width: auto;
     z-index: 3;
@@ -500,7 +514,7 @@ main .searchPage  h2 {
 #open-filters {
     display: none;
     width: 3rem;
-    background-color: #D9D9D9;
+    background-color: var(--tertiary);
     border-radius: 0 2rem 2rem 0;
     height: 3rem;
     border: none;
@@ -514,7 +528,7 @@ main .searchPage  h2 {
 
 #order {
     padding: 0.3rem 0;
-    background-color: #EBEBEB;
+    background-color: var(--secondary);
     border-style: none;
     border-radius: 0.5rem;
 }
@@ -534,7 +548,7 @@ main .userPage, .pfPage{
 
 .userPage .feedback, .pfPage .feedback {
     height: 20rem;
-    background-color: #D9D9D9;
+    background-color: var(--tertiary);
     margin-right: 1rem;
     border-radius: 1rem;
     > p {
@@ -564,7 +578,7 @@ main .userPage, .pfPage{
 
 .userPage .user-details, .pfPage .user-details {
     a {
-        background-color: #F1F1F1;
+        background-color: var(--secondary);
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
         text-decoration: none;
@@ -576,7 +590,7 @@ main .userPage, .pfPage{
 }
 
 .pfPage .display-item > a {
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     padding: 0.5rem 0;
     border-radius: 0.5rem;
     text-decoration: none;
@@ -587,7 +601,7 @@ main .userPage, .pfPage{
 }
 
 .userPage .comment, .pfPage .comment {
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     margin: 0 1rem 1rem;
     border-radius: 1rem;
     position: relative;
@@ -654,13 +668,13 @@ main .userPage, .pfPage{
 }
 
 .navOption.my {
-    border: 2px solid #D9D9D9;
+    border: 2px solid var(--tertiary);
 }
 
 
 /* LOGIN AND REGISTER */
 .login, .register {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     text-align: center;
     margin: 0 auto;
     border-radius: 10px;
@@ -684,7 +698,7 @@ main .userPage, .pfPage{
     padding: 0.5rem;
     justify-content: center;
     width: 50%;
-    box-shadow: 0 0 5px #c4c3ca;
+    box-shadow: 0 0 5px var(--tertiary);
 }
 
 .login input, .register input {
@@ -693,7 +707,7 @@ main .userPage, .pfPage{
     padding: 0.5rem;
     text-align: center;
     width: 65%;
-    box-shadow: 0 0 5px #c4c3ca;
+    box-shadow: 0 0 5px var(--tertiary);
 }
 
 .login a {
@@ -712,7 +726,7 @@ i {
     width: 30%;
     position: absolute;
     top: 6px;
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     transition: all 1s ease;
     margin-top: 3.2rem;
     margin-left: 7rem;
@@ -743,7 +757,7 @@ i {
 }
 
 .login, .register {
-    box-shadow: 5px 5px 10px #c4c3ca;
+    box-shadow: 5px 5px 10px var(--tertiary);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -758,7 +772,7 @@ i {
     height: 20rem;
 }
 .register {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     transform: rotateY(180deg);
 }
 .checkboxLoginRegister {
@@ -774,10 +788,10 @@ i {
     border-radius: 1rem;
     align-self: center;
     margin: 1rem;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
 }
 .toggleLoginRegister:before {
-    box-shadow: 0 0 4px #c4c3ca;
+    box-shadow: 0 0 4px var(--tertiary);
     transition: all 0.5s ease;
     font-family: "Material Symbols Outlined";
     content: "\f1e2";
@@ -793,7 +807,7 @@ i {
     border-radius: 0.4rem;
     line-height: 2rem;
     text-align: center;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
 }
 .checkboxLoginRegister:checked + .toggleLoginRegister:before {
     transform: rotateZ(-270deg);
@@ -832,7 +846,7 @@ i {
 .item-msg-img {
     max-height: 3rem;
     max-width: 3rem;
-    border: 2px solid #D9D9D9;
+    border: 2px solid var(--tertiary);
     border-radius: 0.5rem;
     margin-right: 1rem;
 }
@@ -849,7 +863,7 @@ i {
 
 .msg-inbox {
     background-color: #FAFAFA;
-    border: 2px solid #D9D9D9;
+    border: 2px solid var(--tertiary);
     border-radius: 1rem;
 }
 
@@ -865,7 +879,7 @@ i {
 .received-message {
     max-width: 70%;
     width: fit-content;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     border-radius: 1rem;
     padding: 0.8rem;
     margin-left: 2rem;
@@ -880,7 +894,7 @@ i {
 
 .sent-message {
     max-width: 70%;
-    background-color: #D9D9D9;
+    background-color: var(--tertiary);
     border-radius: 1rem;
     padding: 0.8rem;
     margin-right: 2rem;
@@ -916,7 +930,7 @@ i {
 .input-group input {
     height: 2rem;
     padding: 0 0.5rem;
-    border: 2px solid #F2E8D5;
+    border: 2px solid var(--primary);
     border-radius: 2rem;
     margin: 0 1rem;
 }
@@ -925,7 +939,7 @@ i {
     height: 2.4rem;
     width: 2.4rem;
     border-width: 0;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     border-radius: 3rem;
     margin-right: 1rem;
 }
@@ -946,25 +960,25 @@ i {
     bottom  : -3px;
     height  : 2px;
     width   : 90%;
-    border-bottom: 2px solid #D9D9D9;
+    border-bottom: 2px solid var(--tertiary);
 }
 
 .chat:hover {
     background-color: #fff8ef;
-    box-shadow: 0 0 5px #D9D9D9;
+    box-shadow: 0 0 5px var(--tertiary);
     border-radius: 1rem;
     z-index: 10;
 }
 
 .current-chat {
-    background-color: #F2E8D5;
-    box-shadow: 0 0 2px #D9D9D9;
+    background-color: var(--primary);
+    box-shadow: 0 0 2px var(--tertiary);
     border-radius: 1rem;
 }
 
 .current-chat:hover {
-    background-color: #F2E8D5;
-    box-shadow: 0 0 2px #D9D9D9;
+    background-color: var(--primary);
+    box-shadow: 0 0 2px var(--tertiary);
     border-radius: 1rem;
 }
 
@@ -975,7 +989,7 @@ i {
     text-align: center;
     align-content: center;
     font-size: small;
-    color: #D9D9D9;
+    color: var(--tertiary);
 }
 
 .chat img {
@@ -997,7 +1011,7 @@ i {
 }
 
 .chat > p {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     border-radius: 0.75rem;
     text-align: center;
     padding: 0.1rem;
@@ -1014,7 +1028,7 @@ main.inbox-main ::-webkit-scrollbar-track {
 }
 
 main.inbox-main ::-webkit-scrollbar-thumb {
-    background: #F2E8D5;
+    background: var(--primary);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
@@ -1025,15 +1039,15 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 }
 
 .empty-msg-inbox {
-    border-left: 2px solid #D9D9D9;
+    border-left: 2px solid var(--tertiary);
     text-align: center;
     height: 100%;
     align-content: center;
     font-weight: bold;
-    color: #D9D9D9;
+    color: var(--tertiary);
     i {
         font-size: 6rem;
-        color: #D9D9D9;
+        color: var(--tertiary);
     }
     p{
         margin: 0;
@@ -1045,7 +1059,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 
 .collapsible {
     width: 100%;
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     border: none;
 }
 
@@ -1064,14 +1078,14 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     margin: 0.5rem auto;
     border: none;
     border-radius: 0.5rem;
-    background-color: #E5CFA4;
+    background-color: var(--accent-secondary);
     font-size: large;
     font-weight: bold;
     padding: 0.5rem 1rem;
 }
 
 .buy-form {
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     padding: 0 6rem;
     border-radius: 0 0 1rem 1rem;
     max-height: 0;
@@ -1082,14 +1096,14 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     height: 4rem;
     font-weight: bold;
     font-size: large;
-    border-top: 2px solid #D9D9D9;
+    border-top: 2px solid var(--tertiary);
     border-radius: 1rem;
 }
 
 .checkoutSum {
     height: fit-content;
-    background-color: #F1F1F1;
-    border-top: 2px solid #D9D9D9;
+    background-color: var(--secondary);
+    border-top: 2px solid var(--tertiary);
     padding: 1rem 2rem;
     border-radius: 1rem;
     margin-left: 1rem;
@@ -1097,7 +1111,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 }
 
 .checkoutSum .sum-price {
-    border-top: 2px solid #c4c3ca;
+    border-top: 2px solid var(--tertiary);
 }
 
 /* VERTICAL PROGRESS BAR */
@@ -1120,13 +1134,13 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 .state li::before {
     content: '';
     height: 100%;
-    border-left: 2px dashed #6A4806;
+    border-left: 2px dashed var(--accent-primary);
 }
 
 .state li.done::before {
     content: '';
     height: 100%;
-    border-left: 2px solid #6A4806;
+    border-left: 2px solid var(--accent-primary);
 }
 
 .checkout .state li > button::before, .item-track .state li::after{
@@ -1143,8 +1157,8 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     font-size: 13px;
     color: #FFF;
     text-align: center;
-    border: 2px solid #6A4806;
-    background-color: #6A4806;
+    border: 2px solid var(--accent-primary);
+    background-color: var(--accent-primary);
 }
 
 .item-track .state li.current::after, .checkout .state li.current > button::before {
@@ -1155,38 +1169,31 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     left: -2.3rem;
     font-size: 0.9rem;
     text-align: center;
-    color: #6A4806;
-    border: 2px solid #6A4806;
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
 }
 
 .item-track #contact-seller {
-    background-color: #E5CFA4;
+    background-color: var(--accent-secondary);
     width: 50%;
     border-radius: 1rem;
     padding: 0.5rem;
     margin-top:0.5rem;
     border-style: none;
-    color: #6A4806;
+    color: var(--accent-primary);
 }
 
 .new-item {
     text-align: center;
     width: 100%;
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     border: none;
     border-radius: 1rem;
     text-decoration: none;
     color: black;
 }
 
-:root {
-    --error-background: rgba(232, 133, 127, 0.66);
-    --error-primary: #5a1410;
-    --success-background: rgba(169, 232, 127, 0.66);
-    --success-primary: #105a11;
-    --confirm-background: rgba(243, 223, 169, 0.66);
-    --confirm-primary: #6A4806;
-}
+
 #messages article{
     border-radius: 6px;
     backdrop-filter: blur(5px);
@@ -1222,7 +1229,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 }
 
 .confirmation .message-progress {
-    background: linear-gradient(to right, var(--confirm-background), var(--confirm-primary));
+    background: linear-gradient(to right, var(--confirm-background), var(--accent-primary));
 }
 
 .confirmation {
@@ -1257,14 +1264,14 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 .searchresult .item:hover {
     transform: scale(1.05, 1.05);
     img {
-        box-shadow: 0 0 5px #c4c3ca;
+        box-shadow: 0 0 5px var(--tertiary);
     }
 }
 
 
 .price-input input {
     width: 3rem;
-    background-color: #F2E8D5;
+    background-color: var(--primary);
     border-radius: 0.5rem;
     border-width: 1px;
     box-shadow: black 0px 2px ;
@@ -1279,7 +1286,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     margin: 0.5rem;
     border-style: none;
     border-radius: 0.5rem;
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
 }
 
 #messages p {
@@ -1303,7 +1310,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 }
 
 .index-main .items::-webkit-scrollbar-thumb {
-    background: #F2E8D5;
+    background: var(--primary);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
@@ -1324,7 +1331,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     transform-origin: center;
     position: relative;
     border-style: solid;
-    border-color: #F1F1F1;
+    border-color: var(--secondary);
 }
 
 .index-main .items .item img {
@@ -1487,7 +1494,7 @@ a {
     padding: 0 0.5rem;
     border: 2px solid rgba(25, 25, 25, 0.56);
     border-radius: 2rem;
-    background-color: #F1F1F1;
+    background-color: var(--secondary);
     flex-grow: 1;
 }
 .new-review button {
@@ -1513,7 +1520,7 @@ a {
     height: 14px;
     margin: calc((10rem - 14px) / 2) calc((10rem - 56px) / 2);
     aspect-ratio: 4;
-    --_g: no-repeat radial-gradient(farthest-side,#E5CFA4 90%,#fff);
+    --_g: no-repeat radial-gradient(farthest-side,var(--accent-secondary) 90%,#fff);
     background:
             var(--_g) left,
             var(--_g) right;
@@ -1529,7 +1536,7 @@ a {
     margin: auto;
     border-radius: 50%;
     transform-origin: -100% 50%;
-    background: #E5CFA4;
+    background: var(--accent-secondary);
     animation: l49 1s infinite linear;
 }
 .loader:after {
