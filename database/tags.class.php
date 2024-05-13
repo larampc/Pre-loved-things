@@ -42,7 +42,7 @@ class Tag
         return $stmt->fetchAll();
     }
 
-    public static function get_tag_id(PDO $dbh, string $category, string $tag):  string {
+    public static function get_tag_id(PDO $dbh, string $category, string $tag):  mixed {
         $stmt = $dbh->prepare('SELECT id FROM tags where category = ? and tag = ?');
         $stmt->execute(array($category, $tag));
         return $stmt->fetchColumn();

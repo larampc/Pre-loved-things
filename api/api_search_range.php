@@ -23,7 +23,7 @@ unset($tagOptions[0]);
 $itemsTags = array();
 foreach ($tagOptions as $tagOption) {
     $values = explode(',', $tagOption);
-    $id = Tag::get_tag_id($dbh, $_GET['cat'], $values[0]);
+    $id = Tag::get_tag_id($dbh, $_GET['cat'], $values[0]) ? :Tag::get_tag_id($dbh, '', $values[0]);
     unset($values[0]);
     $optionTags = array();
     foreach ($values as $value) {
