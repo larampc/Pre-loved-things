@@ -553,6 +553,10 @@ main .searchPage  h2 {
     }
 }
 
+.filter input[type="text"] {
+    width: 100%;
+}
+
 /* USER PAGE */
 
 main .userPage, .pfPage{

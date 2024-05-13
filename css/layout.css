@@ -280,6 +280,14 @@ main .searchPage{
 
 .searchPage .filter {
     grid-area: filter;
+    >p:has(>a) {
+        display: flex;
+        align-items: center;
+        a {
+            flex-grow: 1;
+            text-align: right;
+        }
+    }
 }
 
 .searchPage .items {
@@ -756,4 +764,12 @@ main .pfPage{
 .categories {
     display: flex;
     flex-direction: column;
+    >label {
+        display: flex;
+        align-items: center;
+        :nth-child(2) {
+            flex-grow: 1;
+            text-align: right;
+        }
+    }
 }
