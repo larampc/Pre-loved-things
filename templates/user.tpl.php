@@ -33,6 +33,8 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
                 <script src="../scripts/user_actions.js" defer></script>
                 <div class="admin-actions">
                     <form method="post" action="../actions/action_remove_user.php" class="confirmation">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
                         <button title="Remove user" type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirm-action" ><i class="material-symbols-outlined big"> person_remove </i></button>
                     </form>
                     <form method="post" action="../actions/action_change_role.php" class="confirmation">
