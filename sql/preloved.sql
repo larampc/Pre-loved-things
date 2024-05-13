@@ -166,11 +166,11 @@ INSERT INTO item_images (item, image) VALUES
 
 INSERT INTO users (user_id, password, name, email, phone, username, currency)
 VALUES
-    ('1', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'John Doe', 'john@example.com', '1234567890', 'johny', 'USD'),
-    ('2', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Jane Smith', 'jane@example.com', '9876543210', 'janey', 'EUR'),
-    ('3', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful', 'GBP'),
-    ('4', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Bob Green', 'bob@example.com', '4447890123', 'bobby', 'INR'),
-    ('5', 'cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita', 'AUD'),
+    ('1', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'John Doe', 'john@example.com', '1234567890', 'johny', 'USD'),
+    ('2', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Jane Smith', 'jane@example.com', '9876543210', 'janey', 'EUR'),
+    ('3', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful', 'GBP'),
+    ('4', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Bob Green', 'bob@example.com', '4447890123', 'bobby', 'INR'),
+    ('5', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita', 'AUD'),
     ('6', 'password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse', 'CAD'),
     ('7', 'brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii', 'SGD'),
     ('8', 'king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall', 'CHF'),
@@ -178,7 +178,7 @@ VALUES
     ('10', 'lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa', 'JPY');
 --
 INSERT INTO users (user_id, password, name, email, phone, username, role, currency) VALUES
-    ('11','cbfdac6008f9cab4083784cbd1874f76618d2a97', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR');
+    ('11','$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR');
 
 INSERT INTO items (id, name, price, date, description, creator, mainImage, category, sold)
 VALUES
