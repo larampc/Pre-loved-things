@@ -19,7 +19,7 @@ $dbh = get_database_connection();
 
 $img_ids = array();
 foreach ($_FILES as $name => $file) {
-    $img_ids[] = upload_item_image($name);
+    if(!empty($file['tmp_name'])) $img_ids[] = upload_item_image($name);
 }
 
 $item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2), $_POST['category']??"", $session->getId(), $img_ids[0]);
