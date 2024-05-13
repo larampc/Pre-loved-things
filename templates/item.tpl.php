@@ -74,6 +74,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
             <?php if ($item->sold === false) { ?>
                 <?php if ($session->isLoggedIn() && $item->creator->user_id === $session->getId()) { ?>
                     <form method="post" action="../pages/edit_item.php">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                         <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                     </form>
                 <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
@@ -84,6 +85,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
             <?php }
             if ($session->isLoggedIn() && ($session->is_admin() || $session->getId() == $item->creator->user_id)) { ?>
                 <form method="post" action="../actions/action_remove_item.php" class="confirmation">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <script src="../scripts/user_actions.js" defer></script>
                     <button title="Remove item" type="submit" value="<?=$item->id?>" name="remove-item" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
                     </button>
@@ -423,6 +425,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
     <article class="newCategoryPage">
         <h2>New Category</h2>
         <form action="../actions/action_new_category.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <label> Category name
                 <input type="text" name="category" required>
             </label>

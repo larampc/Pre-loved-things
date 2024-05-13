@@ -8,6 +8,11 @@ $session = new Session();
 require_once(__DIR__ . '/../database/item.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    $session->addMessage('error', 'Illegitimate request.');
+    die(header('Location: ' . $_SERVER['HTTP_REFERER']));
+}
+
 $dbh = get_database_connection();
 
 $item = $_POST["edit-item"];

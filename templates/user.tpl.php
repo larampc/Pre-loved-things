@@ -76,7 +76,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <h2>Feedback</h2>
             <section class="stars">
                 <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
-                $average = round($avg, 0, PHP_ROUND_HALF_UP);
+                $average = round($avg);
                 for ($i = 0; $i < $average; $i++) { ?>
                     <i class="material-symbols-outlined filled"> grade </i>
                 <?php }
@@ -94,7 +94,9 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     foreach ($feedback as $comment) {
                         ?>
                     <article class="comment">
-                        <img src="../uploads/profile_pics/<?= $comment->from->image?>.png" class="profile-picture" alt="profile picture">
+                        <a href="../pages/user.php?user_id=<?=$comment->from->user_id ?>">
+                            <img src="../uploads/profile_pics/<?= $comment->from->image?>.png" class="profile-picture" alt="profile picture">
+                        </a>
                         <p class="uname"><?=$comment->from->name?></p>
                         <time><?=$comment->date?></time>
                         <section class="stars">
