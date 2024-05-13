@@ -752,3 +752,8 @@ main .pfPage{
 .hide {
     display: none;
 }
+
+.categories {
+    display: flex;
+    flex-direction: column;
+}
