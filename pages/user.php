@@ -11,6 +11,8 @@
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/tags.class.php');
     require_once(__DIR__ . '/../database/comment.class.php');
+    require_once(__DIR__ . '/../database/currency.class.php');
+
 
     require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/common.tpl.php');
@@ -24,6 +26,7 @@
     if (!$user) die(header('Location: /'));;
     $feedback = User::get_user_feedback($dbh, $user_id);
     $items = Item::get_user_items($dbh, $user_id);
+    $user_currency = new Currency($dbh, $session->getCurrency());
 
-    draw_user_profile($dbh, $user, $feedback, $items, $session);
+    draw_user_profile($dbh, $user, $feedback, $items, $session, $user_currency);
     draw_footer();

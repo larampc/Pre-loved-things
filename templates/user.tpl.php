@@ -133,7 +133,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     </section>
 <?php } ?>
 
-<?php function draw_cart(PDO $db, array $items, Session $session, Currency $user_currency) { ?>
+<?php function draw_cart(array $items, Currency $user_currency) { ?>
     <article class="cartPage">
         <h2>Your cart</h2>
         <?php

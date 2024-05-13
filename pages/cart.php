@@ -8,11 +8,14 @@
     require_once(__DIR__ . '/../database/item.class.php');
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/tags.class.php');
+    require_once(__DIR__ . '/../database/currency.class.php');
 
-    require_once(__DIR__ . '/../templates/user.tpl.php');
+
+require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $dbh = get_database_connection();
+    $user_currency = new Currency($dbh, $session->getCurrency());
 
     $items = array();
     if ($session->isLoggedIn()) {
@@ -23,7 +26,7 @@
     }
     $items = Item::sort_by_user($items);
     get_header("cart", $dbh, $session);
-    draw_cart($dbh, $items, $session);
+    draw_cart($items, $user_currency );
     draw_footer();
 
 

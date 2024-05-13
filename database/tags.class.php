@@ -31,7 +31,7 @@ class Tag
     }
 
     public static function get_tag_options(PDO $dbh, string $category, string $tag):  array {
-        $stmt = $dbh->prepare('SELECT tags_predefined.value FROM tags join categories on tags.category = categories.id join tags_predefined on tags_predefined.tag = tags.id where categories.category = ? and tags.tag = ?');
+        $stmt = $dbh->prepare('SELECT tags_predefined.value FROM tags join categories on tags.category = categories.category join tags_predefined on tags_predefined.tag = tags.id where categories.category = ? and tags.tag = ?');
         $stmt->execute(array($category, $tag));
         return $stmt->fetchAll();
     }
@@ -43,7 +43,7 @@ class Tag
     }
 
     public static function get_tag_id(PDO $dbh, string $category, string $tag):  string {
-        $stmt = $dbh->prepare('SELECT tags.id FROM tags join categories on tags.category = categories.id where categories.category = ? and tags.tag = ?');
+        $stmt = $dbh->prepare('SELECT tags.id FROM tags join categories on tags.category = categories.category where categories.category = ? and tags.tag = ?');
         $stmt->execute(array($category, $tag));
         return $stmt->fetchColumn();
     }
@@ -65,7 +65,7 @@ class Tag
         return $items;
     }
 
-    static function add_category(PDO $dbh, string $category)
+    static function add_category(PDO $dbh, string $category): string
     {
         $stmt = $dbh->prepare('INSERT INTO categories (category) VALUES (?)');
         $stmt->execute(array($category));
