@@ -268,9 +268,11 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     </article>
 <?php }
 
-function draw_category_tags(PDO $dbh, $category) {
-    $tags = Tag::get_category_tags($dbh, $category);
-    foreach ($tags as $tag) { ?>
+function draw_category_tags(PDO $dbh, $category, bool $visible) {
+    $tags = Tag::get_category_tags($dbh, $category); ?>
+    <div class="category-<?=$category?> <?=$visible?: "hide" ?>">
+        <p><?=$category?></p>
+    <?php foreach ($tags as $tag) { ?>
     <div class="options tag" id="<?=$tag['tag']?>">
         <p><?=$tag['tag']?></p>
         <?php
@@ -283,15 +285,31 @@ function draw_category_tags(PDO $dbh, $category) {
             <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
         <?php } ?>
     </div>
-<?php } }
+    <?php } ?> </div> <?php }
 
-function draw_page_filters(string $category, PDO $dbh) { ?>
+function draw_page_filters(array $categories, string $visible, PDO $dbh, Session $session) { ?>
     <script src="../scripts/search.js" defer></script>
     <article class="searchPage">
             <section class="filter">
                 <div class="filter_header">
                     <h2>Filters</h2>
                     <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined big filled">close</i></button>
+                </div>
+                <p>Categories
+                    <?php if ($session->is_admin()) {?>
+                        <a href="../pages/new_category.php" class="material-symbols-outlined">add_circle</a>
+                    <?php }?>
+                </p>
+                <div class="categories">
+                    <?php foreach ($categories as $category) {
+                        if ($category['category'] !== "") { ?>
+                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?>
+                                <?php if ($session->is_admin()) {?>
+                                    <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
+                                    <a href="../actions/action_remove_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">delete</a>
+                                <?php }?>
+                            </label>
+                        <?php }} ?>
                 </div>
                 <p>Order by</p>
                 <label for="order"></label>
@@ -314,12 +332,14 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                     </label>
                 </div>
                 <?php
-                if ($category !== "") draw_category_tags($dbh, "");
-                draw_category_tags($dbh, $category);
+                if ($visible !== "") draw_category_tags($dbh, "", true);
+                foreach ($categories as $category) {
+                    draw_category_tags($dbh, $category['category'], $category['category']==$visible);
+                }
                  ?>
             </section>
         <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
-        <p class="category-search"><?=$category?:""?></p>
+        <p class="category-search"><?=$visible?:""?></p>
         <section class="items searchresult">
             <div class="loader"></div>
         </section>
@@ -475,7 +495,6 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                         <?php
                         if ($tag_options) { ?>
                             <section class="tag-options">
-                                <i class="material-symbols-outlined new-option" title="Add option">add</i>
                                  <?php foreach ($tag_options as $key => $tag) {?>
                                     <label class="<?=$i?>">
                                         <input required type="text" name="option<?=$i?>[<?=$key?>]" value="<?=$tag['value']?>">
@@ -483,6 +502,7 @@ function draw_page_filters(string $category, PDO $dbh) { ?>
                                     </label>
                                 <?php }?>
                             </section>
+                            <i class="material-symbols-outlined new-option" title="Add option">add</i>
                         <?php } ?>
                     </div>
                 <?php } ?>

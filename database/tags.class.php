@@ -73,7 +73,7 @@ class Tag
     }
     static function add_tags_category(PDO $dbh, string $category_id, array $tags) {
         foreach ($tags as $tag) {
-            $stmt = $dbh->prepare('INSERT INTO tags (id, category, tag) VALUES (?, ?)');
+            $stmt = $dbh->prepare('INSERT INTO tags (id, category, tag) VALUES (?, ?, ?)');
             $stmt->execute(array(generate_uuid(),$category_id, $tag));
         }
     }
@@ -118,5 +118,20 @@ class Tag
         $stmt->execute(array($category));
         $res = $stmt->fetchColumn();
         return isset($res);
+    }
+    static function delete_category(PDO $dbh, string $category) {
+        $stmt = $dbh->prepare('UPDATE items SET category = ? WHERE category = ?');
+        if (!$stmt->execute(array('', $category))) return false;
+        $tags = self::get_category_tags($dbh, $category);
+        foreach ($tags as $tag) {
+            $stmt = $dbh->prepare('DELETE FROM tags_values where tag = ?');
+            if (!$stmt->execute(array($tag['id']))) return false;
+            $stmt = $dbh->prepare('DELETE FROM tags where id = ?');
+            if (!$stmt->execute(array($tag['id']))) return false;
+            $stmt = $dbh->prepare('DELETE FROM tags_predefined where tag = ?');
+            if (!$stmt->execute(array($tag['id']))) return false;
+        }
+        $stmt = $dbh->prepare('DELETE FROM categories where category = ?');
+        return $stmt->execute(array($category));
     }
 }

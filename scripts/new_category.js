@@ -1,3 +1,8 @@
+const selectType = document.querySelectorAll("select.type")
+selectType.forEach((select) => select.addEventListener("input", () => {
+    selectionType(select)
+}))
+
 function addTagFinal(section) {
     const tagNumber = section.id.split("-")[2]
     const options = document.getElementsByClassName(tagNumber.toString())
@@ -82,8 +87,8 @@ function selectionType(option) {
         addTagFinal(option.parentElement.parentElement)
     }
     if (option.value === "free") {
-        option.parentElement.parentElement.lastChild.remove();
-        option.parentElement.parentElement.lastChild.remove();
+        option.parentElement.parentElement.lastElementChild.remove();
+        option.parentElement.parentElement.lastElementChild.remove();
     }
 }
 

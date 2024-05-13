@@ -748,3 +748,12 @@ main .pfPage{
     display: flex;
     justify-content: space-between;
 }
+
+.hide {
+    display: none;
+}
+
+.categories {
+    display: flex;
+    flex-direction: column;
+}

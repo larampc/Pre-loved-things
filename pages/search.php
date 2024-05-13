@@ -17,5 +17,6 @@
         die(header('Location: /'));
     }
     get_header("search", $dbh, $session);
-    draw_page_filters($_GET['category']?:"", $dbh);
+    $categories = Tag::get_categories($dbh);
+    draw_page_filters($categories, $_GET['category']?:"", $dbh, $session);
     draw_footer();

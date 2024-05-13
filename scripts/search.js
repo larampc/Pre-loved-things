@@ -11,7 +11,7 @@ let order = "recent"
 let request = 0;
 let controller = new AbortController();
 const mainCat = document.querySelector('.category-search');
-categories.push(mainCat.innerHTML)
+if (mainCat.innerHTML !== '') categories.push(mainCat.innerHTML)
 if (mainCat.innerHTML) {
     const categorySelector = document.querySelector('.dropdown-content ' +'#' + mainCat.innerHTML)
     categorySelector.selected = true;
@@ -140,24 +140,41 @@ function createItem(item, symbol) {
 const tags2 = document.querySelectorAll('.tag input');
 
 tags2.forEach(tag => tag.addEventListener("input", async () => {
-        const index = tags.findIndex((elem) => elem[0] === tag.name && elem[1] === tag.value);
+        const index = tags.findIndex((elem) => elem[0] === tag.name + '$'+(tag.parentElement.parentElement.parentElement.classList[0].split('-')[1])  && elem[1] === tag.value);
         if (index === -1 && tag.type === "checkbox" && tag.checked) {
-            const indexTag = tags.findIndex((elem) => elem[0] === tag.name);
-            if (indexTag === -1) tags.push(Array(tag.name, Array(tag.value)));
+            const indexTag = tags.findIndex((elem) => elem[0] === tag.name + '$'+(tag.parentElement.parentElement.parentElement.classList[0].split('-')[1]));
+            if (indexTag === -1) tags.push(Array(tag.name+'$'+(tag.parentElement.parentElement.parentElement.classList[0].split('-')[1]), Array(tag.value)));
             else tags[indexTag][1].push(tag.value)
         }
         else if (!tag.checked && tag.type === "checkbox") {
-            const indexTag = tags.findIndex((elem) => elem[0] === tag.name);
+            const indexTag = tags.findIndex((elem) => elem[0] === tag.name +'$'+(tag.parentElement.parentElement.parentElement.classList[0].split('-')[1]));
             const toRemove = tags[indexTag][1].findIndex((elem) => elem === tag.value);
             tags[indexTag][1].splice(toRemove, 1);
             if (tags[indexTag][1].length === 0) tags.splice(indexTag, 1);
         }
         if (tag.type === "text") {
-            tags = tags.filter((elem) => elem[0] !== tag.name)
-            if (tag.value) tags.push(Array(tag.name, tag.value))
+            tags = tags.filter((elem) => elem[0] !== tag.name+'$'+(tag.parentElement.parentElement.parentElement.classList[0].split('-')[1]))
+            if (tag.value) tags.push(Array(tag.name+'$'+(tag.parentElement.parentElement.parentElement.classList[0].split('-')[1]), tag.value))
         }
         await getFilteredItems(true);
     }))
+
+const categorySelector = document.querySelectorAll(".select-category")
+categorySelector.forEach(category => category.addEventListener("input", async () => {
+    const index = categories.findIndex((elem) => elem[0] === category.name && elem[1] === category.value);
+    if (index === -1 && category.type === "checkbox" && category.checked) {
+        const indexCategory = categories.findIndex((elem) => elem[0] === category.name);
+        if (indexCategory === -1) categories.push(category.value);
+        else category[indexCategory][1].push(category.value)
+        document.querySelector(".category-"+ category.value).classList.remove("hide");
+    }
+    else if (!category.checked && category.type === "checkbox") {
+        const indexCategory = categories.findIndex((elem) => elem === category.value);
+        categories.splice(indexCategory, 1);
+        document.querySelector(".category-"+ category.value).classList.add("hide");
+    }
+    await getFilteredItems(true);
+}))
 
 function cleanSearch() {
     pageNum = 1;
