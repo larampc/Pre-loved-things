@@ -421,7 +421,7 @@ main .cartPage  h2 {
 }
 
 /* toggle icon state */
-.photo-upload:hover .upload-icon, .delete-icon:hover {
+.photo-upload:hover .upload-icon, .delete-icon:hover, .photo-upload h5:hover ~ .delete-icon {
     opacity: 1;
     backdrop-filter: blur(2px);
 }

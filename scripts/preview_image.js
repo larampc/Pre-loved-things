@@ -93,7 +93,7 @@ function shiftImages() {
         mainImageHeader.innerText = 'Main Image'
         const mainImageDiv = document.querySelector('.uploader#img1').parentElement
         mainImageDiv.classList.add('main-photo-upload')
-        mainImageDiv.insertBefore(mainImageHeader, mainImageHeader.querySelector('i.upload-icon'))
+        mainImageDiv.insertBefore(mainImageHeader, mainImageDiv.querySelector('.uploader'))
     }
 }
 
