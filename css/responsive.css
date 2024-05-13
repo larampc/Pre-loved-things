@@ -321,6 +321,19 @@
             grid-area: send;
         }
     }
+
+    /* EDIT CATEGORY */
+
+    .new-tag {
+        grid-template-columns: auto auto auto 1fr;
+        grid-template-rows: auto auto;
+        grid-template-areas: "name delete type add"
+                             "options options options options";
+    }
+
+    .new-tags {
+        margin-left: 1rem;
+    }
 }
 
 /* PHONE VIEW */
@@ -472,5 +485,26 @@
         position: unset;
         right: 0.5rem;
         top: 0.5rem;
+    }
+
+    /* EDIT CATEGORY */
+
+    .new-tag {
+        grid-template-columns: auto auto 1fr;
+        grid-template-rows: auto auto auto;
+        grid-template-areas: "name name name"
+                             "delete type add"
+                             "options options options";
+        :first-child {
+            grid-area: name;
+        }
+    }
+
+    .new-tags {
+        margin-left: 0;
+    }
+
+    .newCategoryPage form {
+        padding: 1rem 0.5rem;
     }
 }
