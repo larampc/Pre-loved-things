@@ -63,6 +63,6 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
         <span>Sign up</span>
     </h3>
     <label for="checkboxLoginRegister"></label><input class="checkboxLoginRegister" id="checkboxLoginRegister" type="checkbox">
-    <label class="toggleLoginRegister"></label>
+    <span class="toggleLoginRegister"></span>
 
 <?php } ?>
