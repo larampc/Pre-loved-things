@@ -270,7 +270,8 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
 
 function draw_category_tags(PDO $dbh, $category, bool $visible) {
     $tags = Tag::get_category_tags($dbh, $category); ?>
-    <div class="category-<?=$category?> <?=$visible?: "hide" ?>">
+        <?= $category == ""?>
+    <div class="category-box <?=($category != "")? $category : "empty"?> <?=$visible? "" : "hide" ?>">
         <p><?=$category?></p>
     <?php foreach ($tags as $tag) { ?>
     <div class="options tag" id="<?=$tag['tag']?>">

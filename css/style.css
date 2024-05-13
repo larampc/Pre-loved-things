@@ -534,6 +534,24 @@ main .searchPage  h2 {
     border-radius: 0.5rem;
 }
 
+.category-box:not(.empty) {
+    border: 2px solid var(--accent-primary);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    position: relative;
+    > p {
+        margin: 0;
+        padding: 0 0.5rem;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        align-self: center;
+        background-color: var(--primary);
+    }
+}
 
 
 /* USER PAGE */
