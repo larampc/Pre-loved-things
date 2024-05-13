@@ -11,7 +11,7 @@
     require_once(__DIR__ . '/../database/currency.class.php');
 
 
-require_once(__DIR__ . '/../templates/user.tpl.php');
+    require_once(__DIR__ . '/../templates/user.tpl.php');
     require_once(__DIR__ . '/../templates/item.tpl.php');
 
     $dbh = get_database_connection();

@@ -73,7 +73,7 @@ class Tag
     }
     static function add_tags_category(PDO $dbh, string $category_id, array $tags) {
         foreach ($tags as $tag) {
-            $stmt = $dbh->prepare('INSERT INTO tags (id, category, tag) VALUES (?, ?)');
+            $stmt = $dbh->prepare('INSERT INTO tags (id, category, tag) VALUES (?, ?, ?)');
             $stmt->execute(array(generate_uuid(),$category_id, $tag));
         }
     }
