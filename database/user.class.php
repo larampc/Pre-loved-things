@@ -28,24 +28,18 @@ class User
     public static function register_user(PDO $dbh, string $password, string $username, string $email, string $name, string $phone, string $currency): ?User
     {
         $stmt = $dbh->prepare('INSERT INTO users(user_id, password, username, name, email, phone, currency) VALUES (?, ?, ?, ?, ?, ?, ?)');
-        $stmt->execute(array(generate_uuid(),sha1($password), $username, $name, $email, $phone, $currency));
+        $stmt->execute(array(generate_uuid(),password_hash($password, PASSWORD_DEFAULT), $username, $name, $email, $phone, $currency));
         return self::verify_user($dbh, $email, $password);
     }
 
     public static function verify_user(PDO $dbh, string $email, string $password): ?User
     {
-        $stmt = $dbh->prepare('SELECT user_id FROM users WHERE email = ? AND password = ?');
-        $stmt->execute(array($email, sha1($password)));
-        $user = $stmt->fetchColumn();
+        $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? OR username = ?');
+        $stmt->execute(array($email, $email));
+        $user = $stmt->fetch();
 
-        if ($user === false) {
-            $stmt = $dbh->prepare('SELECT user_id FROM users WHERE username = ? AND password = ?');
-            $stmt->execute(array($email, sha1($password)));
-            $user = $stmt->fetchColumn();
-
-            if ($user === false) return null;
-        }
-        return self::get_user($dbh, $user);
+        if($user && password_verify($password, $user['password'])) return self::get_user($dbh, $user['user_id']);
+        else return null;
     }
 
     public static function verify_email(PDO $dbh, string $email): bool {

@@ -74,6 +74,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
             <?php if ($item->sold === false) { ?>
                 <?php if ($session->isLoggedIn() && $item->creator->user_id === $session->getId()) { ?>
                     <form method="post" action="../pages/edit_item.php">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                         <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                     </form>
                 <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
@@ -84,6 +85,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
             <?php }
             if ($session->isLoggedIn() && ($session->is_admin() || $session->getId() == $item->creator->user_id)) { ?>
                 <form method="post" action="../actions/action_remove_item.php" class="confirmation">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <script src="../scripts/user_actions.js" defer></script>
                     <button title="Remove item" type="submit" value="<?=$item->id?>" name="remove-item" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
                     </button>
@@ -147,6 +149,8 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
     <article class="newItemPage">
         <h2>New item</h2>
         <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 
@@ -213,6 +217,8 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     <article class="newItemPage">
         <h2>Edit item</h2>
         <form action="../actions/action_edit_item.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" value="<?= $item->name ?>" required>
             <label for="category">category</label>
@@ -352,6 +358,8 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh) { ?>
             <p>Estimated delivery date: </p>
             <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->getId()) {?>
                 <form method="post" action="../actions/action_update_delivery.php">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
                     <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
                     <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
                     <button type="submit">Confirm</button>
@@ -416,6 +424,8 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh) { ?>
 
 <?php function draw_confirm_ship(TrackItem $trackItem) { ?>
     <form action="../actions/action_update_sale.php" method="post">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
         <input name="confirmationCode" type="password" required>
         <input name="purchase" type="hidden" value="<?=$trackItem->id?>">
         <?php if ($trackItem->state=="preparing" || $trackItem->state=="shipping" || $trackItem->state=="delivering") {
@@ -436,6 +446,7 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh) { ?>
     <article class="newCategoryPage">
         <h2>New Category</h2>
         <form action="../actions/action_new_category.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
             <label> Category name
                 <input type="text" name="category" required>
             </label>
@@ -453,6 +464,8 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh) { ?>
     <article class="newCategoryPage">
         <h2>Edit Category</h2>
         <form action="../actions/action_edit_category.php?id=<?=$category?>" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
             <label> Category name
                 <input type="text" value="<?=$category?>" name="category" required>
             </label>

@@ -10,6 +10,8 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
     <section class="register">
         <h2>Sign Up</h2>
         <form class="register-form" action="../actions/action_register.php<?=$checkout? "?checkout": ($message? "?user=".$user."&item=".$item:"")?>" method="POST">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
             <label>
                 <input type="text" name="name" placeholder="Your name" required autocomplete="on">
             </label>
@@ -37,6 +39,8 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
     <section class="login">
         <h2>Log in</h2>
         <form class="login-form" action="../actions/action_login.php<?=$checkout? "?checkout": ($message? "?user=".$user."&item=".$item:"")?>" method="POST">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
             <label>
                 <input type="text" name="email" placeholder="Your email or username" autocomplete="on">
             </label>

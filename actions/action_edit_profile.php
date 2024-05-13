@@ -5,6 +5,10 @@
     require_once(__DIR__ . '/../utils/session.php');
     require_once(__DIR__ . '/../utils/files.php');
     $session = new Session();
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        $session->addMessage('error', 'Illegitimate request.');
+        die(header('Location: ' . $_SERVER['HTTP_REFERER']));
+    }
 
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/connection.db.php');

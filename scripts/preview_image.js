@@ -17,10 +17,8 @@ function onchangeHandler() {
     previewImage(this.id);
 }
 function previewImage(imageId) {
-
     const fileUploadInput = document.querySelector('.uploader#' + imageId)
     const imagePreviewer = fileUploadInput.parentElement
-
     if (!fileUploadInput.value) {
         return;
     }
@@ -33,6 +31,8 @@ function previewImage(imageId) {
     if (image.size > 10_000_000) {
         return alert('Maximum upload size is 10MB!')
     }
+    const addPhotoIcon = imagePreviewer.querySelector('i')
+    imagePreviewer.removeChild(addPhotoIcon)
 
     const fileReader = new FileReader()
     fileReader.readAsDataURL(image)
@@ -66,6 +66,14 @@ function shiftImages() {
     if(lastLoadedImageId === 1){
         fileUploadInputToRemove.value = ''
         fileUploadInputToRemove.parentElement.style.backgroundImage = ''
+        fileUploadInputToRemove.parentElement.removeChild(fileUploadInputToRemove.parentElement.querySelector('i'))
+        fileUploadInputToRemove.parentElement.insertBefore(createAddPhotoIcon(),fileUploadInputToRemove.parentElement.querySelector('input'))
+        lastLoadedImageId = 0
+        if(allImagesAreLoaded === false){
+            const uploadDivs = uploadSection.querySelectorAll('div.photo-upload')
+            uploadSection.removeChild(uploadDivs[uploadDivs.length-1])
+        }
+        allImagesAreLoaded = false
         return
     }
 
@@ -87,15 +95,21 @@ function shiftImages() {
         mainImageDiv.insertBefore(mainImageHeader, mainImageHeader.querySelector('i.upload-icon'))
     }
 }
-function createImageUploader() {
-    const uploadDiv = document.createElement('div')
-    uploadDiv.classList.add('photo-upload')
 
+function createAddPhotoIcon() {
     const addPhotoIcon = document.createElement('i')
     addPhotoIcon.classList.add('material-symbols-outlined')
     addPhotoIcon.classList.add('bolder')
     addPhotoIcon.classList.add('upload-icon')
     addPhotoIcon.innerText = 'add_a_photo'
+    return addPhotoIcon;
+}
+
+function createImageUploader() {
+    const uploadDiv = document.createElement('div')
+    uploadDiv.classList.add('photo-upload')
+
+    const addPhotoIcon = createAddPhotoIcon();
 
     const uploaderInput = document.createElement('input')
     uploaderInput.type = 'file'
