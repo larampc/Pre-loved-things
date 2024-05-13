@@ -9,8 +9,9 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
         <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
             <div id="curve_chart"></div>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <input type="hidden" class="chart-user" value="<?=$user->user_id?>">
             <script src="../scripts/draw_chart.js"></script>
-            <?php echo('<script>drawChart('.$user->user_id.')</script>');
+            <?php
             draw_user_options($dbh, $user, $session, $user_currency);
         } else draw_items($items, $user_currency);
         ?>

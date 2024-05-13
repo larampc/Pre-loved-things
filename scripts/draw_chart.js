@@ -1,8 +1,9 @@
 google.charts.load('current', {'packages': ['corechart']});
 const width = document.getElementsByClassName("feedback")[0].width;
-google.charts.setOnLoadCallback();
+google.charts.setOnLoadCallback(drawChart);
 
-async function drawChart(user) {
+async function drawChart() {
+    const user = document.querySelector(".chart-user").value
     const response = await fetch('../api/api_get_statistics.php?user='+user)
     const items = await response.json();
     let data = google.visualization.arrayToDataTable(items);
