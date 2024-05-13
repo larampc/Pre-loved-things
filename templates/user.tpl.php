@@ -38,6 +38,8 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
                         <button title="Remove user" type="submit" value="<?=$user->user_id?>" name="remove-user" class="remove confirm-action" ><i class="material-symbols-outlined big"> person_remove </i></button>
                     </form>
                     <form method="post" action="../actions/action_change_role.php" class="confirmation">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
                         <button title="<?=$user->role=="admin"? "Demote user": "Promote user"?>" type="submit" value="<?=$user->user_id?>" name="role-user" class="role confirm-action" >
                             <i class="material-symbols-outlined big"> <?=$user->role=="admin"? "person_off": "admin_panel_settings"?></i>
                         </button>
@@ -53,6 +55,8 @@ function draw_edit_profile($user) { ?>
     <article class="edit-profile">
         <h2>Edit profile</h2>
         <form action="../actions/action_edit_profile.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
             <label for="name"> Name </label>
             <input type="text" id="name" name="name" value="<?=$user->name?>" required>
             <label for="username"> Username </label>

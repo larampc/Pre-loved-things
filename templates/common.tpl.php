@@ -37,6 +37,7 @@ function draw_header(string $page, Session $session, array $categories, array $c
             </form>
         <nav>
             <form method="GET" action="../actions/action_change_currency.php">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <select class="currency" name="currency" >
                     <?php foreach ($currencies as $currency) { ?>
                         <option id="<?=$currency['code']?>" value="<?=$currency['code']?>" <?=$currency['code'] == $session->getCurrency()? "selected":""?>><?=$currency['code']?></option>
