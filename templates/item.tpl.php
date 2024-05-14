@@ -280,7 +280,9 @@ function draw_category_tags(PDO $dbh, $category, bool $visible) {
         $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
         if ($options) {
             foreach ($options as $option) {?>
-                <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>" autocomplete='off'><?=$option['value']?></label>
+                <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>" autocomplete='off'>
+                    <span class="paragraph"><?=$option['value']?></span>
+                </label>
             <?php }}
         else { ?>
             <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
@@ -304,7 +306,7 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                 <div class="categories">
                     <?php foreach ($categories as $category) {
                         if ($category['category'] !== "") { ?>
-                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><p><?=$category['category'] ?: "All categories"?></p>
+                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><span class="paragraph"><?=$category['category'] ?: "All categories"?></span>
                                 <?php if ($session->is_admin()) {?>
                                     <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
                                     <a href="../actions/action_remove_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">delete</a>

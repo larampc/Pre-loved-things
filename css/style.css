@@ -29,6 +29,10 @@ main.search-main {
     margin: 0;
 }
 
+p, .paragraph {
+    word-break: break-word;
+}
+
 body {
     margin: 0;
     font-family: "Carrois Gothic SC", serif;
@@ -562,6 +566,7 @@ main .searchPage  h2 {
     background-color: var(--primary);
     margin-right: 1rem;
     width: auto;
+    max-width: 20rem;
     z-index: 3;
 }
 .category-search {
@@ -598,6 +603,11 @@ main .searchPage  h2 {
         padding: 0 0.5rem;
         text-align: center;
         position: absolute;
+        word-break: normal;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 80%;
         top: 0;
         left: 50%;
         transform: translate(-50%, -50%);
