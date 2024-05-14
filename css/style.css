@@ -42,14 +42,14 @@ body > header {
     position: fixed;
 }
 
-select, input[type="text"], input[type="number"] {
+select, input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"] {
     padding: 0.5rem;
     background-color: var(--secondary);
     border-style: none;
     border-radius: 0.5rem;
 }
 
-select:focus-visible, input[type="text"]:focus-visible, input[type="number"]:focus-visible {
+select:focus-visible, input[type="text"]:focus-visible, input[type="number"]:focus-visible, input[type="password"]:focus-visible, input[type="email"]:focus-visible, input[type="tel"]:focus-visible {
     outline: var(--tertiary) solid 2px;
 }
 
@@ -148,11 +148,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     background-color: transparent;
     border-width: 0;
 }
-
-.dropbtn img {
-    height: 1rem;
-}
-
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 button {
     font-family: "Carrois Gothic SC", serif;
 }
@@ -182,8 +178,11 @@ body > footer {
     text-align: center;
 }
 
-main > h2 {
+h2 {
     text-align: center;
+}
+
+main > h2 {
     margin-top: 2rem;
 }
 
@@ -367,7 +366,6 @@ main > h2 {
 }
 
 main .cartPage  h2 {
-    text-align: center;
     padding-top: 1rem;
 }
 
@@ -423,10 +421,6 @@ main .cartPage  h2 {
     border-radius: 1rem;
 }
 
-.newItemPage h2, main .edit-profile h2, .newCategoryPage h2 {
-    text-align: center;
-}
-
 .newItemPage form > *, .edit-profile form > *, .newCategoryPage form * {
     padding: 0.5rem;
 }
@@ -436,12 +430,6 @@ main .cartPage  h2 {
     * {
         padding: 0.5rem;
     }
-}
-
-.newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
-    background-color: var(--secondary);
-    border-style: none;
-    border-radius: 0.5rem;
 }
 
 .newItemPage button, .edit-profile button, .newCategoryPage button {
