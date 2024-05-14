@@ -304,7 +304,7 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                 <div class="categories">
                     <?php foreach ($categories as $category) {
                         if ($category['category'] !== "") { ?>
-                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?>
+                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><p><?=$category['category'] ?: "All categories"?></p>
                                 <?php if ($session->is_admin()) {?>
                                     <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
                                     <a href="../actions/action_remove_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">delete</a>
