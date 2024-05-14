@@ -160,7 +160,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             <select id="category" name="category">
                 <?php
                 foreach ($categories as $category) { ?>
-                    <option value="<?=$category['category']?:""?>"><?=ucfirst($category['category'])?: "Other"?></option>
+                    <option value="<?=$category['category']?:"other"?>"><?=ucfirst($category['category'])?: "Other"?></option>
                 <?php }?>
             </select>
                 <?php } ?>
