@@ -36,7 +36,6 @@ async function handleTemporary() {
     const old_element = sendMessageInput;
     const new_element = old_element.cloneNode(true);
     old_element.parentNode.replaceChild(new_element, old_element);
-    new_element.focus();
     sendMessageButton.addEventListener("click", async () => {
         await handleButtonClick(chatroom['chatroomId'], user, new_element)
     })
@@ -46,6 +45,7 @@ async function handleTemporary() {
         }
     })
     closeInbox()
+    new_element.focus();
 }
 async function addClickListeners() {
     const chatrooms = document.querySelectorAll('.chat')
