@@ -132,7 +132,7 @@ class User
     {
         $in_cart = self::get_cart_items_ids($dbh, $user);
         foreach ($item_id as $id) {
-            if (!(!empty($in_cart) && in_array($id, $in_cart))) {
+            if (!(!empty($in_cart) && in_array($id, $in_cart)) && Item::get_item($dbh, $id)->creator->user_id !== $user) {
                 $stmt = $dbh->prepare('INSERT INTO user_cart VALUES (?, ?)');
                 $stmt->execute(array($user, $id));
             }

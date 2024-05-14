@@ -6,6 +6,7 @@
     $session = new Session();
 
     if (!$session->isLoggedIn()) die(header('Location: login.php?user='.$_GET["user_id"].'&item='.$_GET["item_id"]));
+    if ($session->getId() === $_GET["user_id"]) die(header('Location: inbox.php'));
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/message.class.php');
