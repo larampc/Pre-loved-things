@@ -182,6 +182,10 @@ h2 {
     text-align: center;
 }
 
+header > h2, h2.name {
+    text-align: left;
+}
+
 main > h2 {
     margin-top: 2rem;
 }
@@ -1139,9 +1143,6 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     padding: 0.5rem;
     input[type="text"] {
         margin-left: 4rem;
-        border-style: none;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
         transition-duration: 100ms;
     }
 }

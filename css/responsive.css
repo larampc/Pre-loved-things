@@ -340,6 +340,29 @@
     .login-main {
         width: 80%;
     }
+
+    /* CHECKOUT PAGE */
+
+    .cart-checkout-main {
+        flex-direction: column;
+    }
+
+    .checkout {
+        width: 100%;
+    }
+
+    .checkoutSum {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .buy-form {
+        padding: 0 2rem;
+    }
+
+    .buy-form label input[type="text"] {
+        margin-left: 1rem;
+    }
 }
 
 /* PHONE VIEW */
@@ -522,5 +545,47 @@
 
     .login input, .register input {
         width: 80%;
+    }
+
+    /* CHECKOUT PAGE */
+
+    .cart-checkout-main {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .state {
+        padding-left: 1rem;
+        list-style: none;
+    }
+
+    .item-track .state li.current::after, .checkout .state li.current > button::before {
+        left: -1.8rem;
+    }
+
+    .checkout .state li > button::before, .item-track .state li::after {
+        left: -1.7rem;
+    }
+
+    .state li::before, .state li.done::before {
+        left: -1.15rem;
+    }
+
+    .checkout {
+        width: 100%;
+    }
+
+    .checkoutSum {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    .buy-form {
+        padding: 0 2rem;
+    }
+
+    .buy-form label input[type="text"] {
+        margin-left: 1rem;
+        width: 100%;
     }
 }
