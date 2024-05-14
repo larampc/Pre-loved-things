@@ -3,9 +3,13 @@
 declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
+require_once(__DIR__ . '/../utils/logger.php');
 $session = new Session();
-if ($_SESSION['csrf'] !== $_POST['csrf']) {
-    $session->addMessage('error', 'Illegitimate request.');
+
+log_to_stdout($_GET['csrf']);
+log_to_stdout($_SESSION['csrf']);
+
+if (!validateCsrfToken($_GET['csrf'])) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 

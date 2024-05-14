@@ -103,8 +103,8 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     <article class="comment">
                         <a href="../pages/user.php?user_id=<?=$comment->from->user_id ?>">
                             <img src="../uploads/profile_pics/<?= $comment->from->image?>.png" class="profile-picture" alt="profile picture">
+                            <p class="uname"><?=$comment->from->name?></p>
                         </a>
-                        <p class="uname"><?=$comment->from->name?></p>
                         <time><?=$comment->date?></time>
                         <section class="stars">
                             <?php for ($i = 0; $i < $comment->rating; $i++) { ?>
@@ -122,6 +122,8 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 
         <?php if ($session->isLoggedIn() && $user->user_id!=$session->getId()) { ?>
             <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
                 <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
                 <div class="star-review">
                     <input type="radio" name="stars" id="st5" value="5">
