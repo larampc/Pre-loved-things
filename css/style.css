@@ -1249,9 +1249,9 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 .item-track #contact-seller {
     background-color: var(--accent-secondary);
     width: 50%;
+    min-width: 8rem;
     border-radius: 1rem;
     padding: 0.5rem;
-    margin-top:0.5rem;
     border-style: none;
     color: var(--accent-primary);
 }

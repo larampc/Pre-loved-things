@@ -531,8 +531,12 @@ main .userPage{
     text-align: center;
     display: flex;
     justify-content: center;
+    align-items: center;
     p {
-        margin: 0 1rem 0 0;
+        margin: 0;
+    }
+    :first-child {
+        margin-right: 1rem;
     }
     input {
         width: 5rem;

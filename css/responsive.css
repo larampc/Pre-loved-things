@@ -159,6 +159,13 @@
     .slider-btns {
         width: 20rem;
     }
+    .item-track img {
+        width: 15rem;
+        height: 15rem;
+    }
+    .item-track {
+        margin-left: 2rem;
+    }
     .priceSection {
         margin-top: 1rem;
     }
@@ -396,6 +403,10 @@
         margin: 10rem 0 2rem;
     }
 
+    main.new-main, main.edit-profile-main, main.new-category-main {
+        padding-top: 8rem;
+    }
+
     /* SEARCH PAGE */
 
     main .searchPage {
@@ -414,6 +425,21 @@
         width: 80dvw;
         height: 80dvw;
         border-radius: 2rem;
+    }
+    .item-track {
+        margin-left: 1rem;
+        margin-right: 1rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        grid-template-areas:
+        "contact"
+        "shipping"
+        "deliveryDate"
+        "item";
+        form {
+            text-align: center;
+        }
+        text-align: center;
     }
     .slider-btns {
         width: 80dvw;
@@ -462,6 +488,10 @@
     .item img {
         width: 40dvw;
         height: 40dvw;
+    }
+    .item-track img {
+        width: 80%;
+        height: 80%;
     }
 
     /* USER AND PROFILE PAGE */
@@ -556,7 +586,10 @@
 
     .state {
         padding-left: 1rem;
-        list-style: none;
+    }
+    .item-track > .state {
+        width: min-content;
+        margin: 1rem auto;
     }
 
     .item-track .state li.current::after, .checkout .state li.current > button::before {
