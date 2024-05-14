@@ -47,7 +47,7 @@ header nav {
     align-items: center;
 }
 
-.searchbtn {
+.search-btn {
     display: flex;
     flex-direction: column;
     align-items: center;

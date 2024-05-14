@@ -32,7 +32,7 @@ function draw_header(string $page, Session $session, array $categories, array $c
                     <?php }?>
                 </select>
                 <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off" value="<?=$page == "search"? $_GET['search'] : ""?>"></label>
-                <button type="submit" class="searchbtn" ><i class="material-symbols-outlined">search</i></button>
+                <button type="submit" class="search-btn" ><i class="material-symbols-outlined">search</i></button>
                 <datalist id="search-suggestions"></datalist>
             </form>
         <nav>
