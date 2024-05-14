@@ -769,6 +769,7 @@ i {
 
 .login-main {
     width: 40%;
+    max-width: 30rem;
     margin-right: auto;
     margin-left: auto;
     perspective: 80rem;

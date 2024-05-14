@@ -334,6 +334,12 @@
     .new-tags {
         margin-left: 1rem;
     }
+
+    /* LOGIN REGISTER PAGE */
+
+    .login-main {
+        width: 80%;
+    }
 }
 
 /* PHONE VIEW */
@@ -506,5 +512,15 @@
 
     .newCategoryPage form {
         padding: 1rem 0.5rem;
+    }
+
+    /* LOGIN REGISTER PAGE */
+
+    .login-main {
+        width: 90%;
+    }
+
+    .login input, .register input {
+        width: 80%;
     }
 }
