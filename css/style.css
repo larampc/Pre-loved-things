@@ -40,12 +40,17 @@ body > header {
     height: 5rem;
     background-color: var(--primary);
     position: fixed;
-    .currency {
-        padding: 0.3rem 0;
-        background-color: var(--secondary);
-        border-style: none;
-        border-radius: 0.5rem;
-    }
+}
+
+select, input[type="text"], input[type="number"] {
+    padding: 0.5rem;
+    background-color: var(--secondary);
+    border-style: none;
+    border-radius: 0.5rem;
+}
+
+select:focus-visible, input[type="text"]:focus-visible, input[type="number"]:focus-visible {
+    outline: var(--tertiary) solid 2px;
 }
 
 .search-container {
@@ -57,6 +62,45 @@ body > header {
     label[form=searchbar] {
         width: 100%;
     }
+}
+
+.filter input[type="text"], .filter input[type="number"], .filter select {
+    background-color: var(--quaternary);
+    border-style: none;
+    border-radius: 0.5rem;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    background-color: var(--secondary);
+    color: currentColor;
+    width: 0.8rem;
+    height: 0.8rem;
+    border: 0.1rem solid var(--accent-primary);
+    border-radius: 0.2rem;
+    display: grid;
+    place-content: center;
+    transform: translateY(-0.075em);
+    transition: 120ms transform ease-in-out;
+}
+
+input[type="checkbox"]::before {
+    content: '';
+    font-size: 0.5rem;
+    text-align: center;
+    color: white;
+    width: 0.5rem;
+    height: 0.5rem;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--accent-primary);
+    background-color: CanvasText;
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
 }
 
 #cart, #heart, #user-pic {
@@ -375,7 +419,7 @@ main .cartPage  h2 {
     }
 }
 
-.newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], .newItemPage select, .newCategoryPage select, .edit-profile select, .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
+.newItemPage input[type=text], .newItemPage input[type=number], .newCategoryPage input[type=text], .edit-profile input[type=text], .edit-profile input[type=tel], .edit-profile input[type=email] {
     background-color: var(--secondary);
     border-style: none;
     border-radius: 0.5rem;
@@ -530,13 +574,6 @@ main .searchPage  h2 {
     display: none;
     background-color: transparent;
     border: none;
-}
-
-#order {
-    padding: 0.3rem 0;
-    background-color: var(--secondary);
-    border-style: none;
-    border-radius: 0.5rem;
 }
 
 .category-box:not(.empty) {
@@ -1297,12 +1334,12 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 }
 
 
-.price-input input {
-    width: 3rem;
-    background-color: var(--primary);
-    border-radius: 0.5rem;
-    border-width: 1px;
-    box-shadow: black 0px 2px ;
+.price-input label {
+    flex-grow: 1;
+    width: min-content;
+    input {
+        width: 70%;
+    }
 }
 
 .searchPage .items {
