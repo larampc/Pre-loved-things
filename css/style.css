@@ -382,20 +382,26 @@ main > h2 {
 .seller-items {
     border-bottom-style: solid;
 }
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* NEW ITEM PAGE */
 
 .newItemPage, .edit-profile, .newCategoryPage {
     background-color: var(--primary);
+    form {
+        background-color: white;
+        padding: 1rem;
+        margin: 0 1rem;
+        border-radius: 1rem;
+    }
+    button {
+        width: 10rem;
+        margin: 1.5rem auto auto auto;
+        border-style: none;
+        border-radius: 0.5rem;
+        background-color: var(--primary);
+    }
 }
-
-.newItemPage form, .edit-profile form, .newCategoryPage form {
-    background-color: white;
-    padding: 1rem;
-    margin: 0 1rem;
-    border-radius: 1rem;
-}
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 .newItemPage form > *, .edit-profile form > *, .newCategoryPage form * {
     padding: 0.5rem;
@@ -406,14 +412,6 @@ main > h2 {
     * {
         padding: 0.5rem;
     }
-}
-
-.newItemPage button, .edit-profile button, .newCategoryPage button {
-    width: 10rem;
-    margin: 1.5rem auto auto auto;
-    border-style: none;
-    border-radius: 0.5rem;
-    background-color: var(--primary);
 }
 
 .item-track img {
