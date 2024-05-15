@@ -152,7 +152,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     background-color: transparent;
     border-width: 0;
 }
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
+
 button {
     font-family: "Carrois Gothic SC", serif;
 }
@@ -194,13 +194,13 @@ main > h2 {
     margin-top: 2rem;
 }
 
-
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 
 
 /* ITEM CARD */
 
-.items .item-info {
+.item-info {
     color: black;
     p {
         margin: 0.2rem;
@@ -211,7 +211,7 @@ main > h2 {
     }
 }
 
-.items .item {
+.item {
     text-decoration: none;
     text-align: center;
 }
@@ -1428,7 +1428,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     border-style: none;
 }
 
-.index-main .items .item .item-info {
+.index-main .item-info {
     background: linear-gradient(
             to top,
             rgba(0, 0, 0, 0.9) 0%,
@@ -1444,12 +1444,12 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     padding: 165px 10px 10px;
 }
 
-.index-main .items .item .item-info:hover {
+.index-main .item-info:hover {
     opacity: 1;
 }
 
-.index-main .items .item .item-info p {
-    color: #fff;
+.index-main .item-info p {
+    color: white;
     margin: 5px 0;
     font-size: 0.8rem;
     max-width: 100px;
