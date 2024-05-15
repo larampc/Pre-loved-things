@@ -22,6 +22,7 @@ body > header {
     align-items: center;
     justify-content:space-between;
     z-index: 100;
+    position: fixed;
 }
 
 .search {
@@ -78,6 +79,14 @@ header nav {
     overflow: hidden;
     transform-origin: center;
     position: relative;
+}
+
+.index-main .item-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 #show-more {
@@ -291,6 +300,12 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     flex-flow: row wrap;
 }
 
+.uploader {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .item-track .item-info {
     display: flex;
     justify-content: space-around;
@@ -422,6 +437,16 @@ main .userPage{
 
 .comment-box {
     flex-grow: 1;
+}
+
+.comment {
+    position: relative;
+}
+
+.comment .stars {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
 }
 
 /* LOGIN AND REGISTER */
@@ -565,6 +590,13 @@ main .userPage{
 .chat {
     display: flex;
     align-items: center;
+    position: relative;
+}
+
+.chat:after {
+    position: absolute;
+    left: 5%;
+    bottom  : -3px;
 }
 
 .chat-content {
@@ -639,6 +671,10 @@ main .userPage{
     grid-template-rows: auto auto;
     grid-template-areas: "contact deliveryDate"
                         "shipping item";
+}
+
+.item-track .state li.current::after, .checkout .state li.current > button::before {
+    left: -2.3rem;
 }
 
 .item-track #contact-seller {
