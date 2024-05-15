@@ -31,8 +31,8 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
         <div class="image-slide">
             <?php if (count($items) > 1) { ?>
                 <div class="slider-btns">
-                    <i class="material-symbols-outlined" id="prev-btn"> chevron_left </i>
-                    <i class="material-symbols-outlined" id="next-btn"> chevron_right </i>
+                    <i class="material-symbols-outlined notSelectable" id="prev-btn"> chevron_left </i>
+                    <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
                 </div>
             <?php } ?>
             <section class="dots">
@@ -95,8 +95,8 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
         <div class="item-images">
             <?php if (count($item->images) > 1) { ?>
                 <div class="slider-btns">
-                    <i class="material-symbols-outlined" id="prev-btn"> chevron_left </i>
-                    <i class="material-symbols-outlined" id="next-btn"> chevron_right </i>
+                    <i class="material-symbols-outlined notSelectable" id="prev-btn"> chevron_left </i>
+                    <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
                 </div>
             <?php } ?>
             <div class="image-slide">

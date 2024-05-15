@@ -194,20 +194,12 @@ main > h2 {
     margin-top: 2rem;
 }
 
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
-
-
-
 /* ITEM CARD */
 
 .item-info {
     color: black;
     p {
         margin: 0.2rem;
-    }
-    .price {
-        font-weight: bold;
-        text-align: right;
     }
 }
 
@@ -224,9 +216,6 @@ main > h2 {
     border-color: var(--tertiary);
 }
 
-
-
-
 /* ITEM PAGE */
 
 .slides, .item-images, .image-slide {
@@ -239,7 +228,7 @@ main > h2 {
     margin-right: 3rem;
 }
 
-.itemPage .userProfile {
+.userProfile {
     color: black;
     margin-right: 3rem;
     img {
@@ -248,7 +237,7 @@ main > h2 {
     }
 }
 
-.itemPage .sendMessage-btn {
+.sendMessage-btn {
     background-color: var(--primary);
     border-radius: 1rem;
     padding: 0.5rem;
@@ -257,19 +246,12 @@ main > h2 {
     color: var(--accent-primary);
 }
 
-.itemPage .userProfile-btn {
-    background-color: transparent;
-    border-style: none;
-    text-decoration: underline;
-    margin-top: 1rem;
-}
-
 .itemPage header {
     height: 4rem;
     width: 100%;
 }
 
-.itemPage .edit img, .itemPage i, .like {
+.edit img, .itemPage i, .like {
     height: 2rem;
     margin: 1rem 0;
 }
@@ -286,16 +268,16 @@ main > h2 {
     }
 }
 
-.itemPage .priceSection {
-    width: 100%;
+.price {
+    font-weight: bold;
+    text-align: right;
 }
 
 .itemPage .price {
     font-size: 2rem;
-    font-weight: bold;
 }
 
-.itemPage .Buy {
+.Buy {
     background-color: transparent;
     border-style: none;
     color: var(--accent-primary);
@@ -303,19 +285,19 @@ main > h2 {
     margin-left: 5px;
 }
 
-.itemPage .buy-item {
+.buy-item {
     background-color: var(--primary);
     border-radius: 1rem;
     padding: 0.5rem;
     height: 2rem;
 }
 
-.itemPage .itemTags ul {
+.itemTags ul {
     padding: 0;
     margin: 0;
 }
 
-.itemPage .itemTags li {
+.itemTags li {
     font-size: 0.7rem;
     margin-right: 0.5rem;
     border-style: solid;
@@ -328,6 +310,12 @@ main > h2 {
     margin-top: 0.5rem;
 }
 
+.notSelectable {
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
 .slider-btns i{
     width: 1.5rem;
     height: 1.5rem;
@@ -337,15 +325,13 @@ main > h2 {
     color: white;
     cursor: pointer;
     text-align: center;
-    -webkit-user-select: none; /* Safari */
-    -ms-user-select: none; /* IE 10 and IE 11 */
-    user-select: none; /* Standard syntax */
 }
 
 .edit {
     background: none;
     border: none;
 }
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* CART PAGE */
 
@@ -361,11 +347,6 @@ main > h2 {
     border-radius: 0.5rem;
     padding: 1rem;
     margin: 1rem auto;
-    width: 100%;
-}
-
-.cartPage .buy-item {
-    margin: 0 auto;
     width: 100%;
 }
 
@@ -397,10 +378,6 @@ main .cartPage  h2 {
 .cartPage .item-info {
     width: 100%;
     margin-left: 1rem;
-}
-
-.cartPage .price {
-    text-align: right;
 }
 
 .sum {
@@ -555,10 +532,6 @@ section.item-image-uploads {
 
 .searchPage .item-info {
     width: 10rem;
-}
-
-.searchPage .price {
-    text-align: right;
 }
 
 main .searchPage  h2 {
@@ -1264,9 +1237,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
     background-color: var(--accent-secondary);
     width: 50%;
     min-width: 8rem;
-    border-radius: 1rem;
-    padding: 0.5rem;
-    border-style: none;
+    margin-top: 0;
     color: var(--accent-primary);
 }
 
