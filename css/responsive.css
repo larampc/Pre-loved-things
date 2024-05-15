@@ -362,6 +362,7 @@
     .checkoutSum {
         margin-left: 0;
         margin-top: 0;
+        width: auto;
     }
 
     .buy-form {

@@ -853,10 +853,9 @@ i {
     transform: rotateZ(-270deg);
     left: 2.5rem;
 }
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
-
 
 /* IMBOX PAGE */
+
 .chat-inbox {
     margin-left: 3rem;
     margin-right: 5rem;
@@ -868,6 +867,7 @@ i {
 
 .message-header{
     margin-bottom: 1rem;
+    font-weight: bold;
 }
 
 .message-header .item-info {
@@ -880,10 +880,6 @@ i {
     border: 2px solid var(--tertiary);
     border-radius: 0.5rem;
     margin-right: 1rem;
-}
-
-.message-header {
-    font-weight: bold;
 }
 
 .addressee-img {
@@ -942,13 +938,16 @@ i {
     margin-top: 0.2rem;
     border-top-right-radius: 0.5rem;
 }
+
 .sent-message + .sent-message {
     border-bottom-right-radius: 0.5rem;
 }
+
 .received-message:has( + .received-message) {
     margin-top: 0.2rem;
     border-top-left-radius: 0.5rem;
 }
+
 .received-message + .received-message {
     border-bottom-left-radius: 0.5rem;
 }
@@ -1050,22 +1049,22 @@ i {
     min-width: 1.3rem;
 }
 
-main.inbox-main ::-webkit-scrollbar {
+.inbox-main ::-webkit-scrollbar {
     width: 20px;
 }
 
-main.inbox-main ::-webkit-scrollbar-track {
+.inbox-main ::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-main.inbox-main ::-webkit-scrollbar-thumb {
+.inbox-main ::-webkit-scrollbar-thumb {
     background: var(--primary);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
 }
 
-main.inbox-main ::-webkit-scrollbar-thumb:hover {
+.inbox-main ::-webkit-scrollbar-thumb:hover {
     background-color: #efdab4cd;
 }
 
@@ -1084,7 +1083,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
         margin: 0;
     }
 }
-
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* CHECKOUT PAGE */
 
@@ -1130,6 +1129,7 @@ main.inbox-main ::-webkit-scrollbar-thumb:hover {
 
 .checkoutSum {
     height: fit-content;
+    width: max-content;
     background-color: var(--secondary);
     border-top: 2px solid var(--tertiary);
     padding: 1rem 2rem;

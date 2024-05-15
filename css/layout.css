@@ -474,7 +474,8 @@ main .userPage{
 }
 
 .checkout {
-    width: 80%;
+    flex-grow: 1;
+    min-width: 60%;
 }
 
 .buy-form {
