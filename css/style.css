@@ -401,17 +401,9 @@ main > h2 {
         background-color: var(--primary);
     }
 }
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 .newItemPage form > *, .edit-profile form > *, .newCategoryPage form * {
     padding: 0.5rem;
-}
-
-.tags {
-    padding: 0;
-    * {
-        padding: 0.5rem;
-    }
 }
 
 .item-track img {
@@ -449,7 +441,6 @@ main > h2 {
     outline-offset: 5px;
 }
 
-/* toggle icon state */
 .photo-upload:hover .upload-icon, .delete-icon:hover, .photo-upload h5:hover ~ .delete-icon {
     opacity: 1;
     backdrop-filter: blur(2px);
@@ -490,15 +481,16 @@ main > h2 {
     border-radius: 100%;
 }
 
-section.item-image-uploads {
+.item-image-uploads {
     display: flex;
     flex-flow: row wrap;
     h4 {
         width: 100%;
     }
-    .main-photo-upload {
-        box-shadow: 0 0 0 5px var(--primary);
-    }
+}
+
+.main-photo-upload {
+    box-shadow: 0 0 0 5px var(--primary);
 }
 
 /* TRACK ITEM */
@@ -523,11 +515,11 @@ section.item-image-uploads {
     width: 10rem;
 }
 
-main .searchPage  h2 {
+.searchPage  h2 {
     margin:0;
 }
 
-.searchPage .filter {
+.filter {
     padding: 1rem 1rem 2rem;
     background-color: var(--primary);
     margin-right: 1rem;
@@ -535,12 +527,9 @@ main .searchPage  h2 {
     max-width: 20rem;
     z-index: 3;
 }
+
 .category-search {
     text-align: center;
-}
-
-.searchPage #searchres {
-    padding: 5rem 0 2rem;
 }
 
 #open-filters {
@@ -552,6 +541,7 @@ main .searchPage  h2 {
     border: none;
     z-index: 2;
 }
+
 #close-filters {
     display: none;
     background-color: transparent;
@@ -585,6 +575,7 @@ main .searchPage  h2 {
 .filter input[type="text"] {
     width: 100%;
 }
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* USER PAGE */
 
