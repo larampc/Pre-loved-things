@@ -1083,7 +1083,6 @@ i {
         margin: 0;
     }
 }
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* CHECKOUT PAGE */
 
@@ -1201,7 +1200,7 @@ i {
     border: 2px solid var(--accent-primary);
 }
 
-.item-track #contact-seller {
+#contact-seller {
     background-color: var(--accent-secondary);
     width: 50%;
     min-width: 8rem;
@@ -1219,7 +1218,6 @@ i {
     color: black;
 }
 
-
 #messages article{
     border-radius: 6px;
     backdrop-filter: blur(5px);
@@ -1229,6 +1227,7 @@ i {
         padding-right: 5px;
     }
 }
+
 #messages .error {
     background-color: var(--error-background);
     color: var(--error-primary);
@@ -1254,6 +1253,10 @@ i {
     background: linear-gradient(to right, var(--error-background), var(--error-primary));
 }
 
+.success .message-progress {
+    background: linear-gradient(to right, var(--success-background), var(--success-primary));
+}
+
 .confirmation .message-progress {
     background: linear-gradient(to right, var(--confirm-background), var(--accent-primary));
 }
@@ -1273,10 +1276,6 @@ i {
     }
 }
 
-.success .message-progress {
-    background: linear-gradient(to right, var(--success-background), var(--success-primary));
-}
-
 .searchresult {
     margin-bottom: 1rem;
     .item {
@@ -1293,7 +1292,6 @@ i {
         box-shadow: 0 0 5px var(--tertiary);
     }
 }
-
 
 .price-input label {
     flex-grow: 1;
@@ -1346,7 +1344,7 @@ i {
     background-color: #efdab4cd;
 }
 
-.index-main .items .item {
+.index-main .item {
     width: 200px;
     height: 200px;
     min-width: 200px;
@@ -1360,7 +1358,7 @@ i {
     border-color: var(--secondary);
 }
 
-.index-main .items .item img {
+.index-main .item img {
     width: 200px;
     height: 200px;
     object-fit: cover;
@@ -1466,9 +1464,11 @@ a {
 .new-tags {
     margin-left: 2rem;
 }
+
 .newCategoryPage form > label input[type=text], .new-tag > label input[type=text] {
     margin-left: 1rem;
 }
+
 .tag-options label {
     margin: 0.2rem;
     padding: 0;
@@ -1476,10 +1476,10 @@ a {
         margin-left: 0;
     }
 }
+
 .tag-options i {
     padding: 0;
 }
-
 
 .star-review{
     position: relative;
@@ -1523,6 +1523,7 @@ a {
     background-color: var(--secondary);
     flex-grow: 1;
 }
+
 .new-review button {
     height: 2.2rem;
     width: 2.2rem;
@@ -1542,6 +1543,7 @@ a {
 }
 
 /* LOADER */
+
 .loader {
     height: 14px;
     margin: calc((10rem - 14px) / 2) calc((10rem - 56px) / 2);
@@ -1553,8 +1555,8 @@ a {
     background-size: 25% 100%;
     display: grid;
 }
-.loader:before,
-.loader:after {
+
+.loader:before, .loader:after {
     content: "";
     height: inherit;
     aspect-ratio: 1;
@@ -1565,6 +1567,7 @@ a {
     background: var(--accent-secondary);
     animation: l49 1s infinite linear;
 }
+
 .loader:after {
     transform-origin: 200% 50%;
     --s:-1;
@@ -1575,3 +1578,5 @@ a {
     58%,
     100% {transform: rotate(calc(var(--s,1)*1turn))}
 }
+
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
