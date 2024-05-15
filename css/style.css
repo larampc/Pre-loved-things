@@ -335,11 +335,6 @@ main > h2 {
 
 /* CART PAGE */
 
-.cartPage a {
-    text-decoration: none;
-    color: black;
-}
-
 .cartPage .checkout {
     border-style: none;
     color: white;
@@ -643,8 +638,6 @@ main .userPage, .pfPage{
         background-color: var(--secondary);
         padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        text-decoration: none;
-        color: black;
     }
     i {
         margin-right: 0.2rem;
@@ -655,8 +648,6 @@ main .userPage, .pfPage{
     background-color: var(--secondary);
     padding: 0.5rem 0;
     border-radius: 0.5rem;
-    text-decoration: none;
-    color: black;
     i {
         margin-right: 0.2rem;
     }
@@ -772,11 +763,6 @@ main .userPage, .pfPage{
     box-shadow: 0 0 5px var(--tertiary);
 }
 
-.login a {
-    color: black;
-    text-decoration: none;
-}
-
 i {
     color: black;
 }
@@ -797,9 +783,7 @@ i {
 }
 
 #suggestions a {
-    color: black;
     padding: 10px;
-    text-decoration: none;
 }
 
 .login-main {
