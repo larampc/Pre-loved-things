@@ -3,12 +3,16 @@ const imageAdder = document.querySelector('.image-upload-adder')
 
 let lastLoadedImageId = 0;
 let allImagesAreLoaded = false
+const maxImageNumber = 7;
 
 if(imageAdder){
     imageAdder.addEventListener('click', () => {
         if (allImagesAreLoaded){
             uploadSection.insertBefore(createImageUploader(), imageAdder)
             allImagesAreLoaded = false
+        }
+        if (lastLoadedImageId+1 === maxImageNumber) {
+            imageAdder.style.display = "none";
         }
     })
 }
@@ -28,8 +32,9 @@ function previewImage(imageId) {
         return alert('Only images are allowed!')
     }
 
-    if (image.size > 10_000_000) {
-        return alert('Maximum upload size is 10MB!')
+    if (image.size > 1_000_000) {
+        fileUploadInput.value = ''
+        return alert('Maximum upload size is 1MB!')
     }
     const addPhotoIcon = imagePreviewer.querySelector('i')
     imagePreviewer.removeChild(addPhotoIcon)
@@ -62,6 +67,7 @@ function createRemoveButton(id) {
 }
 
 function shiftImages() {
+    imageAdder.style.display = "block"
     const removedId = parseInt(this.id.substring(6))
     const fileUploadInputToRemove = document.querySelector('.uploader#img' + removedId)
     if(lastLoadedImageId === 1){
