@@ -24,6 +24,11 @@ body > header {
     z-index: 100;
 }
 
+.search {
+    position: relative;
+    display: inline-block;
+}
+
 .search-container {
     display: flex;
     align-items: center;
@@ -73,6 +78,13 @@ header nav {
     i {
         transition: 1000ms all;
     }
+}
+
+input[type="checkbox"] {
+    display: grid;
+    place-content: center;
+    transform: translateY(-0.075em);
+    transition: 120ms transform ease-in-out;
 }
 
 /* ITEM CARD */
@@ -252,9 +264,19 @@ header nav {
     flex-direction: column;
 }
 
+.item-image-uploads {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .item-track .item-info {
     display: flex;
     justify-content: space-around;
+}
+
+.item-track .items {
+    display: flex;
+    justify-content: center;
 }
 
 /* SEARCH PAGE */
@@ -312,7 +334,13 @@ main .searchPage{
 }
 
 #open-filters {
+    display: none;
     grid-area: category;
+    z-index: 2;
+}
+
+#close-filters {
+    display: none;
 }
 
 /* USER PAGE */
@@ -371,9 +399,21 @@ main .userPage{
 }
 
 /* LOGIN AND REGISTER */
-.login form, .register form {
+
+.login, .register {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    button {
+        justify-content: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .toggleLoginRegister {
@@ -388,6 +428,19 @@ main .userPage{
     top: -0.5rem;
     left: -0.5rem;
     z-index: 20;
+}
+
+.checkboxLoginRegister {
+    position: absolute;
+    left: -100dvh;
+    display: none;
+}
+
+#suggestions {
+    position: absolute;
+    top: 6px;
+    transition: all 1s ease;
+    display: none;
 }
 
 /* IMBOX PAGE */
@@ -863,4 +916,8 @@ main .pfPage{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.loader {
+    display: grid;
 }
