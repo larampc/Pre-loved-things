@@ -402,7 +402,7 @@ main > h2 {
     }
 }
 
-.newItemPage form > *, .edit-profile form > *, .newCategoryPage form * {
+.newItemPage form > *, .newItemPage form .tags *, .edit-profile form > *, .newCategoryPage form * {
     padding: 0.5rem;
 }
 
