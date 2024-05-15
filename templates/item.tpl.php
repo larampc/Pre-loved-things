@@ -484,8 +484,7 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                 <?php $tags = Tag::get_category_tags($dbh, $category);
                 for ($i = 0; $i < count($tags); $i++) { ?>
                     <div class="new-tag" id="new-tag-<?=$i?>">
-                        <label> Tag name
-                            <input type="text" name="tags[<?=$i?>]" value="<?=$tags[$i]['tag']?>" required>
+                        <label>Tag name<input type="text" name="tags[<?=$i?>]" value="<?=$tags[$i]['tag']?>" required>
                         </label>
                         <i class="material-symbols-outlined delete-option" title="Delete tag">delete</i>
                         <?php $tag_options = Tag::get_tag_options($dbh, $category, $tags[$i]['tag']);?>
