@@ -58,6 +58,10 @@ header nav {
     align-items: center;
 }
 
+.searchresult .item:hover {
+    transform: scale(1.05, 1.05);
+}
+
 .nav {
     display: flex;
     align-items: center;
@@ -70,21 +74,39 @@ header nav {
     justify-content: space-evenly;
 }
 
+.index-main .item {
+    overflow: hidden;
+    transform-origin: center;
+    position: relative;
+}
+
 #show-more {
     float: right;
     display: flex;
     justify-content: right;
     align-items: center;
-    i {
-        transition: 1000ms all;
-    }
 }
 
 input[type="checkbox"] {
     display: grid;
     place-content: center;
     transform: translateY(-0.075em);
-    transition: 120ms transform ease-in-out;
+}
+
+input[type="checkbox"]::before {
+    transform: scale(0);
+    transform-origin: bottom left;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    transform: rotateZ(0);
+}
+input[type="search"]:focus::-webkit-search-cancel-button {
+    transform: rotateZ(90deg);
 }
 
 /* ITEM CARD */
@@ -398,6 +420,10 @@ main .userPage{
     float: left;
 }
 
+.comment-box {
+    flex-grow: 1;
+}
+
 /* LOGIN AND REGISTER */
 
 .login, .register {
@@ -422,12 +448,25 @@ main .userPage{
 }
 
 .toggleLoginRegister:before {
-    transition: all 0.5s ease;
     position: absolute;
     align-self: center;
     top: -0.5rem;
     left: -0.5rem;
     z-index: 20;
+}
+
+.flipLoginRegister {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.register {
+    transform: rotateY(180deg);
+}
+
+.checkboxLoginRegister:checked + .toggleLoginRegister:before {
+    transform: rotateZ(-270deg);
+    left: 2.5rem;
 }
 
 .checkboxLoginRegister {
@@ -439,7 +478,6 @@ main .userPage{
 #suggestions {
     position: absolute;
     top: 6px;
-    transition: all 1s ease;
     display: none;
 }
 
@@ -648,7 +686,6 @@ main .userPage{
     display: flex;
     overflow: hidden;
     max-height: 0;
-    transition-duration: 500ms;
 }
 
 .pfPage .items#my,  .userPage .items#my{
@@ -759,6 +796,7 @@ main .pfPage{
 }
 .price-input label {
     display: flex;
+    flex-grow: 1;
     flex-direction: column;
     align-items: center;
 }
@@ -848,6 +886,10 @@ main .pfPage{
     align-items: center;
 }
 
+.write-review {
+    flex-grow: 1;
+}
+
 .hide {
     display: none;
 }
@@ -920,4 +962,33 @@ main .pfPage{
 
 .loader {
     display: grid;
+}
+
+.loader:before, .loader:after {
+    grid-area: 1/1;
+    transform-origin: -100% 50%;
+    animation: l49 1s infinite linear;
+}
+
+.loader:after {
+    transform-origin: 200% 50%;
+    --s:-1;
+    animation-delay: -.5s;
+}
+
+@keyframes l49 {
+    58%,
+    100% {transform: rotate(calc(var(--s,1)*1turn))}
+}
+
+.message-progress {
+    position: absolute;
+    left: 4px;
+    bottom: 4px;
+    transform: scaleX(0);
+    transform-origin: left;
+}
+
+.confirmation {
+    position: relative;
 }
