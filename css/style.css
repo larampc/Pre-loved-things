@@ -331,7 +331,6 @@ main > h2 {
     background: none;
     border: none;
 }
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* CART PAGE */
 
@@ -345,15 +344,11 @@ main > h2 {
     width: 100%;
 }
 
-.cartPage .seller {
+.seller {
     margin: 2rem 3rem;
 }
 
-main .cartPage  h2 {
-    padding-top: 1rem;
-}
-
-.cartPage .seller-info {
+.seller-info {
     margin: 0;
     padding:0.5rem 0;
     border-top-style: solid;
@@ -384,9 +379,10 @@ main .cartPage  h2 {
     transition-duration: 0.2s;
 }
 
-.cartPage .seller-items {
+.seller-items {
     border-bottom-style: solid;
 }
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
 
 /* NEW ITEM PAGE */
 
