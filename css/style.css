@@ -316,6 +316,22 @@ main > h2 {
     text-align: center;
 }
 
+.slider-btns {
+    width: 25rem;
+}
+
+.dots{
+    width: 100%;
+    .dot{
+        width: 0.5rem;
+        height: 0.5rem;
+        background-color: white;
+        opacity: .2;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+}
+
 .edit {
     background: none;
     border: none;
@@ -331,6 +347,15 @@ main > h2 {
     padding: 1rem;
     margin: 1rem auto;
     width: 100%;
+}
+
+.checkout {
+    min-width: 60%;
+}
+
+.cart-checkout-main {
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 
 .seller {
@@ -398,6 +423,7 @@ main > h2 {
 .item-track img {
     width: 20rem;
     height: 20rem;
+    margin: 0 auto;
 }
 
 .uploader {
@@ -418,7 +444,6 @@ main > h2 {
 
 .photo-upload {
     opacity: 0.75;
-    overflow: hidden;
     box-shadow: 0 8px 6px -6px;
 }
 
@@ -487,13 +512,16 @@ main > h2 {
     margin:0;
 }
 
+.searchPage {
+    margin-top: 5rem;
+}
+
 .filter {
     padding: 1rem 1rem 2rem;
     background-color: var(--primary);
     margin-right: 1rem;
     width: auto;
     max-width: 20rem;
-    z-index: 3;
 }
 
 .category-search {
@@ -530,6 +558,10 @@ main > h2 {
     }
 }
 
+.categories > label .paragraph {
+    margin: 0;
+}
+
 .filter input[type="text"] {
     width: 100%;
 }
@@ -542,7 +574,10 @@ main > h2 {
 
 .user {
     margin-bottom: 2rem;
-    column-gap: 1rem;
+    img {
+        width: 10rem;
+        height: 10rem;
+    }
 }
 
 .feedback {
@@ -645,10 +680,6 @@ main > h2 {
     word-break: break-word;
 }
 
-.display-item {
-    justify-content: center;
-}
-
 .display-item .navbar {
     text-align: center;
 }
@@ -666,6 +697,8 @@ main > h2 {
     box-shadow: 5px 5px 10px var(--tertiary);
     width: 100%;
     height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
     h2 {
         margin-top: 0;
     }
@@ -717,7 +750,6 @@ i {
     margin-right: auto;
     margin-left: auto;
     perspective: 80rem;
-    justify-content: center;
     h3 {
         margin: 1rem 0 0;
         text-align: center;
@@ -902,7 +934,6 @@ i {
     background-color: #fff8ef;
     box-shadow: 0 0 5px var(--tertiary);
     border-radius: 1rem;
-    z-index: 10;
 }
 
 .current-chat {
@@ -1061,6 +1092,29 @@ i {
     padding-bottom: 20px;
 }
 
+.item-track {
+    margin-left: 7rem;
+    margin-right: 2rem;
+}
+
+.item-track #delivery-date {
+    text-align: center;
+    p {
+        margin: 0;
+    }
+    :first-child {
+        margin-right: 1rem;
+    }
+    input {
+        width: 5rem;
+    }
+    button {
+        background-color: #E5CFA4;
+        border-radius: 1rem;
+        border-style: none;
+    }
+}
+
 .state li::before {
     content: '';
     height: 100%;
@@ -1120,11 +1174,20 @@ i {
     color: black;
 }
 
+#messages {
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #messages article{
     border-radius: 6px;
     backdrop-filter: blur(5px);
     opacity: 0;
     padding: 10px 8px;
+    visibility: hidden;
+    align-items: center;
+    margin-top: 0.5rem;
     i {
         padding-right: 5px;
     }
