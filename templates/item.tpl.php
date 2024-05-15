@@ -150,7 +150,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
         <h2>New item</h2>
         <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-
+            <p><?=log_to_stdout("heyyy")?></p>
             <label for="iname">Item Name</label>
             <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
 

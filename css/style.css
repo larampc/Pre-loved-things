@@ -475,8 +475,12 @@ main .cartPage  h2 {
 .photo-upload {
     opacity: 0.75;
     overflow: hidden;
-
     box-shadow: 0 8px 6px -6px;
+}
+
+.photo-upload.over {
+    outline: 5px dotted var(--accent-primary);
+    outline-offset: 5px;
 }
 
 /* toggle icon state */

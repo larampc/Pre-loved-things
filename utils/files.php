@@ -81,3 +81,4 @@ function upload_item_image($img) : string {
     imagejpeg($medium, $mediumFileName);
     return $id;
 }
+
