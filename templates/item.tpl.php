@@ -290,10 +290,10 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     </article>
 <?php }
 
-function draw_category_tags(PDO $dbh, $category, bool $visible) {
+function draw_category_tags(PDO $dbh, $category) {
     $tags = Tag::get_category_tags($dbh, $category);
     if (!empty($tags)) { ?>
-    <div class="category-<?=$category?> <?=$visible? "" : "hide" ?> category-box">
+    <div class="category-<?=$category?> category-box">
         <p><?=$category?></p>
     <?php foreach ($tags as $tag) { ?>
     <div class="options tag" id="<?=$tag['tag']?>">
@@ -312,7 +312,7 @@ function draw_category_tags(PDO $dbh, $category, bool $visible) {
     </div>
     <?php } ?> </div> <?php }}
 
-function draw_page_filters(array $categories, string $visible, PDO $dbh, Session $session) { ?>
+function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
     <script src="../scripts/search.js" defer></script>
     <article class="searchPage">
             <section class="filter">
@@ -329,7 +329,7 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                     <script src="../scripts/user_actions.js" defer></script>
                     <?php foreach ($categories as $category) {
                         if ($category['category'] !== "") { ?>
-                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><span class="paragraph"><?=$category['category'] ?: "All categories"?></span>
+                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" value="<?=$category['category']?>"><span class="paragraph"><?=$category['category'] ?: "All categories"?></span>
                                 <?php if ($session->is_admin()) {?>
                                     <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
                                     <form method="post" action="../actions/action_remove_category.php" class="confirmation">
@@ -362,14 +362,13 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                     </label>
                 </div>
                 <?php
-                if ($visible !== "") draw_category_tags($dbh, "", true);
+                draw_category_tags($dbh, "", true);
                 foreach ($categories as $category) {
-                    draw_category_tags($dbh, $category['category'], $category['category']==$visible);
+                    draw_category_tags($dbh, $category['category']);
                 }
                  ?>
             </section>
         <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
-        <p class="category-search"><?=$visible?:""?></p>
         <section class="items searchresult">
             <div class="loader"></div>
         </section>

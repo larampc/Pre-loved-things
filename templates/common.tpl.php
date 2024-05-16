@@ -1,7 +1,7 @@
 <?php
 require_once ("../database/user.class.php");
 
-function draw_header(string $page, Session $session, array $categories, array $currencies) { ?>
+function draw_header(string $page, Session $session, array $currencies) { ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -26,11 +26,6 @@ function draw_header(string $page, Session $session, array $categories, array $c
     <header class="header-visible">
         <a href="../index.php"><img src="../resources/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="../pages/search.php">
-                <select name="category" class="dropdown-content">
-                    <?php foreach ($categories as $category) { ?>
-                        <option id="<?=$category['category']?>" value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?></option>
-                    <?php }?>
-                </select>
                 <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off" value="<?=$page == "search"? $_GET['search'] : ""?>"></label>
                 <button type="submit" class="search-btn" ><i class="material-symbols-outlined">search</i></button>
                 <datalist id="search-suggestions"></datalist>
@@ -82,7 +77,6 @@ function draw_header(string $page, Session $session, array $categories, array $c
 <?php } ?>
 
 <?php function get_header(string $name,PDO $dbh, Session $session) {
-    $categories = Tag::get_categories($dbh);
     $currencies = User::get_currencies($dbh);
-    draw_header($name, $session, $categories, $currencies);
+    draw_header($name, $session, $currencies);
 }

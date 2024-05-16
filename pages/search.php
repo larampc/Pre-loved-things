@@ -18,5 +18,5 @@
     }
     get_header("search", $dbh, $session);
     $categories = Tag::get_categories($dbh);
-    draw_page_filters($categories, $_GET['category']?:"", $dbh, $session);
+    draw_page_filters($categories, $dbh, $session);
     draw_footer();

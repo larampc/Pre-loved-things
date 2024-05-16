@@ -10,12 +10,6 @@ let tags = Array();
 let order = "recent"
 let request = 0;
 let controller = new AbortController();
-const mainCat = document.querySelector('.category-search');
-if (mainCat.innerHTML !== '') categories.push(mainCat.innerHTML)
-if (mainCat.innerHTML) {
-    const categorySelector = document.querySelector('.dropdown-content ' +'#' + mainCat.innerHTML)
-    categorySelector.selected = true;
-}
 
 const searchres = document.querySelector('#searchbar').value;
 
