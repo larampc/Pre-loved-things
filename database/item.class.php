@@ -254,4 +254,14 @@ class Item {
         $stmt->execute(array($item->id));
         return $stmt->fetchColumn();
     }
+    static function get_sell_items(PDO $dbh, string $month) {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items WHERE date = ?');
+        $stmt->execute(array("%/$month/".date("Y", time())));
+        return $stmt->fetchColumn();
+    }
+    static function get_buy_items(PDO $dbh, string $month) {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE purchaseData.deliveryDate LIKE ?');
+        $stmt->execute(array("%/$month/".date("Y", time())));
+        return $stmt->fetchColumn();
+    }
 }

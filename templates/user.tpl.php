@@ -12,7 +12,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             <div id="curve_chart"></div>
             <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
             <input type="hidden" class="chart-user" value="<?=$user->user_id?>">
-            <script src="../scripts/draw_chart.js"></script>
+            <script src="../scripts/draw_chart_user.js"></script>
             <?php
             draw_user_options($dbh, $user, $session, $user_currency);
         } else draw_items($items, $user_currency);
@@ -328,4 +328,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <div class="loader"></div>
         </section>
     </div>
+    <div id="curve_chart"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="../scripts/draw_chart_all.js"></script>
 <?php }
