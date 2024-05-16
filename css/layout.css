@@ -397,6 +397,9 @@ main .userPage{
 
 .userPage .user-details, .pfPage .user-details {
     align-self: center;
+    a i {
+        transform: translateY(25%);
+    }
 }
 
 .pfPage .display-item > a {
