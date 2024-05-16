@@ -195,8 +195,8 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             <label for="price">Price</label>
             <input type="number" step="0.01" id="price" name="price" placeholder="The price of your item" required>
 
-            <label for="description">Description</label>
-            <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40">
+            <label for="description" >Description</label>
+            <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40" required>
 
             <section class="item-image-uploads">
                 <h4>Upload Images</h4>
@@ -260,7 +260,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
             <input type="number" step="0.01" id="price" name="price" value="<?= round($item->price * User::get_currency_conversion($db, $session->getCurrency())) ?>" required>
 
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40">
+            <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40" required>
 
             <section class="item-image-uploads">
                 <h4>Upload Images</h4>
