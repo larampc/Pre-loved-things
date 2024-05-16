@@ -710,6 +710,7 @@ main > h2 {
     input {
         border-style: none;
         border-radius: 0.5rem;
+        background-color: var(--quaternary);
         padding: 0.5rem;
         text-align: center;
         width: 65%;
