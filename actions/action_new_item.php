@@ -22,7 +22,7 @@ foreach ($_FILES as $name => $file) {
     if(!empty($file['tmp_name'])) $img_ids[] = upload_item_image($name);
 }
 
-$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2), $_POST['category']??"", $session->getId(), $img_ids[0]);
+$item_id = Item::register_item($dbh, $_POST['iname'], $_POST['description'],  round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2), $_POST['category'] == "other" ? "" : $_POST['category'], $session->getId(), $img_ids[0]);
 
 if ($item_id == -1) {
     //remove images
