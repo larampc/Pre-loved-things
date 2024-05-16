@@ -307,10 +307,6 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* SEARCH PAGE */
 
-.searchPage {
-    flex-grow: 1;
-}
-
 .searchPage .item-info {
     display: flex;
     justify-content: space-between;
@@ -322,11 +318,12 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 }
 
 .searchPage {
+    flex-grow: 1;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: auto auto;
-    grid-template-areas: "filter category"
-                        "filter items";
+    grid-template-areas: "filter items"
+                        "filter none";
 }
 
 .category-search {
