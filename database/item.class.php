@@ -46,7 +46,7 @@ class Item {
         return $new_items;
     }
 
-    public static function update_item(PDO $dbh, string $id,  string $name, string $description, float $price, int $category): bool
+    public static function update_item(PDO $dbh, string $id,  string $name, string $description, float $price, string $category): bool
     {
         $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category = ? WHERE id = ?');
         return $stmt->execute(array($name, $description, $price, $category,$id));
