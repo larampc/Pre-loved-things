@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+require_once('../utils/uuid.php');
 
 class Comment
 {
@@ -17,7 +18,7 @@ class Comment
         $this->rating = $rating;
     }
     public static function add_review(PDO $dbh, string $user_id, string $id,string $review, int $rating) {
-        $stmt = $dbh->prepare('INSERT INTO comments (id, mainuser, userc, text, rating, date) VALUES (?,?,?,?,?)');
+        $stmt = $dbh->prepare('INSERT INTO comments (id, mainuser, userc, text, rating, date) VALUES (?, ?,?,?,?,?)');
         $stmt->execute(array(generate_uuid(),$user_id, $id, $review, $rating, date('d/m/Y', time())));
     }
     public static function get_user_average(PDO $dbh, string $user_id) {
