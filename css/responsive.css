@@ -1,7 +1,8 @@
 /* CART PAGE */
 
-.cartPage .sum {
+.sum {
     position: sticky;
+    transition-duration: 0.2s;
 }
 .header-hidden ~ .cart-main  .cartPage .sum {
     top: 2rem;
@@ -9,7 +10,6 @@
 .header-visible ~ .cart-main  .cartPage .sum {
     top: 6rem;
 }
-
 
 /* USER PAGE */
 
@@ -26,7 +26,6 @@
 .dots .dot {
     transition: opacity .2s ease-in-out;
 }
-
 
  /* Messages */
 #messages article {
@@ -91,7 +90,66 @@
     opacity: 0.3;
 }
 
+input[type="checkbox"] {
+    transition: 120ms transform ease-in-out;
+}
 
+input[type="checkbox"]::before {
+    transition: 120ms transform ease-in-out;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+    pointer-events: none;
+    transition: 100ms all ease-in-out;
+}
+
+input[type="search"]:focus::-webkit-search-cancel-button {
+    pointer-events: all;
+}
+
+.upload-icon, .delete-icon {
+    transition: opacity 0.3s ease;
+}
+
+.userPage .items, .pfPage .items {
+    transition-duration: 500ms;
+}
+
+#suggestions {
+    transition: all 1s ease;
+}
+
+.flipLoginRegister {
+    transition: transform 0.6s;
+}
+
+.toggleLoginRegister:before {
+    transition: all 0.5s ease;
+}
+
+.buy-form label input[type="text"] {
+    transition-duration: 100ms;
+}
+
+.buy-form {
+    transition-duration: 500ms;
+}
+
+.searchresult .item, .searchresult .item img {
+    transition: 0.5s all;
+}
+
+.index-main .item {
+    transition: 1000ms all;
+}
+
+#show-more i {
+    transition: 1000ms all;
+}
+
+.star-review  label  {
+    transition-duration: 0.1s;
+}
 
 /* TABLET VIEW */
 @media (max-width: 60em) {
