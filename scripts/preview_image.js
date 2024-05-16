@@ -5,22 +5,33 @@ let lastLoadedImageId = 0;
 let allImagesAreLoaded = false
 const maxImageNumber = 7;
 
-if(imageAdder){
+const removeIcons = document.querySelectorAll('.delete-icon')
+if (removeIcons) {
+    lastLoadedImageId = removeIcons.length
+    allImagesAreLoaded = true
+}
+
+if (imageAdder) {
     imageAdder.addEventListener('click', () => {
-        if (allImagesAreLoaded){
+        if (allImagesAreLoaded) {
             uploadSection.insertBefore(createImageUploader(), imageAdder)
             allImagesAreLoaded = false
         }
-        if (lastLoadedImageId+1 === maxImageNumber) {
+        if (lastLoadedImageId + 1 === maxImageNumber) {
             imageAdder.style.display = "none";
         }
     })
+}
+if (lastLoadedImageId > 0) {
+    mainImageInput = uploadSection.querySelector('.main-photo-upload input')
+    mainImageInput.required = false
 }
 
 function onchangeHandler() {
     previewImage(this.id);
 }
-function previewImage(imageId) {
+
+async function previewImage(imageId) {
     const fileUploadInput = document.querySelector('.uploader#' + imageId)
     const imagePreviewer = fileUploadInput.parentElement
     if (!fileUploadInput.value) {
@@ -29,12 +40,14 @@ function previewImage(imageId) {
     const image = fileUploadInput.files[0]
 
     if (!image.type.includes('image')) {
-        return alert('Only images are allowed!')
+        addErrorMessage("Only images are allowed!")
+        return;
     }
 
     if (image.size > 1_000_000) {
         fileUploadInput.value = ''
-        return alert('Maximum upload size is 1MB!')
+        addErrorMessage("Maximum upload size is 1MB!")
+        return;
     }
     const addPhotoIcon = imagePreviewer.querySelector('i')
     imagePreviewer.removeChild(addPhotoIcon)
@@ -46,17 +59,17 @@ function previewImage(imageId) {
         imagePreviewer.style.backgroundImage = `url(${fileReaderEvent.target.result})`
     }
     const id = parseInt(imageId.substring(3))
-    if(id > lastLoadedImageId) lastLoadedImageId = id
+    if (id > lastLoadedImageId) lastLoadedImageId = id
     allImagesAreLoaded = true
     const removeButton = createRemoveButton(id);
-    if(removeButton !== null) {
+    if (removeButton !== null) {
         fileUploadInput.parentNode.appendChild(removeButton)
         fileUploadInput.parentElement.draggable = true;
     }
 }
 
 function createRemoveButton(id) {
-    if(document.querySelector('i#delete' + id) !== null) return null;
+    if (document.querySelector('i#delete' + id) !== null) return null;
     const removeButton = document.createElement('i')
     removeButton.classList.add('material-symbols-outlined')
     removeButton.classList.add('bolder')
@@ -72,16 +85,17 @@ function shiftImages() {
     imageAdder.style.display = "block"
     const removedId = parseInt(this.id.substring(6))
     const fileUploadInputToRemove = document.querySelector('.uploader#img' + removedId)
-    if(lastLoadedImageId === 1){
+    if (lastLoadedImageId === 1) {
+        fileUploadInputToRemove.required = true
         fileUploadInputToRemove.value = ''
         fileUploadInputToRemove.parentElement.style.backgroundImage = ''
         fileUploadInputToRemove.parentElement.draggable = false
         fileUploadInputToRemove.parentElement.removeChild(fileUploadInputToRemove.parentElement.querySelector('i'))
-        fileUploadInputToRemove.parentElement.insertBefore(createAddPhotoIcon(),fileUploadInputToRemove.parentElement.querySelector('input'))
+        fileUploadInputToRemove.parentElement.insertBefore(createAddPhotoIcon(), fileUploadInputToRemove.parentElement.querySelector('input'))
         lastLoadedImageId = 0
-        if(allImagesAreLoaded === false){
+        if (allImagesAreLoaded === false) {
             const uploadDivs = uploadSection.querySelectorAll('div.photo-upload')
-            uploadSection.removeChild(uploadDivs[uploadDivs.length-1])
+            uploadSection.removeChild(uploadDivs[uploadDivs.length - 1])
         }
         allImagesAreLoaded = false
         return
@@ -90,14 +104,18 @@ function shiftImages() {
     uploadSection.removeChild(fileUploadInputToRemove.parentNode)
 
     for (let i = removedId + 1; i <= lastLoadedImageId; i++) {
+        const hiddenInputToShift = document.getElementsByName('hiddenimg' + i)
+        if (hiddenInputToShift) {
+            hiddenInputToShift.name = "hiddenimg" + i - 1
+        }
         const fileUploadInputToShift = document.querySelector('.uploader#img' + i)
         const removeButtonToShift = fileUploadInputToShift.parentNode.querySelector('#delete' + i)
-        fileUploadInputToShift.id = fileUploadInputToShift.name = "img" + (i-1)
-        removeButtonToShift.id = 'delete' + (i-1)
+        fileUploadInputToShift.id = fileUploadInputToShift.name = "img" + (i - 1)
+        removeButtonToShift.id = 'delete' + (i - 1)
     }
     lastLoadedImageId--
 
-    if(removedId === 1){
+    if (removedId === 1) {
         const mainImageHeader = document.createElement('h5')
         mainImageHeader.innerText = 'Main Image'
         const mainImageDiv = document.querySelector('.uploader#img1').parentElement
@@ -129,7 +147,7 @@ function createImageUploader() {
 
     let uploaderInput = document.createElement('input')
     uploaderInput.type = 'file'
-    uploaderInput.name = uploaderInput.id = 'img' + (lastLoadedImageId+1) //changed
+    uploaderInput.name = uploaderInput.id = 'img' + (lastLoadedImageId + 1) //changed
     uploaderInput.classList.add('uploader')
     uploaderInput.accept = 'image/*'
     uploaderInput.onchange = this.onchangeHandler;
@@ -202,7 +220,7 @@ function handleDrop(e) {
             this.appendChild(dragSrcEl.querySelector('h5'));
         }
 
-        for(let i = 1; i <= lastLoadedImageId; i++) {
+        for (let i = 1; i <= lastLoadedImageId; i++) {
             this.parentElement.appendChild(this.parentElement.querySelector('#img' + i).parentElement);
         }
 
@@ -213,3 +231,29 @@ function handleDrop(e) {
     }
     return false;
 }
+
+function addErrorMessage(message) {
+    const messageArticle = document.createElement('article')
+    messageArticle.classList.add("error")
+    const messageIcon = document.createElement('i')
+    messageIcon.classList.add("material-symbols-outlined")
+    messageIcon.classList.add("red")
+    messageIcon.innerText = "error"
+    const messageP = document.createElement('p')
+    messageP.innerText = message
+    const messageProgress = document.createElement('div')
+    messageProgress.classList.add("message-progress")
+    messageArticle.appendChild(messageIcon)
+    messageArticle.appendChild(messageP)
+    messageArticle.appendChild(messageProgress)
+
+    document.getElementById("messages").appendChild(messageArticle)
+}
+
+// <section id="messages">
+//     <article className="error">
+//         <i className="material-symbols-outlined red"> error </i>
+//         <p>message</p>
+//         <div className="message-progress"></div>
+//     </article>
+// </section>

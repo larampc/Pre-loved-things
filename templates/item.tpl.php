@@ -1,5 +1,6 @@
 <?php declare(strict_types = 1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
+require_once (__DIR__ . '/../utils/logger.php');
 
 function draw_item(Item $item, Currency $user_currency) { ?>
     <a href="../pages/item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
@@ -214,6 +215,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
 <?php }
 
 function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categories) { ?>
+    <script src="../scripts/preview_image.js" defer></script>
     <article class="newItemPage">
         <h2>Edit item</h2>
         <form action="../actions/action_edit_item.php" method="POST" enctype="multipart/form-data">
@@ -260,8 +262,28 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
             <label for="description">Description</label>
             <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40">
 
-            <input type="file" id="img1" name="img1" accept="image/*">
-            <input type="file" id="img2" name="img2" accept="image/*">
+            <section class="item-image-uploads">
+                <h4>Upload Images</h4>
+                <div class="photo-upload main-photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $item->mainImage . ".png" ?>)">
+                    <h5>Main Image</h5>
+                    <input type="file" id="img1" class="uploader" name="img1" accept="image/*" value="<?=$item->mainImage?>" required onchange="previewImage(this.id)">
+                    <input type="hidden" value="<?=$item->mainImage?>" name="<?="hiddenimg1"?>">
+                    <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="shiftImages.bind(this)()">delete</i>
+                </div>
+                <?php
+                    $images = $item->images;
+                    for ($i = 1; $i < count( $images); $i++) { ?>
+                        <div class="photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $images[$i] . ".png" ?>)">
+                            <input type="file" id="<?="img" . ($i+1)?>" value="<?=$images[$i]?>" class="uploader" name="<?="img" . ($i+1)?>" accept="image/*" onchange="previewImage(this.id)">
+                            <input type="hidden" value="<?=$images[$i]?>" name="<?="hiddenimg" . ($i+1)?>">
+                            <i class="material-symbols-outlined bolder delete-icon" id="<?= "delete" . ($i+1)?>" onclick="shiftImages.bind(this)()">delete</i>
+                        </div>
+                    <?php }
+                ?>
+                <div class="image-upload-adder">
+                    <i class="material-symbols-outlined">add</i>
+                </div>
+            </section>
 
             <button type="submit" value="<?=$item->id?>" name="edit-item">Submit</button>
         </form>

@@ -75,7 +75,7 @@ select:focus-visible, input[type="text"]:focus-visible, input[type="number"]:foc
     }
 }
 
-.filter input[type="text"], .filter input[type="number"], .filter select {
+.filter input[type="text"], .filter input[type="number"], .filter select, .currency {
     background-color: var(--quaternary);
     border-style: none;
     border-radius: 0.5rem;
@@ -243,7 +243,7 @@ main > h2 {
     width: 100%;
 }
 
-.edit img, .itemPage i, .like {
+.edit img, .itemPage header > * {
     height: 2rem;
     margin: 1rem 0;
 }
@@ -710,6 +710,7 @@ main > h2 {
     input {
         border-style: none;
         border-radius: 0.5rem;
+        background-color: var(--quaternary);
         padding: 0.5rem;
         text-align: center;
         width: 65%;
@@ -1191,17 +1192,16 @@ i {
 }
 
 .confirmation {
-    margin: 0 0.5rem 0 0;
     border-radius: 0.5rem;
     button {
-        background-color: white;
+        background-color: transparent;
         border-style: none;
-        padding-bottom: 0.5rem;
-        border-radius: 0.5rem;
-        i {
-            padding-bottom: 1rem;
-        }
     }
+}
+
+button[name="remove-category"] {
+    padding: 0;
+    margin: 0;
 }
 
 .searchresult {

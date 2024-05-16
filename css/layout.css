@@ -397,7 +397,7 @@ main .userPage{
 
 .userPage .user-details, .pfPage .user-details {
     align-self: center;
-    i {
+    a i {
         transform: translateY(25%);
     }
 }
@@ -982,11 +982,15 @@ main .pfPage{
 .message-progress {
     position: absolute;
     left: 4px;
-    bottom: 4px;
+    bottom: -2px;
     transform: scaleX(0);
     transform-origin: left;
 }
 
 .confirmation {
     position: relative;
+    button {
+        display: flex;
+        align-items: center;
+    }
 }
