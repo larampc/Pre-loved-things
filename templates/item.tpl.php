@@ -304,6 +304,7 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                     <?php }?>
                 </p>
                 <div class="categories">
+                    <script src="../scripts/user_actions.js" defer></script>
                     <?php foreach ($categories as $category) {
                         if ($category['category'] !== "") { ?>
                             <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><span class="paragraph"><?=$category['category'] ?: "All categories"?></span>
@@ -311,7 +312,6 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                                     <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
                                     <form method="post" action="../actions/action_remove_category.php" class="confirmation">
                                         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                                        <script src="../scripts/user_actions.js" defer></script>
                                         <button title="Remove category" type="submit" value="<?=$category['category']?>" name="remove-category" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
                                         </button>
                                     </form>
