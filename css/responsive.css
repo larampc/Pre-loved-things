@@ -151,6 +151,47 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     transition-duration: 0.1s;
 }
 
+.photo-upload:hover .upload-icon, .delete-icon:hover, .photo-upload h5:hover ~ .delete-icon {
+    opacity: 1;
+    backdrop-filter: blur(2px);
+}
+
+.comment-box::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroll-hover-secondary);
+}
+
+.chat:hover {
+    background-color: var(--accent-tertiary);
+    box-shadow: 0 0 5px var(--tertiary);
+    border-radius: 1rem;
+}
+
+.current-chat:hover {
+    background-color: var(--primary);
+    box-shadow: 0 0 2px var(--tertiary);
+    border-radius: 1rem;
+}
+
+.inbox-main ::-webkit-scrollbar-thumb:hover, .index-main .items::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroll-background-primary);
+}
+
+.searchresult .item:hover img {
+    box-shadow: 0 0 5px var(--tertiary);
+}
+
+.index-main .item-info:hover {
+    opacity: 1;
+}
+
+#show-more:hover i {
+    margin-left: 0.5rem;
+}
+
+.star-review input:hover ~ label {
+    background: var(--star-hover);
+}
+
 /* TABLET VIEW */
 @media (max-width: 60em) {
     /* SEARCH PAGE */
@@ -176,13 +217,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         background-color: transparent;
     }
     .searchPage .filter::-webkit-scrollbar-thumb {
-        background: #efdab4cd;
+        background: var(--scroll-background-primary);
         border-radius: 20px;
         border: 6px solid transparent;
         background-clip: content-box;
     }
     .searchPage .filter::-webkit-scrollbar-thumb:hover {
-        background-color: rgba(225, 193, 159, 0.8);
+        background-color: var(--scroll-hover-primary);
     }
     #close-filters {
         display: block;
@@ -270,7 +311,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         border-top-style: solid;
         border-bottom-style: solid;
         flex-direction: row;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: var(--semi-transparent);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
     }
@@ -280,7 +321,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .cartPage .seller-info {
         position: sticky;
         transition-duration: 0.2s;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: var(--semi-transparent);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
     }
@@ -576,7 +617,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         margin: 0.5rem 0;
         border-style: none;
         border-radius: 0.5rem;
-        background-color: #F1F1F1;
+        background-color: var(--secondary);
     }
     .admin-actions {
         justify-content: center;

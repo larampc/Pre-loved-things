@@ -10,9 +10,17 @@
     --secondary: #F1F1F1;
     --tertiary: #D9D9D9;
     --quaternary: #FAFAFA;
+    --semi-transparent: #FFFFFF99;
     --accent-primary: #6A4806;
     --accent-secondary: #E5CFA4;
-
+    --accent-tertiary: #FFF8EF;
+    --scroll-background-primary: #EFDAB4CD;
+    --scroll-hover-primary: #E1C19FCC;
+    --star-background: #E3C087ED;
+    --star-hover: #CCA76AED;
+    --button-transparent: #C8C8C873;
+    --scroll-background-secondary: #19191933;
+    --scroll-hover-secondary: #1919194C;
 }
 
 main {
@@ -304,7 +312,7 @@ main > h2 {
     width: 1.5rem;
     height: 1.5rem;
     font-size: 1.5rem;
-    background: rgba(200, 200, 200, 0.451);
+    background: var(--button-transparent);
     border-radius: 100%;
     color: white;
     cursor: pointer;
@@ -442,11 +450,6 @@ main > h2 {
 .photo-upload.over {
     outline: 5px dotted var(--accent-primary);
     outline-offset: 5px;
-}
-
-.photo-upload:hover .upload-icon, .delete-icon:hover, .photo-upload h5:hover ~ .delete-icon {
-    opacity: 1;
-    backdrop-filter: blur(2px);
 }
 
 .photo-upload {
@@ -646,14 +649,10 @@ main > h2 {
 }
 
 .comment-box::-webkit-scrollbar-thumb {
-    background: rgba(25, 25, 25, 0.2);
+    background: var(--scroll-background-secondary);
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
-}
-
-.comment-box::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(25, 25, 25, 0.3);
 }
 
 .comment p{
@@ -918,19 +917,7 @@ i {
     border-bottom: 2px solid var(--tertiary);
 }
 
-.chat:hover {
-    background-color: #fff8ef;
-    box-shadow: 0 0 5px var(--tertiary);
-    border-radius: 1rem;
-}
-
 .current-chat {
-    background-color: var(--primary);
-    box-shadow: 0 0 2px var(--tertiary);
-    border-radius: 1rem;
-}
-
-.current-chat:hover {
     background-color: var(--primary);
     box-shadow: 0 0 2px var(--tertiary);
     border-radius: 1rem;
@@ -985,10 +972,6 @@ i {
     border-radius: 20px;
     border: 6px solid transparent;
     background-clip: content-box;
-}
-
-.inbox-main ::-webkit-scrollbar-thumb:hover {
-    background-color: #efdab4cd;
 }
 
 .empty-msg-inbox {
@@ -1095,7 +1078,7 @@ i {
         width: 5rem;
     }
     button {
-        background-color: #E5CFA4;
+        background-color: var(--accent-secondary);
         border-radius: 1rem;
         border-style: none;
     }
@@ -1117,15 +1100,15 @@ i {
     content: '';
     width: 1rem;
     height: 1rem;
-    border: 2px solid #c4c2ca;
+    border: 2px solid var(--tertiary);
     border-radius: 100%;
-    background-color: #FFF;
+    background-color: white;
 }
 
 .item-track .state li.done::after, .checkout .state li.done > button::before {
     content: "✔";
     font-size: 13px;
-    color: #FFF;
+    color: white;
     text-align: center;
     border: 2px solid var(--accent-primary);
     background-color: var(--accent-primary);
@@ -1225,12 +1208,6 @@ i {
     margin-bottom: 1rem;
 }
 
-.searchresult .item:hover {
-    img {
-        box-shadow: 0 0 5px var(--tertiary);
-    }
-}
-
 .price-input label {
     width: min-content;
     input {
@@ -1277,10 +1254,6 @@ i {
     background-clip: content-box;
 }
 
-.index-main .items::-webkit-scrollbar-thumb:hover {
-    background-color: #efdab4cd;
-}
-
 .index-main .item {
     width: 200px;
     height: 200px;
@@ -1309,10 +1282,6 @@ i {
     padding: 165px 10px 10px;
 }
 
-.index-main .item-info:hover {
-    opacity: 1;
-}
-
 .index-main .item-info p {
     color: white;
     margin: 5px 0;
@@ -1325,12 +1294,6 @@ i {
     padding-right: 20px;
     color: black;
     text-decoration: none;
-}
-
-#show-more:hover {
-    i {
-        margin-left: 0.5rem;
-    }
 }
 
 a {
@@ -1408,22 +1371,18 @@ a {
 .star-review  label  {
     aspect-ratio: 1;
     width: 100%;
-    background: rgba(25, 25, 25, 0.56);
+    background: var(--scroll-hover-secondary);
     clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
 .star-review input:checked ~ label {
-    background: #E3C087ED;
-}
-
-.star-review input:hover ~ label {
-    background: rgba(204, 167, 106, 0.93);
+    background: var(--star-background);
 }
 
 .write-review {
     height: 2rem;
     padding: 0 0.5rem;
-    border: 2px solid rgba(25, 25, 25, 0.56);
+    border: 2px solid var(--scroll-hover-secondary);
     border-radius: 2rem;
     background-color: var(--secondary);
 }
@@ -1432,7 +1391,7 @@ a {
     height: 2.2rem;
     width: 2.2rem;
     border-width: 0;
-    background-color: rgba(25, 25, 25, 0.3);
+    background-color: var(--scroll-hover-secondary);
     border-radius: 3rem;
     i {
         margin-left: 3px;
@@ -1449,7 +1408,7 @@ a {
     height: 14px;
     margin: calc((10rem - 14px) / 2) calc((10rem - 56px) / 2);
     aspect-ratio: 4;
-    --_g: no-repeat radial-gradient(farthest-side,var(--accent-secondary) 90%,#fff);
+    --_g: no-repeat radial-gradient(farthest-side,var(--accent-secondary) 90%, white);
     background:
             var(--_g) left,
             var(--_g) right;
