@@ -82,3 +82,10 @@ function upload_item_image($img) : string {
     return $id;
 }
 
+function remove_uploaded_item_imgs(array $imgs) {
+    $dbh = get_database_connection();
+    foreach ($imgs as $img) {
+        unlink(__DIR__ . "/../uploads/thumbnails" . $img . ".png");
+        unlink(__DIR__ . "/../uploads/medium" . $img . ".png");
+    }
+}

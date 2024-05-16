@@ -5,6 +5,12 @@ let lastLoadedImageId = 0;
 let allImagesAreLoaded = false
 const maxImageNumber = 7;
 
+const removeIcons = document.querySelectorAll('.delete-icon')
+if(removeIcons){
+    lastLoadedImageId = removeIcons.length
+    allImagesAreLoaded = true
+}
+
 if(imageAdder){
     imageAdder.addEventListener('click', () => {
         if (allImagesAreLoaded){
@@ -15,6 +21,10 @@ if(imageAdder){
             imageAdder.style.display = "none";
         }
     })
+}
+if(lastLoadedImageId > 0){
+    mainImageInput = uploadSection.querySelector('.main-photo-upload input')
+    mainImageInput.required = false
 }
 
 function onchangeHandler() {
@@ -73,6 +83,7 @@ function shiftImages() {
     const removedId = parseInt(this.id.substring(6))
     const fileUploadInputToRemove = document.querySelector('.uploader#img' + removedId)
     if(lastLoadedImageId === 1){
+        fileUploadInputToRemove.required = true
         fileUploadInputToRemove.value = ''
         fileUploadInputToRemove.parentElement.style.backgroundImage = ''
         fileUploadInputToRemove.parentElement.draggable = false
@@ -90,6 +101,10 @@ function shiftImages() {
     uploadSection.removeChild(fileUploadInputToRemove.parentNode)
 
     for (let i = removedId + 1; i <= lastLoadedImageId; i++) {
+        const hiddenInputToShift = document.getElementsByName('hiddenimg' + i)
+        if(hiddenInputToShift){
+            hiddenInputToShift.name = "hiddenimg" + i-1
+        }
         const fileUploadInputToShift = document.querySelector('.uploader#img' + i)
         const removeButtonToShift = fileUploadInputToShift.parentNode.querySelector('#delete' + i)
         fileUploadInputToShift.id = fileUploadInputToShift.name = "img" + (i-1)

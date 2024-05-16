@@ -51,6 +51,23 @@ class Item {
         $stmt = $dbh->prepare('UPDATE items SET name = ?, description = ?, price = ?, category = ? WHERE id = ?');
         return $stmt->execute(array($name, $description, $price, $category,$id));
     }
+    public static function update_item_images(PDO $dbh, string $id, string $mainImage, array $images): bool
+    {
+        $oldImages = self::get_item_images($dbh, $id);
+        $stmt = $dbh->prepare('DELETE FROM item_images WHERE item = ?');
+        $stmt->execute([$id]);
+
+        self::register_item_images($dbh, $images ,$id);
+
+        $stmt = $dbh->prepare('UPDATE items SET mainImage = ? WHERE id = ?');
+        $stmt->execute([$mainImage,$id]);
+
+        foreach ($oldImages as $image) {
+            $stmt = $dbh->prepare('DELETE FROM images WHERE id = ?');
+            $stmt->execute([$image]);
+        }
+        return true;
+    }
 
     static function get_item_images(PDO $dbh, string $id) : array
     {
@@ -223,7 +240,8 @@ class Item {
         }
     }
 
-    static function delete_item(PDO $dbh, string $id) {
+    static function delete_item(PDO $dbh, string $id): bool
+    {
         $stmt = $dbh->prepare('DELETE FROM items WHERE id = ?');
         if (!$stmt->execute(array($id))) return false;
         self::remove_cart_favorite($dbh, array(self::get_item($dbh, $id)));
