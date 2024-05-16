@@ -70,6 +70,8 @@ select:focus-visible, input[type="text"]:focus-visible, input[type="number"]:foc
     border-color: black;
     border-width: 1px;
     border-style:solid;
+    padding-left: 0.5rem;
+    padding-right: 0.3rem;
     label[form=searchbar] {
         width: 100%;
     }
@@ -143,6 +145,8 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 .search-btn {
     background-color: transparent;
     border-width: 0;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 button {
