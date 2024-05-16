@@ -309,7 +309,13 @@ function draw_page_filters(array $categories, string $visible, PDO $dbh, Session
                             <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" <?=$visible==$category['category']?"checked":""?> value="<?=$category['category']?>"><span class="paragraph"><?=$category['category'] ?: "All categories"?></span>
                                 <?php if ($session->is_admin()) {?>
                                     <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
-                                    <a href="../actions/action_remove_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">delete</a>
+                                    <script src="../scripts/user_actions.js" defer></script>
+                                    <form method="post" action="../actions/action_remove_category.php" class="confirmation">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                        <script src="../scripts/user_actions.js" defer></script>
+                                        <button title="Remove category" type="submit" value="<?=$category['category']?>" name="remove-category" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
+                                        </button>
+                                    </form>
                                 <?php }?>
                             </label>
                         <?php }} ?>
