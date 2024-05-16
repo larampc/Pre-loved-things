@@ -202,4 +202,15 @@ class User
         $stmt->execute(array($user_id, "%/$month/".date("Y", time())));
         return $stmt->fetchColumn();
     }
+    public static function get_users(PDO $dbh, int $page, string $search): array {
+        $page = 3 * ($page - 1);
+        $stmt = $dbh->prepare('SELECT * FROM users WHERE (username LIKE ?) OR (name LIKE ?) OR (email LIKE ?) LIMIT 3 offset ? ');
+        $stmt->execute(array("%$search%","%$search%", "%$search%", $page));
+        $users = $stmt->fetchAll();
+        $new_users = array();
+        foreach ($users as $user) {
+            $new_users[] = new User($user['user_id'], $user['username'], $user['email'],$user['name'], $user['image'], $user['phone'], $user['role']);
+        }
+        return $new_users;
+    }
 }

@@ -3,7 +3,9 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
-    <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>> <?php
+    <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>>
+        <script src="../scripts/user_actions.js" defer></script>
+        <?php
         draw_user_details($dbh, $user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
         <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
@@ -31,7 +33,6 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
             <?php } ?>
             <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && $session->is_admin()){?>
-                <script src="../scripts/user_actions.js" defer></script>
                 <div class="admin-actions">
                     <form method="post" action="../actions/action_remove_user.php" class="confirmation">
                         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
@@ -316,3 +317,15 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     </section>
 <?php
 } ?>
+
+<?php function draw_admin_page() { ?>
+    <script src="../scripts/admin_panel.js" defer></script>
+    <div class="user">
+        <label> Search user
+            <input type="text" id="search-user">
+        </label>
+        <section class="user-result">
+            <div class="loader"></div>
+        </section>
+    </div>
+<?php }
