@@ -293,7 +293,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
 function draw_category_tags(PDO $dbh, $category) {
     $tags = Tag::get_category_tags($dbh, $category);
     if (!empty($tags)) { ?>
-    <div class="category-<?=$category?> category-box">
+    <div class="category-<?=$category?> category-box <?=$category == ""?: "hide"?>>
         <p><?=$category?></p>
     <?php foreach ($tags as $tag) { ?>
     <div class="options tag" id="<?=$tag['tag']?>">
@@ -362,7 +362,6 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
                     </label>
                 </div>
                 <?php
-                draw_category_tags($dbh, "", true);
                 foreach ($categories as $category) {
                     draw_category_tags($dbh, $category['category']);
                 }
