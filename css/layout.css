@@ -991,3 +991,23 @@ main .pfPage{
         align-items: center;
     }
 }
+
+.user-table-header {
+    display: grid;
+    grid-template-columns: 4rem 1fr 1fr 1fr 1fr 1fr;
+}
+
+.user-result .user-details {
+    display: flex;
+    .user-info {
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.admin-main #curve_chart {
+    overflow: clip;
+}

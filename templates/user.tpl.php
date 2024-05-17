@@ -322,16 +322,24 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 } ?>
 
 <?php function draw_admin_page() { ?>
+    <div id="curve_chart"></div>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="../scripts/draw_chart_all.js"></script>
     <script src="../scripts/admin_panel.js" defer></script>
-    <div class="user">
+    <div class="user-search">
         <label> Search user
             <input type="text" id="search-user">
         </label>
+        <section class="user-table-header">
+            <p>Image</p>
+            <p>Username</p>
+            <p>Email</p>
+            <p>Phone</p>
+            <p>Sold</p>
+            <p>Purchases</p>
+        </section>
         <section class="user-result">
             <div class="loader"></div>
         </section>
     </div>
-    <div id="curve_chart"></div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script src="../scripts/draw_chart_all.js"></script>
 <?php }

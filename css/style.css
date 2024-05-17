@@ -27,7 +27,7 @@ main {
     margin: 7rem 0 2rem;
 }
 
-main.new-main, main.edit-profile-main, main.new-category-main {
+main.new-main, main.edit-profile-main, main.new-category-main, main.admin-main {
     margin: 0;
     padding: 7rem 0 2rem;
     background-color: var(--primary);
@@ -1430,3 +1430,46 @@ a {
 }
 
 /* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
+
+.user-search {
+    margin: 4rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 3px solid var(--primary);
+    background-color: var(--tertiary);
+}
+
+.user-table-header {
+    margin-top: 1rem;
+    padding: 0 1rem;
+    border-radius: 1rem 1rem 0 0;
+    background-color: var(--button-transparent);
+    box-shadow: 0 0 5px var(--scroll-background-secondary);
+    text-align: center;
+}
+
+.user-result {
+    padding: 1rem;
+    border-radius: 0 0 1rem 1rem;
+    background-color: var(--secondary);
+    box-shadow: 0 0 5px var(--scroll-background-secondary);
+}
+
+.user-result .user-details {
+    margin: 0.4rem 0;
+    img {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+    }
+    .user-info {
+        text-align: center;
+    }
+}
+
+.admin-main #curve_chart {
+    margin: 0 4rem;
+    border-radius: 1rem;
+    height: 16rem;
+    background-color: white;
+}

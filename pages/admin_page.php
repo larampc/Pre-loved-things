@@ -15,6 +15,6 @@ require_once(__DIR__ . '/../templates/user.tpl.php');
 
 $dbh = get_database_connection();
 
-get_header("new", $dbh, $session);
+get_header("admin", $dbh, $session);
 draw_admin_page();
 draw_footer();
