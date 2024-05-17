@@ -11,6 +11,13 @@ if (removeIcons) {
     allImagesAreLoaded = true
 }
 
+if (lastLoadedImageId + 1 >= maxImageNumber) {
+    imageAdder.style.display = "none";
+}
+if (lastLoadedImageId > 0) {
+    uploadSection.querySelector('.main-photo-upload input').required = false
+}
+
 if (imageAdder) {
     imageAdder.addEventListener('click', () => {
         if (allImagesAreLoaded) {
@@ -22,13 +29,9 @@ if (imageAdder) {
         }
     })
 }
-if (lastLoadedImageId > 0) {
-    mainImageInput = uploadSection.querySelector('.main-photo-upload input')
-    mainImageInput.required = false
-}
 
-function onchangeHandler() {
-    previewImage(this.id);
+async function onchangeHandler() {
+    await previewImage(this.id);
 }
 
 async function previewImage(imageId) {
@@ -91,6 +94,9 @@ function shiftImages() {
         fileUploadInputToRemove.parentElement.style.backgroundImage = ''
         fileUploadInputToRemove.parentElement.draggable = false
         fileUploadInputToRemove.parentElement.removeChild(fileUploadInputToRemove.parentElement.querySelector('i'))
+        const hiddenInput = document.querySelector('input[type=hidden].image-data')
+        if(hiddenInput) hiddenInput.parentElement.removeChild(hiddenInput)
+
         fileUploadInputToRemove.parentElement.insertBefore(createAddPhotoIcon(), fileUploadInputToRemove.parentElement.querySelector('input'))
         lastLoadedImageId = 0
         if (allImagesAreLoaded === false) {
@@ -249,11 +255,3 @@ function addErrorMessage(message) {
 
     document.getElementById("messages").appendChild(messageArticle)
 }
-
-// <section id="messages">
-//     <article className="error">
-//         <i className="material-symbols-outlined red"> error </i>
-//         <p>message</p>
-//         <div className="message-progress"></div>
-//     </article>
-// </section>

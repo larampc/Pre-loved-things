@@ -267,7 +267,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                 <div class="photo-upload main-photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $item->mainImage . ".png" ?>)">
                     <h5>Main Image</h5>
                     <input type="file" id="img1" class="uploader" name="img1" accept="image/*" value="<?=$item->mainImage?>" required onchange="previewImage(this.id)">
-                    <input type="hidden" value="<?=$item->mainImage?>" name="<?="hiddenimg1"?>">
+                    <input type="hidden" class="image-data" value="<?=$item->mainImage?>" name="<?="hiddenimg1"?>">
                     <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="shiftImages.bind(this)()">delete</i>
                 </div>
                 <?php
@@ -275,7 +275,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                     for ($i = 1; $i < count( $images); $i++) { ?>
                         <div class="photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $images[$i] . ".png" ?>)">
                             <input type="file" id="<?="img" . ($i+1)?>" value="<?=$images[$i]?>" class="uploader" name="<?="img" . ($i+1)?>" accept="image/*" onchange="previewImage(this.id)">
-                            <input type="hidden" value="<?=$images[$i]?>" name="<?="hiddenimg" . ($i+1)?>">
+                            <input type="hidden" class="image-data" value"<?=$images[$i]?>" name="<?="hiddenimg" . ($i+1)?>">
                             <i class="material-symbols-outlined bolder delete-icon" id="<?= "delete" . ($i+1)?>" onclick="shiftImages.bind(this)()">delete</i>
                         </div>
                     <?php }
