@@ -1435,8 +1435,12 @@ a {
     margin: 4rem;
     padding: 1rem;
     border-radius: 1rem;
+    text-align: center;
     border: 3px solid var(--primary);
     background-color: var(--tertiary);
+    input[type="text"]:focus-visible {
+        outline: var(--button-transparent) solid 2px;
+    }
 }
 
 .user-table-header {

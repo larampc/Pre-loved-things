@@ -328,7 +328,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     <script src="../scripts/admin_panel.js" defer></script>
     <div class="user-search">
         <label> Search user
-            <input type="text" id="search-user">
+            <input type="text" id="search-user" placeholder="Username or Email">
         </label>
         <section class="user-table-header">
             <p>Image</p>
