@@ -168,6 +168,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                             <p class="total"><?=$sum . $user_currency->symbol?></p>
                         </div>
                         <form class="checkout-item" action="../actions/action_checkout.php" method="post">
+                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                             <input type="hidden" value="<?=$user->user_id?>" name="user_items">
                             <label>
                                 <button class="checkout" type="submit">Buy now!</button>
@@ -201,6 +202,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                 </div>
                 <form class="checkout-item" action="../actions/action_checkout.php" method="post">
                     <input type="hidden" value="<?=$user->user_id?>" name="user_items">
+                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <label>
                         <button class="checkout" type="submit">Buy now!</button>
                     </label>
@@ -213,6 +215,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 <?php function draw_checkout_form() { ?>
     <script src="../scripts/checkout.js" defer></script>
     <form class="checkout" method="post" action="../actions/action_purchase.php">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <ul class="state">
             <li class="current">
                 <button type="button" class="collapsible">Shipping information</button>

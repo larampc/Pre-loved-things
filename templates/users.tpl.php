@@ -6,7 +6,6 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 
 <?php function draw_register_form(bool $checkout, bool $message, string $user, string $item)
 { ?>
-
     <section class="register">
         <h2>Sign Up</h2>
         <form class="register-form" action="../actions/action_register.php<?=$checkout? "?checkout": ($message? "?user=".$user."&item=".$item:"")?>" method="POST">
@@ -16,16 +15,25 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
                 <input type="text" name="name" placeholder="Your name" required autocomplete="on">
             </label>
             <label>
-                <input type="text" name="username" placeholder="Your username" required autocomplete="on">
+                <input type="text" name="username" placeholder="Your username" required
+                       pattern="\w+" oninvalid="this.setCustomValidity('Invalid username - can only contain letters, digits and underscores')"
+                       oninput="this.setCustomValidity('')" autocomplete="on">
             </label>
             <label>
                 <input type="email" name="email" placeholder="Your email" required autocomplete="on">
             </label>
             <label>
-                <input type="text" name="phone" placeholder="Your phone number" required autocomplete="on">
+                <input type="tel" name="phone" placeholder="Your phone number" required
+                       pattern="\d{9}|\d{3}-\d{3}-\d{3}"
+                       oninvalid="this.setCustomValidity('Invalid phone number - (ddddddddd or ddd-ddd-ddd)')"
+                       oninput="this.setCustomValidity('')" autocomplete="on">
             </label>
             <label>
-                <input type="password" name="password" placeholder="Your password" autocomplete="off" required>
+                <input type="password" name="password" placeholder="Your password" autocomplete="off"
+                       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[?!@#$%^&*()\-+=\/\\]).{8,}"
+                       oninvalid="this.setCustomValidity('Invalid password - must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long')"
+                       oninput="this.setCustomValidity('')"
+                       required>
             </label>
             <button class="login-button" type="submit">Register</button>
             <p class="rotateRegister">Already have an account?</p>

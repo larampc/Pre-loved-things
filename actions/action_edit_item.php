@@ -6,7 +6,7 @@ require_once(__DIR__ . '/../utils/session.php');
 require_once(__DIR__ . '/../utils/files.php');
 $session = new Session();
 
-if(!validateCsrfToken($_POST['csrf'])) {
+if(!validate_csrf_token($_POST['csrf'])) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 

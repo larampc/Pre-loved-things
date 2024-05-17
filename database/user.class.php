@@ -34,7 +34,7 @@ class User
 
     public static function verify_user(PDO $dbh, string $email, string $password): ?User
     {
-        $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? OR username = ?');
+        $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? OR username = ? COLLATE nocase');
         $stmt->execute(array($email, $email));
         $user = $stmt->fetch();
 
@@ -43,14 +43,14 @@ class User
     }
 
     public static function verify_email(PDO $dbh, string $email): bool {
-        $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ?');
+        $stmt = $dbh->prepare('SELECT * FROM users WHERE email = ? COLLATE nocase');
         $stmt->execute(array($email));
         $row = $stmt->fetch();
         return !empty($row);
     }
 
     public static function verify_username(PDO $dbh, string $username): bool {
-        $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ?');
+        $stmt = $dbh->prepare('SELECT * FROM users WHERE username = ? COLLATE nocase');
         $stmt->execute(array($username));
         $row = $stmt->fetch();
         return !empty($row);
@@ -101,7 +101,7 @@ class User
 
     public static function update_user(PDO $dbh, string $id, $username,$email, $phone, $name, $image): bool
     {
-        $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, image=?, username=? WHERE user_id = ?');
+        $stmt = $dbh->prepare('UPDATE users SET email = ?, phone = ?, name = ?, image = ?, username = ? WHERE user_id = ?');
         return $stmt->execute(array($email, $phone, $name, $image, $username,$id));
     }
 

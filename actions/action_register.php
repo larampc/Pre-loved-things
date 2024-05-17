@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
-if(!validateCsrfToken($_POST['csrf'])) {
+if(!validate_csrf_token($_POST['csrf'])) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
@@ -30,5 +30,5 @@ if ($email_available && $username_available) {
 }
 else {
     $session->addMessage('error', $email_available? 'Username already taken' : 'Email already registered.');
-    header('Location: ../pages/login.php'. ($checkout? '?checkout':($message? '?user='.$_GET['user'].'&item='.$_GET['item']:'')));
+    header('Location: ../pages/login.php'. ($checkout ? '?checkout' : ($message ? '?user='.$_GET['user'].'&item='.$_GET['item'] : '')));
 }

@@ -9,7 +9,7 @@ $session = new Session();
 log_to_stdout($_GET['csrf']);
 log_to_stdout($_SESSION['csrf']);
 
-if (!validateCsrfToken($_GET['csrf'])) {
+if (!validate_csrf_token($_GET['csrf'])) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
