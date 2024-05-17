@@ -14,6 +14,9 @@ require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
+if(!validate_password($_POST['password'])){
+    die(header('Location: ../pages/login.php'));
+}
 
 $checkout = isset($_GET['checkout']);
 $email_available = !User::verify_email($dbh, $_POST['email']);
