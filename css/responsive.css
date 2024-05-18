@@ -472,6 +472,20 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .buy-form label input[type="text"] {
         margin-left: 1rem;
     }
+
+    .user-search {
+        margin: 2rem;
+    }
+    .admin-main #curve_chart {
+        margin: 0 2rem;
+    }
+    .user-result .user-details img {
+        width: 3rem;
+        height: 3rem;
+    }
+    .user-table-header {
+        grid-template-columns: 3rem 1fr 1fr 1fr 1fr 1fr;
+    }
 }
 
 /* PHONE VIEW */
