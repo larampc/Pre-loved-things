@@ -3,7 +3,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once (__DIR__ . '/../utils/logger.php');
 
 function draw_item(Item $item, Currency $user_currency) { ?>
-    <a href="../pages/item.php?id=<?= $item->id ?>" class="item" id="<?=$item->id?>">
+    <a href="../pages/item.php?id=<?= $item->id ?>" class="item">
         <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
@@ -21,11 +21,11 @@ function draw_items_main(array $liked_items, array $recent_items, Currency $user
 <?php }
 
 function draw_items(array $items, Currency $user_currency) { ?>
-    <section class="items">
+    <div class="items">
         <?php foreach($items as $item) {
             draw_item($item, $user_currency);
         } ?>
-    </section>
+    </div>
 <?php }
 function draw_sliding_items(array $items, Currency $user_currency) { ?>
     <section class="items">

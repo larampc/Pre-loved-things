@@ -50,7 +50,7 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
             <?php } ?>
         </nav>
     </header>
-        <section id="messages">
+        <div id="messages">
             <?php foreach ($session->getMessages() as $message) { ?>
                 <article class="<?=$message['type']?>">
                     <?php
@@ -63,7 +63,7 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
                     <div class="message-progress"></div>
                 </article>
             <?php } ?>
-        </section>
+        </div>
     <main class=<?=$page . "-main"?>>
 <?php } ?>
 

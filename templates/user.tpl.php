@@ -6,7 +6,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>>
         <script src="../scripts/user_actions.js" defer></script>
         <?php
-        draw_user_details($dbh, $user, $session);
+        draw_user_details($user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
         <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
             <div id="curve_chart"></div>
@@ -20,12 +20,12 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     </article>
 <?php } ?>
 
-<?php function draw_user_details(PDO $dbh, User $user, Session $session) { ?>
+<?php function draw_user_details(User $user, Session $session) { ?>
     <section class="user">
         <img src="../uploads/profile_pics/<?=$user->image?>.png" class="profile-picture" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
-            <?php if ($session->isLoggedIn() &&  $session->getId() === $user->user_id) {?><p class="username"><?=$user->username?></p> <?php } ?>
+            <?php if ($session->isLoggedIn() &&  $session->getId() === $user->user_id || $session->is_admin()) {?><p class="username"><?=$user->username?></p> <?php } ?>
             <p class="phone"><?=$user->phone?></p>
             <p class="email"><?=$user->email?></p>
             <?php if ($session->isLoggedIn() && $session->getId() === $user->user_id) {?>
