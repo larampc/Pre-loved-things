@@ -34,6 +34,7 @@ async function getFilteredUsers(clean) {
         request--;
         return;
     }
+    console.log(response.url)
     const users = await response.json();
     let loader = document.querySelector(".loader-users");
     if (users.length === 0) {
@@ -68,7 +69,7 @@ getFilteredUsers(true);
 
 function createUser(user) {
     const main = document.createElement('a');
-    main.href = "user.php?user_id=" + user.user_id;
+    main.href = "user.php?user_id=" + user['user_id'];
     main.className = "user-details";
     const img = document.createElement("img")
     img.src = "../uploads/profile_pics/" + user['image'] + ".png"
@@ -76,17 +77,25 @@ function createUser(user) {
     const div = document.createElement("div")
     div.className = "user-info"
     const name = document.createElement("p")
-    name.innerText = user.name;
+    name.innerText = user['name'];
     name.className = "name"
     div.appendChild(name);
     const email = document.createElement("p")
-    email.innerText = user.email;
+    email.innerText = user['email'];
     email.className = "email"
     div.appendChild(email);
     const phone = document.createElement("p")
-    phone.innerText = user.phone;
+    phone.innerText = user['phone'];
     phone.className = "phone"
     div.appendChild(phone);
+    const sold = document.createElement("p")
+    sold.innerText = user['sold'];
+    sold.className = "sold"
+    div.appendChild(sold);
+    const purchase = document.createElement("p")
+    purchase.innerText = user['buy'];
+    purchase.className = "purchase"
+    div.appendChild(purchase);
     main.appendChild(div);
     return main;
 }

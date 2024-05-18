@@ -202,15 +202,25 @@ class User
         $stmt->execute(array($user_id, "%/$month/".date("Y", time())));
         return $stmt->fetchColumn();
     }
+    public static function get_sold_user(PDO $dbh, string$user_id): int {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item WHERE items.creator = ? ');
+        $stmt->execute(array($user_id));
+        return $stmt->fetchColumn();
+    }
+    public static function get_bought_user(PDO $dbh, string$user_id): int {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE purchaseData.buyer = ? ');
+        $stmt->execute(array($user_id));
+        return $stmt->fetchColumn();
+    }
     public static function get_users(PDO $dbh, int $page, string $search): array {
         $page = 3 * ($page - 1);
         $stmt = $dbh->prepare('SELECT * FROM users WHERE (username LIKE ?) OR (name LIKE ?) OR (email LIKE ?) LIMIT 3 offset ? ');
         $stmt->execute(array("%$search%","%$search%", "%$search%", $page));
         $users = $stmt->fetchAll();
-        $new_users = array();
-        foreach ($users as $user) {
-            $new_users[] = new User($user['user_id'], $user['username'], $user['email'],$user['name'], $user['image'], $user['phone'], $user['role']);
+        foreach ($users as &$user) {
+            $user['sold'] = self::get_sold_user($dbh, $user['user_id']);
+            $user['buy'] = self::get_bought_user($dbh, $user['user_id']);
         }
-        return $new_users;
+        return $users;
     }
 }
