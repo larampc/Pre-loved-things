@@ -3,6 +3,7 @@ let isLoading = false;
 const container = document;
 const resultContainer =
     document.querySelector(".user-result");
+const userSearch = document.querySelector(".user-search");
 let tags = Array();
 let request = 0;
 let controller = new AbortController();
@@ -34,7 +35,7 @@ async function getFilteredUsers(clean) {
         return;
     }
     const users = await response.json();
-    let loader = document.querySelector(".loader");
+    let loader = document.querySelector(".loader-users");
     if (users.length === 0) {
         all = true;
         isLoading = false;
@@ -44,9 +45,9 @@ async function getFilteredUsers(clean) {
     }
     if (request === 1) {
         users.forEach(user => resultContainer.appendChild(createUser(user)));
-        loader = document.querySelector(".loader");
+        loader = document.querySelector(".loader-users");
         if (loader) resultContainer.appendChild(loader);
-        if (users.length < 20) loader.style.display = 'none';
+        if (users.length < 3) loader.style.display = 'none';
         else loader.style.display = 'grid';
         isLoading = false;
     }
@@ -56,7 +57,7 @@ async function getFilteredUsers(clean) {
 document.onscroll = async () => {
     if (isLoading || all) return;
     if (
-        window.scrollY > (document.body.offsetHeight - window.outerHeight)
+        window.scrollY > (document.body.offsetHeight - window.outerHeight - parseInt(window.getComputedStyle(userSearch).marginBottom, 10))
     ) {
         pageNum++;
         await getFilteredUsers(false);
@@ -94,9 +95,9 @@ function cleanSearch() {
     pageNum = 1;
     all = false;
     const users = resultContainer.children;
-    while (!resultContainer.firstElementChild.classList.contains("loader")) {
+    while (!resultContainer.firstElementChild.classList.contains("loader-users")) {
         resultContainer.removeChild(resultContainer.firstElementChild);
     }
-    const loader = document.querySelector(".loader");
+    const loader = document.querySelector(".loader-users");
     loader.style.display = 'grid';
 }

@@ -976,6 +976,18 @@ main .pfPage{
     100% {transform: rotate(calc(var(--s,1)*1turn))}
 }
 
+.loader-users {
+    animation: l9 1s infinite;
+}
+
+@keyframes l9 {
+    0%   {background-size:1.5rem 50% ,1.5rem 50% ,1.5rem 50%}
+    25%  {background-size:1.5rem 100%,1.5rem 50% ,1.5rem 50%}
+    50%  {background-size:1.5rem 50% ,1.5rem 100%,1.5rem 50%}
+    75%  {background-size:1.5rem 50% ,1.5rem 50% ,1.5rem 100%}
+    100% {background-size:1.5rem 50% ,1.5rem 50% ,1.5rem 50%}
+}
+
 .message-progress {
     position: absolute;
     left: 4px;

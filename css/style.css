@@ -1429,7 +1429,17 @@ a {
     background: var(--accent-secondary);
 }
 
-/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
+.loader-users {
+    margin: 0 auto;
+    width: 6rem;
+    height: 3rem;
+    --g1: conic-gradient(from 90deg at left 8px top 8px, transparent 90deg, var(--tertiary) 0);
+    --g2: conic-gradient(from -90deg at bottom 8px right 8px, transparent 90deg, var(--tertiary) 0);
+    background: var(--g1), var(--g1), var(--g1), var(--g2), var(--g2), var(--g2);
+    background-position: left, center, right;
+    background-repeat: no-repeat;
+}
+
 
 .user-search {
     margin: 4rem;
@@ -1477,3 +1487,5 @@ a {
     height: 16rem;
     background-color: white;
 }
+
+/* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/

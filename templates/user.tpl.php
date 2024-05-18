@@ -339,7 +339,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <p>Purchases</p>
         </section>
         <section class="user-result">
-            <div class="loader"></div>
+            <div class="loader-users"></div>
         </section>
     </div>
 <?php }
