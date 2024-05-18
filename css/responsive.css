@@ -356,9 +356,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
             align-items: center;
             justify-content: center;
             margin-top: 0.5rem;
-        }
-        i {
-            transform: none;
+
+            i {
+                transform: none;
+            }
         }
     }
 

@@ -358,7 +358,6 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 #open-filters {
     display: none;
-    grid-area: category;
     z-index: 2;
 }
 
