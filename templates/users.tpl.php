@@ -65,7 +65,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 
 <?php function draw_login_register_form(bool $checkout, bool $message, string $user, string $item)
 { ?>
-
+    <script src="../scripts/flip.js" defer></script>
     <section class="flipLoginRegister">
         <?php draw_login_form($checkout, $message, $user, $item); ?>
         <?php draw_register_form($checkout, $message, $user, $item); ?>

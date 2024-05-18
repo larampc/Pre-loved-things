@@ -69,6 +69,8 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
 <?php } ?>
 
 <?php function draw_item_page(PDO $db, Item $item, Session $session, Currency $user_currency) { ?>
+    <script src="../scripts/like.js" defer></script>
+    <script src="../scripts/add_cart.js" defer></script>
     <article class="itemPage">
         <header>
             <h2><?=$item->name?></h2>
@@ -375,6 +377,7 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
 <?php } ?>
 
 <?php function draw_item_tracking(TrackItem $trackItem, Session $session, Currency $user_currency) { ?>
+    <script src="../scripts/print.js" defer></script>
     <section class="item-track">
         <form method="get" action="../pages/inbox.php">
             <label>

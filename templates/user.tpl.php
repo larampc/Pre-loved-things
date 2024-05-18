@@ -153,6 +153,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 <?php } ?>
 
 <?php function draw_cart(array $items, Currency $user_currency) { ?>
+    <script src="../scripts/remove_cart.js" defer></script>
     <article class="cartPage">
         <h2>Your cart</h2>
         <?php
