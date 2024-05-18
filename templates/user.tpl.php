@@ -3,25 +3,25 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
-    <article class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>>
+    <div class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>>
         <script src="../scripts/user_actions.js" defer></script>
         <?php
         draw_user_details($user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
         <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
             <div id="curve_chart"></div>
-            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script src="https://www.gstatic.com/charts/loader.js"></script>
             <input type="hidden" class="chart-user" value="<?=$user->user_id?>">
             <script src="../scripts/draw_chart_user.js"></script>
             <?php
             draw_user_options($dbh, $user, $session, $user_currency);
         } else draw_items($items, $user_currency);
         ?>
-    </article>
+    </div>
 <?php } ?>
 
 <?php function draw_user_details(User $user, Session $session) { ?>
-    <section class="user">
+    <div class="user">
         <img src="../uploads/profile_pics/<?=$user->image?>.png" class="profile-picture" alt="profile picture">
         <div class="user-details">
             <h2 class="name"><?=$user->name?></h2>
@@ -51,7 +51,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
                 </div>
             <?php } ?>
         </div>
-    </section>
+    </div>
     <?php
 }
 function draw_edit_profile($user) { ?>
@@ -86,10 +86,10 @@ function draw_edit_profile($user) { ?>
 }
 
 function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
-    <section class="feedback">
-        <div class="feedback-sum">
+    <div class="feedback">
+        <section class="feedback-sum">
             <h2>Feedback</h2>
-            <section class="stars">
+            <div class="stars">
                 <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
                 $average = round($avg);
                 for ($i = 0; $i < $average; $i++) { ?>
@@ -99,8 +99,8 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     <i class="material-symbols-outlined"> grade </i>
                 <?php } ?>
                 <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
-            </section>
-        </div>
+            </div>
+        </section>
             <div class ="comment-box">
                 <?php
                     if (empty($feedback)) { ?>
@@ -108,22 +108,22 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     <?php }
                     foreach ($feedback as $comment) {
                         ?>
-                    <article class="comment">
+                    <div class="comment">
                         <a href="../pages/user.php?user_id=<?=$comment->from->user_id ?>">
                             <img src="../uploads/profile_pics/<?= $comment->from->image?>.png" class="profile-picture" alt="profile picture">
                             <p class="uname"><?=$comment->from->name?></p>
                         </a>
                         <time><?=$comment->date?></time>
-                        <section class="stars">
+                        <div class="stars">
                             <?php for ($i = 0; $i < $comment->rating; $i++) { ?>
                                 <i class="material-symbols-outlined filled"> grade </i>
                             <?php }
                             for ($i = $comment->rating; $i < 5; $i++) { ?>
                                 <i class="material-symbols-outlined"> grade </i>
                             <?php } ?>
-                        </section>
+                        </div>
                         <p class="content"><?=$comment->message?></p>
-                    </article>
+                    </div>
                         <?php
                     } ?>
             </div>
@@ -132,7 +132,9 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
-                <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
+                <label>
+                    <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
+                </label>
                 <div class="star-review">
                     <input type="radio" name="stars" id="st5" value="5">
                     <label for="st5"></label>
@@ -149,7 +151,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                 </button>
             </form>
         <?php } ?>
-    </section>
+    </div>
 <?php } ?>
 
 <?php function draw_cart(array $items, Currency $user_currency) { ?>
@@ -308,7 +310,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 
 <?php  function draw_user_options(PDO $dbh, User $user, Session $session, Currency $user_currency) { ?>
     <script src="../scripts/profileNav.js" defer></script>
-    <section class="display-item">
+    <div class="display-item">
         <?php if ($user->user_id === $session->getId()) {?>
             <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
         <?php } ?>
@@ -317,27 +319,27 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <button type="button" class="navOption sales" onclick="openNav('sales')">Pending sales</button>
             <button type="button" class="navOption purchased" onclick="openNav('purchased')">Pending purchases</button>
         </div>
-        <section class="items" id="purchased">
+        <div class="items" id="purchased">
             <?php
             $items = TrackItem::get_purchased_items($dbh, $user->user_id);
             foreach ($items as $item) {
                 draw_item_to_track($dbh, $item);
             } ?>
-            </section>
-        <section class="items" id="sales">
+            </div>
+        <div class="items" id="sales">
             <?php
             $items = TrackItem::get_selling_items($dbh, $user->user_id);
             foreach ($items as $item) {
                 draw_item_to_track($dbh, $item);
             } ?>
-            </section>
-        <section class="items" id="my">
+            </div>
+        <div class="items" id="my">
             <?php $items = Item::get_user_items($dbh, $user->user_id);
             foreach($items as $item) {
                 draw_item($item, $user_currency);
             } ?>
-        </section>
-    </section>
+        </div>
+    </div>
 <?php
 } ?>
 
