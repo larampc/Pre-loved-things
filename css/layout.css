@@ -81,6 +81,10 @@ header nav {
     position: relative;
 }
 
+.item-info p:first-child {
+    overflow: hidden;
+}
+
 .index-main .item-info {
     position: absolute;
     top: 0;
@@ -306,11 +310,6 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 }
 
 /* SEARCH PAGE */
-
-.searchPage .item-info {
-    display: flex;
-    justify-content: space-between;
-}
 
 .searchPage .options {
     display: flex;

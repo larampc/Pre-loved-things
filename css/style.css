@@ -196,6 +196,8 @@ main > h2 {
     color: black;
     p {
         margin: 0.2rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 }
 
@@ -503,7 +505,7 @@ main > h2 {
 
 /* SEARCH PAGE */
 
-.searchPage .item-info {
+.searchPage .item-info, .favorite-main .item-info, .display-item .item-info {
     width: 10rem;
 }
 

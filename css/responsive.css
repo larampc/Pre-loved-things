@@ -613,6 +613,9 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         width: 80%;
         height: 80%;
     }
+    .searchPage .item-info, .favorite-main .item-info, .display-item .item-info {
+        width: 40dvw;
+    }
 
     /* USER AND PROFILE PAGE */
 
