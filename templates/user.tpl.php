@@ -62,13 +62,18 @@ function draw_edit_profile($user) { ?>
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
             <label for="name"> Name </label>
-            <input type="text" id="name" name="name" value="<?=$user->name?>" required>
+            <input type="text" id="name" name="name" value="<?=$user->name?>" autocomplete="on" required>
             <label for="username"> Username </label>
-            <input type="text" id="username" name="username" value="<?=$user->username?>" required>
+            <input type="text" id="username" name="username" value="<?=$user->username?>" autocomplete="on" required
+                   pattern="\w+" oninvalid="this.setCustomValidity('Invalid username - can only contain letters, digits and underscores')"
+                   oninput="this.setCustomValidity('')">
             <label for="email"> Email </label>
-            <input type="email" id="email" name="email" value="<?=$user->email?>" required>
+            <input type="email" id="email" name="email" value="<?=$user->email?>" autocomplete="on" required>
             <label for="phone"> Phone </label>
-            <input type="tel" id="phone" name="phone" value="<?=$user->phone?>" required>
+            <input type="tel" id="phone" name="phone" value="<?=$user->phone?>" autocomplete="on" required
+                   pattern="\d{9}|\d{3}-\d{3}-\d{3}"
+                   oninvalid="this.setCustomValidity('Invalid phone number - (ddddddddd or ddd-ddd-ddd)')"
+                   oninput="this.setCustomValidity('')">
             <label for="img1">Profile photo</label>
             <div class="photo-upload">
                 <i class="material-symbols-outlined bolder upload-icon">add_a_photo</i>
@@ -229,7 +234,10 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                         <input type="text" name="city" required autocomplete="on">
                     </label>
                     <label> Postal code
-                        <input type="text" name="postalCode" required autocomplete="on">
+                        <input type="text" name="postalCode" required autocomplete="on"
+                               pattern="\d{4}-\d{3}"
+                               oninvalid="this.setCustomValidity('Invalid postal code')"
+                               oninput="this.setCustomValidity('')">
                     </label>
                     <button type="button" class="next shipping">Next</button>
                 </div>
@@ -247,18 +255,27 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     </div>
                     <div id="credit-card" class="payment-form">
                         <label> Card number
-                            <input type="text" name="card-number" required>
+                            <input type="text" name="card-number" required
+                                   pattern="\d{16}"
+                                   oninvalid="this.setCustomValidity('Invalid card number')"
+                                   oninput="this.setCustomValidity('')">
                         </label>
                         <label> CVC
-                            <input type="text" name="cvc" required>
+                            <input type="text" name="cvc" required
+                                   pattern="\d{3}"
+                                   oninvalid="this.setCustomValidity('Invalid CVC')"
+                                   oninput="this.setCustomValidity('')">
                         </label>
                         <label> Expiration date
-                            <input type="date" name="expire" required>
+                            <input type="month" name="expire" required>
                         </label>
                     </div>
                     <div id="mbway" class="payment-form">
                         <label> Phone number
-                            <input type="text" name="phone" autocomplete="on">
+                            <input type="text" name="phone" autocomplete="on"
+                                   pattern="\d{9}|\d{3}-\d{3}-\d{3}"
+                                   oninvalid="this.setCustomValidity('Invalid phone number - (ddddddddd or ddd-ddd-ddd)')"
+                                   oninput="this.setCustomValidity('')">
                         </label>
                     </div>
                     <button type="submit" class="confirm">Confirm payment</button>

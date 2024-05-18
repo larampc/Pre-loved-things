@@ -105,10 +105,3 @@ function checkInput(elem) {
     }
     error = false;
 }
-
-document.addEventListener("invalid", (event) =>
-{
-    event.preventDefault()
-    if (!error) checkInput(document.querySelector('.current'))
-    if (!error) document.querySelector('.current .next').click()
-}, {capture:true})
