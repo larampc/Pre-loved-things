@@ -76,7 +76,7 @@ function createUser(user) {
     const div = document.createElement("div")
     div.className = "user-info"
     const name = document.createElement("p")
-    name.innerText = user['name'];
+    name.innerText = user['username'];
     name.className = "name"
     div.appendChild(name);
     const email = document.createElement("p")
