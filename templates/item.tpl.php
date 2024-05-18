@@ -351,12 +351,12 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
                 <p>Price</p>
                 <div class="price-input">
                     <label> Minimum
-                        <input type="number"
+                        <input name="minimum" type="number"
                                class="min-input"
                                value="0">
                     </label>
                     <label> Maximum
-                        <input type="number"
+                        <input name="maximum" type="number"
                                class="max-input"
                                value="<?=ceil((8500 * Currency::get_currency_conversion($dbh, $session->getCurrency()))/10)*10?>">
                     </label>

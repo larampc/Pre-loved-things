@@ -27,7 +27,7 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
         <a href="../index.php"><img src="../resources/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="../pages/search.php">
                 <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off" value="<?=$page == "search"? $_GET['search'] : ""?>"></label>
-                <button type="submit" class="search-btn" ><i class="material-symbols-outlined">search</i></button>
+                <button type="submit" class="search-btn" ><i class="material-symbols-outlined bold">search</i></button>
                 <datalist id="search-suggestions"></datalist>
             </form>
         <nav>
