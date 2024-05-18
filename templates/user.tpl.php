@@ -31,7 +31,9 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             <?php if ($session->isLoggedIn() && $session->getId() === $user->user_id) {?>
             <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
-            <?php } ?>
+            <?php if ($session->is_admin()) { ?>
+                    <a href="../pages/admin_page.php"><i class="material-symbols-outlined bold">manage_accounts</i></a>
+                <?php }} ?>
             <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && $session->is_admin()){?>
                 <div class="admin-actions">
                     <form method="post" action="../actions/action_remove_user.php" class="confirmation">

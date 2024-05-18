@@ -34,7 +34,6 @@ async function getFilteredUsers(clean) {
         request--;
         return;
     }
-    console.log(response.url)
     const users = await response.json();
     let loader = document.querySelector(".loader-users");
     if (users.length === 0) {
