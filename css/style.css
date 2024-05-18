@@ -1479,6 +1479,10 @@ a {
     }
     .user-info {
         text-align: center;
+        p {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 }
 
