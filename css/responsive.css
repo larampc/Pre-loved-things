@@ -356,6 +356,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
             align-items: center;
             justify-content: center;
             margin-top: 0.5rem;
+            line-height: normal;
 
             i {
                 transform: none;
@@ -519,7 +520,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         margin: 10rem 0 2rem;
     }
 
-    main.new-main, main.edit-profile-main, main.new-category-main {
+    main.new-main, main.edit-profile-main, main.new-category-main, main.admin-main {
         padding-top: 8rem;
     }
 
