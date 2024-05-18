@@ -345,7 +345,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 
 <?php function draw_admin_page() { ?>
     <div id="curve_chart"></div>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="../scripts/draw_chart_all.js"></script>
     <script src="../scripts/admin_panel.js" defer></script>
     <div class="user-search">
