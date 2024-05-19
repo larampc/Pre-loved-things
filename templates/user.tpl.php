@@ -52,7 +52,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
     </div>
     <?php
 }
-function draw_edit_profile($user) { ?>
+function draw_edit_profile(User $user) { ?>
     <script src="../scripts/preview_image.js" defer></script>
     <article class="edit-profile">
         <h2>Edit profile</h2>
@@ -73,9 +73,10 @@ function draw_edit_profile($user) { ?>
                    oninvalid="this.setCustomValidity('Invalid phone number - (ddddddddd or ddd-ddd-ddd)')"
                    oninput="this.setCustomValidity('')">
             <label for="img1">Profile photo</label>
-            <div class="photo-upload">
-                <i class="material-symbols-outlined bolder upload-icon">add_a_photo</i>
+            <div class="photo-upload" style="background-image: url(<?="../uploads/profile_pics/" . $user->image . ".png" ?>)">
                 <input type="file" id="img1" class="uploader" name="img1" accept="image/*" onchange="previewImage(this.id)">
+                <input type="hidden" class="image-data" value="<?=$user->image?>" name="hiddenimg1">
+                <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="removeUserImage()">delete</i>
             </div>
             <button type="submit">Submit</button>
         </form>

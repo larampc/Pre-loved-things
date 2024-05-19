@@ -83,7 +83,7 @@
             'opsz' 24;
 }
 
-i.material-symbols-outlined.big:hover {
+i.material-symbols-outlined.big:hover, a.material-symbols-outlined:hover {
     font-variation-settings:
             'FILL' 100,
             'wght' 400,

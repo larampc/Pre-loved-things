@@ -82,10 +82,22 @@ function upload_item_image($img) : string {
     return $id;
 }
 
-function remove_uploaded_item_imgs(array $imgs) {
+function remove_uploaded_item_imgs(array $imgs) : bool {
     $dbh = get_database_connection();
+    $success = true;
     foreach ($imgs as $img) {
-        unlink(__DIR__ . "/../uploads/thumbnails" . $img . ".png");
-        unlink(__DIR__ . "/../uploads/medium" . $img . ".png");
+        if(!unlink(__DIR__ . "/../uploads/thumbnails" . $img . ".png")) $success = false;
+        if(!unlink(__DIR__ . "/../uploads/medium" . $img . ".png")) $success = false;
+        $stmt = $dbh->prepare('DELETE FROM images WHERE id = ?');
+        if(!$stmt->execute([$img])) $success = false;
     }
+    return $success;
+}
+
+function remove_uploaded_user_img(string $img): bool
+{
+    $dbh = get_database_connection();
+    if(!unlink(__DIR__ . "/../uploads/profile_pics/" . $img . ".png")) return false;
+    $stmt = $dbh->prepare('DELETE FROM images WHERE id = ?');
+    return $stmt->execute([$img]);
 }

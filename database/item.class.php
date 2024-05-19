@@ -62,10 +62,6 @@ class Item {
         $stmt = $dbh->prepare('UPDATE items SET mainImage = ? WHERE id = ?');
         $stmt->execute([$mainImage,$id]);
 
-        foreach ($oldImages as $image) {
-            $stmt = $dbh->prepare('DELETE FROM images WHERE id = ?');
-            $stmt->execute([$image]);
-        }
         return true;
     }
 

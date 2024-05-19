@@ -263,7 +263,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         height: 15rem;
     }
     .track-main  {
-        margin-left: 2rem;
+        padding-left: 2rem;
     }
     .purchase {
         margin-top: 1rem;
@@ -547,8 +547,8 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         border-radius: 2rem;
     }
     .track-main  {
-        margin-left: 1rem;
-        margin-right: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto auto;
         grid-template-areas:

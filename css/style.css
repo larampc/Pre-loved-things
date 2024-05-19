@@ -448,10 +448,13 @@ main > h2 {
     opacity: 0;
     height: 100%;
     width: 100%;
-    cursor: pointer;
     + * {
         cursor: pointer;
     }
+}
+
+.add-tag, .chat, button, label:has(input[type="checkbox"]), input[type="checkbox"], .buy-item, .uploader {
+    cursor: pointer;
 }
 
 .upload-icon, .delete-icon {
@@ -1080,8 +1083,8 @@ i {
 }
 
 .track-main {
-    margin-left: 7rem;
-    margin-right: 2rem;
+    padding-left: 7rem;
+    padding-right: 2rem;
 }
 
 .track-main #delivery-date {

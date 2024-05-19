@@ -49,7 +49,8 @@ function draw_big_chatroom(Chatroom $chatroom, User $to, array $messages){ ?>
             </section>
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Write message...">
-                <button type="button" class="send-icon"><i class="material-symbols-outlined filled-color">send</i>
+                <button type="button" class="send-icon">
+                    <i class="material-symbols-outlined filled-color">send</i>
                 </button>
             </div>
         </article>
@@ -73,7 +74,8 @@ function draw_temporary_chatroom(User $to, Item $item) { ?>
             </section>
             <div class="input-group">
                 <input class="form-control" type="text" placeholder="Write message...">
-                <button type="button" class="send-icon"><i class="material-symbols-outlined filled-color">send</i>
+                <button type="button" class="send-icon">
+                    <i class="material-symbols-outlined filled-color">send</i>
                 </button>
             </div>
         </article>
