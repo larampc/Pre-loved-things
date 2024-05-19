@@ -90,11 +90,11 @@ class User
     }
 
     public static function get_user_feedback(PDO $dbh, string $id): array {
-        $stmt = $dbh->prepare('SELECT * FROM comments WHERE mainuser = ?');
+        $stmt = $dbh->prepare('SELECT * FROM comments WHERE subject = ?');
         $stmt->execute(array($id));
         $comments = array();
         while ($comment = $stmt->fetch()) {
-            $comments[] = new Comment($dbh, $comment['userc'], $comment['mainuser'], $comment['text'], $comment['date'], $comment['rating']);
+            $comments[] = new Comment($dbh, $comment['writer'], $comment['subject'], $comment['text'], $comment['date'], $comment['rating']);
         }
         return $comments;
     }
@@ -151,7 +151,7 @@ class User
     {
         $stmt = $dbh->prepare('DELETE FROM users WHERE user_id = ?');
         if (!$stmt->execute(array($user))) return false;
-        $stmt = $dbh->prepare('DELETE FROM comments WHERE mainuser = ? OR userc = ?');
+        $stmt = $dbh->prepare('DELETE FROM comments WHERE subject = ? OR writer = ?');
         if (!$stmt->execute(array($user, $user))) return false;
         $stmt = $dbh->prepare('SELECT items.id FROM items WHERE creator = ?');
         $stmt->execute(array($user));

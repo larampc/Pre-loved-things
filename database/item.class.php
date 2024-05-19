@@ -30,7 +30,7 @@ class Item {
         $new_item->description = $item['description'] ?? "";
         $new_item->name = $item['name'] ?? "";
         $new_item->creator = User::get_user($dbh, $item['creator']);
-        $new_item->mainImage = $item['mainImage'] ?? "";;
+        $new_item->mainImage = $item['mainImage'] ?? "";
         $new_item->category = Tag::get_category_by_id($dbh, $item['category']);
         $new_item->tags = Tag::get_item_tags($dbh, $item['id']);
         $new_item->sold = boolval($item['sold']);
