@@ -175,7 +175,7 @@ VALUES
     ('7', 'brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii', 'SGD'),
     ('8', 'king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall', 'CHF'),
     ('9', 'sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro', 'MYR'),
-    ('10', 'lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa', 'JPY');
+    ('10', 'lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa', 'JPY'),
     ('74429f6c-6dc9-49bd-9c31-73df294f5bd6', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carolina Montgomery', 'Carolina_Montgomery70@gmail.com', '910080502', 'Carol', 'EUR'),
     ('6179e03c-f7a7-4601-94e4-8b33266e4bb9', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Perry Rivers', 'Perry_Rivers50@gmail.com', '957101156', 'PERRYY', 'EUR'),
     ('dd22de70-a364-41a7-9ed4-d93894be3b53', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ricky Joyce', 'Ricky_Joyce22@gmail.com', '969108048', 'Rolling4ever', 'EUR'),
@@ -205,10 +205,16 @@ VALUES
     ('f1be0523-8f5d-4411-84d6-8228efaccef9', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Wayne West', 'Wayne_West82@gmail.com', '949314032', 'Not_North82', 'USD'),
     ('3e12516b-fe08-4265-9a75-043d8789685d', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Leona Roth', 'Leona_Roth44@gmail.com', '990289177', 'Leona44', 'USD'),
     ('817b9c91-5587-44d7-8dc9-ee935bf78e16', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Vince Willson', 'Vince_Willson11@gmail.com', '915612952', 'Vience123', 'USD'),
-    ('afcf970e-ba98-40bb-a66c-ce2bd0c0ef37', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Stephanie Watkins', 'Stephanie_Watkins28@gmail.com', '980681758', 'Steph_Wat_28', 'USD'),
+    ('afcf970e-ba98-40bb-a66c-ce2bd0c0ef37', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Stephanie Watkins', 'Stephanie_Watkins28@gmail.com', '980681758', 'Steph_Wat_28', 'USD');
 --
 INSERT INTO users (user_id, password, name, email, phone, username, role, currency) VALUES
-    ('11','$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR');
+    ('11','$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR'),
+    ('cc2931ab-3b55-4172-8db1-3914a6fb8c61', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Claude Moon', 'Claude_Moon99@gmail.com', '968032551', 'Santa_Sun', 'admin', 'USD'),
+    ('cadaaa8d-59f8-4f96-88ab-9844ce1e842a', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Mabel Montgomery', 'Mabel_Montgomery52@gmail.com', '993690490', 'MnM52', 'admin', 'USD'),
+    ('37787680-81d6-4518-b0b2-6028afe5fd37', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Zach Pratt', 'Zach_Pratt83@gmail.com', '927950085', 'Zack_P', 'admin', 'USD'),
+    ('f97a426e-b368-4ebb-b5c8-61443d410d6d', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Esther Frey', 'Esther_Frey25@gmail.com', '930693697', 'EstherF', 'admin', 'USD'),
+    ('98f86636-bfc5-4e11-9532-38fe154e2738', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Michelle Cornell', 'Michelle_Cornell92@gmail.com', '978776666', 'Mi_92', 'admin', 'USD'),
+    ('2c6c9a25-f011-4230-b10a-a34d73ea5b8c', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Dee Riddle', 'Dee_Riddle71@gmail.com', '976503406', 'Riddle_me_this', 'admin', 'USD');
 
 INSERT INTO items (id, name, price, date, description, creator, mainImage, category, sold)
 VALUES
