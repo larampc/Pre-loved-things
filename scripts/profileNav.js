@@ -156,9 +156,9 @@ function setFadeNavbar(navbar) {
     navbar.classList.toggle('is-left-overflowing', !isScrolledToLeft)
 }
 
-document.querySelector('.navbar').addEventListener('scroll', (e) => {
+document.querySelector('.navbar')?.addEventListener('scroll', (e) => {
     const navbar = e.currentTarget
     setFadeNavbar(navbar)
 });
 
-setFadeNavbar(document.querySelector('.navbar'))
+if (document.querySelector('.navbar')) setFadeNavbar(document.querySelector('.navbar'))

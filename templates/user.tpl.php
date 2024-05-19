@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
         <script src="../scripts/user_actions.js" defer></script>
-        <?php
+        <script src="../scripts/profileNav.js" defer></script>
+    <?php
         draw_user_details($user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
         <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
@@ -13,9 +14,16 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             <script src="../scripts/draw_chart_user.js"></script>
             <?php
             draw_user_options($dbh, $user, $session, $user_currency);
-        } else draw_items($items, $user_currency);
-        ?>
-<?php } ?>
+        } else  { ?>
+            <div class="display-item">
+                <div class="slider-btns">
+                    <i class="material-symbols-outlined notSelectable" id="prev-btn"> chevron_left </i>
+                    <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
+                </div>
+                <div class="items"></div>
+            </div>
+    <?php }
+} ?>
 
 <?php function draw_user_details(User $user, Session $session) { ?>
     <div class="user">
@@ -154,7 +162,6 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 <?php } ?>
 
 <?php  function draw_user_options(PDO $dbh, User $user, Session $session, Currency $user_currency) { ?>
-    <script src="../scripts/profileNav.js" defer></script>
     <div class="display-item">
         <?php if ($user->user_id === $session->getId()) {?>
             <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
