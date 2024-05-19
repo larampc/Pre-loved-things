@@ -17,13 +17,13 @@ async function handleTemporary() {
     const sendMessageInput = document.querySelector('.chat-page input')
     const sendMessageButton = document.querySelector('.chat-page button.send-icon')
     const temporary = document.querySelector('.temporary')
-    const user_response = await fetch('../api/api_user.php');
-    const user = await user_response.json();
-    const text = sendMessageInput.value.trim();
-    if (!text.length) return;
+    const user_response = await fetch('../api/api_user.php')
+    const user = await user_response.json()
+    const text = sendMessageInput.value.trim()
+    if (!text.length) return
     const id = temporary.id.split('&')
     const response = await fetch('../api/api_register_chatroom.php?' + encodeForAjax({item_id: id[1], seller_id: id[0]}))
-    const chatroom = await response.json();
+    const chatroom = await response.json()
     await sendMessage(chatroom['chatroomId'], chatroom['buyer']['user_id'], sendMessageInput)
     const new_chatroom = createSmallChatroom(chatroom, chatroom['buyer'], chatroom['seller'],text)
     const chatroom_section = document.querySelector('section .chat-rooms')
@@ -33,9 +33,9 @@ async function handleTemporary() {
     updateCurrentChatroom(new_chatroom)
     new_chatroom.addEventListener("click", async () => handleClick(new_chatroom, user))
     sendMessageButton.removeEventListener("click",handleTemporary)
-    const old_element = sendMessageInput;
-    const new_element = old_element.cloneNode(true);
-    old_element.parentNode.replaceChild(new_element, old_element);
+    const old_element = sendMessageInput
+    const new_element = old_element.cloneNode(true)
+    old_element.parentNode.replaceChild(new_element, old_element)
     sendMessageButton.addEventListener("click", async () => {
         await handleButtonClick(chatroom['chatroomId'], user, new_element)
     })
@@ -45,15 +45,15 @@ async function handleTemporary() {
         }
     })
     closeInbox()
-    new_element.focus();
+    new_element.focus()
 }
 async function addClickListeners() {
     const chatrooms = document.querySelectorAll('.chat')
     const temporary = document.querySelector('.temporary')
     const existing_chatroom = document.querySelector('.chat-page')
     const existing = !existing_chatroom.classList.contains('temporary') && existing_chatroom.id.includes('chat-page')
-    const user_response = await fetch('../api/api_user.php');
-    const user = await user_response.json();
+    const user_response = await fetch('../api/api_user.php')
+    const user = await user_response.json()
     if (chatrooms) {
         for (const chatroom of chatrooms) {
             chatroom.addEventListener("click", async () => handleClick(chatroom, user))
@@ -65,7 +65,7 @@ async function addClickListeners() {
         sendMessageButton.addEventListener("click", handleTemporary)
         sendMessageInput.addEventListener("keypress", (event) => {
             if (event.key === "Enter") {
-                handleTemporary();
+                handleTemporary()
             }
         })
     }
@@ -119,7 +119,7 @@ function create_message(user, message, sender, sentTime) {
     message_p.innerText = message
 
     const message_time = document.createElement('time')
-    const date = new Date(sentTime*1000);
+    const date = new Date(sentTime*1000)
     message_time.dateTime = date.toISOString()
     message_time.innerText = formatDateTime(date)
 
@@ -131,7 +131,7 @@ function fill_messages( messages, user){
     const section = document.createElement('section')
     section.classList.add('scroll')
     messages.forEach(m => {
-            const  {message, sender, sentTime} = m;
+            const  {message, sender, sentTime} = m
             section.appendChild(create_message(user, message, sender, sentTime))
         }
     )
@@ -153,39 +153,39 @@ function formatDateTime(date) {
 async function handleClick(chatroom, user) {
     const response = await fetch('../api/api_get_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroom.id.substring(4)}))
     const chatroom_data = await response.json()
-    const msgInbox = await createMessageInbox(chatroom.id.substring(4), user);
-    updateCurrentChatroom(chatroom);
-    const chatPage = document.querySelector('.chat-page');
-    chatPage.innerHTML = '';
+    const msgInbox = await createMessageInbox(chatroom.id.substring(4), user)
+    updateCurrentChatroom(chatroom)
+    const chatPage = document.querySelector('.chat-page')
+    chatPage.innerHTML = ''
 
-    const header = createChatHeader(chatroom_data, user);
+    const header = createChatHeader(chatroom_data, user)
 
-    chatPage.appendChild(header);
-    chatPage.appendChild(msgInbox);
-    closeInbox();
+    chatPage.appendChild(header)
+    chatPage.appendChild(msgInbox)
+    closeInbox()
 }
 
 function updateCurrentChatroom(chatroom) {
-    const curr = document.querySelector('.current-chat');
-    if (curr) curr.classList.remove("current-chat");
+    const curr = document.querySelector('.current-chat')
+    if (curr) curr.classList.remove("current-chat")
 
-    chatroom.classList.add("current-chat");
-    const msg_count = document.querySelector('.current-chat #message-count');
+    chatroom.classList.add("current-chat")
+    const msg_count = document.querySelector('.current-chat #message-count')
 
     if(msg_count) chatroom.removeChild(msg_count)
 }
 
 function createChatHeader(chatroom_data, user) {
-    const header = document.createElement('header');
-    header.classList.add("message-header");
+    const header = document.createElement('header')
+    header.classList.add("message-header")
 
-    const figure = createItemInfo(chatroom_data);
-    const aside = createUserInfo(chatroom_data, user);
+    const figure = createItemInfo(chatroom_data)
+    const aside = createUserInfo(chatroom_data, user)
 
-    header.appendChild(figure);
-    header.appendChild(aside);
+    header.appendChild(figure)
+    header.appendChild(aside)
 
-    return header;
+    return header
 }
 
 function createItemInfo(chatroom_json) {
@@ -308,7 +308,7 @@ function createSendButton(chatroom, user, input) {
     return button;
 }
 
-let inTableMode = window.matchMedia("(max-width: 60em)");
+const inTableMode = window.matchMedia("(max-width: 60em)");
 const inbox = document.getElementsByClassName("chat-inbox");
 const chat = document.getElementsByClassName("chat-page");
 

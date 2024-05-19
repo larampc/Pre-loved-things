@@ -12,4 +12,4 @@ require_once(__DIR__ . '/../database/connection.db.php');
 $page = $_GET['page'];
 $dbh = get_database_connection();
 
-echo json_encode(User::get_users($dbh, intval($page), $_GET['search']));
+echo json_encode(User::get_users($dbh, intval($page), htmlentities($_GET['search'])));

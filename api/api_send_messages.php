@@ -4,7 +4,7 @@
 
     $chatroom = $_GET['chatroom_id'];
     $sender = $_GET['sender'];
-    $message = $_GET['message'];
+    $message = htmlentities($_GET['message']);
 
     $db = get_database_connection();
 
