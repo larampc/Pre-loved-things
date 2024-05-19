@@ -347,16 +347,16 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <label> Search user
             <input type="text" id="search-user" placeholder="Username or Email">
         </label>
-        <section class="user-table-header">
+        <header class="user-table-header">
             <p>Image</p>
             <p>Username</p>
             <p>Email</p>
             <p>Phone</p>
             <p>Sold</p>
             <p>Purchases</p>
-        </section>
-        <section class="user-result">
+        </header>
+        <div class="user-result">
             <div class="loader-users"></div>
-        </section>
+        </div>
     </div>
 <?php }
