@@ -14,8 +14,9 @@ if (removeIcons) {
 if (lastLoadedImageId + 1 >= maxImageNumber) {
     imageAdder.style.display = "none";
 }
-if (lastLoadedImageId > 0) {
-    uploadSection.querySelector('.main-photo-upload input').required = false
+if (lastLoadedImageId > 0 && uploadSection) {
+    const mainPhotoInput = uploadSection.querySelector('.main-photo-upload input')
+    if(mainPhotoInput) mainPhotoInput.required = false
 }
 
 if (imageAdder) {
@@ -79,9 +80,24 @@ function createRemoveButton(id) {
     removeButton.classList.add('delete-icon')
     removeButton.innerText = 'delete'
     removeButton.id = "delete" + id
-    removeButton.addEventListener('click', shiftImages.bind(removeButton))
+    if(uploadSection){
+        removeButton.addEventListener('click', shiftImages.bind(removeButton))
+    }
+    else {
+        removeButton.addEventListener('click', removeUserImage)
+    }
 
     return removeButton
+}
+function removeUserImage() {
+    const fileUploadInputToRemove = document.querySelector('.uploader')
+    fileUploadInputToRemove.required = true
+    fileUploadInputToRemove.value = ''
+    fileUploadInputToRemove.parentElement.style.backgroundImage = ''
+    fileUploadInputToRemove.parentElement.removeChild(fileUploadInputToRemove.parentElement.querySelector('i'))
+    const hiddenInput = document.querySelector('input[type=hidden].image-data')
+    if(hiddenInput) hiddenInput.parentElement.removeChild(hiddenInput)
+    fileUploadInputToRemove.parentElement.insertBefore(createAddPhotoIcon(), fileUploadInputToRemove.parentElement.querySelector('input'))
 }
 
 function shiftImages() {

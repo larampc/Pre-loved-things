@@ -40,7 +40,7 @@ if (Item::get_item($dbh, $item) === null) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 Tag::remove_item_tags($dbh, $item);
-if (!Item::update_item($dbh, $item, $_POST['iname'], $_POST['description'], round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2),  $_POST['category'])
+if (!Item::update_item($dbh, $item, htmlentities($_POST['item-name']), htmlentities($_POST['description']), round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2),  $_POST['category'])
 || !Item::update_item_images($dbh, $item, $new_images_ids[0], $new_images_ids)) {
     $session->addMessage('error', 'Could not update item.');
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));

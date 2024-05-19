@@ -149,9 +149,8 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
         <h2>New item</h2>
         <form action="../actions/action_new_item.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-            <p><?=log_to_stdout("heyyy")?></p>
-            <label for="iname">Item Name</label>
-            <input type="text" id="iname" name="iname" placeholder="The name of your item" required>
+            <label for="item-name">Item Name</label>
+            <input type="text" id="item-name" name="item-name" placeholder="The name of your item" required>
 
             <label for="category">Category</label>
             <?php
@@ -191,7 +190,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
             <?php }} ?>
 
             <label for="price">Price</label>
-            <input type="number" step="0.01" id="price" name="price" placeholder="The price of your item" required>
+            <input type="number" max="1000000000" step="0.01" id="price" name="price" placeholder="The price of your item" required>
 
             <label for="description" >Description</label>
             <input type="text" id="description" name="description" placeholder="Describe your item" maxlength="1000" minlength="40" required>
@@ -219,8 +218,8 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
         <form action="../actions/action_edit_item.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
-            <label for="iname">Item Name</label>
-            <input type="text" id="iname" name="iname" value="<?= $item->name ?>" required>
+            <label for="item-name">Item Name</label>
+            <input type="text" id="item-name" name="item-name" value="<?= $item->name ?>" required>
             <label for="category">category</label>
             <select id="category" name="category">
                 <?php foreach ($categories as $category) { ?>
@@ -265,7 +264,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                 <div class="photo-upload main-photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $item->mainImage . ".png" ?>)">
                     <h5>Main Image</h5>
                     <input type="file" id="img1" class="uploader" name="img1" accept="image/*" required onchange="previewImage(this.id)">
-                    <input type="hidden" class="image-data" value="<?=$item->mainImage?>" name="<?="hiddenimg1"?>">
+                    <input type="hidden" class="image-data" value="<?=$item->mainImage?>" name="hiddenimg1">
                     <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="shiftImages.bind(this)()">delete</i>
                 </div>
                 <?php
