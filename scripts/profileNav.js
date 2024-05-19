@@ -142,7 +142,7 @@ async function drawItem(item, currency) {
     return main
 }
 
-get_pagination().then(() => draw_pagination().then(() => updatePage()))
+get_pagination().then(() => updatePage().then(() => draw_pagination()))
 
 function setFadeNavbar(navbar) {
     const isScrollable = navbar.scrollWidth > navbar.clientWidth
