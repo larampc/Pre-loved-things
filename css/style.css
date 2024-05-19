@@ -453,7 +453,7 @@ main > h2 {
     }
 }
 
-.add-tag, .chat, button, input[type="checkbox"], input[type="checkbox"] + *, .buy-item, .uploader {
+.add-tag, .chat, button, label:has(input[type="checkbox"]), input[type="checkbox"], .buy-item, .uploader {
     cursor: pointer;
 }
 
