@@ -6,6 +6,7 @@ require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
 require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/currency.class.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
@@ -54,10 +55,10 @@ else {
         array_push($itemsCat, $value['category']);
     }
 }
-    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->get_currency())), intval($max/ User::get_currency_conversion($dbh, $session->get_currency())), $search, $order);
+    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / Currency::get_currency_conversion($dbh, $session->get_currency())), intval($max/ Currency::get_currency_conversion($dbh, $session->get_currency())), $search, $order);
 
 foreach ($res as $item) {
-    $item->price = round($item->price * User::get_currency_conversion($dbh, $session->get_currency()), 2);
+    $item->price = round($item->price * Currency::get_currency_conversion($dbh, $session->get_currency()), 2);
 }
 
 echo json_encode($res);

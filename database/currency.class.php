@@ -16,12 +16,16 @@ class Currency
     public static function get_currency_conversion(PDO $dbh, string $currency) : float {
         $stmt = $dbh->prepare('SELECT value FROM currency WHERE code = ?');
         $stmt->execute(array($currency));
-        return $stmt->fetch()['value'];
+        return floatval($stmt->fetch()['value']);
     }
     public static function get_currency_symbol(PDO $dbh, string $currency) : string {
         $stmt = $dbh->prepare('SELECT symbol FROM currency WHERE code = ?');
         $stmt->execute(array($currency));
         return $stmt->fetch()['symbol'];
     }
-
+    public static function get_currencies(PDO $dbh): array {
+        $stmt = $dbh->prepare('SELECT * FROM currency');
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
 }

@@ -1,5 +1,6 @@
 <?php
-require_once ("../database/user.class.php");
+require_once(__DIR__ . '/../database/user.class.php');
+require_once(__DIR__ . '/../database/currency.class.php');
 
 function draw_header(string $page, Session $session, array $currencies) { ?>
 <!DOCTYPE html>
@@ -21,7 +22,7 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
     <header class="header-visible">
         <a href="../index.php"><img src="../resources/logo.png" id="logo" alt="logo"></a>
             <form class="search-container" method="GET" action="../pages/search.php">
-                <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off" value="<?=$page == "search"? $_GET['search'] : ""?>"></label>
+                <label for="searchbar"><input name="search" type="search" id="searchbar" list="search-suggestions" autocomplete="off" value="<?=$page == "search"? ($_GET['search']?:"") : ""?>"></label>
                 <button type="submit" class="search-btn" ><i class="material-symbols-outlined bold">search</i></button>
                 <datalist id="search-suggestions"></datalist>
             </form>
@@ -72,6 +73,6 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
 <?php } ?>
 
 <?php function get_header(string $name,PDO $dbh, Session $session) {
-    $currencies = User::get_currencies($dbh);
+    $currencies = Currency::get_currencies($dbh);
     draw_header($name, $session, $currencies);
 }

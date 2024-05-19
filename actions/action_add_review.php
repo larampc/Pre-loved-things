@@ -8,7 +8,7 @@ if(!validate_csrf_token($_POST['csrf'])) {
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
-require_once(__DIR__ . '/../database/Comment.class.php');
+require_once(__DIR__ . '/../database/comment.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();

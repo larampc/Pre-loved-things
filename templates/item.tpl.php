@@ -253,7 +253,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                 <?php }} ?>
 
             <label for="price">Price</label>
-            <input type="number" step="0.01" id="price" name="price" value="<?= round($item->price * User::get_currency_conversion($db, $session->get_currency())) ?>" required>
+            <input type="number" step="0.01" id="price" name="price" value="<?= round($item->price * Currency::get_currency_conversion($db, $session->get_currency())) ?>" required>
 
             <label for="description">Description</label>
             <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40" required>
