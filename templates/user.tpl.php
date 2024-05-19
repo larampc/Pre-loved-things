@@ -111,7 +111,7 @@ function draw_user_feedback($user, $feedback, Session $session) { ?>
             <div class="stars">
                 <?php $avg = 0;
                 foreach ($feedback as $comment) { $avg += $comment->rating; }
-                $avg /= count($feedback);
+                if (count($feedback) != 0) $avg /= count($feedback);
                 draw_stars(round($avg));
                ?> <p><?=round($avg, 2)?> out of <?=count($feedback);?> ratings</p>
             </div>
