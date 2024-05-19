@@ -1012,6 +1012,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     transform-origin: left;
 }
 
+.error .message-progress, .success .message-progress {
+    bottom: 4px;
+}
+
 .confirmation {
     position: relative;
     button {
