@@ -294,7 +294,7 @@ function draw_category_tags(PDO $dbh, $category) {
     <div class="category-<?=$category?> category-box <?=$category == ""?: "hide"?>" >
         <p><?=$category?></p>
     <?php foreach ($tags as $tag) { ?>
-    <div class="options tag" id="<?=$tag['tag']?>">
+    <div class="options tag">
         <p><?=$tag['tag']?></p>
         <?php
         $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
@@ -312,67 +312,65 @@ function draw_category_tags(PDO $dbh, $category) {
 
 function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
     <script src="../scripts/search.js" defer></script>
-    <article class="searchPage">
-            <section class="filter">
-                <div class="filter_header">
-                    <h2>Filters</h2>
-                    <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined big filled">close</i></button>
-                </div>
-                <p>Categories
-                    <?php if ($session->is_admin()) {?>
-                        <a href="../pages/new_category.php" class="material-symbols-outlined">add_circle</a>
-                    <?php }?>
-                </p>
-                <div class="categories">
-                    <script src="../scripts/user_actions.js" defer></script>
-                    <?php foreach ($categories as $category) {
-                        if ($category['category'] !== "") { ?>
-                                <div class="category">
-                                    <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?></label>
-                                    <?php if ($session->is_admin()) {?>
-                                        <div class="category-actions">
-                                            <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
-                                            <form method="post" action="../actions/action_remove_category.php" class="confirmation">
-                                                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                                                <button title="Remove category" type="submit" value="<?=$category['category']?>" name="remove-category" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    <?php }?>
+    <section class="filter">
+        <div class="filter_header">
+            <h2>Filters</h2>
+            <button id="close-filters" onclick="closeFilters()"><i class="material-symbols-outlined big filled">close</i></button>
+        </div>
+        <p>Categories
+            <?php if ($session->is_admin()) {?>
+                <a href="../pages/new_category.php" class="material-symbols-outlined">add_circle</a>
+            <?php }?>
+        </p>
+        <div class="categories">
+            <script src="../scripts/user_actions.js" defer></script>
+            <?php foreach ($categories as $category) {
+                if ($category['category'] !== "") { ?>
+                        <div class="category">
+                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?></label>
+                            <?php if ($session->is_admin()) {?>
+                                <div class="category-actions">
+                                    <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
+                                    <form method="post" action="../actions/action_remove_category.php" class="confirmation">
+                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                        <button title="Remove category" type="submit" value="<?=$category['category']?>" name="remove-category" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
+                                        </button>
+                                    </form>
                                 </div>
-                        <?php }} ?>
-                </div>
-                <p>Order by</p>
-                <label for="order"></label>
-                <select id="order">
-                    <option value="recent">Most recent</option>
-                    <option value="price-asc">Ascending Price</option>
-                    <option value="price-desc">Descending Price</option>
-                </select>
-                <p>Price</p>
-                <div class="price-input">
-                    <label> Minimum
-                        <input name="minimum" type="number"
-                               class="min-input"
-                               value="0">
-                    </label>
-                    <label> Maximum
-                        <input name="maximum" type="number"
-                               class="max-input"
-                               value="<?=ceil((8500 * Currency::get_currency_conversion($dbh, $session->getCurrency()))/10)*10?>">
-                    </label>
-                </div>
-                <?php
-                foreach ($categories as $category) {
-                    draw_category_tags($dbh, $category['category']);
-                }
-                 ?>
-            </section>
-        <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
-        <section class="items searchresult">
-            <div class="loader"></div>
-        </section>
-        </article>
+                            <?php }?>
+                        </div>
+                <?php }} ?>
+        </div>
+        <p>Order by</p>
+        <label for="order"></label>
+        <select id="order">
+            <option value="recent">Most recent</option>
+            <option value="price-asc">Ascending Price</option>
+            <option value="price-desc">Descending Price</option>
+        </select>
+        <p>Price</p>
+        <div class="price-input">
+            <label> Minimum
+                <input name="minimum" type="number"
+                       class="min-input"
+                       value="0">
+            </label>
+            <label> Maximum
+                <input name="maximum" type="number"
+                       class="max-input"
+                       value="<?=ceil((8500 * Currency::get_currency_conversion($dbh, $session->getCurrency()))/10)*10?>">
+            </label>
+        </div>
+        <?php
+        foreach ($categories as $category) {
+            draw_category_tags($dbh, $category['category']);
+        }
+         ?>
+    </section>
+    <button id="open-filters" onclick="openFilters()"><i class="material-symbols-outlined big filled">filter_list</i></button>
+    <div class="items searchresult">
+        <div class="loader"></div>
+    </div>
 <?php } ?>
 
 <?php function draw_item_tracking(TrackItem $trackItem, Session $session, Currency $user_currency) { ?>

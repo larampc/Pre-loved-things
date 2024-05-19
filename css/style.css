@@ -515,15 +515,15 @@ main > h2 {
 
 /* SEARCH PAGE */
 
-.searchPage .item-info, .favorite-main .item-info, .display-item .item-info {
+.search-main .item-info, .favorite-main .item-info, .display-item .item-info {
     width: 10rem;
 }
 
-.searchPage  h2 {
+.search-main  h2 {
     margin:0;
 }
 
-.searchPage {
+.search-main {
     margin-top: 5rem;
 }
 
@@ -1233,7 +1233,7 @@ button[name="remove-category"] {
     }
 }
 
-.searchPage .items {
+.search-main .items {
     padding: 0 1rem;
 }
 

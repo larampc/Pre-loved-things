@@ -308,12 +308,12 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* SEARCH PAGE */
 
-.searchPage .options {
+.search-main .options {
     display: flex;
     flex-direction: column;
 }
 
-.searchPage {
+.search-main {
     flex-grow: 1;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -339,7 +339,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     }
 }
 
-.searchPage .items {
+.search-main .items {
     grid-area: items;
     display: flex;
     flex-wrap: wrap;

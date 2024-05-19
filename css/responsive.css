@@ -195,10 +195,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 /* TABLET VIEW */
 @media (max-width: 60em) {
     /* SEARCH PAGE */
-    .searchPage {
+    .search-main {
         position: relative;
     }
-    .searchPage .filter {
+    .search-main .filter {
         grid-area: unset;
         transition: width 0.1s;
         width: 0;
@@ -210,19 +210,19 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         overflow-y: scroll;
         border-bottom-right-radius: 2rem;
     }
-    .searchPage .filter::-webkit-scrollbar {
+    .search-main .filter::-webkit-scrollbar {
         width: 20px;
     }
-    .searchPage .filter::-webkit-scrollbar-track {
+    .search-main .filter::-webkit-scrollbar-track {
         background-color: transparent;
     }
-    .searchPage .filter::-webkit-scrollbar-thumb {
+    .search-main .filter::-webkit-scrollbar-thumb {
         background: var(--scroll-background-primary);
         border-radius: 20px;
         border: 6px solid transparent;
         background-clip: content-box;
     }
-    .searchPage .filter::-webkit-scrollbar-thumb:hover {
+    .search-main .filter::-webkit-scrollbar-thumb:hover {
         background-color: var(--scroll-hover-primary);
     }
     #close-filters {
@@ -529,7 +529,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* SEARCH PAGE */
 
-    main .searchPage {
+    .search-main {
         margin-top: 8rem;
         grid-template-columns: auto;
         grid-template-rows: auto auto;
@@ -613,7 +613,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         width: 80%;
         height: 80%;
     }
-    .searchPage .item-info, .favorite-main .item-info, .display-item .item-info {
+    .search-main .item-info, .favorite-main .item-info, .display-item .item-info {
         width: 40dvw;
     }
 
