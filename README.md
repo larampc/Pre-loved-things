@@ -22,7 +22,10 @@ We have used the following external libraries:
 
 ## Screenshots
 
+![Screenshot1](screenshots/img_1.png)
+![Screenshot1](screenshots/img_2.png)
 ![Screenshot1](screenshots/img.png)
+![Screenshot1](screenshots/img_3.png)
 
 ## Implemented Features
 
