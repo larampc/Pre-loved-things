@@ -25,6 +25,7 @@
 
 main {
     margin: 7rem 0 2rem;
+    min-width: 20rem;
 }
 
 main.new-main, main.edit-profile-main, main.new-category-main, main.admin-main {
