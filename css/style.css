@@ -434,6 +434,10 @@ main > h2 {
     padding: 0.5rem;
 }
 
+.tags {
+    line-height: 2.4rem;
+}
+
 .item-track img {
     width: 20rem;
     height: 20rem;

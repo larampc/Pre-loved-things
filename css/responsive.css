@@ -654,9 +654,6 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* INBOX PAGE */
 
-    main.inbox-main {
-        margin-top: 8rem;
-    }
     .chat-page {
         margin-left: 1rem;
         margin-right: 1rem;
