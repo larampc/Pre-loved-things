@@ -31,7 +31,7 @@ declare(strict_types=1);
             </label>
             <label>
                 <input type="password" name="password" placeholder="Your password" autocomplete="off"
-                       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[?!@#$%&<>\(\)\[\]\{\}\/\\\-\|+~\^\*]).{8,}"
+                       pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.?!@#$%&<>\(\)\[\]\{\}\/\\\-\|+~\^\*]).{8,}"
                        oninvalid="this.setCustomValidity('Invalid password - must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long')"
                        oninput="this.setCustomValidity('')"
                        required>
