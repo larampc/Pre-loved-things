@@ -53,7 +53,6 @@ class Item {
     }
     public static function update_item_images(PDO $dbh, string $id, string $mainImage, array $images): bool
     {
-        $oldImages = self::get_item_images($dbh, $id);
         $stmt = $dbh->prepare('DELETE FROM item_images WHERE item = ?');
         $stmt->execute([$id]);
 
