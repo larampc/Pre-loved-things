@@ -364,6 +364,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         }
     }
 
+    .navbar {
+        width: calc(100dvw - 7rem);
+    }
+
     /* INBOX PAGE */
 
     main.inbox-main {
@@ -633,6 +637,9 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         p {
             margin: 0;
         }
+    }
+    .navbar {
+        width: calc(100dvw - 3rem);
     }
     .navOption {
         padding: 0.5rem;
