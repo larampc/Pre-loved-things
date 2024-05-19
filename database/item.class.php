@@ -185,13 +185,14 @@ class Item {
     }
     static function get_most_liked_items(PDO $dbh, int $count = 5): array
     {
-        $stmt = $dbh->prepare('SELECT items.id as id FROM items JOIN favorites ON favorites.item = items.id 
+        $stmt = $dbh->prepare('SELECT items.id as id FROM items LEFT JOIN favorites ON favorites.item = items.id 
          where items.sold = 0 GROUP BY items.id ORDER BY count(favorites.user) DESC LIMIT ?');
         $stmt->execute(array($count));
         $items = array();
         while($item = $stmt->fetch()) {
             $items[] = self::get_item($dbh, $item['id']);
         }
+        var_dump($items);
         return $items;
     }
     static function get_last_added_items(PDO $dbh, int $count = 5): array
