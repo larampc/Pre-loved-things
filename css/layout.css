@@ -230,11 +230,11 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* CART PAGE */
 
-.cartPage .Buy {
+.cart-main .Buy {
     justify-content: center;
 }
 
-.cartPage .seller {
+.cart-main .seller {
     display: grid;
     grid-template-columns:  2fr 1fr;
     grid-template-rows:  auto auto;
@@ -242,17 +242,17 @@ input[type="search"]:focus::-webkit-search-cancel-button {
                             " seller-items sum";
 }
 
-.cartPage .seller-info {
+.cart-main .seller-info {
     grid-area: seller-info;
     display: flex;
     align-items: center;
 }
 
-.cartPage .item {
+.cart-main .item {
     display: flex;
 }
 
-.cartPage .item-info {
+.cart-main .item-info {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -265,7 +265,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     justify-content: end;
 }
 
-.cartPage .seller-items {
+.cart-main .seller-items {
     grid-area: seller-items;
 }
 
@@ -274,7 +274,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     justify-content: space-between;
 }
 
-.cartPage p {
+.cart-main p {
     text-align: center;
 }
 

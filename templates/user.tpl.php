@@ -153,70 +153,67 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 
 <?php function draw_cart(array $items, Currency $user_currency) { ?>
     <script src="../scripts/remove_cart.js" defer></script>
-    <article class="cartPage">
-        <h2>Your cart</h2>
-        <?php
-        $user = null;
-        $num_items = 0;
-        $sum = 0;
-        if (empty($items)) { ?>
-            <p>You have no items</p>
-            </article>
-        <?php
-        return;
-        }
-        foreach ($items as $item) {
-            if ($user != $item->creator && $user != null) { ?>
-                </article>
-                    <div class="sum">
-                        <p class="num-items">Number items: <?=$num_items?></p>
-                        <div class="sum-price">
-                            <p>Total: </p>
-                            <p class="total"><?=$sum . $user_currency->symbol?></p>
-                        </div>
-                        <form class="checkout-item" action="../actions/action_checkout.php" method="post">
-                            <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                            <input type="hidden" value="<?=$user->user_id?>" name="user_items">
-                            <label>
-                                <button class="checkout" type="submit">Buy now!</button>
-                            </label>
-                        </form>
-                    </div>
-                </section>
-        <?php
-                $num_items = 0;
-                $sum = 0;
-            }
-            if ($user != $item->creator) { ?>
-                <section class="seller">
-                    <a href="../pages/user.php?user_id=<?=$item->creator->user_id?>" class="seller-info">
-                        <img src="../uploads/profile_pics/<?= $item->creator->image?>.png" class="profile-picture" alt="profile-photo">
-                        <p><?=$item->creator->name?></p>
-                    </a>
-                    <article class="seller-items">
-            <?php }
-            draw_item($item, $user_currency);
-            $num_items += 1;
-            $sum += round($item->price * $user_currency->conversion, 2);
-            $user = $item->creator;
-        } ?>
-            </article>
-            <div class="sum">
-                <p class="num-items">Number items: <?=$num_items?></p>
-                <div class="sum-price">
-                    <p>Total: </p>
-                    <p class="total"><?=$sum . $user_currency->symbol?></p>
-                </div>
-                <form class="checkout-item" action="../actions/action_checkout.php" method="post">
-                    <input type="hidden" value="<?=$user->user_id?>" name="user_items">
-                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                    <label>
-                        <button class="checkout" type="submit">Buy now!</button>
-                    </label>
-                </form>
+    <h2>Your cart</h2>
+    <?php
+    $user = null;
+    $num_items = 0;
+    $sum = 0;
+    if (empty($items)) { ?>
+        <p>You have no items</p>
+    <?php
+    return;
+    }
+    foreach ($items as $item) {
+        if ($user != $item->creator && $user != null) { ?>
             </div>
+                <section class="sum">
+                    <h4 class="num-items">Number items: <?=$num_items?></h4>
+                    <div class="sum-price">
+                        <p>Total: </p>
+                        <p class="total"><?=$sum . $user_currency->symbol?></p>
+                    </div>
+                    <form class="checkout-item" action="../actions/action_checkout.php" method="post">
+                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                        <input type="hidden" value="<?=$user->user_id?>" name="user_items">
+                        <label>
+                            <button class="checkout" type="submit">Buy now!</button>
+                        </label>
+                    </form>
+                </section>
+            </div>
+    <?php
+            $num_items = 0;
+            $sum = 0;
+        }
+        if ($user != $item->creator) { ?>
+            <div class="seller">
+                <a href="../pages/user.php?user_id=<?=$item->creator->user_id?>" class="seller-info">
+                    <img src="../uploads/profile_pics/<?= $item->creator->image?>.png" class="profile-picture" alt="profile-photo">
+                    <p><?=$item->creator->name?></p>
+                </a>
+                <div class="seller-items">
+        <?php }
+        draw_item($item, $user_currency);
+        $num_items += 1;
+        $sum += round($item->price * $user_currency->conversion, 2);
+        $user = $item->creator;
+    } ?>
+        </div>
+        <section class="sum">
+            <h4 class="num-items">Number items: <?=$num_items?></h4>
+            <div class="sum-price">
+                <p>Total: </p>
+                <p class="total"><?=$sum . $user_currency->symbol?></p>
+            </div>
+            <form class="checkout-item" action="../actions/action_checkout.php" method="post">
+                <input type="hidden" value="<?=$user->user_id?>" name="user_items">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                <label>
+                    <button class="checkout" type="submit">Buy now!</button>
+                </label>
+            </form>
         </section>
-    </article>
+    </div>
 <?php } ?>
 
 <?php function draw_checkout_form() { ?>

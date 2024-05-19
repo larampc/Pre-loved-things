@@ -348,7 +348,7 @@ main > h2 {
 
 /* CART PAGE */
 
-.cartPage .checkout {
+.cart-main .checkout {
     border-style: none;
     color: white;
     background-color: black;
@@ -384,11 +384,11 @@ main > h2 {
     }
 }
 
-.cartPage .item {
+.cart-main .item {
     margin: 1rem;
 }
 
-.cartPage .item-info {
+.cart-main .item-info {
     width: 100%;
     margin-left: 1rem;
 }
@@ -403,6 +403,11 @@ main > h2 {
 
 .seller-items {
     border-bottom-style: solid;
+}
+
+.num-items {
+    text-align: center;
+    font-weight: normal;
 }
 
 /* NEW ITEM PAGE */
