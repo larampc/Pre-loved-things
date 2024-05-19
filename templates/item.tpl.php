@@ -300,12 +300,12 @@ function draw_category_tags(PDO $dbh, $category) {
         $options = Tag::get_tag_options($dbh, $category, $tag['tag']);
         if ($options) {
             foreach ($options as $option) {?>
-                <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>" autocomplete='off'>
-                    <span class="paragraph"><?=$option['value']?></span>
+                <label><input type="checkbox" name="<?=$tag['tag']?>" value="<?=$option['value']?>">
+                    <?=$option['value']?>
                 </label>
             <?php }}
         else { ?>
-            <label><input type="text" name="<?=$tag['tag']?>" autocomplete='off'></label>
+            <label><input type="text" name="<?=$tag['tag']?>"></label>
         <?php } ?>
     </div>
     <?php } ?> </div> <?php }}
@@ -327,16 +327,19 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
                     <script src="../scripts/user_actions.js" defer></script>
                     <?php foreach ($categories as $category) {
                         if ($category['category'] !== "") { ?>
-                            <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" value="<?=$category['category']?>"><span class="paragraph"><?=$category['category'] ?: "All categories"?></span>
-                                <?php if ($session->is_admin()) {?>
-                                    <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
-                                    <form method="post" action="../actions/action_remove_category.php" class="confirmation">
-                                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                                        <button title="Remove category" type="submit" value="<?=$category['category']?>" name="remove-category" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
-                                        </button>
-                                    </form>
-                                <?php }?>
-                            </label>
+                                <div class="category">
+                                    <label><input type="checkbox" class="select-category" id="<?=$category['category']?>" value="<?=$category['category']?>"><?=$category['category'] ?: "All categories"?></label>
+                                    <?php if ($session->is_admin()) {?>
+                                        <div class="category-actions">
+                                            <a href="../pages/edit_category.php?category=<?=$category['category']?>" class="material-symbols-outlined">edit</a>
+                                            <form method="post" action="../actions/action_remove_category.php" class="confirmation">
+                                                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                                                <button title="Remove category" type="submit" value="<?=$category['category']?>" name="remove-category" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    <?php }?>
+                                </div>
                         <?php }} ?>
                 </div>
                 <p>Order by</p>

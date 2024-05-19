@@ -888,12 +888,17 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 .categories {
     display: flex;
     flex-direction: column;
-    >label {
+    .category label {
         display: flex;
         align-items: center;
-        .paragraph {
-            flex-grow: 1;
-        }
+        flex-grow: 1;
+    }
+}
+
+.category {
+    display: flex;
+    .category-actions {
+        display: flex;
     }
 }
 
