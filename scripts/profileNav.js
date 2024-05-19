@@ -2,6 +2,8 @@ let currentNav = "my"
 let page = 1;
 let isLoading = false;
 let maxPage = 0;
+const urlParams = new URLSearchParams(window.location.search);
+const user = urlParams.get("user_id")
 
 async function openNav(option) {
     currentNav = option;
@@ -18,8 +20,9 @@ async function openNav(option) {
 }
 
 async function draw_pagination() {
-    const response_max = await fetch('../api/api_get_max_page.php?nav=' + currentNav);
+    const response_max = await fetch('../api/api_get_max_page.php?nav=' + currentNav + "&user=" + (user?user:""));
     maxPage = await response_max.json();
+    console.log(response_max.url)
     const nav = document.createElement("nav");
     nav.className = "pagination"
     for (let i = 1; i <= maxPage; i++) {
@@ -51,7 +54,7 @@ next.addEventListener("click", async () => {
 
 async function updatePage() {
     if (page === 1) previous.style.visibility = "hidden";
-    if (page === maxPage) next.style.visibility = "hidden"
+    if (page >= maxPage) next.style.visibility = "hidden"
     if (page < maxPage) next.style.visibility = "visible"
     if (page > 1) previous.style.visibility = "visible"
     document.querySelectorAll(".page-number").forEach((elem) => {
@@ -60,7 +63,7 @@ async function updatePage() {
     } )
 
     isLoading = true;
-    const response = await fetch('../api/api_get_user_items.php?page=' + page + "&nav=" + currentNav);
+    const response = await fetch('../api/api_get_user_items.php?page=' + page + "&nav=" + currentNav + "&user=" + (user?user:""));
     const items = await response.json();
     if (items.length < 5) {
         isLoading = false;
