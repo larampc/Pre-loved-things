@@ -1,57 +1,57 @@
-let pageNum = 1;
-let isLoading = false;
-const container = document;
+let pageNum = 1
+let isLoading = false
 const resultContainer =
-    document.querySelector(".searchresult");
-let categories = Array();
-let price_range = Array();
-let conditions = Array();
-let tags = Array();
+    document.querySelector(".searchresult")
+let categories = Array()
+let price_range = Array()
+let conditions = Array()
+let tags = Array()
 let order = "recent"
-let request = 0;
-let controller = new AbortController();
+let request = 0
+let controller = new AbortController()
 
-const searchres = document.querySelector('#searchbar').value;
+const searchres = document.querySelector('#searchbar').value
 
-let all = false;
-let waitingMin = 0;
-let waitingMax = 0;
+let all = false
+let waitingMin = 0
+let waitingMax = 0
 
 const selectOrder = document.querySelector("#order")
 selectOrder.addEventListener("input", async () => {
-    order = selectOrder.value;
-    await getFilteredItems(true);
+    order = selectOrder.value
+    await getFilteredItems(true)
 })
 
 async function getFilteredItems(clean) {
-    //if (isLoading) return;
-    if (clean) cleanSearch();
+    //if (isLoading) return
+    if (clean) cleanSearch()
     if (request > 0) {
-        controller.abort();
-        controller = new AbortController();
+        controller.abort()
+        controller = new AbortController()
     }
-    request++;
-    isLoading = true;
-    let response;
+    request++
+    isLoading = true
+    let response
     try {
-        response = await fetch('../api/api_search_range.php?page=' + pageNum + '&' + encodeForAjax({cat: categories, cond: conditions, price: price_range}) + '&' + encodeForAjaxArray({tag: tags}) + '&search=' + searchres + '&order=' + order, {
+        response = await fetch('../api/api_search_range.php?' + encodeForAjax({page: pageNum,cat: categories, cond: conditions, price: price_range})
+            + '&' + encodeForAjaxArray({tag: tags}) + '&' + encodeForAjax({search: searchres, order: order}), {
             signal: controller.signal,
-        });
+        })
     } catch (error) {
-        request--;
-        return;
+        request--
+        return
     }
     if (waitingMin !== 0 || waitingMax !== 0){
-        request--;
-        return;
+        request--
+        return
     }
-    const items = await response.json();
-    let loader = document.querySelector(".loader");
+    const items = await response.json()
+    let loader = document.querySelector(".loader")
     if (items.length === 0) {
-        all = true;
-        isLoading = false;
-        if (loader) loader.style.display = 'none';
-        request--;
+        all = true
+        isLoading = false
+        if (loader) loader.style.display = 'none'
+        request--
         return;
     }
     const response_currency = await fetch('../api/api_get_currency.php')

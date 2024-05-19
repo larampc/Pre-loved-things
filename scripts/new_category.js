@@ -6,7 +6,7 @@ selectType.forEach((select) => select.addEventListener("input", () => {
 function addTagFinal(section) {
     const tagNumber = section.id.split("-")[2]
     const options = document.getElementsByClassName(tagNumber.toString())
-    let optionNumber = 0;
+    let optionNumber = 0
     if (options.length > 0) {
         const lastOption = options[options.length - 1].querySelector("input").name
         optionNumber = parseInt(lastOption[lastOption.length-2]) + 1;

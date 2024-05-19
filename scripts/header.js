@@ -1,41 +1,40 @@
-var prevScrollpos = window.scrollY;
+let prevScrollpos = window.scrollY
 
-const header = document.querySelector("header");
-var headerBottom = header.offsetTop + header.offsetHeight;
-var hidden = false;
+const header = document.querySelector("header")
+let hidden = false
 
 window.onscroll = function() {
-    header.style.transitionDuration = "0s";
-    var currentScrollPos = window.scrollY;
+    header.style.transitionDuration = "0s"
+    let currentScrollPos = window.scrollY
   
     if (prevScrollpos <= currentScrollPos) {
-        header.style.top = (prevScrollpos-currentScrollPos).toString() + "px";
+        header.style.top = (prevScrollpos-currentScrollPos).toString() + "px"
         if (prevScrollpos <= currentScrollPos-(header.offsetHeight/2) && currentScrollPos > header.offsetHeight) {
-            hidden = true;
-            header.className = "header-hidden";
+            hidden = true
+            header.className = "header-hidden"
         }
         else {
-            hidden = false;
-            header.className = "header-visible";
+            hidden = false
+            header.className = "header-visible"
         }
     }
     else{  
-        hidden = false;
-        header.style.top = "0";
-        header.className = "header-visible";
+        hidden = false
+        header.style.top = "0"
+        header.className = "header-visible"
     }
 }
 
 window.onscrollend = function() {
-    header.style.transitionDuration = "0.2s";
+    header.style.transitionDuration = "0.2s"
     if (hidden) {
-        prevScrollpos = window.scrollY - header.offsetHeight;
-        header.style.top = (-header.offsetHeight).toString() + "px";
-        header.className = "header-hidden";
+        prevScrollpos = window.scrollY - header.offsetHeight
+        header.style.top = (-header.offsetHeight).toString() + "px"
+        header.className = "header-hidden"
     }
     else {
-        prevScrollpos = window.scrollY;
-        header.style.top = "0";
-        header.className = "header-visible";
+        prevScrollpos = window.scrollY
+        header.style.top = "0"
+        header.className = "header-visible"
     }
 }
