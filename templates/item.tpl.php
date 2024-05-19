@@ -307,7 +307,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
             <form method="post" action="../actions/action_update_delivery.php">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
-                <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
+                <input value="<?=$trackItem->date?>" id="set_date" name="new-date" type="date" min="<?=date("Y-m-d", time())?>">
                 <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
                 <button type="submit">Confirm</button>
             </form>
