@@ -98,8 +98,8 @@ CREATE TABLE roles (
 
 CREATE TABLE comments (
   id VARCHAR PRIMARY KEY,            -- comment id
-  mainuser VARCHAR REFERENCES users,   -- user this comment is about
-  userc VARCHAR REFERENCES users, -- user that wrote the comment
+  subject VARCHAR REFERENCES users,   -- user this comment is about
+  writer VARCHAR REFERENCES users, -- user that wrote the comment
   date INTEGER,                 -- date when news item was published in epoch format
   text VARCHAR,                       -- comment text
   rating INTEGER
@@ -166,55 +166,55 @@ INSERT INTO item_images (item, image) VALUES
 
 INSERT INTO users (user_id, password, name, email, phone, username, currency)
 VALUES
-    ('1', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'John Doe', 'john@example.com', '1234567890', 'johny', 'USD'),
-    ('2', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Jane Smith', 'jane@example.com', '9876543210', 'janey', 'EUR'),
-    ('3', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful', 'GBP'),
-    ('4', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Bob Green', 'bob@example.com', '4447890123', 'bobby', 'INR'),
-    ('5', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita', 'AUD'),
+    ('1', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'John Doe', 'john@example.com', '1234567890', 'johny', 'USD'),
+    ('2', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Jane Smith', 'jane@example.com', '9876543210', 'janey', 'EUR'),
+    ('3', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Alice Wonder', 'alice@example.com', '5551234567', 'alicewonderful', 'GBP'),
+    ('4', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Bob Green', 'bob@example.com', '4447890123', 'bobby', 'INR'),
+    ('5', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Sarah Jones', 'sarah@example.com', '9998887777', 'sarita', 'AUD'),
     ('6', 'password321', 'Mike Andrews', 'mike@example.com', '1112223333', 'mikeymouse', 'CAD'),
     ('7', 'brownie', 'Emily Brown', 'emily@example.com', '7776665555', 'emiliii', 'SGD'),
     ('8', 'king123', 'Alex King', 'alex@example.com', '2223334444', 'kingofall', 'CHF'),
     ('9', 'sammy123', 'Sam Carter', 'sam@example.com', '6667778888', 'carteiro', 'MYR'),
     ('10', 'lisalisa', 'Lisa Adams', 'lisa@example.com', '3334445555', 'lisa', 'JPY'),
-    ('74429f6c-6dc9-49bd-9c31-73df294f5bd6', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carolina Montgomery', 'Carolina_Montgomery70@gmail.com', '910080502', 'Carol', 'EUR'),
-    ('6179e03c-f7a7-4601-94e4-8b33266e4bb9', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Perry Rivers', 'Perry_Rivers50@gmail.com', '957101156', 'PERRYY', 'EUR'),
-    ('dd22de70-a364-41a7-9ed4-d93894be3b53', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ricky Joyce', 'Ricky_Joyce22@gmail.com', '969108048', 'Rolling4ever', 'EUR'),
-    ('15b3547d-9a7c-4df6-b009-82ff5c7d2b8a', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ron Coleman', 'Ron_Coleman33@gmail.com', '913639123', 'Ronei', 'EUR'),
-    ('5d389996-7b06-4dbe-9402-2875b26bf403', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Malcolm Hoffman', 'Malcolm_Hoffman93@gmail.com', '957106414', 'MH', 'EUR'),
-    ('e6fb2b5a-c0bb-4c04-a9c4-f9778977bc5e', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Robbie Coyle', 'Robbie_Coyle64@gmail.com', '999226752', 'Robbie64', 'EUR'),
-    ('e8642d87-cd43-4d20-8e26-f9a43e28ff44', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carrie Richards', 'Carrie_Richards87@gmail.com', '954933787', 'CC87', 'EUR'),
-    ('bb0faa2a-743c-4144-99d4-27bfe949e5c1', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Chris Charles', 'Chris_Charles13@gmail.com', '960543243', 'Charlie', 'EUR'),
-    ('c2dfc91f-6c7c-4ae4-b0d1-bcb0483206a8', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Sheila Preston', 'Sheila_Preston72@gmail.com', '955184411', 'Sheilaaa_', 'GBP'),
-    ('82146581-ad4f-4b8b-b5fd-48c478087851', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Manuel Fields', 'Manuel_Fields80@gmail.com', '920802692', 'Fields8080', 'INR'),
-    ('090ea498-7db9-4c2e-93a6-d68a5f479964', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Olga Olson', 'Olga_Olson6@gmail.com', '941618630', 'O_O', 'AUD'),
-    ('b32b03b8-7210-436e-92fd-2fa183b4f658', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Zachary Andrews', 'Zachary_Andrews71@gmail.com', '960200069', 'zackk', 'CAD'),
-    ('79c99578-db93-4156-9cce-000cb34829ff', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Casey Stevenson', 'Casey_Stevenson7@gmail.com', '971939623', 'not-the_father', 'SGD'),
-    ('c89ce9e3-5abc-41fe-8414-a0cabf1eec95', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ruth Elliot', 'Ruth_Elliot48@gmail.com', '981610736', 'Ell_48', 'CHF'),
-    ('6f4fc1c9-bd29-479d-bff5-2ac502db1b50', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Andrea Greenwood', 'Andrea_Greenwood24@gmail.com', '975850978', 'andrea123', 'MYR'),
-    ('aa5735cf-affc-43c1-8938-92c1b53f119a', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Randolph Matthews', 'Randolph_Matthews47@gmail.com', '998517823', '47_RM_47', 'JPY'),
-    ('cb4f0761-590e-431c-a786-861ade932102', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Jesus Jones', 'Jesus_Jones39@gmail.com', '935740480', 'O_M_Me', 'CNY'),
-    ('d6b25587-4310-4b69-8d04-09372d8a8ba4', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Kelvin Donovan', 'Kelvin_Donovan60@gmail.com', '933354073', 'Celsius', 'USD'),
-    ('3a8a539d-8bdc-4e52-a86c-16a3af67dd17', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lindsey McMillan', 'Lindsey_McMillan56@gmail.com', '930016152', 'Lindi', 'USD'),
-    ('5c99c65e-4f32-4cf0-b736-83cdddca6d50', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Cora Katz', 'Cora_Katz88@gmail.com', '980937279', 'KitKat', 'USD'),
-    ('dded65b5-f58e-45dd-87a3-b80d0c06f2e0', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lorenzo Clarke', 'Lorenzo_Clarke5@gmail.com', '993076798', 'Lore5', 'USD'),
-    ('44962523-7d16-4dfa-b9c4-a9c5d0fa6dc7', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Viola Carey', 'Viola_Carey27@gmail.com', '917059730', 'Guitarra_Carey', 'USD'),
-    ('073811a5-7e63-4525-bde3-67635b11a818', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Latoya Gallegos', 'Latoya_Gallegos18@gmail.com', '942913064', 'Gal81', 'USD'),
-    ('c1176c7b-4846-4bed-ba3e-ea9c4d625240', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carlton Dougherty', 'Carlton_Dougherty81@gmail.com', '916045366', 'Dougherty2', 'USD'),
-    ('0fcc89c1-5ed4-44d6-8973-41a0fdc76645', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Graciela Haney', 'Graciela_Haney73@gmail.com', '935067101', 'Haney_im_home', 'USD'),
-    ('ab4db53b-9233-4684-b409-6920f25b44bd', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Tiffany Cameron', 'Tiffany_Cameron89@gmail.com', '980157605', 'Tiff89', 'USD'),
-    ('f1be0523-8f5d-4411-84d6-8228efaccef9', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Wayne West', 'Wayne_West82@gmail.com', '949314032', 'Not_North82', 'USD'),
-    ('3e12516b-fe08-4265-9a75-043d8789685d', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Leona Roth', 'Leona_Roth44@gmail.com', '990289177', 'Leona44', 'USD'),
-    ('817b9c91-5587-44d7-8dc9-ee935bf78e16', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Vince Willson', 'Vince_Willson11@gmail.com', '915612952', 'Vience123', 'USD'),
-    ('afcf970e-ba98-40bb-a66c-ce2bd0c0ef37', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Stephanie Watkins', 'Stephanie_Watkins28@gmail.com', '980681758', 'Steph_Wat_28', 'USD');
+    ('74429f6c-6dc9-49bd-9c31-73df294f5bd6', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carolina Montgomery', 'Carolina_Montgomery70@gmail.com', '910080502', 'Carol', 'EUR'),
+    ('6179e03c-f7a7-4601-94e4-8b33266e4bb9', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Perry Rivers', 'Perry_Rivers50@gmail.com', '957101156', 'PERRYY', 'EUR'),
+    ('dd22de70-a364-41a7-9ed4-d93894be3b53', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ricky Joyce', 'Ricky_Joyce22@gmail.com', '969108048', 'Rolling4ever', 'EUR'),
+    ('15b3547d-9a7c-4df6-b009-82ff5c7d2b8a', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ron Coleman', 'Ron_Coleman33@gmail.com', '913639123', 'Ronei', 'EUR'),
+    ('5d389996-7b06-4dbe-9402-2875b26bf403', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Malcolm Hoffman', 'Malcolm_Hoffman93@gmail.com', '957106414', 'MH', 'EUR'),
+    ('e6fb2b5a-c0bb-4c04-a9c4-f9778977bc5e', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Robbie Coyle', 'Robbie_Coyle64@gmail.com', '999226752', 'Robbie64', 'EUR'),
+    ('e8642d87-cd43-4d20-8e26-f9a43e28ff44', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carrie Richards', 'Carrie_Richards87@gmail.com', '954933787', 'CC87', 'EUR'),
+    ('bb0faa2a-743c-4144-99d4-27bfe949e5c1', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Chris Charles', 'Chris_Charles13@gmail.com', '960543243', 'Charlie', 'EUR'),
+    ('c2dfc91f-6c7c-4ae4-b0d1-bcb0483206a8', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Sheila Preston', 'Sheila_Preston72@gmail.com', '955184411', 'Sheilaaa_', 'GBP'),
+    ('82146581-ad4f-4b8b-b5fd-48c478087851', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Manuel Fields', 'Manuel_Fields80@gmail.com', '920802692', 'Fields8080', 'INR'),
+    ('090ea498-7db9-4c2e-93a6-d68a5f479964', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Olga Olson', 'Olga_Olson6@gmail.com', '941618630', 'O_O', 'AUD'),
+    ('b32b03b8-7210-436e-92fd-2fa183b4f658', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Zachary Andrews', 'Zachary_Andrews71@gmail.com', '960200069', 'zackk', 'CAD'),
+    ('79c99578-db93-4156-9cce-000cb34829ff', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Casey Stevenson', 'Casey_Stevenson7@gmail.com', '971939623', 'not-the_father', 'SGD'),
+    ('c89ce9e3-5abc-41fe-8414-a0cabf1eec95', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Ruth Elliot', 'Ruth_Elliot48@gmail.com', '981610736', 'Ell_48', 'CHF'),
+    ('6f4fc1c9-bd29-479d-bff5-2ac502db1b50', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Andrea Greenwood', 'Andrea_Greenwood24@gmail.com', '975850978', 'andrea123', 'MYR'),
+    ('aa5735cf-affc-43c1-8938-92c1b53f119a', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Randolph Matthews', 'Randolph_Matthews47@gmail.com', '998517823', '47_RM_47', 'JPY'),
+    ('cb4f0761-590e-431c-a786-861ade932102', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Jesus Jones', 'Jesus_Jones39@gmail.com', '935740480', 'O_M_Me', 'CNY'),
+    ('d6b25587-4310-4b69-8d04-09372d8a8ba4', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Kelvin Donovan', 'Kelvin_Donovan60@gmail.com', '933354073', 'Celsius', 'USD'),
+    ('3a8a539d-8bdc-4e52-a86c-16a3af67dd17', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lindsey McMillan', 'Lindsey_McMillan56@gmail.com', '930016152', 'Lindi', 'USD'),
+    ('5c99c65e-4f32-4cf0-b736-83cdddca6d50', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Cora Katz', 'Cora_Katz88@gmail.com', '980937279', 'KitKat', 'USD'),
+    ('dded65b5-f58e-45dd-87a3-b80d0c06f2e0', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lorenzo Clarke', 'Lorenzo_Clarke5@gmail.com', '993076798', 'Lore5', 'USD'),
+    ('44962523-7d16-4dfa-b9c4-a9c5d0fa6dc7', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Viola Carey', 'Viola_Carey27@gmail.com', '917059730', 'Guitarra_Carey', 'USD'),
+    ('073811a5-7e63-4525-bde3-67635b11a818', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Latoya Gallegos', 'Latoya_Gallegos18@gmail.com', '942913064', 'Gal81', 'USD'),
+    ('c1176c7b-4846-4bed-ba3e-ea9c4d625240', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Carlton Dougherty', 'Carlton_Dougherty81@gmail.com', '916045366', 'Dougherty2', 'USD'),
+    ('0fcc89c1-5ed4-44d6-8973-41a0fdc76645', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Graciela Haney', 'Graciela_Haney73@gmail.com', '935067101', 'Haney_im_home', 'USD'),
+    ('ab4db53b-9233-4684-b409-6920f25b44bd', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Tiffany Cameron', 'Tiffany_Cameron89@gmail.com', '980157605', 'Tiff89', 'USD'),
+    ('f1be0523-8f5d-4411-84d6-8228efaccef9', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Wayne West', 'Wayne_West82@gmail.com', '949314032', 'Not_North82', 'USD'),
+    ('3e12516b-fe08-4265-9a75-043d8789685d', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Leona Roth', 'Leona_Roth44@gmail.com', '990289177', 'Leona44', 'USD'),
+    ('817b9c91-5587-44d7-8dc9-ee935bf78e16', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Vince Willson', 'Vince_Willson11@gmail.com', '915612952', 'Vience123', 'USD'),
+    ('afcf970e-ba98-40bb-a66c-ce2bd0c0ef37', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Stephanie Watkins', 'Stephanie_Watkins28@gmail.com', '980681758', 'Steph_Wat_28', 'USD');
 --
 INSERT INTO users (user_id, password, name, email, phone, username, role, currency) VALUES
-    ('11','2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR'),
-    ('cc2931ab-3b55-4172-8db1-3914a6fb8c61', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Claude Moon', 'Claude_Moon99@gmail.com', '968032551', 'Santa_Sun', 'admin', 'USD'),
-    ('cadaaa8d-59f8-4f96-88ab-9844ce1e842a', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Mabel Montgomery', 'Mabel_Montgomery52@gmail.com', '993690490', 'MnM52', 'admin', 'USD'),
-    ('37787680-81d6-4518-b0b2-6028afe5fd37', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Zach Pratt', 'Zach_Pratt83@gmail.com', '927950085', 'Zack_P', 'admin', 'USD'),
-    ('f97a426e-b368-4ebb-b5c8-61443d410d6d', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Esther Frey', 'Esther_Frey25@gmail.com', '930693697', 'EstherF', 'admin', 'USD'),
-    ('98f86636-bfc5-4e11-9532-38fe154e2738', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Michelle Cornell', 'Michelle_Cornell92@gmail.com', '978776666', 'Mi_92', 'admin', 'USD'),
-    ('2c6c9a25-f011-4230-b10a-a34d73ea5b8c', '2y10uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Dee Riddle', 'Dee_Riddle71@gmail.com', '976503406', 'Riddle_me_this', 'admin', 'USD');
+    ('11','$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Lisa Adams2', 'lisa2@example.com', '3334445555', 'lisa2', 'admin', 'EUR'),
+    ('cc2931ab-3b55-4172-8db1-3914a6fb8c61', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Claude Moon', 'Claude_Moon99@gmail.com', '968032551', 'Santa_Sun', 'admin', 'USD'),
+    ('cadaaa8d-59f8-4f96-88ab-9844ce1e842a', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Mabel Montgomery', 'Mabel_Montgomery52@gmail.com', '993690490', 'MnM52', 'admin', 'USD'),
+    ('37787680-81d6-4518-b0b2-6028afe5fd37', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Zach Pratt', 'Zach_Pratt83@gmail.com', '927950085', 'Zack_P', 'admin', 'USD'),
+    ('f97a426e-b368-4ebb-b5c8-61443d410d6d', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Esther Frey', 'Esther_Frey25@gmail.com', '930693697', 'EstherF', 'admin', 'USD'),
+    ('98f86636-bfc5-4e11-9532-38fe154e2738', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Michelle Cornell', 'Michelle_Cornell92@gmail.com', '978776666', 'Mi_92', 'admin', 'USD'),
+    ('2c6c9a25-f011-4230-b10a-a34d73ea5b8c', '$2y$10$uiOS.8pUzfpRMyaGoLyE6uvcnSbxFnjm2qvUvqNM7EFc7c45SQj6W', 'Dee Riddle', 'Dee_Riddle71@gmail.com', '976503406', 'Riddle_me_this', 'admin', 'USD');
 
 INSERT INTO items (id, name, price, date, description, creator, mainImage, category, sold)
 VALUES
@@ -293,7 +293,7 @@ VALUES
 
 
 
-INSERT INTO comments (id, mainuser, userc, date, text, rating)
+INSERT INTO comments (id, subject, writer, date, text, rating)
 VALUES
     ('1', '1', '2', '2024-04-10', 'Great guitar!', 5),
     ('2', '2', '1', '2024-04-10', 'Excellent laptop.', 4),
