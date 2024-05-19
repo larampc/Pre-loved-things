@@ -129,10 +129,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <?php if ($session->isLoggedIn() && $user->user_id!=$session->getId()) { ?>
             <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-
-                <label>
-                    <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
-                </label>
+                <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
                 <div class="star-review">
                     <input type="radio" name="stars" id="st5" value="5">
                     <label for="st5"></label>

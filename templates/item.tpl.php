@@ -510,7 +510,7 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
                         <i class="material-symbols-outlined delete-option" title="Delete tag">delete</i>
                         <?php $tag_options = Tag::get_tag_options($dbh, $category, $tags[$i]['tag']);?>
                         <label>
-                            <select class="type">
+                            <select class="type" name="select-type">
                                 <option value="free">Free</option>
                                 <option value="select" <?=$tag_options ? "selected" : ""?>>Select</option>
                             </select>
