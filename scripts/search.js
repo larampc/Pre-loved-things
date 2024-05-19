@@ -14,6 +14,8 @@ let controller = new AbortController();
 const searchres = document.querySelector('#searchbar').value;
 
 let all = false;
+let waitingMin = 0;
+let waitingMax = 0;
 
 const selectOrder = document.querySelector("#order")
 selectOrder.addEventListener("input", async () => {
@@ -36,6 +38,10 @@ async function getFilteredItems(clean) {
             signal: controller.signal,
         });
     } catch (error) {
+        request--;
+        return;
+    }
+    if (waitingMin !== 0 || waitingMax !== 0){
         request--;
         return;
     }
@@ -78,12 +84,22 @@ if (optionsPrice) {
     const max = optionsPrice.querySelector('.price-input .max-input');
     price_range.push(max.value)
     min.addEventListener("input", async() => {
+        waitingMin++;
         price_range[0] = min.value
-        await getFilteredItems(true);
+        setTimeout(async () => {
+            waitingMin--;
+            if (waitingMin === 0) await getFilteredItems(true);
+            else cleanSearch();
+        }, 200)
     })
     max.addEventListener("input", async() => {
+        waitingMax++;
         price_range[1] = max.value
-        await getFilteredItems(true);
+        setTimeout(async () => {
+            waitingMax--;
+            if (waitingMax === 0) await getFilteredItems(true);
+            else cleanSearch();
+        }, 200)
     })
 }
 
@@ -173,7 +189,6 @@ categorySelector.forEach(category => category.addEventListener("input", async ()
 function cleanSearch() {
     pageNum = 1;
     all = false;
-    const items = resultContainer.children;
     while (!resultContainer.firstElementChild.classList.contains("loader")) {
         resultContainer.removeChild(resultContainer.firstElementChild);
     }

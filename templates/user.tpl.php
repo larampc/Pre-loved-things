@@ -72,10 +72,15 @@ function draw_edit_profile(User $user) { ?>
                    oninvalid="this.setCustomValidity('Invalid phone number - (ddddddddd or ddd-ddd-ddd)')"
                    oninput="this.setCustomValidity('')">
             <label for="img1">Profile photo</label>
-            <div class="photo-upload" style="background-image: url(<?="../uploads/profile_pics/" . $user->image . ".png" ?>)">
-                <input type="file" id="img1" class="uploader" name="img1" accept="image/*" onchange="previewImage(this.id)">
-                <input type="hidden" class="image-data" value="<?=$user->image?>" name="hiddenimg1">
-                <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="removeUserImage()">delete</i>
+            <div class="photo-upload" <?php if($user->image !== "0"){ ?> style="background-image: url(<?="../uploads/profile_pics/" . $user->image . ".png" ?>)" <?php } ?> >
+                <?php if( $user->image !== "0"){ ?>
+                    <input type="hidden" class="image-data" value="<?=$user->image?>" name="hiddenimg1">
+                    <input type="file" id="img1" class="uploader" name="img1" accept="image/*" onchange="previewImage(this.id)">
+                    <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="removeUserImage()">delete</i>
+                <?php } else { ?>
+                    <i class="material-symbols-outlined bolder upload-icon">add_a_photo</i>
+                    <input type="file" id="img1" class="uploader" name="img1" accept="image/*" onchange="previewImage(this.id)">
+                <?php }?>
             </div>
             <button type="submit">Submit</button>
         </form>
