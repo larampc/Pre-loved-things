@@ -70,8 +70,8 @@ function upload_item_image($img) : string {
     // Calculate width and height of medium sized image (max width: 400)
     $medium_width = $width;
     $medium_height = $height;
-    if ($medium_width > 400) {
-        $medium_width = 400;
+    if ($medium_width > 800) {
+        $medium_width = 800;
         $medium_height = $medium_height * ( $medium_width / $width );
     }
 
