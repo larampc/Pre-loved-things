@@ -1505,4 +1505,13 @@ a {
     background-color: white;
 }
 
+.sale-info-main button {
+    border-style: none;
+    color: white;
+    background-color: black;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 0 5px var(--tertiary);
+}
+
 /* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
