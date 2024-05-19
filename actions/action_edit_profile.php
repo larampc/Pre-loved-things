@@ -21,9 +21,12 @@
     }
 
     if(!isset($_POST["hiddenimg1"])){
-        remove_uploaded_user_img($user->image);
-        if(isset($_FILES['img1'])) {
+        if($user->image !== "0") remove_uploaded_user_img($user->image);
+        if(!empty($_FILES['img1']['name'])) {
             $image_id = upload_user_image("img1");
+        }
+        else {
+            $image_id = "0";
         }
     }
 
