@@ -1,9 +1,7 @@
 let currentNav = "my"
 let page = 1;
-let all = false;
 let isLoading = false;
-
-updatePage();
+let maxPage = 0;
 
 async function openNav(option) {
     currentNav = option;
@@ -14,7 +12,26 @@ async function openNav(option) {
         if (buttons[j].classList.contains(option)) buttons[j].style.border = "2px solid #D9D9D9";
         else buttons[j].style.border = "none";
     }
+    document.querySelector(".display-item").lastElementChild.remove()
+    await draw_pagination();
     await updatePage();
+}
+
+async function draw_pagination() {
+    const response_max = await fetch('../api/api_get_max_page.php?nav=' + currentNav);
+    maxPage = await response_max.json();
+    const nav = document.createElement("nav");
+    nav.className = "pagination"
+    for (let i = 1; i <= maxPage; i++) {
+        const number = document.createElement("a");
+        number.innerHTML = i.toString();
+        number.addEventListener("click", async () => {
+            page = i;
+            await updatePage();
+        })
+        nav.appendChild(number);
+    }
+    document.querySelector(".display-item").appendChild(nav);
 }
 
 const previous = document.querySelector("#prev-btn");
@@ -26,16 +43,19 @@ previous.addEventListener("click", async () => {
 })
 
 next.addEventListener("click", async () => {
-    if (!all) page++;
+    if (page < maxPage) page++;
     await updatePage();
 })
 
 async function updatePage() {
+    if (page === 1) previous.style.visibility = "hidden";
+    if (page === maxPage) next.style.visibility = "hidden"
+    if (page < maxPage)next.style.visibility = "visible"
+    if (page > 1) previous.style.visibility = "visible"
     isLoading = true;
     const response = await fetch('../api/api_get_user_items.php?page=' + page + "&nav=" + currentNav);
     const items = await response.json();
     if (items.length < 5) {
-        all = true;
         isLoading = false;
         if (items === 0) return;
     }
@@ -81,3 +101,6 @@ async function drawItem(item, currency) {
     console.log(main)
     return main;
 }
+
+updatePage();
+draw_pagination();

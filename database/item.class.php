@@ -90,6 +90,12 @@ class Item {
         return self::create_items($dbh, $stmt->fetchAll());
     }
 
+    static function get_max_user_items(PDO $dbh, string $user_id): int {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM items WHERE creator = ? AND sold = 0');
+        $stmt->execute(array($user_id));
+        return intval($stmt->fetchColumn());
+    }
+
     static function get_items_suggestion(PDO $dbh, string $q): array
     {
         $stmt = $dbh->prepare(
