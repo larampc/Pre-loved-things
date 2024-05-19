@@ -166,38 +166,11 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <button type="button" class="navOption purchases" onclick="openNav('purchases')">Pending purchases</button>
             <button type="button" class="navOption purchased" onclick="openNav('purchased')">Purchased</button>
         </div>
-        <div class="items" id="purchases">
-            <?php
-            $items = TrackItem::get_pending_purchases_items($dbh, $user->user_id);
-            foreach ($items as $item) {
-                draw_item_to_track($dbh, $item);
-            } ?>
-            </div>
-        <div class="items" id="purchased">
-            <?php $items = TrackItem::get_purchased_items($dbh, $user->user_id);
-            foreach($items as $item) {
-                draw_item_to_track($dbh, $item);
-            } ?>
+        <div class="slider-btns">
+            <i class="material-symbols-outlined notSelectable" id="prev-btn"> chevron_left </i>
+            <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
         </div>
-        <div class="items" id="sales">
-            <?php
-            $items = TrackItem::get_pending_sales_items($dbh, $user->user_id);
-            foreach ($items as $item) {
-                draw_item_to_track($dbh, $item);
-            } ?>
-            </div>
-        <div class="items" id="sold">
-            <?php $items = TrackItem::get_sold_items($dbh, $user->user_id);
-            foreach($items as $item) {
-                draw_item_to_track($dbh, $item);
-            } ?>
-        </div>
-        <div class="items" id="my">
-            <?php $items = Item::get_user_items($dbh, $user->user_id);
-            foreach($items as $item) {
-                draw_item($item, $user_currency);
-            } ?>
-        </div>
+        <div class="items"></div>
     </div>
 <?php
 } ?>

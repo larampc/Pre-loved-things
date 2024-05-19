@@ -682,7 +682,6 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 .profile-main .items, .user-main .display-item .items{
     display: flex;
     overflow: hidden;
-    max-height: 0;
 }
 
 .profile-main .items#my,  .user-main .items#my{
