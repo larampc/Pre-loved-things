@@ -404,6 +404,19 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     justify-content: center;
 }
 
+.navbar {
+    overflow-x: auto;
+}
+
+.pagination {
+    align-content: center;
+}
+
+.page-number {
+    align-content: center;
+    display: inline-block;
+}
+
 .user-main .items, .profile-main .items, .favorite-main .items {
     grid-area: items;
     display: flex;

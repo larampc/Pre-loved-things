@@ -9,7 +9,7 @@ require_once(__DIR__ . '/../database/item.class.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
-$q = $_GET['q'];
+$q = htmlentities($_GET['q']);
 
 if ($q === '') $items = array();
 else {

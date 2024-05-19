@@ -10,14 +10,14 @@ require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 
 $cat = $_GET['cat']??"";
-$tag = $_GET['tag']??"";
+$tag = htmlentities($_GET['tag'])??"";
 $page = $_GET['page'];
 $range = $_GET['price'];
-$search = $_GET['search'];
+$search = htmlentities($_GET['search']);
 $order = $_GET['order'];
 $dbh = get_database_connection();
 
-$checkTag = !empty($_GET['tag']);
+$checkTag = !empty($tag);
 $tagOptions = explode('-', $tag);
 unset($tagOptions[0]);
 $itemsTags = array();

@@ -1,46 +1,45 @@
-let pageNum = 1;
-let isLoading = false;
-const container = document;
+let pageNum = 1
+let isLoading = false
 const resultContainer =
-    document.querySelector(".user-result");
-const userSearch = document.querySelector(".user-search");
-let tags = Array();
-let request = 0;
-let controller = new AbortController();
+    document.querySelector(".user-result")
+const userSearch = document.querySelector(".user-search")
+let tags = Array()
+let request = 0
+let controller = new AbortController()
 
-let searchres = document.querySelector('#search-user').value;
+let searchres = document.querySelector('#search-user').value
 
-let all = false;
+let all = false
 document.querySelector('#search-user').addEventListener("input", () => {
-    searchres = document.querySelector('#search-user').value;
-    getFilteredUsers(true);
+    searchres = document.querySelector('#search-user').value
+    getFilteredUsers(true)
 })
 
 async function getFilteredUsers(clean) {
-    //if (isLoading) return;
-    if (clean) cleanSearch();
+    //if (isLoading) return
+    if (clean) cleanSearch()
     if (request > 0) {
-        controller.abort();
-        controller = new AbortController();
+        controller.abort()
+        controller = new AbortController()
     }
-    request++;
-    isLoading = true;
-    let response;
+    request++
+    isLoading = true
+    let response
     try {
         response = await fetch('../api/api_get_users.php?page='+pageNum + "&search=" + searchres, {
             signal: controller.signal,
-        });
+        })
     } catch (error) {
-        request--;
-        return;
+        request--
+        return
     }
-    const users = await response.json();
-    let loader = document.querySelector(".loader-users");
+    const users = await response.json()
+    let loader = document.querySelector(".loader-users")
     if (users.length === 0) {
-        all = true;
-        isLoading = false;
-        if (loader) loader.style.display = 'none';
-        request--;
+        all = true
+        isLoading = false
+        if (loader) loader.style.display = 'none'
+        request--
         return;
     }
     if (request === 1) {
@@ -102,7 +101,6 @@ function createUser(user) {
 function cleanSearch() {
     pageNum = 1;
     all = false;
-    const users = resultContainer.children;
     while (!resultContainer.firstElementChild.classList.contains("loader-users")) {
         resultContainer.removeChild(resultContainer.firstElementChild);
     }

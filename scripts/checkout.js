@@ -1,46 +1,46 @@
-let coll = document.getElementsByClassName("collapsible");
+let coll = document.getElementsByClassName("collapsible")
 
 if (coll.length > 0) {
-    coll[0].style.borderRadius = "1rem 1rem 0 0";
+    coll[0].style.borderRadius = "1rem 1rem 0 0"
     coll[0].nextElementSibling.style.maxHeight = coll[0].nextElementSibling.scrollHeight +"px"
 }
 
 for (let i = 0; i < coll.length; i++) {
     coll[i].addEventListener("click", function() {
         if (coll[i].parentElement.classList.contains("current") || coll[i].parentElement.classList.contains("done")) {
-            let content = this.nextElementSibling;
+            let content = this.nextElementSibling
             if (content.style.maxHeight !== "0px" && content.style.maxHeight) {
                 this.style.transitionDelay = "500ms"
                 content.style.maxHeight = "0"
-                this.style.borderRadius = "1rem";
+                this.style.borderRadius = "1rem"
             } else {
                 this.style.transitionDelay = "0ms"
                 content.style.maxHeight = content.scrollHeight+"px"
-                this.style.borderRadius = "1rem 1rem 0 0";
+                this.style.borderRadius = "1rem 1rem 0 0"
                 for (let j = 0; j < coll.length; j++) {
                     if (j !== i)  {
-                        let content2 = coll[j].nextElementSibling;
+                        let content2 = coll[j].nextElementSibling
                         coll[j].style.transitionDelay = "500ms"
                         content2.style.maxHeight = "0"
-                        coll[j].style.borderRadius = "1rem";
+                        coll[j].style.borderRadius = "1rem"
                     }
                 }
             }
         }
-    });
+    })
 }
 
-let next = document.getElementsByClassName("next");
-let error = false;
+let next = document.getElementsByClassName("next")
+let error = false
 for (let i = 0; i < next.length; i++) {
     next[i].addEventListener("click", function() {
         checkInput(this.parentElement)
-        if (error) return;
-        let content = this.parentElement;
+        if (error) return
+        let content = this.parentElement
         if (!content.parentElement.classList.contains("done")) content.parentElement.classList.add("done")
         content.previousElementSibling.style.transitionDelay = "500ms"
         content.style.maxHeight = "0"
-        content.previousElementSibling.style.borderRadius = "1rem";
+        content.previousElementSibling.style.borderRadius = "1rem"
         for (let j = 0; j < coll.length; j++) {
             if (j === i+1)  {
                 let content2 = coll[j].nextElementSibling;

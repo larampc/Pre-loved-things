@@ -6,12 +6,12 @@ if (search) {
         const response = await fetch('../api/api_search.php?' + encodeForAjax({ q: input.value }))
         const items = await response.json()
 
-        const suggestions = search.querySelector('#search-suggestions');
-        suggestions.innerHTML = '';
+        const suggestions = search.querySelector('#search-suggestions')
+        suggestions.innerHTML = ''
         for (const item of items) {
             const row = document.createElement('option')
-            row.value = item.name;
-            suggestions.appendChild(row);
+            row.value = item.name
+            suggestions.appendChild(row)
         }
     })
 }

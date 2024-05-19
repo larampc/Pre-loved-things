@@ -4,9 +4,9 @@ google.charts.setOnLoadCallback(drawChart);
 async function drawChart() {
     const response = await fetch('../api/api_get_statistics_all.php')
     const items = await response.json();
-    let data = google.visualization.arrayToDataTable(items);
+    const data = google.visualization.arrayToDataTable(items);
 
-    let options = {
+    const options = {
         title: 'Sales statistics in '+ new Date().getFullYear() ,
         curveType: 'function',
         vAxis: {
@@ -28,7 +28,7 @@ async function drawChart() {
     chart.draw(data, options);
     window.onresize = function() {
         document.getElementById('curve_chart').innerHTML = '';
-        let chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+        const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
         chart.draw(data, options);
     }
 }
