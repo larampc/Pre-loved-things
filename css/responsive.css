@@ -258,6 +258,9 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .slider-btns {
         width: 20rem;
     }
+    .display-item .slider-btns {
+        width: calc(100% - 5rem);
+    }
     .track-main  img {
         width: 15rem;
         height: 15rem;
@@ -567,6 +570,9 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     }
     .slider-btns {
         width: 80dvw;
+    }
+    .display-item .slider-btns {
+        width: calc(100% - 3rem);
     }
     .item-main .price {
         font-size: 1.5rem;
