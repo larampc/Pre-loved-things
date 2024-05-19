@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once(__DIR__ . '/../utils/session.php');
 require_once(__DIR__ . '/../utils/files.php');
+require_once(__DIR__ . '/../database/currency.class.php');
 $session = new Session();
 
 if(!validate_csrf_token($_POST['csrf'])) {
