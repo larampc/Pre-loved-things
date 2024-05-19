@@ -83,6 +83,14 @@ next.addEventListener("click", async () => {
 })
 
 async function updatePage() {
+    isLoading = true
+    const response = await fetch('../api/api_get_user_items.php?' + encodeForAjax({page:page, nav:currentNav, user:(user?user:"")}))
+    const items = await response.json()
+    if (items.length < 5) {
+        isLoading = false
+        if (items === 0) return
+    }
+    document.querySelector(".items").replaceWith( await getItems(items))
     await draw_pagination()
     if (page === 1) previous.style.visibility = "hidden"
     if (page >= maxPage) next.style.visibility = "hidden"
@@ -92,15 +100,6 @@ async function updatePage() {
         if (elem.id === page.toString())  elem.classList.add("current")
         else elem.classList.remove("current")
     } )
-
-    isLoading = true
-    const response = await fetch('../api/api_get_user_items.php?' + encodeForAjax({page:page, nav:currentNav, user:(user?user:"")}))
-    const items = await response.json()
-    if (items.length < 5) {
-        isLoading = false
-        if (items === 0) return
-    }
-    document.querySelector(".items").replaceWith( await getItems(items))
     isLoading = false
 }
 
