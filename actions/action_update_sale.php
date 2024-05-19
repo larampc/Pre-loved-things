@@ -29,4 +29,4 @@ else {
     $session->addMessage('error', 'Unable to update process.');
 }
 
-header('Location: ' . $_SERVER['HTTP_REFERER']);
+header('Location: ../pages');

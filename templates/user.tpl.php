@@ -162,22 +162,36 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
         <div class="navbar">
             <button type="button" class="navOption my" onclick="openNav('my')"> <?=$user->user_id === $session->getId() ? "My " : "User "?> items</button>
             <button type="button" class="navOption sales" onclick="openNav('sales')">Pending sales</button>
-            <button type="button" class="navOption purchased" onclick="openNav('purchased')">Pending purchases</button>
+            <button type="button" class="navOption sold" onclick="openNav('sold')">Sold</button>
+            <button type="button" class="navOption purchases" onclick="openNav('purchases')">Pending purchases</button>
+            <button type="button" class="navOption purchased" onclick="openNav('purchased')">Purchased</button>
         </div>
-        <div class="items" id="purchased">
+        <div class="items" id="purchases">
             <?php
-            $items = TrackItem::get_purchased_items($dbh, $user->user_id);
+            $items = TrackItem::get_pending_purchases_items($dbh, $user->user_id);
             foreach ($items as $item) {
                 draw_item_to_track($dbh, $item);
             } ?>
             </div>
+        <div class="items" id="purchased">
+            <?php $items = TrackItem::get_purchased_items($dbh, $user->user_id);
+            foreach($items as $item) {
+                draw_item_to_track($dbh, $item);
+            } ?>
+        </div>
         <div class="items" id="sales">
             <?php
-            $items = TrackItem::get_selling_items($dbh, $user->user_id);
+            $items = TrackItem::get_pending_sales_items($dbh, $user->user_id);
             foreach ($items as $item) {
                 draw_item_to_track($dbh, $item);
             } ?>
             </div>
+        <div class="items" id="sold">
+            <?php $items = TrackItem::get_sold_items($dbh, $user->user_id);
+            foreach($items as $item) {
+                draw_item_to_track($dbh, $item);
+            } ?>
+        </div>
         <div class="items" id="my">
             <?php $items = Item::get_user_items($dbh, $user->user_id);
             foreach($items as $item) {

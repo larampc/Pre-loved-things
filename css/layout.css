@@ -1026,3 +1026,9 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 .admin-main #curve_chart {
     overflow: clip;
 }
+
+.sale-info-main form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

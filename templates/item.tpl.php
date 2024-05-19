@@ -302,18 +302,18 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
         <li class="<?=($trackItem->state == "delivered"? "done" : "")?>">Delivered</li>
     </ul>
     <div id="delivery-date">
-        <p>Estimated delivery date: </p>
+        <p><?=$trackItem->state == "delivered" ? "Delivered at: " : "Estimated delivery date: "?></p>
         <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->getId()) {?>
             <form method="post" action="../actions/action_update_delivery.php">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
-                <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
+                <input value="<?=$trackItem->date?>" id="set_date" name="new-date" type="date" min="<?=date("Y-m-d", time())?>">
                 <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
                 <button type="submit">Confirm</button>
             </form>
         <?php }
         else {?>
-            <p><?=$trackItem->date?></p>
+            <p><?=date("d/m/Y", strtotime($trackItem->date))?></p>
         <?php } ?>
     </div>
     <?php draw_sliding_items($trackItem->tracking, $user_currency);
@@ -336,7 +336,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
     <qr-code
             id="qr1"
-            contents="http://localhost:9000/pages/confirm_ship.php?purchase=<?=$trackItem->id?>"
+            contents="http://<?=$_SERVER['HTTP_HOST']?>/pages/confirm_ship.php?purchase=<?=$trackItem->id?>"
             module-color="#000000"
             position-ring-color="#000000"
             position-center-color="#000000"
@@ -367,10 +367,13 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     </div>
 <?php } ?>
 
-<?php function draw_confirm_ship(TrackItem $trackItem) { ?>
+<?php function draw_confirm_ship(TrackItem $trackItem) {
+    if ($trackItem->state == "delivered") { ?>
+        <p>This item was already delivered</p>
+    <?php } else {?>
     <form action="../actions/action_update_sale.php" method="post">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-        <input name="confirmationCode" type="password" required>
+        <input name="confirmationCode" type="password" required placeholder="Delivery Agency Code">
         <input name="purchase" type="hidden" value="<?=$trackItem->id?>">
         <?php if ($trackItem->state=="preparing" || $trackItem->state=="shipping" || $trackItem->state=="delivering") {
             $text = $trackItem->state=="preparing"? "order was shipped" : ($trackItem->state=="shipping"? "order is being delivered" : "order was delivered");
@@ -381,5 +384,5 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
         <?php }
         ?>
     </form>
-<?php } ?>
+<?php }} ?>
 

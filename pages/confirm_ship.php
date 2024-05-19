@@ -17,7 +17,6 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 require_once(__DIR__ . '/../templates/item.tpl.php');
 
 $dbh = get_database_connection();
-
 $track_item = TrackItem::get_tracking_item($dbh, $_GET['purchase']);
 get_header("sale-info", $dbh, $session);
 draw_confirm_ship($track_item);

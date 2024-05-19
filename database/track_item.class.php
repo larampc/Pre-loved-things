@@ -32,9 +32,9 @@ class TrackItem {
         $stmt->execute(array($item_track));
         return new TrackItem($dbh, $stmt->fetch());
     }
-    public static function get_purchased_items(PDO $dbh, string $buyer) : array {
-        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase WHERE purchaseData.buyer = ?');
-        $stmt->execute(array($buyer));
+    public static function get_pending_purchases_items(PDO $dbh, string $buyer) : array {
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase WHERE purchaseData.buyer = ? AND purchaseData.state <> ?');
+        $stmt->execute(array($buyer, "delivered"));
         $items = $stmt->fetchAll();
         $result = array();
         foreach ($items as $item) {
@@ -42,9 +42,30 @@ class TrackItem {
         }
         return $result;
     }
-    public static function get_selling_items(PDO $dbh, string $seller) : array {
-        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ?');
-        $stmt->execute(array($seller));
+    public static function get_purchased_items(PDO $dbh, string $buyer) : array {
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase WHERE purchaseData.buyer = ? AND purchaseData.state = ?');
+        $stmt->execute(array($buyer, "delivered"));
+        $items = $stmt->fetchAll();
+        $result = array();
+        foreach ($items as $item) {
+            $result[] = Item::get_item($dbh, $item['item']);
+        }
+        return $result;
+    }
+    public static function get_pending_sales_items(PDO $dbh, string $seller) : array {
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ? AND purchaseData.state <> ?');
+        $stmt->execute(array($seller, "delivered"));
+        $items = $stmt->fetchAll();
+        $result = array();
+        foreach ($items as $item) {
+            $result[] = Item::get_item($dbh, $item['item']);
+        }
+        return $result;
+    }
+
+    public static function get_sold_items(PDO $dbh, string $seller) : array {
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ? AND purchaseData.state = ?');
+        $stmt->execute(array($seller, "delivered"));
         $items = $stmt->fetchAll();
         $result = array();
         foreach ($items as $item) {
@@ -68,13 +89,19 @@ class TrackItem {
         $stmt->execute(array($code));
         return !empty($stmt->fetchAll());
     }
-    public static function update_shipping(PDO $dbh, string $purchase) {
+    public static function update_shipping(PDO $dbh, string $purchase): bool
+    {
         $stmt = $dbh->prepare('UPDATE purchaseData SET state=? WHERE id = ?');
         $sale = self::get_tracking_item($dbh, $purchase);
         $state = $sale->state;
         if ($sale->state === "preparing") {$state = "shipping";}
         else if ($sale->state === "shipping") {$state = "delivering";}
         else if ($sale->state === "delivering") {$state = "delivered";}
-        return $stmt->execute(array($state, $purchase));
+        if (!$stmt->execute(array($state, $purchase))) return false;
+        if ($state === "delivered") {
+            $stmt = $dbh->prepare('UPDATE purchaseData SET deliveryDate=? WHERE id = ?');
+            return $stmt->execute(array(date("Y-m-d", time()), $purchase));
+        }
+        return true;
     }
 }

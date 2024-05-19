@@ -140,7 +140,7 @@ class Item {
     static function register_item(PDO $dbh, string $name, string $description, float $price, string $category, string $user_id, string $mainImage): string {
         $id = generate_uuid();
         $stmt = $dbh->prepare('INSERT INTO items (id, name, description, price, creator, mainImage, category, date) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-        $ret = $stmt->execute([$id,$name, $description, $price, $user_id, $mainImage, $category, date('d/m/Y', time())]);
+        $ret = $stmt->execute([$id,$name, $description, $price, $user_id, $mainImage, $category, date('Y-m-d', time())]);
         return $ret ? $id : "";
     }
     static function register_item_images(PDO $db, array $images, string $item_id): bool
@@ -219,7 +219,7 @@ class Item {
     static function register_purchase(PDO $dbh, string $buyer, array $items, string $address, string $city, string $postalCode): string {
         $id = generate_uuid();
         $stmt = $dbh->prepare("INSERT INTO purchaseData (id, buyer, deliveryDate, state, address, city, postalCode) VALUES(?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute(array($id, $buyer,date('d/m/Y', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
+        $stmt->execute(array($id, $buyer,date('Y-m-d', time()+10*60*60*24), 'preparing',$address, $city, $postalCode));
         foreach ($items as $item) {
             $stmt = $dbh->prepare('INSERT INTO purchases VALUES(?, ?)');
             $stmt->execute(array($item->id, $id));

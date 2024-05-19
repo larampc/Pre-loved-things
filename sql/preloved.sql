@@ -278,10 +278,10 @@ VALUES
 
 
 INSERT INTO purchaseData (id, buyer, deliveryDate, state, address, city, postalCode) VALUES
-    ('1','1', '2/10/2020', 'shipping', 'Rua very', 'Valbom', '4420-150'),
-    ('2','1','10/10/2024', 'preparing', 'Rua pocuo', 'Caniço', '4480-220'),
-    ('3','4', '10/10/2024', 'preparing', 'Rua muiro', 'Lisbon', '4500-209'),
-    ('4','2', '10/10/2025', 'delivered', 'Ruaaa', 'Porto', '6492-943');
+    ('1','1', '2020-10-14', 'shipping', 'Rua very', 'Valbom', '4420-150'),
+    ('2','1','2024-10-10', 'preparing', 'Rua pocuo', 'Caniço', '4480-220'),
+    ('3','4', '2024-10-10', 'preparing', 'Rua muiro', 'Lisbon', '4500-209'),
+    ('4','2', '2024-10-10', 'delivered', 'Ruaaa', 'Porto', '6492-943');
 
 INSERT INTO purchases (item, purchase) VALUES
                                            ('2', '1'),
