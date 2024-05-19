@@ -60,17 +60,18 @@ let options = document.getElementsByClassName("option")
 
 for (let k = 0; k < options.length; k++) {
     options[k].addEventListener("click", function () {
-        let display = document.querySelector("div#" +  this.id);
+        let display = document.querySelector("div#" +  this.name);
         display.style.display = "block"
         for (let j = 0; j < options.length; j++) {
-            let not = document.querySelector("div#" +  options[j].id).querySelectorAll("input")
+            let not = document.querySelector("div#" +  options[j].name).querySelectorAll("input")
             if (j !== k) {
                 for (let i  = 0; i < not.length; i++) {
-                    console.log(not[i])
                     not[i].required = false;
+                    not[i].value = "";
                 }
-                let display2 = document.querySelector("div#" +  options[j].id);
+                let display2 = document.querySelector("div#" +  options[j].name);
                 display2.style.display = "none"
+                options[j].checked = false;
             }
             else {
                 for (let i  = 0; i < not.length; i++) {
