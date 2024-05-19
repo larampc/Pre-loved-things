@@ -162,7 +162,6 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 <?php } ?>
 
 <?php  function draw_user_options(PDO $dbh, User $user, Session $session, Currency $user_currency) { ?>
-    <script src="../scripts/profile_nav.js" defer></script>
     <div class="display-item">
         <?php if ($user->user_id === $session->get_id()) {?>
             <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
