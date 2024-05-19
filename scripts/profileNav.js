@@ -8,7 +8,6 @@ const user = urlParams.get("user_id")
 async function openNav(option) {
     currentNav = option;
     page = 1;
-    const x = document.querySelectorAll(".display-item .items");
     const buttons = document.querySelectorAll(".navbar *");
     for (let j = 0; j < buttons.length; j++) {
         if (buttons[j].classList.contains(option)) buttons[j].style.border = "2px solid #D9D9D9";
@@ -144,3 +143,23 @@ async function drawItem(item, currency) {
 }
 
 get_pagination().then(() => draw_pagination().then(() => updatePage()))
+
+function setFadeNavbar(navbar) {
+    const isScrollable = navbar.scrollWidth > navbar.clientWidth;
+
+    if (!isScrollable) {
+        navbar.classList.remove('is-right-overflowing', 'is-left-overflowing');
+        return;
+    }
+    const isScrolledToRight = navbar.scrollWidth < navbar.clientWidth + navbar.scrollLeft + 1;
+    const isScrolledToLeft = isScrolledToRight ? false : navbar.scrollLeft === 0;
+    navbar.classList.toggle('is-right-overflowing', !isScrolledToRight);
+    navbar.classList.toggle('is-left-overflowing', !isScrolledToLeft);
+}
+
+document.querySelector('.navbar').addEventListener('scroll', (e) => {
+    const navbar = e.currentTarget;
+    setFadeNavbar(navbar);
+});
+
+setFadeNavbar(document.querySelector('.navbar'));

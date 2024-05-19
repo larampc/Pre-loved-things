@@ -692,6 +692,18 @@ main > h2 {
     width: 24rem;
     white-space: nowrap;
     z-index: 10;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, black var(--left-mask-size, 0), black calc(100% - var(--right-mask-size, 0)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, black var(--left-mask-size, 0), black calc(100% - var(--right-mask-size, 0)), transparent 100%);
+    --left-mask-size: 0px;
+    --right-mask-size: 0px;
+}
+
+.navbar.is-left-overflowing {
+    --left-mask-size: 48px !important;
+}
+
+.navbar.is-right-overflowing {
+    --right-mask-size: 48px !important;
 }
 
 .navOption.my {
