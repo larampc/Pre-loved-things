@@ -1,8 +1,6 @@
 <?php
 declare(strict_types=1);
-require_once (__DIR__ . "/../utils/logger.php");
-
-function draw_user_profile(PDO $dbh, User $user, array $feedback, Session $session) { ?>
+function draw_user_profile(User $user, array $feedback, Session $session) { ?>
         <script src="../scripts/user_actions.js" defer></script>
         <script src="../scripts/profile_nav.js" defer></script>
     <?php
