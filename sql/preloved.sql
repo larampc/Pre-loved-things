@@ -17,6 +17,7 @@ DROP TABLE IF EXISTS shippingCode;
 DROP TABLE IF EXISTS currency;
 DROP TABLE IF EXISTS images;
 DROP TABLE IF EXISTS item_images;
+DROP TABLE IF EXISTS recovery;
 
 CREATE TABLE images (
     id VARCHAR PRIMARY KEY
@@ -135,6 +136,11 @@ CREATE TABLE currency (
     code VARCHAR PRIMARY KEY,
     value REAL,
     symbol VARCHAR
+);
+
+CREATE TABLE recovery (
+      email VARCHAR PRIMARY KEY,
+      code INTEGER
 );
 
 INSERT INTO images VALUES
