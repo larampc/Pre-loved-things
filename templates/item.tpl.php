@@ -348,7 +348,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     border: 1rem solid #F2E8D5;
     border-radius: 2rem;
   "
-            ><img src="../resources/logo.png" slot="icon" style="width: 100%">
+            ><img src="../resources/logo.png" alt="logo" slot="icon" style="width: 100%">
     </qr-code>
     <div class="shipInfo">
         <?php $user = User::get_user($db, $trackItem->buyer)?>

@@ -20,7 +20,7 @@ async function openNav(option) {
 }
 
 async function draw_pagination() {
-    const response_max = await fetch('../api/api_get_max_page.php?nav=' + currentNav + "&user=" + (user?user:""));
+    const response_max = await fetch('../api/api_get_max_page.php?' + encodeForAjax({nav: currentNav, user: (user?user:"")}));
     maxPage = await response_max.json();
     const nav = document.createElement("nav");
     nav.className = "pagination"
@@ -62,7 +62,7 @@ async function updatePage() {
     } )
 
     isLoading = true;
-    const response = await fetch('../api/api_get_user_items.php?page=' + page + "&nav=" + currentNav + "&user=" + (user?user:""));
+    const response = await fetch('../api/api_get_user_items.php?' + encodeForAjax({page:page, nav:currentNav, user:(user?user:"")}));
     const items = await response.json();
     if (items.length < 5) {
         isLoading = false;
