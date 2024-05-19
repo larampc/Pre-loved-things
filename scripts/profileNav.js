@@ -65,7 +65,7 @@ async function drawItem(item, currency) {
     else main.href = "item.php?id=" + item.id;
     main.className = "item";
     const img = document.createElement("img")
-    img.src = "../uploads/thumbnails/" + item['mainImage'] + ".png"
+    img.src = "../uploads/medium/" + item['mainImage'] + ".png"
     main.appendChild(img);
     const div = document.createElement("div")
     div.className = "item-info"

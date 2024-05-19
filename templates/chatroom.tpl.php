@@ -32,7 +32,7 @@ function draw_big_chatroom(Chatroom $chatroom, User $to, array $messages){ ?>
         <header class="message-header">
             <aside class="item-info">
                 <button id="back-inbox" onclick="openInbox()"><i class="material-symbols-outlined">arrow_back_ios</i></button>
-                <a href="../pages/item.php?id=<?=$chatroom->item->id?>"><img class="item-msg-img" alt="item image" src="../uploads/thumbnails/<?=$chatroom->item->mainImage?>.png"></a>
+                <a href="../pages/item.php?id=<?=$chatroom->item->id?>"><img class="item-msg-img" alt="item image" src="../uploads/medium/<?=$chatroom->item->mainImage?>.png"></a>
                 <a href="../pages/item.php?id=<?=$chatroom->item->id?>"><p><?=$chatroom->item->name?></p></a>
             </aside>
             <aside class="user-info">
@@ -61,7 +61,7 @@ function draw_temporary_chatroom(User $to, Item $item) { ?>
         <header class="message-header">
             <aside class="item-info">
                 <button id="back-inbox" onclick="openInbox()"><i class="material-symbols-outlined">arrow_back_ios</i></button>
-                <a href="../pages/item.php?id=<?=$item->id?>"><img class="item-msg-img" alt="item image" src="../uploads/thumbnails/<?=$item->mainImage?>.png"></a>
+                <a href="../pages/item.php?id=<?=$item->id?>"><img class="item-msg-img" alt="item image" src="../uploads/medium/<?=$item->mainImage?>.png"></a>
                 <a href="../pages/item.php?id=<?=$item->id?>"><p><?=$item->name?></p></a>
             </aside>
             <aside class="user-info">

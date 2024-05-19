@@ -51,21 +51,10 @@ function upload_item_image($img) : string {
     $stmt->execute(array($id));
 
     // Generate filenames for original, small and medium files
-    $thumbnailFileName = "../uploads/thumbnails/$id.png";
     $mediumFileName = "../uploads/medium/$id.png";
 
     $width = imagesx($original);     // width of the original image
     $height = imagesy($original);    // height of the original image
-    $square = min($width, $height);  // size length of the maximum square
-
-
-    // We could also copy the file directly without converting to jpeg
-    // move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
-
-    // Create and save a small square thumbnail
-    $small = imagecreatetruecolor(400, 400);
-    imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 400, 400, $square, $square);
-    imagepng($small, $thumbnailFileName);
 
     // Calculate width and height of medium sized image (max width: 400)
     $medium_width = $width;
@@ -86,7 +75,6 @@ function remove_uploaded_item_imgs(array $imgs) : bool {
     $dbh = get_database_connection();
     $success = true;
     foreach ($imgs as $img) {
-        if(!unlink(__DIR__ . "/../uploads/thumbnails" . $img . ".png")) $success = false;
         if(!unlink(__DIR__ . "/../uploads/medium" . $img . ".png")) $success = false;
         $stmt = $dbh->prepare('DELETE FROM images WHERE id = ?');
         if(!$stmt->execute([$img])) $success = false;

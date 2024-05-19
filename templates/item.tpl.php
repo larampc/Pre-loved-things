@@ -3,7 +3,7 @@ require_once (__DIR__ . '/../utils/logger.php');
 
 function draw_item(Item $item, Currency $user_currency) { ?>
     <a href="../pages/item.php?id=<?= $item->id ?>" class="item">
-        <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
+        <img src="../uploads/medium/<?=$item->mainImage?>.png" alt="item photo">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
             <p class="price"><?=round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></p>
@@ -47,7 +47,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
             <?php foreach($items as $item) {
                 ?>
                 <a href="../pages/item.php?id=<?= $item->id ?>" class="slides item" id="<?=$item->id?>">
-                    <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item photo">
+                    <img src="../uploads/medium/<?=$item->mainImage?>.png" alt="item photo">
                     <div class="item-info">
                         <p class="name"><?=$item->name?></p>
                         <p class="price"><?=round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></p>
@@ -324,7 +324,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
 
 <?php function draw_item_to_track(PDO $db, Item $item) { ?>
     <a href="../pages/track_item.php?purchase=<?= Item::get_purchase_id($db, $item->id) ?>" class="item" id="<?=$item->id?>">
-        <img src="../uploads/thumbnails/<?=$item->mainImage?>.png" alt="item image">
+        <img src="../uploads/medium/<?=$item->mainImage?>.png" alt="item image">
         <div class="item-info">
             <p class="name"><?=$item->name?></p>
             <p class="price"><?=$item->price?></p>

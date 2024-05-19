@@ -195,7 +195,7 @@ function createItemInfo(chatroom_json) {
     const item_image = document.createElement('img');
     item_image.classList.add("item-msg-img");
     item_image.alt = "item image";
-    item_image.src = "../uploads/thumbnails/" + chatroom_json['item']['mainImage'] + ".png";
+    item_image.src = "../uploads/medium/" + chatroom_json['item']['mainImage'] + ".png";
     const item_link = document.createElement('a')
     item_link.href = "../pages/item.php?id=" + chatroom_json['item']['id']
     const item_link2 = item_link.cloneNode()
