@@ -25,6 +25,9 @@ async function draw_pagination() {
     for (let i = 1; i <= maxPage; i++) {
         const number = document.createElement("a");
         number.innerHTML = i.toString();
+        number.className = "page-number"
+        number.id = i.toString();
+        if (i === 1) number.classList.add("current");
         number.addEventListener("click", async () => {
             page = i;
             await updatePage();
@@ -36,7 +39,6 @@ async function draw_pagination() {
 
 const previous = document.querySelector("#prev-btn");
 const next = document.querySelector("#next-btn");
-console.log(previous)
 previous.addEventListener("click", async () => {
     if (page > 1) page--;
     await updatePage();
@@ -50,8 +52,13 @@ next.addEventListener("click", async () => {
 async function updatePage() {
     if (page === 1) previous.style.visibility = "hidden";
     if (page === maxPage) next.style.visibility = "hidden"
-    if (page < maxPage)next.style.visibility = "visible"
+    if (page < maxPage) next.style.visibility = "visible"
     if (page > 1) previous.style.visibility = "visible"
+    document.querySelectorAll(".page-number").forEach((elem) => {
+        if (elem.id === page.toString())  elem.classList.add("current")
+        else elem.classList.remove("current")
+    } )
+
     isLoading = true;
     const response = await fetch('../api/api_get_user_items.php?page=' + page + "&nav=" + currentNav);
     const items = await response.json();
@@ -69,7 +76,6 @@ async function getItems(items) {
     const result = document.createElement("div")
     result.classList.add("items")
     for (const item of items) {
-        console.log(item)
         result.appendChild(await drawItem(item, currency));
     }
     return result
@@ -98,9 +104,7 @@ async function drawItem(item, currency) {
     price.className = "price"
     div.appendChild(price);
     main.appendChild(div);
-    console.log(main)
     return main;
 }
 
-updatePage();
-draw_pagination();
+draw_pagination().then(() => updatePage());

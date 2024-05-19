@@ -1518,3 +1518,7 @@ a {
 }
 
 /* REVIEWED UNTIL HERE -------------------------------------------------------------------------------------------------------*/
+
+.display-item #prev-btn, .display-item #next-btn {
+    visibility: hidden;
+}
