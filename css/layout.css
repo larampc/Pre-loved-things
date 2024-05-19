@@ -650,7 +650,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 .track-main  {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto 1fr;
     grid-template-areas: "contact deliveryDate"
                         "shipping item";
 }
@@ -667,7 +667,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     grid-area: shipping;
 }
 
-.track-main  #delivery-date {
+.track-main #delivery-date {
     grid-area: deliveryDate;
     display: flex;
     justify-content: center;
