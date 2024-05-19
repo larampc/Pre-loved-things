@@ -168,7 +168,7 @@ class Item {
         return $items;
     }
     static function get_filtered_items(PDO $dbh, array $categories, array $itemTags, int $page, bool $checkTag, int $min, int $max, string $search, string $order): array {
-        $getOrder = "date ASC";
+        $getOrder = "date DESC";
         if ($order == "price-asc") $getOrder = "price ASC";
         if ($order == "price-desc") $getOrder = "price DESC";
         $page = 20 * ($page - 1);
