@@ -14,6 +14,8 @@
     sudo apt-get install php-gd (install php-gd if it is not already)
     php -S localhost:9000
 
+[Visit our website](https://web.fe.up.pt/~up202208689/pre-loved)
+
 ## External Libraries
 
 We have used the following external libraries:
