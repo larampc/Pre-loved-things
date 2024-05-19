@@ -40,70 +40,70 @@ async function getFilteredUsers(clean) {
         isLoading = false
         if (loader) loader.style.display = 'none'
         request--
-        return;
+        return
     }
     if (request === 1) {
-        users.forEach(user => resultContainer.appendChild(createUser(user)));
-        loader = document.querySelector(".loader-users");
-        if (loader) resultContainer.appendChild(loader);
-        if (users.length < 3) loader.style.display = 'none';
-        else loader.style.display = 'grid';
-        isLoading = false;
+        users.forEach(user => resultContainer.appendChild(createUser(user)))
+        loader = document.querySelector(".loader-users")
+        if (loader) resultContainer.appendChild(loader)
+        if (users.length < 3) loader.style.display = 'none'
+        else loader.style.display = 'grid'
+        isLoading = false
     }
-    request--;
+    request--
 }
 
 document.onscroll = async () => {
-    if (isLoading || all) return;
+    if (isLoading || all) return
     if (
         window.scrollY > (document.body.offsetHeight - window.outerHeight - parseInt(window.getComputedStyle(userSearch).marginBottom, 10))
     ) {
-        pageNum++;
-        await getFilteredUsers(false);
+        pageNum++
+        await getFilteredUsers(false)
     }
-};
+}
 
-getFilteredUsers(true);
+getFilteredUsers(true)
 
 function createUser(user) {
-    const main = document.createElement('a');
-    main.href = "user.php?user_id=" + user['user_id'];
-    main.className = "user-details";
+    const main = document.createElement('a')
+    main.href = "user.php?user_id=" + user['user_id']
+    main.className = "user-details"
     const img = document.createElement("img")
     img.src = "../uploads/profile_pics/" + user['image'] + ".png"
-    main.appendChild(img);
+    main.appendChild(img)
     const div = document.createElement("div")
     div.className = "user-info"
     const name = document.createElement("p")
-    name.innerText = user['username'];
+    name.innerText = user['username']
     name.className = "name"
-    div.appendChild(name);
+    div.appendChild(name)
     const email = document.createElement("p")
-    email.innerText = user['email'];
+    email.innerText = user['email']
     email.className = "email"
-    div.appendChild(email);
+    div.appendChild(email)
     const phone = document.createElement("p")
-    phone.innerText = user['phone'];
+    phone.innerText = user['phone']
     phone.className = "phone"
-    div.appendChild(phone);
+    div.appendChild(phone)
     const sold = document.createElement("p")
-    sold.innerText = user['sold'];
+    sold.innerText = user['sold']
     sold.className = "sold"
-    div.appendChild(sold);
+    div.appendChild(sold)
     const purchase = document.createElement("p")
-    purchase.innerText = user['buy'];
+    purchase.innerText = user['buy']
     purchase.className = "purchase"
-    div.appendChild(purchase);
-    main.appendChild(div);
-    return main;
+    div.appendChild(purchase)
+    main.appendChild(div)
+    return main
 }
 
 function cleanSearch() {
-    pageNum = 1;
-    all = false;
+    pageNum = 1
+    all = false
     while (!resultContainer.firstElementChild.classList.contains("loader-users")) {
-        resultContainer.removeChild(resultContainer.firstElementChild);
+        resultContainer.removeChild(resultContainer.firstElementChild)
     }
-    const loader = document.querySelector(".loader-users");
-    loader.style.display = 'grid';
+    const loader = document.querySelector(".loader-users")
+    loader.style.display = 'grid'
 }

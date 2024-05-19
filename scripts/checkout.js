@@ -43,17 +43,17 @@ for (let i = 0; i < next.length; i++) {
         content.previousElementSibling.style.borderRadius = "1rem"
         for (let j = 0; j < coll.length; j++) {
             if (j === i+1)  {
-                let content2 = coll[j].nextElementSibling;
+                let content2 = coll[j].nextElementSibling
                 coll[j].parentElement.classList.add("current")
                 coll[j].style.transitionDelay = "0ms"
                 content2.style.maxHeight = content2.scrollHeight+"px"
-                coll[j].style.borderRadius = "1rem 1rem 0 0";
+                coll[j].style.borderRadius = "1rem 1rem 0 0"
             }
             else {
                 if (content.parentElement.classList.contains("done")) coll[j].parentElement.classList.remove("current")
             }
         }
-    });
+    })
 }
 
 let options = document.getElementsByClassName("option")
@@ -100,9 +100,9 @@ function checkInput(elem) {
             article.appendChild(message)
             article.appendChild(progress)
             document.querySelector('#messages').appendChild(article)
-            error = true;
-            return;
+            error = true
+            return
         }
     }
-    error = false;
+    error = false
 }
