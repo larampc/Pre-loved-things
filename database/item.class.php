@@ -192,7 +192,6 @@ class Item {
         while($item = $stmt->fetch()) {
             $items[] = self::get_item($dbh, $item['id']);
         }
-        var_dump($items);
         return $items;
     }
     static function get_last_added_items(PDO $dbh, int $count = 5): array

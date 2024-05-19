@@ -15,7 +15,6 @@ if (button) {
         hideFrame.onload = setPrint;
         hideFrame.style.display = "none"; // hide iframe
         hideFrame.src = button.className;
-        console.log(button.className);
         document.body.appendChild(hideFrame);
     });
 }
