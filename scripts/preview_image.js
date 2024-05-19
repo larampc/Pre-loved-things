@@ -125,9 +125,10 @@ function shiftImages() {
     uploadSection.removeChild(fileUploadInputToRemove.parentNode)
 
     for (let i = removedId + 1; i <= lastLoadedImageId; i++) {
-        const hiddenInputToShift = document.getElementsByName('hiddenimg' + i)
+        const hiddenInputToShift = document.querySelector('.image-data[name=hiddenimg' + i + ']')
         if (hiddenInputToShift) {
-            hiddenInputToShift.name = "hiddenimg" + i - 1
+            hiddenInputToShift.name = "hiddenimg" + (i - 1)
+
         }
         const fileUploadInputToShift = document.querySelector('.uploader#img' + i)
         const removeButtonToShift = fileUploadInputToShift.parentNode.querySelector('#delete' + i)
@@ -166,16 +167,22 @@ function createImageUploader() {
 
     const addPhotoIcon = createAddPhotoIcon();
 
-    let uploaderInput = document.createElement('input')
+    const uploaderInput = document.createElement('input')
     uploaderInput.type = 'file'
     uploaderInput.name = uploaderInput.id = 'img' + (lastLoadedImageId + 1) //changed
     uploaderInput.classList.add('uploader')
     uploaderInput.accept = 'image/*'
     uploaderInput.onchange = this.onchangeHandler;
 
+    const hiddenInput = document.createElement('input')
+    hiddenInput.type = "hidden"
+    hiddenInput.classList.add("image-data")
+    hiddenInput.name = "hiddenimg" + (lastLoadedImageId + 1)
+    hiddenInput.value = ''
+
     uploadDiv.appendChild(addPhotoIcon)
     uploadDiv.appendChild(uploaderInput)
-
+    uploadDiv.appendChild(hiddenInput)
     return uploadDiv
 }
 
@@ -194,11 +201,16 @@ if(uploadSection){
     function handleDragStart(e) {
         this.style.opacity = '0.2';
         dragSrcEl = this;
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/inputID', this.querySelector('.uploader').id);
-        e.dataTransfer.setData('text/inputName', this.querySelector('.uploader').name);
-        e.dataTransfer.setData('text/deleteID', this.querySelector('.delete-icon').id);
-        e.dataTransfer.setData('text/class', this.className);
+        // e.dataTransfer.effectAllowed = 'move';
+        // e.dataTransfer.setData('text/inputID', this.querySelector('.uploader').id);
+        // e.dataTransfer.setData('text/inputName', this.querySelector('.uploader').name);
+        // e.dataTransfer.setData('text/deleteID', this.querySelector('.delete-icon').id);
+        // e.dataTransfer.setData('text/class', this.className);
+        // const hiddenInput = this.querySelector('input[type=hidden]')
+        // if(hiddenInput) {
+        //     e.dataTransfer.setData('text/hiddenName', hiddenInput.name)
+        //     e.dataTransfer.setData('text/hiddenValue', hiddenInput.value)
+        // }
     }
 
     function handleDragEnd(e) {
@@ -222,33 +234,54 @@ if(uploadSection){
         this.classList.remove('over');
     }
 
+    function swap(node1, node2) {
+        const afterNode2 = node2.nextElementSibling;
+        const parent = node2.parentNode;
+        node1.replaceWith(node2);
+        parent.insertBefore(node1, afterNode2);
+    }
+
     function handleDrop(e) {
         e.stopPropagation(); // stops the browser from redirecting.
         if (dragSrcEl !== this && this.draggable) {
-            dragSrcEl.querySelector('.uploader').id = this.querySelector('.uploader').id;
-            dragSrcEl.querySelector('.uploader').name = this.querySelector('.uploader').name;
-            dragSrcEl.querySelector('.delete-icon').id = this.querySelector('.delete-icon').id;
-            dragSrcEl.className = this.className;
+            // dragSrcEl.querySelector('.uploader').id = this.querySelector('.uploader').id;
+            // dragSrcEl.querySelector('.uploader').name = this.querySelector('.uploader').name;
+            // dragSrcEl.querySelector('.delete-icon').id = this.querySelector('.delete-icon').id;
+            // dragSrcEl.className = this.className;
+            const position = dragSrcEl.compareDocumentPosition(this)
+            if (position & Node.DOCUMENT_POSITION_FOLLOWING) {
+                swap(dragSrcEl, this)
+            } else if (position & Node.DOCUMENT_POSITION_PRECEDING) {
+                swap(this, dragSrcEl)
+            }
 
-            this.querySelector('.uploader').id = e.dataTransfer.getData('text/inputID');
-            this.querySelector('.uploader').name = e.dataTransfer.getData('text/inputName');
-            this.querySelector('.delete-icon').id = e.dataTransfer.getData('text/deleteID');
-            this.className = e.dataTransfer.getData('text/class');
+            // this.querySelector('.uploader').id = e.dataTransfer.getData('text/inputID');
+            // this.querySelector('.uploader').name = e.dataTransfer.getData('text/inputName');
+            // this.querySelector('.delete-icon').id = e.dataTransfer.getData('text/deleteID');
+            // this.className = e.dataTransfer.getData('text/class');
 
             if (this.querySelector('h5')) {
-                dragSrcEl.appendChild(this.querySelector('h5'));
+                const header = this.querySelector('h5');
+                this.removeChild(header)
+                dragSrcEl.appendChild(header);
+                dragSrcEl.classList.add( "main-photo-upload")
+                this.classList.remove("main-photo-upload")
             } else if (dragSrcEl.querySelector('h5')) {
-                this.appendChild(dragSrcEl.querySelector('h5'));
+                const header = dragSrcEl.querySelector('h5')
+                dragSrcEl.removeChild(header)
+                this.appendChild(header);
+                this.classList.add( "main-photo-upload")
+                dragSrcEl.classList.remove("main-photo-upload")
             }
-
-            for (let i = 1; i <= lastLoadedImageId; i++) {
-                this.parentElement.appendChild(this.parentElement.querySelector('#img' + i).parentElement);
-            }
-
-            if (!this.parentElement.querySelector('.photo-upload').draggable) {
-                this.parentElement.appendChild(this.parentElement.querySelector('.photo-upload'));
-            }
-            this.parentElement.appendChild(this.parentElement.querySelector('.image-upload-adder'));
+            //
+            // for (let i = 1; i <= lastLoadedImageId; i++) {
+            //     this.parentElement.appendChild(this.parentElement.querySelector('#img' + i).parentElement);
+            // }
+            //
+            // if (!this.parentElement.querySelector('.photo-upload').draggable) {
+            //     this.parentElement.appendChild(this.parentElement.querySelector('.photo-upload'));
+            // }
+            // this.parentElement.appendChild(this.parentElement.querySelector('.image-upload-adder'));
         }
         return false;
     }
