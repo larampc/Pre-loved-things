@@ -714,6 +714,9 @@ main > h2 {
     width: 100%;
     text-align: center;
     height: 2rem;
+    a:not(.page-number) {
+        font-weight: bold;
+    }
 }
 
 .page-number {
