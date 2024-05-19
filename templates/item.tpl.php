@@ -336,7 +336,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     <script src="https://unpkg.com/@bitjson/qr-code@1.0.2/dist/qr-code.js"></script>
     <qr-code
             id="qr1"
-            contents="http://localhost:9000/pages/confirm_ship.php?purchase=<?=$trackItem->id?>"
+            contents="http://<?=$_SERVER['HTTP_HOST']?>/pages/confirm_ship.php?purchase=<?=$trackItem->id?>"
             module-color="#000000"
             position-ring-color="#000000"
             position-center-color="#000000"
