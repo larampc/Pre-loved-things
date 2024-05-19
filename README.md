@@ -11,6 +11,7 @@
     git clone https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw15g05.git
     git checkout final-delivery-v1
     sqlite3 data/preloved.db < sql/preloved.sql
+    sudo apt-get install php-gd (install php-gd if it is not already)
     php -S localhost:9000
 
 ## External Libraries
@@ -21,11 +22,27 @@ We have used the following external libraries:
 - Google charts
 
 ## Screenshots
+- Home Page
 
 ![Screenshot1](screenshots/img_1.png)
+- Search Page
+
 ![Screenshot1](screenshots/img_2.png)
+- Item Page
+
 ![Screenshot1](screenshots/img.png)
+- User Page
+
 ![Screenshot1](screenshots/img_3.png)
+- Cart Page
+
+![Screenshot1](screenshots/img_4.png)
+- Checkout Page
+
+![Screenshot1](screenshots/img_6.png)
+- Admin Page
+
+![Screenshot1](screenshots/img_5.png)
 
 ## Implemented Features
 
