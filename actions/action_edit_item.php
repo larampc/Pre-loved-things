@@ -16,24 +16,27 @@ require_once(__DIR__ . '/../database/connection.db.php');
 $dbh = get_database_connection();
 $item = $_POST["edit-item"];
 
+var_dump($_POST);
+var_dump($_FILES);
+
 $old_images = Item::get_item_images($dbh, $item);
 $max_num_saved_img = count($old_images);
-$img_to_remove = array();
 $new_images_ids = array();
-for($i = 1; $i  <= $max_num_saved_img; $i++ ){
-    if(isset($_POST["hiddenimg" . $i])){
-        $new_images_ids[] = $_POST["hiddenimg" . $i];
+foreach ($_FILES as $key => $value) {
+    $position = substr($key, 3);
+    if(empty($value['tmp_name'])) {
+        $new_images_ids[] = $_POST['hiddenimg' . $position];
     }
     else {
-        $img_to_remove[] = $old_images[$i-1];
+        $new_images_ids[] = upload_item_image($key);
     }
 }
-foreach ($_FILES as $name => $file) {
-    if(!empty($file['tmp_name'])) {
-        $new_images_ids[] = upload_item_image($name);
-    }
-}
+$img_to_remove = array_diff($old_images, $new_images_ids);
+
 remove_uploaded_item_imgs($img_to_remove);
+
+var_dump($new_images_ids);
+var_dump($img_to_remove);
 
 if (Item::get_item($dbh, $item) === null) {
     $session->addMessage('error', 'Item not found.');
