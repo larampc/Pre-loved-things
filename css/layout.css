@@ -216,6 +216,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    pointer-events: none;
+    i {
+        pointer-events: all;
+    }
 }
 
 .dots{

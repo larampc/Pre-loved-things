@@ -571,6 +571,7 @@ INSERT INTO categories (category) VALUES
                                       ('music'),
                                       ('homekitchen'),
                                       ('sports');
+
 INSERT INTO tags (id, category, tag) VALUES
                                      ('1','', 'condition'),
                                      ('2','', 'tag'),
