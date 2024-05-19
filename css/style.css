@@ -34,10 +34,6 @@ main {
     background-color: var(--primary);
 }
 
-main.search-main {
-    margin: 0;
-}
-
 p, .paragraph {
     word-break: break-word;
 }
@@ -528,6 +524,7 @@ main > h2 {
 
 .search-main {
     margin-top: 5rem;
+    margin-bottom: 0;
 }
 
 .filter {
@@ -1226,7 +1223,7 @@ button[name="remove-category"] {
 
 .searchresult {
     margin-top: 4rem;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }
 
 .price-input label {
