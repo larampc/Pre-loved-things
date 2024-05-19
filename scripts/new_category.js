@@ -50,6 +50,7 @@ addtag.addEventListener("click", () => {
     const optionFree = document.createElement("option")
     const optionSelect = document.createElement("option")
     select.classList.add("type")
+    select.name = "select-type"
     optionFree.value = "free";
     optionFree.innerHTML = "Free"
     optionSelect.innerHTML = "Select"

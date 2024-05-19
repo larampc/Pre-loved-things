@@ -13,6 +13,7 @@
     require_once(__DIR__ . '/../database/tags.class.php');
 
     require_once(__DIR__ . '/../templates/item.tpl.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
 
     $dbh = get_database_connection();
     $user_currency = new Currency($dbh, $session->getCurrency());

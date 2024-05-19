@@ -12,6 +12,8 @@
     require_once(__DIR__ . '/../database/tags.class.php');
 
     require_once(__DIR__ . '/../templates/user.tpl.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
+
 
     $dbh = get_database_connection();
 

@@ -5,9 +5,11 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
 
-    require_once(__DIR__ . '/../templates/users.tpl.php');
     require_once(__DIR__ . '/../database/tags.class.php');
     require_once(__DIR__ . '/../database/connection.db.php');
+
+    require_once(__DIR__ . '/../templates/common.tpl.php');
+    require_once(__DIR__ . '/../templates/authentication.tpl.php');
 
     $checkout = isset($_GET['checkout']);
     $message = isset($_GET['user']);
