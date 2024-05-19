@@ -374,7 +374,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     <form action="../actions/action_update_sale.php" method="post">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         <input name="confirmationCode" type="password" required
-               pattern="\d+" placeholder="Delivery Agency Code">
+               pattern="\w+" placeholder="Delivery Agency Code">
         <input name="purchase" type="hidden" value="<?=$trackItem->id?>">
         <?php if ($trackItem->state=="preparing" || $trackItem->state=="shipping" || $trackItem->state=="delivering") {
             $text = $trackItem->state=="preparing"? "order was shipped" : ($trackItem->state=="shipping"? "order is being delivered" : "order was delivered");
