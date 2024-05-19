@@ -25,7 +25,7 @@ class Message {
 
         $messages = [];
         while ($message = $stmt->fetch()) {
-            $messages[] = new Message($message["chatroom"], $message["sender"], $message["sentTime"], $message["readTime"], $message["message"]);
+            $messages[] = new Message($message["chatroom"], $message["sender"], intval($message["sentTime"]), intval($message["readTime"]), $message["message"]);
         }
         return $messages;
     }

@@ -11,11 +11,13 @@ declare(strict_types=1);
             <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
             <label>
-                <input type="text" name="name" placeholder="Your name" required autocomplete="on">
+                <input type="text" name="name" placeholder="Your name" required
+                       pattern=".{1,50}" oninvalid="this.setCustomValidity('Invalid name - can not be longer than 50 chars')"
+                       oninput="this.setCustomValidity('')" autocomplete="on">
             </label>
             <label>
                 <input type="text" name="username" placeholder="Your username" required
-                       pattern="\w+" oninvalid="this.setCustomValidity('Invalid username - can only contain letters, digits and underscores')"
+                       pattern="\w{1,30}" oninvalid="this.setCustomValidity('Invalid username - can only contain letters, digits and underscores and can not be longer than 30 chars')"
                        oninput="this.setCustomValidity('')" autocomplete="on">
             </label>
             <label>

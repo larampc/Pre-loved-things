@@ -14,7 +14,7 @@ function draw_item(Item $item, Currency $user_currency) { ?>
 function draw_items_main(array $liked_items, array $recent_items, Currency $user_currency) { ?>
     <section class="last-added">
         <h2>Last Added Items</h2>
-        <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
+        <a href="../pages/search.php" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
         <?php draw_items($recent_items, $user_currency); ?>
     </section>
     <section class="most-liked">
@@ -373,7 +373,8 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     <?php } else {?>
     <form action="../actions/action_update_sale.php" method="post">
         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-        <input name="confirmationCode" type="password" required placeholder="Delivery Agency Code">
+        <input name="confirmationCode" type="password" required
+               pattern="\w+" placeholder="Delivery Agency Code">
         <input name="purchase" type="hidden" value="<?=$trackItem->id?>">
         <?php if ($trackItem->state=="preparing" || $trackItem->state=="shipping" || $trackItem->state=="delivering") {
             $text = $trackItem->state=="preparing"? "order was shipped" : ($trackItem->state=="shipping"? "order is being delivered" : "order was delivered");
