@@ -690,12 +690,36 @@ main > h2 {
 .navbar {
     text-align: center;
     width: 24rem;
-    overflow-x: auto;
     white-space: nowrap;
+    z-index: 10;
 }
 
 .navOption.my {
     border: 2px solid var(--tertiary);
+}
+
+.pagination {
+    width: 100%;
+    text-align: center;
+    height: 2rem;
+}
+
+.page-number {
+    color: var(--accent-primary);
+    background-color: var(--secondary);
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.2rem;
+    border-radius: 50%;
+    aspect-ratio: max(1);
+    cursor: pointer;
+}
+
+.page-number.current {
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--primary);
+    border: 2px solid var(--accent-primary);
 }
 
 /* LOGIN AND REGISTER */

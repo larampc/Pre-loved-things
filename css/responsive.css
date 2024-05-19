@@ -192,6 +192,16 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     background: var(--star-hover);
 }
 
+.page-number {
+    transition: all 0.2s ease-in-out;
+}
+
+.page-number:not(.current):hover {
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: var(--tertiary);
+}
+
 /* TABLET VIEW */
 @media (max-width: 60em) {
     /* SEARCH PAGE */
