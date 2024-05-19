@@ -1,8 +1,8 @@
-const rL = document.getElementsByClassName("rotateLogin");
-const rR = document.getElementsByClassName("rotateRegister");
-const fLR = document.getElementsByClassName("flipLoginRegister");
-const tLR = document.getElementsByClassName("toggleLoginRegister");
-const cRL = document.getElementsByClassName("checkboxLoginRegister");
+const rL = document.getElementsByClassName("rotateLogin")
+const rR = document.getElementsByClassName("rotateRegister")
+const fLR = document.getElementsByClassName("flipLoginRegister")
+const tLR = document.getElementsByClassName("toggleLoginRegister")
+const cRL = document.getElementsByClassName("checkboxLoginRegister")
 
 
 if (rL.length > 0) {

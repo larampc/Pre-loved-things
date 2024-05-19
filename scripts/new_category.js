@@ -9,20 +9,20 @@ function addTagFinal(section) {
     let optionNumber = 0
     if (options.length > 0) {
         const lastOption = options[options.length - 1].querySelector("input").name
-        optionNumber = parseInt(lastOption[lastOption.length-2]) + 1;
+        optionNumber = parseInt(lastOption[lastOption.length-2]) + 1
     }
     const label = document.createElement("label")
-    label.classList.add(tagNumber.toString());
+    label.classList.add(tagNumber.toString())
     const input = document.createElement("input")
     input.required = true
     input.type = "text"
-    input.name = "option" + tagNumber + "[" + optionNumber +"]";
+    input.name = "option" + tagNumber + "[" + optionNumber +"]"
     const remove = document.createElement("i")
     remove.classList.add("material-symbols-outlined")
     remove.classList.add("remove-option")
     remove.innerHTML = "close"
     remove.title = "Remove option"
-    label.appendChild(input);
+    label.appendChild(input)
     label.appendChild(remove)
     section.querySelector(".tag-options").appendChild(label)
     remove.addEventListener("click", () => {remove.parentElement.remove()})
@@ -32,7 +32,7 @@ const addtag = document.querySelector(".add-tag")
 addtag.addEventListener("click", () => {
     const tags = document.querySelectorAll(".new-tag")
     const lastTag = tags[tags.length-1]
-    let tagNumber = 0;
+    let tagNumber = 0
     if (tags.length > 0) tagNumber = parseInt(lastTag.id[lastTag.id.length-1]) +1
     const div = document.createElement("div")
     div.classList.add("new-tag")
@@ -51,17 +51,17 @@ addtag.addEventListener("click", () => {
     const optionSelect = document.createElement("option")
     select.classList.add("type")
     select.name = "select-type"
-    optionFree.value = "free";
+    optionFree.value = "free"
     optionFree.innerHTML = "Free"
     optionSelect.innerHTML = "Select"
-    optionSelect.value = "select";
+    optionSelect.value = "select"
     const deleteTag = document.createElement("i")
     deleteTag.classList.add("material-symbols-outlined")
     deleteTag.classList.add("delete-option")
     deleteTag.innerHTML = "delete"
     deleteTag.title = "Delete tag"
-    select.appendChild(optionFree);
-    select.appendChild(optionSelect);
+    select.appendChild(optionFree)
+    select.appendChild(optionSelect)
     type.appendChild(select)
     div.appendChild(deleteTag)
     div.appendChild(type)
@@ -88,8 +88,8 @@ function selectionType(option) {
         addTagFinal(option.parentElement.parentElement)
     }
     if (option.value === "free") {
-        option.parentElement.parentElement.lastElementChild.remove();
-        option.parentElement.parentElement.lastElementChild.remove();
+        option.parentElement.parentElement.lastElementChild.remove()
+        option.parentElement.parentElement.lastElementChild.remove()
     }
 }
 

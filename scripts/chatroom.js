@@ -189,143 +189,143 @@ function createChatHeader(chatroom_data, user) {
 }
 
 function createItemInfo(chatroom_json) {
-    const aside = document.createElement('aside');
-    aside.classList.add("item-info");
+    const aside = document.createElement('aside')
+    aside.classList.add("item-info")
 
-    const item_image = document.createElement('img');
-    item_image.classList.add("item-msg-img");
-    item_image.alt = "item image";
-    item_image.src = "../uploads/medium/" + chatroom_json['item']['mainImage'] + ".png";
+    const item_image = document.createElement('img')
+    item_image.classList.add("item-msg-img")
+    item_image.alt = "item image"
+    item_image.src = "../uploads/medium/" + chatroom_json['item']['mainImage'] + ".png"
     const item_link = document.createElement('a')
     item_link.href = "../pages/item.php?id=" + chatroom_json['item']['id']
     const item_link2 = item_link.cloneNode()
     item_link.appendChild(item_image)
 
-    const item_name = document.createElement('p');
-    item_name.innerText = chatroom_json['item']['name'];
+    const item_name = document.createElement('p')
+    item_name.innerText = chatroom_json['item']['name']
     item_link2.appendChild(item_name)
 
-    const back_inbox = document.createElement('button');
-    const back_inbox_icon = document.createElement('i');
-    back_inbox_icon.classList.add("material-symbols-outlined");
-    back_inbox.id = "back-inbox";
-    back_inbox_icon.append("arrow_back_ios");
-    back_inbox.append(back_inbox_icon);
+    const back_inbox = document.createElement('button')
+    const back_inbox_icon = document.createElement('i')
+    back_inbox_icon.classList.add("material-symbols-outlined")
+    back_inbox.id = "back-inbox"
+    back_inbox_icon.append("arrow_back_ios")
+    back_inbox.append(back_inbox_icon)
     back_inbox.onclick = function () {openInbox()}
 
-    aside.appendChild(back_inbox);
-    aside.appendChild(item_link);
-    aside.appendChild(item_link2);
+    aside.appendChild(back_inbox)
+    aside.appendChild(item_link)
+    aside.appendChild(item_link2)
 
-    return aside;
+    return aside
 }
 
 function createUserInfo(chatroom_json, user) {
-    const aside = document.createElement('aside');
-    aside.classList.add("user-info");
+    const aside = document.createElement('aside')
+    aside.classList.add("user-info")
     const addressee = chatroom_json['buyer']['user_id'] === user ? chatroom_json['seller'] : chatroom_json['buyer']
-    const addressee_image = document.createElement('img');
-    addressee_image.classList.add("addressee-img");
-    addressee_image.alt = "addressee profile image";
-    addressee_image.src = "../uploads/profile_pics/" + addressee['image'] + ".png";
+    const addressee_image = document.createElement('img')
+    addressee_image.classList.add("addressee-img")
+    addressee_image.alt = "addressee profile image"
+    addressee_image.src = "../uploads/profile_pics/" + addressee['image'] + ".png"
     const addressee_link = document.createElement('a')
     addressee_link.href = "../pages/user.php?user_id=" + addressee['user_id']
     const addressee_link2 = addressee_link.cloneNode()
     addressee_link.appendChild(addressee_image)
 
-    const addressee_name = document.createElement('p');
-    addressee_name.innerText = addressee.name;
+    const addressee_name = document.createElement('p')
+    addressee_name.innerText = addressee.name
     addressee_link2.appendChild(addressee_name)
 
-    aside.appendChild(addressee_link);
-    aside.appendChild(addressee_link2);
+    aside.appendChild(addressee_link)
+    aside.appendChild(addressee_link2)
 
-    return aside;
+    return aside
 }
 
 async function createMessageInbox(chatroomId, user) {
-    const response = await fetch('../api/api_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroomId}));
-    const messages = await response.json();
-    const msg_inbox = document.createElement('article');
-    msg_inbox.classList.add("msg-inbox");
+    const response = await fetch('../api/api_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroomId}))
+    const messages = await response.json()
+    const msg_inbox = document.createElement('article')
+    msg_inbox.classList.add("msg-inbox")
 
-    const message_section = fill_messages(messages, user);
-    msg_inbox.appendChild(message_section);
-    msg_inbox.appendChild(createSendMessageDiv(chatroomId, user));
+    const message_section = fill_messages(messages, user)
+    msg_inbox.appendChild(message_section)
+    msg_inbox.appendChild(createSendMessageDiv(chatroomId, user))
 
-    message_section.scrollTo(0, message_section.scrollHeight);
+    message_section.scrollTo(0, message_section.scrollHeight)
 
-    return msg_inbox;
+    return msg_inbox
 }
 
 function createSendMessageDiv(chatroom, user) {
-    const send_msg_div = document.createElement('div');
-    send_msg_div.classList.add("input-group");
+    const send_msg_div = document.createElement('div')
+    send_msg_div.classList.add("input-group")
 
-    const input = document.createElement('input');
-    input.classList.add("form-control");
-    input.type = "text";
+    const input = document.createElement('input')
+    input.classList.add("form-control")
+    input.type = "text"
     input.name = "message"
-    input.placeholder = "Write message...";
+    input.placeholder = "Write message..."
     input.autocomplete = "off"
     input.addEventListener("keypress", async (event) => {
-        if (event.key === "Enter") await handleButtonClick(chatroom, user, input);
+        if (event.key === "Enter") await handleButtonClick(chatroom, user, input)
     })
-    const button = createSendButton(chatroom, user, input);
+    const button = createSendButton(chatroom, user, input)
 
-    send_msg_div.appendChild(input);
-    send_msg_div.appendChild(button);
+    send_msg_div.appendChild(input)
+    send_msg_div.appendChild(button)
 
-    return send_msg_div;
+    return send_msg_div
 }
 async function  sendMessage(chatroom, user, input) {
-    const text = input.value.trim();
-    if (!text.length) return;
+    const text = input.value.trim()
+    if (!text.length) return
     await fetch("../api/api_send_messages.php?" + encodeForAjax({chatroom_id: chatroom, sender: user, message: text}))
-    input.value = '';
-    const msg_section = document.querySelector('section.scroll');
-    msg_section.insertBefore(create_message(user, text, user, Date.now() / 1000), msg_section.firstChild);
-    msg_section.scrollTo(0, msg_section.scrollHeight);
+    input.value = ''
+    const msg_section = document.querySelector('section.scroll')
+    msg_section.insertBefore(create_message(user, text, user, Date.now() / 1000), msg_section.firstChild)
+    msg_section.scrollTo(0, msg_section.scrollHeight)
 }
 async function handleButtonClick(chatroom, user, input) {
     await sendMessage(chatroom, user, input)
     await updateUserChatrooms(chatroom)
 }
 function createSendButton(chatroom, user, input) {
-    const button = document.createElement('button');
-    button.type = "button";
+    const button = document.createElement('button')
+    button.type = "button"
     button.name = "send"
-    button.classList.add("send-icon");
+    button.classList.add("send-icon")
     button.addEventListener("click", async () => {
         await handleButtonClick(chatroom, user, input)
-    });
-    const send_icon = document.createElement('i');
-    send_icon.classList.add("material-symbols-outlined");
-    send_icon.classList.add("filled-color");
-    send_icon.innerText = "send";
-    button.appendChild(send_icon);
+    })
+    const send_icon = document.createElement('i')
+    send_icon.classList.add("material-symbols-outlined")
+    send_icon.classList.add("filled-color")
+    send_icon.innerText = "send"
+    button.appendChild(send_icon)
 
-    return button;
+    return button
 }
 
-const inTableMode = window.matchMedia("(max-width: 60em)");
-const inbox = document.getElementsByClassName("chat-inbox");
-const chat = document.getElementsByClassName("chat-page");
+const inTableMode = window.matchMedia("(max-width: 60em)")
+const inbox = document.getElementsByClassName("chat-inbox")
+const chat = document.getElementsByClassName("chat-page")
 
 function openInbox() {
     if (inTableMode.matches) {
-        chat[0].style.gridArea = "none";
-        chat[0].style.display = "none";
-        inbox[0].style.gridArea = "page";
-        inbox[0].style.display = "block";
+        chat[0].style.gridArea = "none"
+        chat[0].style.display = "none"
+        inbox[0].style.gridArea = "page"
+        inbox[0].style.display = "block"
     }
 }
 function closeInbox() {
     if (inTableMode.matches) {
-        inbox[0].style.gridArea = "none";
-        inbox[0].style.display = "none";
-        chat[0].style.gridArea = "page";
-        chat[0].style.display = "block";
+        inbox[0].style.gridArea = "none"
+        inbox[0].style.display = "none"
+        chat[0].style.gridArea = "page"
+        chat[0].style.display = "block"
     }
 }
 
