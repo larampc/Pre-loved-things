@@ -63,8 +63,8 @@ function upload_item_image($img) : string {
     // move_uploaded_file($_FILES['image']['tmp_name'], $originalFileName);
 
     // Create and save a small square thumbnail
-    $small = imagecreatetruecolor(200, 200);
-    imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
+    $small = imagecreatetruecolor(400, 400);
+    imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 400, 400, $square, $square);
     imagepng($small, $thumbnailFileName);
 
     // Calculate width and height of medium sized image (max width: 400)
