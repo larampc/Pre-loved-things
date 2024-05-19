@@ -50,7 +50,7 @@ body > header {
     background-color: var(--primary);
 }
 
-select, input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], #set_date {
+select, input[type="text"], input[type="number"], input[type="password"], input[type="email"], input[type="tel"], #set_date, input[type="month"] {
     padding: 0.5rem;
     background-color: var(--secondary);
     border-style: none;
