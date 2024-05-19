@@ -1561,3 +1561,12 @@ a {
 .display-item #prev-btn, .display-item #next-btn {
     visibility: hidden;
 }
+
+.forgot-popup {
+    border: 3px solid var(--accent-primary);
+    border-radius: 1rem;
+    width: 20rem;
+    height: 10rem;
+    align-content: center;
+    background-color: var(--quaternary);
+}
