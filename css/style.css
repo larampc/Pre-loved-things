@@ -569,7 +569,7 @@ main > h2 {
 
 /* USER PAGE */
 
-.userPage, .pfPage{
+.user-main, .profile-main{
     padding: 0 3rem;
 }
 
@@ -607,7 +607,7 @@ main > h2 {
     }
 }
 
-.userPage .items, .pfPage .items {
+.user-main .items, .profile-main .items {
     width: 24rem;
 }
 
@@ -623,7 +623,7 @@ main > h2 {
     }
 }
 
-.pfPage .display-item > a {
+.profile-main .display-item > a {
     background-color: var(--secondary);
     padding: 0.5rem 0;
     border-radius: 0.5rem;

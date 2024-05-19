@@ -13,11 +13,15 @@ function draw_item(Item $item, Currency $user_currency) { ?>
 <?php }
 
 function draw_items_main(array $liked_items, array $recent_items, Currency $user_currency) { ?>
-    <h2>Last Added Items</h2>
-    <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
-    <?php draw_items($recent_items, $user_currency); ?>
-    <h2>Most liked</h2>
-    <?php draw_items($liked_items, $user_currency); ?>
+    <section class="last-added">
+        <h2>Last Added Items</h2>
+        <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
+        <?php draw_items($recent_items, $user_currency); ?>
+    </section>
+    <section class="most-liked">
+        <h2>Most liked</h2>
+        <?php draw_items($liked_items, $user_currency); ?>
+    </section>
 <?php }
 
 function draw_items(array $items, Currency $user_currency) { ?>

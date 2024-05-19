@@ -3,7 +3,6 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../templates/common.tpl.php');
 
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
-    <div class=<?php echo $session->getId() !== $user->user_id ? "userPage" : "pfPage" ?>>
         <script src="../scripts/user_actions.js" defer></script>
         <?php
         draw_user_details($user, $session);
@@ -17,13 +16,12 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
             draw_user_options($dbh, $user, $session, $user_currency);
         } else draw_items($items, $user_currency);
         ?>
-    </div>
 <?php } ?>
 
 <?php function draw_user_details(User $user, Session $session) { ?>
     <div class="user">
         <img src="../uploads/profile_pics/<?=$user->image?>.png" class="profile-picture" alt="profile picture">
-        <div class="user-details">
+        <section class="user-details">
             <h2 class="name"><?=$user->name?></h2>
             <?php if ($session->isLoggedIn() &&  $session->getId() === $user->user_id || $session->is_admin()) {?><p class="username"><?=$user->username?></p> <?php } ?>
             <p class="phone"><?=$user->phone?></p>
@@ -50,7 +48,7 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
                     </form>
                 </div>
             <?php } ?>
-        </div>
+        </section>
     </div>
     <?php
 }
@@ -85,6 +83,15 @@ function draw_edit_profile($user) { ?>
     <?php
 }
 
+function draw_stars ($rating) : void {
+    for ($i = 0; $i < $rating; $i++) { ?>
+        <i class="material-symbols-outlined filled"> grade </i>
+    <?php }
+    for ($i = $rating; $i < 5; $i++) { ?>
+        <i class="material-symbols-outlined"> grade </i>
+    <?php }
+}
+
 function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     <div class="feedback">
         <section class="feedback-sum">
@@ -92,13 +99,8 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
             <div class="stars">
                 <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
                 $average = round($avg);
-                for ($i = 0; $i < $average; $i++) { ?>
-                    <i class="material-symbols-outlined filled"> grade </i>
-                <?php }
-                for ($i = $average; $i < 5; $i++) { ?>
-                    <i class="material-symbols-outlined"> grade </i>
-                <?php } ?>
-                <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
+                draw_stars($average);
+               ?> <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
             </div>
         </section>
             <div class ="comment-box">
@@ -115,12 +117,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                         </a>
                         <time><?=$comment->date?></time>
                         <div class="stars">
-                            <?php for ($i = 0; $i < $comment->rating; $i++) { ?>
-                                <i class="material-symbols-outlined filled"> grade </i>
-                            <?php }
-                            for ($i = $comment->rating; $i < 5; $i++) { ?>
-                                <i class="material-symbols-outlined"> grade </i>
-                            <?php } ?>
+                            <?php draw_stars($comment->rating);?>
                         </div>
                         <p class="content"><?=$comment->message?></p>
                     </div>

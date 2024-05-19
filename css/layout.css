@@ -366,7 +366,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* USER PAGE */
 
-main .userPage{
+.user-main {
     display: grid;
     grid-template-columns:  1fr auto;
     grid-template-rows:  auto auto auto 1fr;
@@ -383,21 +383,21 @@ main .userPage{
     column-gap: 1rem;
 }
 
-.userPage .feedback, .pfPage .feedback {
+.user-main .feedback, .profile-main .feedback {
     grid-area: feedback;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.userPage .user-details, .pfPage .user-details {
+.user-main .user-details, .profile-main .user-details {
     align-self: center;
     a i {
         transform: translateY(25%);
     }
 }
 
-.pfPage .display-item > a {
+.profile-main .display-item > a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -407,7 +407,7 @@ main .userPage{
     justify-content: center;
 }
 
-.userPage .items, .pfPage .items, .favorite-main .items {
+.user-main .items, .profile-main .items, .favorite-main .items {
     grid-area: items;
     display: flex;
     flex-wrap: wrap;
@@ -415,7 +415,7 @@ main .userPage{
     gap: 1rem
 }
 
-.userPage .comment img, .pfPage .comment img {
+.user-main .comment img, .profile-main .comment img {
     float: left;
 }
 
@@ -682,21 +682,21 @@ main .userPage{
     align-content: center;
 }
 
-.pfPage .items, .userPage .display-item .items{
+.profile-main .items, .user-main .display-item .items{
     display: flex;
     overflow: hidden;
     max-height: 0;
 }
 
-.pfPage .items#my,  .userPage .items#my{
+.profile-main .items#my,  .user-main .items#my{
     max-height: 100%;
 }
 
-.pfPage .collapsible {
+.profile-main .collapsible {
     border-radius: 1rem;
 }
 
-main .pfPage{
+.profile-main {
     display: grid;
     grid-template-columns:  1fr auto;
     grid-template-rows:  auto auto auto 1fr;
@@ -706,11 +706,11 @@ main .pfPage{
                          "none items";
 }
 
-.pfPage .display-item, .userPage .display-item {
+.profile-main .display-item, .user-main .display-item {
     grid-area: items;
 }
 
-.pfPage #curve_chart {
+.profile-main #curve_chart {
     grid-area: stats;
 }
 

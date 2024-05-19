@@ -13,7 +13,7 @@
 
 /* USER PAGE */
 
-.userPage .comment-box, .pfPage .comment-box {
+.user-main .comment-box, .profile-main .comment-box {
     overflow:auto;
 }
 
@@ -111,7 +111,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     transition: opacity 0.3s ease;
 }
 
-.userPage .items, .pfPage .items {
+.user-main .items, .profile-main .items {
     transition-duration: 500ms;
 }
 
@@ -334,7 +334,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* USER AND PROFILE PAGE */
 
-    main .userPage, main .pfPage {
+    .user-main, .profile-main {
         grid-template-columns: auto;
         grid-template-rows: auto auto auto;
         grid-template-areas:
@@ -343,14 +343,14 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         "stats"
         "items";
     }
-    .userPage .feedback, .pfPage .feedback {
+    .user-main .feedback, .profile-main .feedback {
         margin-right: 0;
         margin-bottom: 2rem;
     }
-    .userPage .items, .pfPage .items {
+    .user-main .items, .profile-main .items {
         width: auto;
     }
-    .userPage .user-details, .pfPage .user-details {
+    .user-main .user-details, .profile-main .user-details {
         a {
             display: flex;
             align-items: center;
@@ -619,13 +619,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* USER AND PROFILE PAGE */
 
-    main .userPage, main .pfPage {
+    .user-main, .profile-main {
         padding: 0 1rem;
     }
-    .userPage .user, .pfPage .user {
+    .user-main .user, .profile-main .user {
         flex-direction: column;
     }
-    .userPage .user-details, .pfPage .user-details {
+    .user-main .user-details, .profile-main .user-details {
         text-align: center;
         h2 {
             margin-bottom: 0.6rem;
@@ -678,7 +678,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* FEEDBACK */
 
-    .userPage .comment .stars, .pfPage .comment .stars {
+    .user-main .comment .stars, .profile-main .comment .stars {
         position: unset;
         right: 0.5rem;
         top: 0.5rem;
