@@ -377,7 +377,7 @@ main > h2 {
         height: 2rem;
     }
     p {
-        margin: 0;
+        margin: 0 0.5rem;
     }
 }
 
