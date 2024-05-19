@@ -46,6 +46,9 @@ We have used the following external libraries:
 - Admin Page
 
 ![Screenshot1](screenshots/img_5.png)
+- Shipping form
+
+![Screenshot1](screenshots/img_7.png)
 
 ## Implemented Features
 
