@@ -258,11 +258,11 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .slider-btns {
         width: 20rem;
     }
-    .item-track img {
+    .track-main  img {
         width: 15rem;
         height: 15rem;
     }
-    .item-track {
+    .track-main  {
         margin-left: 2rem;
     }
     .purchase {
@@ -523,7 +523,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         margin: 10rem 0 2rem;
     }
 
-    main.new-main, main.edit-profile-main, main.new-category-main, main.admin-main {
+    .new-main, .edit-profile-main, .new-category-main, .admin-main, .track-main {
         padding-top: 8rem;
     }
 
@@ -546,7 +546,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         height: 80dvw;
         border-radius: 2rem;
     }
-    .item-track {
+    .track-main  {
         margin-left: 1rem;
         margin-right: 1rem;
         grid-template-columns: 1fr;
@@ -609,7 +609,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         width: 40dvw;
         height: 40dvw;
     }
-    .item-track img {
+    .track-main img {
         width: 80%;
         height: 80%;
     }
@@ -725,16 +725,16 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .state {
         padding-left: 1rem;
     }
-    .item-track > .state {
+    .track-main > .state {
         width: min-content;
         margin: 1rem auto;
     }
 
-    .item-track .state li.current::after, .checkout .state li.current > button::before {
+    .track-main .state li.current::after, .checkout .state li.current > button::before {
         left: -1.8rem;
     }
 
-    .checkout .state li > button::before, .item-track .state li::after {
+    .checkout .state li > button::before, .track-main .state li::after {
         left: -1.7rem;
     }
 

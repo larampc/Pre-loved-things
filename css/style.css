@@ -28,7 +28,7 @@ main {
     min-width: 20rem;
 }
 
-main.new-main, main.edit-profile-main, main.new-category-main, main.admin-main {
+.new-main, .edit-profile-main, .new-category-main, .admin-main, .track-main {
     margin: 0;
     padding: 7rem 0 2rem;
     background-color: var(--primary);
@@ -434,7 +434,7 @@ main > h2 {
     padding: 0.5rem;
 }
 
-.item-track img {
+.track-main img {
     width: 20rem;
     height: 20rem;
     margin: 0 auto;
@@ -1071,16 +1071,16 @@ i {
     counter-increment: list;
 }
 
-.item-track .state li:not(:last-child) {
+.track-main .state li:not(:last-child) {
     padding-bottom: 20px;
 }
 
-.item-track {
+.track-main {
     margin-left: 7rem;
     margin-right: 2rem;
 }
 
-.item-track #delivery-date {
+.track-main #delivery-date {
     text-align: center;
     p {
         margin: 0;
@@ -1110,7 +1110,7 @@ i {
     border-left: 2px solid var(--accent-primary);
 }
 
-.checkout .state li > button::before, .item-track .state li::after{
+.checkout .state li > button::before, .track-main .state li::after{
     content: '';
     width: 1rem;
     height: 1rem;
@@ -1119,7 +1119,7 @@ i {
     background-color: white;
 }
 
-.item-track .state li.done::after, .checkout .state li.done > button::before {
+.track-main .state li.done::after, .checkout .state li.done > button::before {
     content: "✔";
     font-size: 13px;
     color: white;
@@ -1128,7 +1128,7 @@ i {
     background-color: var(--accent-primary);
 }
 
-.item-track .state li.current::after, .checkout .state li.current > button::before {
+.track-main .state li.current::after, .checkout .state li.current > button::before {
     content: counter(list);
     padding-top: 1px;
     width: 1.2rem;

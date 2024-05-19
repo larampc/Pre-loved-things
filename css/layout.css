@@ -296,12 +296,12 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     left: 0;
 }
 
-.item-track .item-info {
+.track-main .item-info {
     display: flex;
     justify-content: space-around;
 }
 
-.item-track .items {
+.track-main  .items {
     display: flex;
     justify-content: center;
 }
@@ -647,7 +647,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     display: block;
 }
 
-.item-track {
+.track-main  {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
@@ -655,26 +655,26 @@ input[type="search"]:focus::-webkit-search-cancel-button {
                         "shipping item";
 }
 
-.item-track .state li.current::after, .checkout .state li.current > button::before {
+.track-main  .state li.current::after, .checkout .state li.current > button::before {
     left: -2.3rem;
 }
 
-.item-track #contact-seller {
+.track-main  #contact-seller {
     grid-area: contact;
 }
 
-.item-track .state {
+.track-main  .state {
     grid-area: shipping;
 }
 
-.item-track #delivery-date {
+.track-main  #delivery-date {
     grid-area: deliveryDate;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.item-track .item {
+.track-main  .item {
     grid-area: item;
     align-content: center;
 }
@@ -760,7 +760,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     left: -1.7rem;
 }
 
-.checkout .state li > button::before, .item-track .state li::after{
+.checkout .state li > button::before, .track-main .state li::after{
     position: absolute;
     left: -2.2rem;
 }

@@ -32,7 +32,7 @@ function draw_items(array $items, Currency $user_currency) { ?>
     </div>
 <?php }
 function draw_sliding_items(array $items, Currency $user_currency) { ?>
-    <section class="items">
+    <div class="items">
         <div class="image-slide">
             <?php if (count($items) > 1) { ?>
                 <div class="slider-btns">
@@ -58,7 +58,7 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
             } ?>
         </div>
         <script src="../scripts/slide.js" defer></script>
-    </section>
+    </div>
 <?php } ?>
 
 <?php function draw_item_images(array $images) { ?>
@@ -374,41 +374,38 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
 
 <?php function draw_item_tracking(TrackItem $trackItem, Session $session, Currency $user_currency) { ?>
     <script src="../scripts/print.js" defer></script>
-    <section class="item-track">
-        <form method="get" action="../pages/inbox.php">
-            <label>
-                <button class="sendMessage-btn" id="contact-seller" type="submit"><?=$trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "")?></button>
-            </label>
-            <input type="hidden" name="user_id" value="<?=$trackItem->buyer == $session->getId()? $trackItem->tracking[0]->creator->user_id : ($trackItem->tracking[0]->creator->user_id == $session->getId()? $trackItem->buyer : "")?>">
-            <input type="hidden" name="item_id" value="<?=$trackItem->tracking[0]->id?>">
-        </form>
-        <ul class="state">
-            <li class="<?= ($trackItem->state == "preparing"? "current" : "done")?>">Preparing</li>
-            <li class="<?=($trackItem->state == "shipping"? "current" : (($trackItem->state == "delivering" || $trackItem->state == "delivered") ? "done":""))?>">Shipping</li>
-            <li class="<?=($trackItem->state == "delivering"? "current" : ($trackItem->state == "delivered" ? "done":""))?>">Delivering</li>
-            <li class="<?=($trackItem->state == "delivered"? "done" : "")?>">Delivered</li>
-        </ul>
-        <div id="delivery-date">
-            <p>Estimated delivery date: </p>
-            <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->getId()) {?>
-                <form method="post" action="../actions/action_update_delivery.php">
-                    <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+    <form method="get" action="../pages/inbox.php">
+        <label>
+            <button class="sendMessage-btn" id="contact-seller" type="submit"><?=$trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "")?></button>
+        </label>
+        <input type="hidden" name="user_id" value="<?=$trackItem->buyer == $session->getId()? $trackItem->tracking[0]->creator->user_id : ($trackItem->tracking[0]->creator->user_id == $session->getId()? $trackItem->buyer : "")?>">
+        <input type="hidden" name="item_id" value="<?=$trackItem->tracking[0]->id?>">
+    </form>
+    <ul class="state">
+        <li class="<?= ($trackItem->state == "preparing"? "current" : "done")?>">Preparing</li>
+        <li class="<?=($trackItem->state == "shipping"? "current" : (($trackItem->state == "delivering" || $trackItem->state == "delivered") ? "done":""))?>">Shipping</li>
+        <li class="<?=($trackItem->state == "delivering"? "current" : ($trackItem->state == "delivered" ? "done":""))?>">Delivering</li>
+        <li class="<?=($trackItem->state == "delivered"? "done" : "")?>">Delivered</li>
+    </ul>
+    <div id="delivery-date">
+        <p>Estimated delivery date: </p>
+        <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->getId()) {?>
+            <form method="post" action="../actions/action_update_delivery.php">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
-                    <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
-                    <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
-                    <button type="submit">Confirm</button>
-                </form>
-            <?php }
-            else {?>
-                <p><?=$trackItem->date?></p>
-            <?php } ?>
-        </div>
-        <?php draw_sliding_items($trackItem->tracking, $user_currency);
-        if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
-            <button id="print" class="../pages/sale_info.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
+                <input value="<?=$trackItem->date?>" id="set_date" name="new-date">
+                <input type="hidden" value="<?=$trackItem->id?>" name="purchase">
+                <button type="submit">Confirm</button>
+            </form>
+        <?php }
+        else {?>
+            <p><?=$trackItem->date?></p>
         <?php } ?>
-    </section>
-
+    </div>
+    <?php draw_sliding_items($trackItem->tracking, $user_currency);
+    if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
+        <button id="print" class="../pages/sale_info.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
+    <?php } ?>
 <?php } ?>
 
 <?php function draw_item_to_track(PDO $db, Item $item) { ?>
