@@ -54,10 +54,10 @@ else {
         array_push($itemsCat, $value['category']);
     }
 }
-    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->getCurrency())), intval($max/ User::get_currency_conversion($dbh, $session->getCurrency())), $search, $order);
+    $res = Item::get_filtered_items($dbh, $itemsCat, $itemsTags, intval($page), $checkTag, intval($min / User::get_currency_conversion($dbh, $session->get_currency())), intval($max/ User::get_currency_conversion($dbh, $session->get_currency())), $search, $order);
 
 foreach ($res as $item) {
-    $item->price = round($item->price * User::get_currency_conversion($dbh, $session->getCurrency()), 2);
+    $item->price = round($item->price * User::get_currency_conversion($dbh, $session->get_currency()), 2);
 }
 
 echo json_encode($res);

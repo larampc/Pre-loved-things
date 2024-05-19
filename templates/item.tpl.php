@@ -77,18 +77,18 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
     <header>
         <h2><?=$item->name?></h2>
         <?php if ($item->sold === false) { ?>
-            <?php if ($session->isLoggedIn() && $item->creator->user_id === $session->getId()) { ?>
+            <?php if ($session-> is_logged_in() && $item->creator->user_id === $session->get_id()) { ?>
                 <form method="post" action="../pages/edit_item.php">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                     <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                 </form>
-            <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
+            <?php } if ($session-> is_logged_in() && $item->creator->user_id !== $session->get_id()) { ?>
                 <div class="like">
-                    <button value="<?=$item->id?>" class="material-symbols-outlined big <?= Item::check_favorite($db, $session->getId(), $item)? "filled": ""?>"> favorite </button>
+                    <button value="<?=$item->id?>" class="material-symbols-outlined big <?= Item::check_favorite($db, $session->get_id(), $item)? "filled": ""?>"> favorite </button>
                     <p>Liked by <?=Item::get_number_likes($db, $item)?></p>
                 </div> <?php } ?>
         <?php }
-        if ($session->isLoggedIn() && ($session->is_admin() || $session->getId() == $item->creator->user_id)) { ?>
+        if ($session-> is_logged_in() && ($session->is_admin() || $session->get_id() == $item->creator->user_id)) { ?>
             <form method="post" action="../actions/action_remove_item.php" class="confirmation">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <script src="../scripts/user_actions.js" defer></script>
@@ -115,11 +115,11 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
         <?php if ($item->sold === false) { ?>
             <div class="buy-item">
                 <i class="material-symbols-outlined cart big"> local_mall </i>
-                <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator->user_id) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
+                <button value="<?=$item->id?>" class="Buy"><?=($session-> is_logged_in() && $session->get_id() == $item->creator->user_id) ? "You own this product" : (($session-> is_logged_in() && Item::check_cart($db, $session->get_id(), $item) || ($session->has_items_cart() && in_array($item->id, $session->get_cart())))?  "Already in cart" : "Buy now!")?></button>
             </div>
         <?php } ?>
     </section>
-    <?php if( $item->creator->user_id !== $session->getId()) { ?>
+    <?php if( $item->creator->user_id !== $session->get_id()) { ?>
     <form method="get" action="../pages/inbox.php" class="send-message">
         <label>
             <button class="sendMessage-btn" type="submit">Send Message</button>
@@ -253,7 +253,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                 <?php }} ?>
 
             <label for="price">Price</label>
-            <input type="number" step="0.01" id="price" name="price" value="<?= round($item->price * User::get_currency_conversion($db, $session->getCurrency())) ?>" required>
+            <input type="number" step="0.01" id="price" name="price" value="<?= round($item->price * User::get_currency_conversion($db, $session->get_currency())) ?>" required>
 
             <label for="description">Description</label>
             <input type="text" id="description" name="description" value="<?= $item->description ?>" maxlength="1000" minlength="40" required>
@@ -290,9 +290,9 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     <script src="../scripts/print.js" defer></script>
     <form method="get" action="../pages/inbox.php">
         <label>
-            <button class="sendMessage-btn" id="contact-seller" type="submit"><?=$trackItem->buyer == $session->getId()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->getId()? "Contact buyer" : "")?></button>
+            <button class="sendMessage-btn" id="contact-seller" type="submit"><?=$trackItem->buyer == $session->get_id()? "Contact Seller" : ($trackItem->tracking[0]->creator->user_id == $session->get_id()? "Contact buyer" : "")?></button>
         </label>
-        <input type="hidden" name="user_id" value="<?=$trackItem->buyer == $session->getId()? $trackItem->tracking[0]->creator->user_id : ($trackItem->tracking[0]->creator->user_id == $session->getId()? $trackItem->buyer : "")?>">
+        <input type="hidden" name="user_id" value="<?=$trackItem->buyer == $session->get_id()? $trackItem->tracking[0]->creator->user_id : ($trackItem->tracking[0]->creator->user_id == $session->get_id()? $trackItem->buyer : "")?>">
         <input type="hidden" name="item_id" value="<?=$trackItem->tracking[0]->id?>">
     </form>
     <ul class="state">
@@ -303,7 +303,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
     </ul>
     <div id="delivery-date">
         <p><?=$trackItem->state == "delivered" ? "Delivered at: " : "Estimated delivery date: "?></p>
-        <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->getId()) {?>
+        <?php if ($trackItem->state != "delivered" && $trackItem->tracking[0]->creator->user_id == $session->get_id()) {?>
             <form method="post" action="../actions/action_update_delivery.php">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
@@ -317,7 +317,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
         <?php } ?>
     </div>
     <?php draw_sliding_items($trackItem->tracking, $user_currency);
-    if ($trackItem->tracking[0]->creator->user_id == $session->getId()) { ?>
+    if ($trackItem->tracking[0]->creator->user_id == $session->get_id()) { ?>
         <button id="print" class="../pages/sale_info.php?purchase=<?=$trackItem->id?>">Get shipping form</button>
     <?php } ?>
 <?php } ?>

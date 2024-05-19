@@ -5,8 +5,8 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
 
-    if (!$session->isLoggedIn()) die(header('Location: login.php?user='.$_GET["user_id"].'&item='.$_GET["item_id"]));
-    if ($session->getId() === $_GET["user_id"]) die(header('Location: inbox.php'));
+    if (!$session-> is_logged_in()) die(header('Location: login.php?user='.$_GET["user_id"].'&item='.$_GET["item_id"]));
+    if ($session->get_id() === $_GET["user_id"]) die(header('Location: inbox.php'));
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/message.class.php');
@@ -18,12 +18,12 @@
     require_once(__DIR__ . '/../templates/chatroom.tpl.php');
 
     $dbh = get_database_connection();
-    $chatrooms = Chatroom::get_user_chatrooms($dbh, $session->getId());
+    $chatrooms = Chatroom::get_user_chatrooms($dbh, $session->get_id());
     usort($chatrooms, function ($a, $b) {
         return $a->last_message->sentTime < $b->last_message->sentTime;
     });
     get_header("inbox", $dbh, $session);
-    draw_user_chatrooms($chatrooms, User::get_user($dbh, $session->getId()));
+    draw_user_chatrooms($chatrooms, User::get_user($dbh, $session->get_id()));
     $to = $_GET["user_id"];
     if(isset($to)){
         $to_chatroom = array_filter($chatrooms, function($chatroom) use($to) { return $chatroom->seller->user_id === $to && $chatroom->item->id === $_GET["item_id"]; });

@@ -30,13 +30,13 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <select class="currency" name="currency" >
                     <?php foreach ($currencies as $currency) { ?>
-                        <option id="<?=$currency['code']?>" value="<?=$currency['code']?>" <?=$currency['code'] == $session->getCurrency()? "selected":""?>><?=$currency['code']?></option>
+                        <option id="<?=$currency['code']?>" value="<?=$currency['code']?>" <?=$currency['code'] == $session->get_currency()? "selected":""?>><?=$currency['code']?></option>
                     <?php } ?>
                 </select>
                 <button type="submit" class="change-currency"></button>
             </form>
             <a href="../pages/cart.php"><i class="material-symbols-outlined big <?= $page=="cart"? "filled": ""?>"> local_mall </i></a>
-            <?php if ($session->isLoggedIn()) { ?>
+            <?php if ($session-> is_logged_in()) { ?>
                 <a href="../pages/favorite.php"><i class="material-symbols-outlined big <?= $page=="favorite"? "filled": ""?>"> favorite </i></a>
                 <a href="../pages/inbox.php"><i class="material-symbols-outlined big <?= $page=="inbox"? "filled": ""?>"> chat </i></a>
                 <a href="../pages/profile.php"><i class="material-symbols-outlined big <?= $page=="profile"? "filled": ""?>"> person </i> </a>
@@ -46,7 +46,7 @@ function draw_header(string $page, Session $session, array $currencies) { ?>
         </nav>
     </header>
         <section id="messages">
-            <?php foreach ($session->getMessages() as $message) { ?>
+            <?php foreach ($session->get_messages() as $message) { ?>
                 <article class="<?=$message['type']?>">
                     <?php
                     if ($message['type'] == "success") { ?>

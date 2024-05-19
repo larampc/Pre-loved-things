@@ -19,10 +19,10 @@ $item = $_POST['remove-item'];
 
 
 if (Item::delete_item($dbh, $item)) {
-    $session->addMessage('success', 'Item deleted successfully.');
+    $session->add_message('success', 'Item deleted successfully.');
 }
 else {
-    $session->addMessage('error', 'Unable to delete item.');
+    $session->add_message('error', 'Unable to delete item.');
 }
 
 header('Location: ../pages' );

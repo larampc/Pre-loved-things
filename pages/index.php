@@ -18,7 +18,7 @@
 
     $liked_items = Item::get_most_liked_items($dbh, 5);
     $recent_items = Item::get_last_added_items($dbh, 5);
-    $user_currency = new Currency($dbh, $session->getCurrency());
+    $user_currency = new Currency($dbh, $session->get_currency());
 
     get_header("index", $dbh, $session);
 

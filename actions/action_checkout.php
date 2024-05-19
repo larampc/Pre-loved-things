@@ -13,6 +13,6 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-$session->setItemCheckout($_POST['user_items']);
+$session->set_item_checkout($_POST['user_items']);
 
-Header("Location: ". ($session->isLoggedIn()?"../pages/checkout.php": "../pages/login.php?checkout"));
+Header("Location: ". ($session-> is_logged_in()?"../pages/checkout.php": "../pages/login.php?checkout"));

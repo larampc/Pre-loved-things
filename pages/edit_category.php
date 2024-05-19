@@ -14,7 +14,7 @@ require_once(__DIR__ . '/../templates/common.tpl.php');
 
 $dbh = get_database_connection();
 
-if (!$session->isLoggedIn() || !$session->is_admin()) die(header('Location: /'));
+if (!$session-> is_logged_in() || !$session->is_admin()) die(header('Location: /'));
 
 
 get_header("new-category", $dbh, $session);

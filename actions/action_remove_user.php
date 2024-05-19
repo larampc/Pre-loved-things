@@ -17,10 +17,10 @@ $user = $_POST['remove-user'];
 
 
 if (User::delete_user($dbh, $user)) {
-    $session->addMessage('success', 'User banished successfully.');
+    $session->add_message('success', 'User banished successfully.');
 }
 else {
-    $session->addMessage('error', 'Unable to banish user.');
+    $session->add_message('error', 'Unable to banish user.');
 }
 
 header('Location: ../pages' );

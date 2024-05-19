@@ -11,7 +11,7 @@ require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/track_item.class.php');
 
 $nav = $_GET['nav'];
-$user = $_GET['user'] ? :$session->getId();
+$user = $_GET['user'] ? :$session->get_id();
 $dbh = get_database_connection();
 $items = array();
 

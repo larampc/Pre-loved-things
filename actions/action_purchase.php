@@ -17,9 +17,9 @@ $address = $_POST["address"];
 $city = $_POST["city"];
 $postalCode = $_POST["postalCode"];
 
-$items = User::get_cart_items_from_user($dbh, $session->getId(), $session->getItemCheckout());
+$items = User::get_cart_items_from_user($dbh, $session->get_id(), $session->get_item_checkout());
 Item::update_items_sold($dbh, $items);
 Item::remove_cart_favorite($dbh, $items);
-$purchase = Item::register_purchase($dbh, $session->getId(), $items,$address, $city, $postalCode);
+$purchase = Item::register_purchase($dbh, $session->get_id(), $items,$address, $city, $postalCode);
 
 header('Location: ../pages/track_item.php?purchase='. ($purchase));

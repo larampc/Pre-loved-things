@@ -14,9 +14,9 @@
 
     $dbh = get_database_connection();
 
-    $user = User::get_user($dbh, $session->getId());
+    $user = User::get_user($dbh, $session->get_id());
     if ($user == null) {
-        $session->addMessage('error', 'Error editing profile. Please try again.');
+        $session->add_message('error', 'Error editing profile. Please try again.');
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
 
@@ -30,10 +30,10 @@
         }
     }
 
-    if (!User::update_user($dbh, $session->getId(), $_POST['username'], $_POST['email'], $_POST['phone'], $_POST['name'],
+    if (!User::update_user($dbh, $session->get_id(), $_POST['username'], $_POST['email'], $_POST['phone'], $_POST['name'],
         $image_id ?? $user->image)) {
-        $session->addMessage('error', 'Error editing profile. Please try again.');
+        $session->add_message('error', 'Error editing profile. Please try again.');
         die(header('Location: ' . $_SERVER['HTTP_REFERER']));
     }
-    $session->addMessage('success', 'Profile updated successfully.');
+    $session->add_message('success', 'Profile updated successfully.');
     header('Location: ../pages/profile.php');

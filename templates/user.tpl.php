@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
         <script src="../scripts/user_actions.js" defer></script>
-        <script src="../scripts/profileNav.js" defer></script>
+        <script src="../scripts/profile_nav.js" defer></script>
     <?php
         draw_user_details($user, $session);
         draw_user_feedback($dbh, $user, $feedback, $session); ?>
-        <?php if ($session->getId() === $user->user_id || ($session->isLoggedIn() && $session->is_admin())) { ?>
+        <?php if ($session->get_id() === $user->user_id || ($session-> is_logged_in() && $session->is_admin())) { ?>
             <div id="curve_chart"></div>
             <script src="https://www.gstatic.com/charts/loader.js"></script>
             <input type="hidden" class="chart-user" value="<?=$user->user_id?>">
@@ -30,16 +30,16 @@ function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, 
         <img src="../uploads/profile_pics/<?=$user->image?>.png" class="profile-picture" alt="profile picture">
         <section class="user-details">
             <h2 class="name"><?=$user->name?></h2>
-            <?php if ($session->isLoggedIn() &&  $session->getId() === $user->user_id || $session->is_admin()) {?><p class="username"><?=$user->username?></p> <?php } ?>
+            <?php if ($session-> is_logged_in() &&  $session->get_id() === $user->user_id || $session->is_admin()) {?><p class="username"><?=$user->username?></p> <?php } ?>
             <p class="phone"><?=$user->phone?></p>
             <p class="email"><?=$user->email?></p>
-            <?php if ($session->isLoggedIn() && $session->getId() === $user->user_id) {?>
+            <?php if ($session-> is_logged_in() && $session->get_id() === $user->user_id) {?>
             <a href="../actions/action_logout.php" class="logout"><i class="material-symbols-outlined bold">logout</i>Log out</a>
             <a href="../pages/edit_profile.php"><i class="material-symbols-outlined bold">edit</i>Edit profile</a>
             <?php if ($session->is_admin()) { ?>
                     <a href="../pages/admin_page.php"><i class="material-symbols-outlined bold">manage_accounts</i></a>
                 <?php }} ?>
-            <?php if ($session->isLoggedIn() && $session->getId() !== $user->user_id && $session->is_admin()){?>
+            <?php if ($session-> is_logged_in() && $session->get_id() !== $user->user_id && $session->is_admin()){?>
                 <div class="admin-actions">
                     <form method="post" action="../actions/action_remove_user.php" class="confirmation">
                         <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
@@ -138,7 +138,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                     } ?>
             </div>
 
-        <?php if ($session->isLoggedIn() && $user->user_id!=$session->getId()) { ?>
+        <?php if ($session-> is_logged_in() && $user->user_id!=$session->get_id()) { ?>
             <form action="../actions/action_add_review.php?user=<?=$user->user_id?>" method="post" class="new-review">
                 <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
                 <input class="write-review" type="text" placeholder="Write your feedback..." name="review" required>
@@ -162,12 +162,13 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
 <?php } ?>
 
 <?php  function draw_user_options(PDO $dbh, User $user, Session $session, Currency $user_currency) { ?>
+    <script src="../scripts/profile_nav.js" defer></script>
     <div class="display-item">
-        <?php if ($user->user_id === $session->getId()) {?>
+        <?php if ($user->user_id === $session->get_id()) {?>
             <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>
         <?php } ?>
         <div class="navbar">
-            <button type="button" class="navOption my" onclick="openNav('my')"> <?=$user->user_id === $session->getId() ? "My " : "User "?> items</button>
+            <button type="button" class="navOption my" onclick="openNav('my')"> <?=$user->user_id === $session->get_id() ? "My " : "User "?> items</button>
             <button type="button" class="navOption sales" onclick="openNav('sales')">Pending sales</button>
             <button type="button" class="navOption sold" onclick="openNav('sold')">Sold</button>
             <button type="button" class="navOption purchases" onclick="openNav('purchases')">Pending purchases</button>

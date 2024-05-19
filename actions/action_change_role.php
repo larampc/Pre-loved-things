@@ -18,10 +18,10 @@ $user = User::get_user($dbh, $_POST['role-user']);
 $role = $user->role=="admin"?"user":"admin";
 
 if (User::change_role($dbh, $user->user_id, $role)) {
-    $session->addMessage('success', $role=="admin"?"User promoted to admin":"User demoted");
+    $session->add_message('success', $role=="admin"?"User promoted to admin":"User demoted");
 }
 else {
-    $session->addMessage('error', 'Unable to change user role.');
+    $session->add_message('error', 'Unable to change user role.');
 }
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);

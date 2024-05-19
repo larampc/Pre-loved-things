@@ -4,9 +4,9 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
 
-    if (!$session->isLoggedIn()) die(header('Location: /'));
-    if (!$session->getItemCheckout()) {
-        $session->addMessage("error", "No items where found.");
+    if (!$session-> is_logged_in()) die(header('Location: /'));
+    if (!$session->get_item_checkout()) {
+        $session->add_message("error", "No items where found.");
         die(header('Location: /'));
     }
 
@@ -24,12 +24,12 @@
 
     $dbh = get_database_connection();
 
-    $items = User::get_cart_items_from_user($dbh, $session->getId(), $session->getItemCheckout());
+    $items = User::get_cart_items_from_user($dbh, $session->get_id(), $session->get_item_checkout());
     if (empty($items)) {
-        $session->addMessage("error", "Items unavailable.");
+        $session->add_message("error", "Items unavailable.");
         die(header('Location: /'));
     }
-    $currency = new Currency($dbh, $session->getCurrency());
+    $currency = new Currency($dbh, $session->get_currency());
 
     get_header("cart-checkout", $dbh, $session);
     draw_checkout_form();

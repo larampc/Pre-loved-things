@@ -17,7 +17,7 @@
 
     $dbh = get_database_connection();
     if (!Tag::check_category($dbh, $_GET['category'] ?? "")) {
-        $session->addMessage("error", "Invalid category");
+        $session->add_message("error", "Invalid category");
         die(header('Location: /'));
     }
     get_header("search", $dbh, $session);

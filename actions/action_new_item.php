@@ -22,11 +22,11 @@ foreach ($_FILES as $name => $file) {
     if(!empty($file['tmp_name'])) $img_ids[] = upload_item_image($name);
 }
 
-$item_id = Item::register_item($dbh, htmlentities($_POST['item-name']), htmlentities($_POST['description']),  round($_POST['price']/ User::get_currency_conversion($dbh, $session->getCurrency()), 2), $_POST['category'] == "other" ? "" : $_POST['category'], $session->getId(), $img_ids[0]);
+$item_id = Item::register_item($dbh, htmlentities($_POST['item-name']), htmlentities($_POST['description']),  round($_POST['price']/ User::get_currency_conversion($dbh, $session->get_currency()), 2), $_POST['category'] == "other" ? "" : $_POST['category'], $session->get_id(), $img_ids[0]);
 
 if ($item_id == -1) {
     //remove images
-    $session->addMessage('error', 'Error creating item.');
+    $session->add_message('error', 'Error creating item.');
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
@@ -46,9 +46,9 @@ if (isset($_POST['category'])) {
 }
 
 if (!Item::register_item_images($dbh, $img_ids, $item_id)) {
-    $session->addMessage('error', 'Error creating item.');
+    $session->add_message('error', 'Error creating item.');
     die(header('Location: ' . $_SERVER['HTTP_REFERER']));
 }
 
-$session->addMessage('success', 'You item is now for sale.');
+$session->add_message('success', 'You item is now for sale.');
 header('Location: ../pages/profile.php');

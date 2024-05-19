@@ -15,66 +15,62 @@ class Session {
         unset($_SESSION['messages']);
     }
 
-    public function isLoggedIn() : bool {
+    public function is_logged_in() : bool {
         return isset($_SESSION['user_id']);
     }
 
-    public function logout() {
+    public function logout(): void {
         session_destroy();
     }
 
-    public function getId() : ?string {
+    public function get_id() : ?string {
         return $_SESSION['user_id'] ?? null;
     }
 
-    public function setId(string $id) {
+    public function set_id(string $id): void {
         $_SESSION['user_id'] = $id;
     }
     public function is_admin(): bool {
         return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
     }
 
-    public function set_admin() {
+    public function set_admin(): void {
         $_SESSION['user_role'] = 'admin';
     }
-    public function hasItemsCart(): bool {
+    public function has_items_cart(): bool {
         return isset($_SESSION['cart']);
     }
 
-    public function addToCart(string $id) {
+    public function add_to_cart(string $id): void {
         $_SESSION['cart'][] = $id;
         $_SESSION['cart'] = array_unique($_SESSION['cart']);
     }
 
-    public function getCart() : array {
+    public function get_cart() : array {
         return $_SESSION['cart'] ?? array();
     }
 
-    public function hasItemCheckout(): bool {
-        return isset($_SESSION['user_items']);
-    }
-
-    public function getItemCheckout() : string {
+    public function get_item_checkout() : string {
         return $_SESSION['user_items'] ?? -1;
     }
 
-    public function setItemCheckout($user_item) {
+    public function set_item_checkout($user_item): void {
         $_SESSION['user_items'] = $user_item;
     }
 
-    public function addMessage(string $type, string $text) {
+    public function add_message(string $type, string $text): void {
         $_SESSION['messages'][] = array('type' => $type, 'text' => $text);
     }
 
-    public function getMessages() {
+    public function get_messages() {
         return $this->messages;
     }
 
-    public function setCurrency(string $currency) {
+    public function set_currency(string $currency): void {
         $_SESSION['currency'] = $currency;
     }
 
-    public function getCurrency() : string {
+    public function get_currency() : string {
         return $_SESSION['currency'] ?? 'EUR';
     }
 }

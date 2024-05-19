@@ -25,13 +25,13 @@ $message = isset($_GET['user']);
 
 if ($email_available && $username_available) {
 
-    $session->setId(User::register_user($dbh, $_POST['password'], $_POST['username'], $_POST['email'], $_POST['name'], $_POST['phone'], $session->getCurrency())->user_id);
-    if ($session->hasItemsCart()) User::add_to_cart($dbh, $session->getCart(), $session->getId());
+    $session->set_id(User::register_user($dbh, $_POST['password'], $_POST['username'], $_POST['email'], $_POST['name'], $_POST['phone'], $session->get_currency())->user_id);
+    if ($session->has_items_cart()) User::add_to_cart($dbh, $session->get_cart(), $session->get_id());
 
-    $session->addMessage('success', 'Account successfully created.');
+    $session->add_message('success', 'Account successfully created.');
     header('Location: '. ($checkout? '../pages/checkout.php':($message? '../pages/inbox.php?user_id='.$_GET['user'].'&item_id='.$_GET['item'] : '../index.php')));
 }
 else {
-    $session->addMessage('error', $email_available? 'Username already taken' : 'Email already registered.');
+    $session->add_message('error', $email_available? 'Username already taken' : 'Email already registered.');
     header('Location: ../pages/login.php'. ($checkout ? '?checkout' : ($message ? '?user='.$_GET['user'].'&item='.$_GET['item'] : '')));
 }

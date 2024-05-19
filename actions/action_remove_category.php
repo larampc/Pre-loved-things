@@ -16,10 +16,10 @@ $category = $_POST['remove-category'];
 
 
 if (Tag::delete_category($dbh, $category)) {
-    $session->addMessage('success', 'Category deleted successfully.');
+    $session->add_message('success', 'Category deleted successfully.');
 }
 else {
-    $session->addMessage('error', 'Unable to delete category.');
+    $session->add_message('error', 'Unable to delete category.');
 }
 
 header('Location: ../pages/search.php' );

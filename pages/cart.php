@@ -18,14 +18,14 @@
 
 
     $dbh = get_database_connection();
-    $user_currency = new Currency($dbh, $session->getCurrency());
+    $user_currency = new Currency($dbh, $session->get_currency());
 
     $items = array();
-    if ($session->isLoggedIn()) {
-        $items = User::get_cart_items($dbh, $session->getId());
+    if ($session-> is_logged_in()) {
+        $items = User::get_cart_items($dbh, $session->get_id());
     }
     else {
-        if ($session->hasItemsCart()) $items = Item::get_items_in_array($dbh, $session->getCart());
+        if ($session->has_items_cart()) $items = Item::get_items_in_array($dbh, $session->get_cart());
     }
     $items = Item::sort_by_user($items);
     get_header("cart", $dbh, $session);

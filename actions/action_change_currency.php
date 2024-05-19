@@ -18,11 +18,11 @@ require_once(__DIR__ . '/../database/connection.db.php');
 
 $dbh = get_database_connection();
 
-if ($session->isLoggedIn()) {
-    if (!User::set_user_currency($dbh, $session->getId(), $_GET['currency'])) {
-        $session->addMessage("error", "Error setting user currency");
+if ($session-> is_logged_in()) {
+    if (!User::set_user_currency($dbh, $session->get_id(), $_GET['currency'])) {
+        $session->add_message("error", "Error setting user currency");
     }
 }
-$session->setCurrency($_GET['currency']);
+$session->set_currency($_GET['currency']);
 
 header('Location: ' . $_SERVER['HTTP_REFERER']);

@@ -136,7 +136,7 @@ function draw_page_filters(array $categories, PDO $dbh, Session $session) { ?>
             <label> Maximum
                 <input name="maximum" type="number"
                        class="max-input"
-                       value="<?=ceil((8500 * Currency::get_currency_conversion($dbh, $session->getCurrency()))/10)*10?>">
+                       value="<?=ceil((8500 * Currency::get_currency_conversion($dbh, $session->get_currency()))/10)*10?>">
             </label>
         </div>
         <?php

@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once(__DIR__ . '/../utils/session.php');
 $session = new Session();
 
-if (!$session->isLoggedIn() || !$session->is_admin()) die(header('Location: /'));
+if (!$session-> is_logged_in() || !$session->is_admin()) die(header('Location: /'));
 
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');

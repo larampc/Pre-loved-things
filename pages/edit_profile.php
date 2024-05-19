@@ -5,7 +5,7 @@
     require_once(__DIR__ . '/../utils/session.php');
     $session = new Session();
 
-    if (!$session->isLoggedIn()) die(header('Location: /'));
+    if (!$session-> is_logged_in()) die(header('Location: /'));
 
     require_once(__DIR__ . '/../database/connection.db.php');
     require_once(__DIR__ . '/../database/user.class.php');
@@ -18,5 +18,5 @@
     $dbh = get_database_connection();
 
     get_header("edit-profile", $dbh, $session);
-    draw_edit_profile(User::get_user($dbh, $session->getId()));
+    draw_edit_profile(User::get_user($dbh, $session->get_id()));
     draw_footer();
