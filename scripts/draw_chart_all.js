@@ -1,10 +1,10 @@
-google.charts.load('current', {'packages': ['corechart']});
-google.charts.setOnLoadCallback(drawChart);
+google.charts.load('current', {'packages': ['corechart']})
+google.charts.setOnLoadCallback(drawChart)
 
 async function drawChart() {
     const response = await fetch('../api/api_get_statistics_all.php')
-    const items = await response.json();
-    const data = google.visualization.arrayToDataTable(items);
+    const items = await response.json()
+    const data = google.visualization.arrayToDataTable(items)
 
     const options = {
         title: 'Sales statistics in '+ new Date().getFullYear() ,
@@ -21,14 +21,14 @@ async function drawChart() {
         },
         responsive: true,
         chartArea:{left:"5%", width: "80%"}
-    };
+    }
 
-    const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+    const chart = new google.visualization.LineChart(document.getElementById('curve_chart'))
 
-    chart.draw(data, options);
+    chart.draw(data, options)
     window.onresize = function() {
-        document.getElementById('curve_chart').innerHTML = '';
-        const chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-        chart.draw(data, options);
+        document.getElementById('curve_chart').innerHTML = ''
+        const chart = new google.visualization.LineChart(document.getElementById('curve_chart'))
+        chart.draw(data, options)
     }
 }

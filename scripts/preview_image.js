@@ -1,9 +1,9 @@
 const uploadSection = document.querySelector('section.item-image-uploads')
 const imageAdder = document.querySelector('.image-upload-adder')
 
-let lastLoadedImageId = 0;
+let lastLoadedImageId = 0
 let allImagesAreLoaded = false
-const maxImageNumber = 7;
+const maxImageNumber = 7
 
 const removeIcons = document.querySelectorAll('.delete-icon')
 if (removeIcons) {
@@ -12,7 +12,7 @@ if (removeIcons) {
 }
 
 if (lastLoadedImageId + 1 >= maxImageNumber) {
-    imageAdder.style.display = "none";
+    imageAdder.style.display = "none"
 }
 if (lastLoadedImageId > 0 && uploadSection) {
     const mainPhotoInput = uploadSection.querySelector('.main-photo-upload input')
@@ -26,32 +26,32 @@ if (imageAdder) {
             allImagesAreLoaded = false
         }
         if (lastLoadedImageId + 1 === maxImageNumber) {
-            imageAdder.style.display = "none";
+            imageAdder.style.display = "none"
         }
     })
 }
 
 async function onchangeHandler() {
-    await previewImage(this.id);
+    await previewImage(this.id)
 }
 
 async function previewImage(imageId) {
     const fileUploadInput = document.querySelector('.uploader#' + imageId)
     const imagePreviewer = fileUploadInput.parentElement
     if (!fileUploadInput.value) {
-        return;
+        return
     }
     const image = fileUploadInput.files[0]
 
     if (!image.type.includes('image')) {
         addErrorMessage("Only images are allowed!")
-        return;
+        return
     }
 
     if (image.size > 1_000_000) {
         fileUploadInput.value = ''
         addErrorMessage("Maximum upload size is 1MB!")
-        return;
+        return
     }
     const addPhotoIcon = imagePreviewer.querySelector('i')
     imagePreviewer.removeChild(addPhotoIcon)
@@ -65,15 +65,15 @@ async function previewImage(imageId) {
     const id = parseInt(imageId.substring(3))
     if (id > lastLoadedImageId) lastLoadedImageId = id
     allImagesAreLoaded = true
-    const removeButton = createRemoveButton(id);
+    const removeButton = createRemoveButton(id)
     if (removeButton !== null) {
         fileUploadInput.parentNode.appendChild(removeButton)
-        fileUploadInput.parentElement.draggable = true;
+        fileUploadInput.parentElement.draggable = true
     }
 }
 
 function createRemoveButton(id) {
-    if (document.querySelector('i#delete' + id) !== null) return null;
+    if (document.querySelector('i#delete' + id) !== null) return null
     const removeButton = document.createElement('i')
     removeButton.classList.add('material-symbols-outlined')
     removeButton.classList.add('bolder')
@@ -152,27 +152,27 @@ function createAddPhotoIcon() {
     addPhotoIcon.classList.add('bolder')
     addPhotoIcon.classList.add('upload-icon')
     addPhotoIcon.innerText = 'add_a_photo'
-    return addPhotoIcon;
+    return addPhotoIcon
 }
 
 function createImageUploader() {
     const uploadDiv = document.createElement('div')
     uploadDiv.classList.add('photo-upload')
-    uploadDiv.addEventListener('dragstart', handleDragStart);
-    uploadDiv.addEventListener('dragover', handleDragOver);
-    uploadDiv.addEventListener('dragenter', handleDragEnter);
-    uploadDiv.addEventListener('dragleave', handleDragLeave);
-    uploadDiv.addEventListener('dragend', handleDragEnd);
-    uploadDiv.addEventListener('drop', handleDrop);
+    uploadDiv.addEventListener('dragstart', handleDragStart)
+    uploadDiv.addEventListener('dragover', handleDragOver)
+    uploadDiv.addEventListener('dragenter', handleDragEnter)
+    uploadDiv.addEventListener('dragleave', handleDragLeave)
+    uploadDiv.addEventListener('dragend', handleDragEnd)
+    uploadDiv.addEventListener('drop', handleDrop)
 
-    const addPhotoIcon = createAddPhotoIcon();
+    const addPhotoIcon = createAddPhotoIcon()
 
     const uploaderInput = document.createElement('input')
     uploaderInput.type = 'file'
     uploaderInput.name = uploaderInput.id = 'img' + (lastLoadedImageId + 1) //changed
     uploaderInput.classList.add('uploader')
     uploaderInput.accept = 'image/*'
-    uploaderInput.onchange = this.onchangeHandler;
+    uploaderInput.onchange = this.onchangeHandler
 
     const hiddenInput = document.createElement('input')
     hiddenInput.type = "hidden"
@@ -188,51 +188,51 @@ function createImageUploader() {
 
 if(uploadSection){
     uploadSection.querySelectorAll('div.photo-upload').forEach(m => {
-        m.addEventListener('dragstart', handleDragStart);
-        m.addEventListener('dragover', handleDragOver);
-        m.addEventListener('dragenter', handleDragEnter);
-        m.addEventListener('dragleave', handleDragLeave);
-        m.addEventListener('dragend', handleDragEnd);
-        m.addEventListener('drop', handleDrop);
+        m.addEventListener('dragstart', handleDragStart)
+        m.addEventListener('dragover', handleDragOver)
+        m.addEventListener('dragenter', handleDragEnter)
+        m.addEventListener('dragleave', handleDragLeave)
+        m.addEventListener('dragend', handleDragEnd)
+        m.addEventListener('drop', handleDrop)
     })
 
-    let dragSrcEl;
+    let dragSrcEl
 
     function handleDragStart(e) {
-        this.style.opacity = '0.2';
-        dragSrcEl = this;
+        this.style.opacity = '0.2'
+        dragSrcEl = this
     }
 
     function handleDragEnd(e) {
-        this.style.opacity = '0.75';
+        this.style.opacity = '0.75'
         let uploadDivs = uploadSection.querySelectorAll('div.photo-upload')
         uploadDivs.forEach(function (item) {
-            item.classList.remove('over');
-        });
+            item.classList.remove('over')
+        })
     }
 
     function handleDragOver(e) {
-        e.preventDefault();
-        return false;
+        e.preventDefault()
+        return false
     }
 
     function handleDragEnter(e) {
-        this.classList.add('over');
+        this.classList.add('over')
     }
 
     function handleDragLeave(e) {
-        this.classList.remove('over');
+        this.classList.remove('over')
     }
 
     function swap(node1, node2) {
-        const afterNode2 = node2.nextElementSibling;
-        const parent = node2.parentNode;
-        node1.replaceWith(node2);
-        parent.insertBefore(node1, afterNode2);
+        const afterNode2 = node2.nextElementSibling
+        const parent = node2.parentNode
+        node1.replaceWith(node2)
+        parent.insertBefore(node1, afterNode2)
     }
 
     function handleDrop(e) {
-        e.stopPropagation(); // stops the browser from redirecting.
+        e.stopPropagation() // stops the browser from redirecting.
         if (dragSrcEl !== this && this.draggable) {
             const position = dragSrcEl.compareDocumentPosition(this)
             if (position & Node.DOCUMENT_POSITION_FOLLOWING) {
@@ -241,20 +241,20 @@ if(uploadSection){
                 swap(this, dragSrcEl)
             }
             if (this.querySelector('h5')) {
-                const header = this.querySelector('h5');
+                const header = this.querySelector('h5')
                 this.removeChild(header)
-                dragSrcEl.appendChild(header);
+                dragSrcEl.appendChild(header)
                 dragSrcEl.classList.add( "main-photo-upload")
                 this.classList.remove("main-photo-upload")
             } else if (dragSrcEl.querySelector('h5')) {
                 const header = dragSrcEl.querySelector('h5')
                 dragSrcEl.removeChild(header)
-                this.appendChild(header);
+                this.appendChild(header)
                 this.classList.add( "main-photo-upload")
                 dragSrcEl.classList.remove("main-photo-upload")
             }
         }
-        return false;
+        return false
     }
 
 }

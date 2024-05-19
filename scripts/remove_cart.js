@@ -37,6 +37,6 @@ function add_remove_carts(item) {
         icon.innerText = "shopping_cart_off"
         item[i].id = item[i].href.split("=")[1]
         icon.value = item[i].href.split("=")[1]
-        item[i].appendChild(icon);
+        item[i].appendChild(icon)
     }
 }
