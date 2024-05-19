@@ -7,12 +7,14 @@ $session = new Session();
 
 if (!$session->isLoggedIn()) die(header('Location: /'));
 
-require_once(__DIR__ . '/../templates/item.tpl.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../database/user.class.php');
 require_once(__DIR__ . '/../database/item.class.php');
 require_once(__DIR__ . '/../database/tags.class.php');
 require_once(__DIR__ . '/../database/track_item.class.php');
+
+require_once(__DIR__ . '/../templates/common.tpl.php');
+require_once(__DIR__ . '/../templates/item.tpl.php');
 
 $dbh = get_database_connection();
 

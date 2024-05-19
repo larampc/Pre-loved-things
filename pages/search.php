@@ -12,6 +12,8 @@
 
 
     require_once(__DIR__ . '/../templates/item.tpl.php');
+    require_once(__DIR__ . '/../templates/category.tpl.php');
+    require_once(__DIR__ . '/../templates/common.tpl.php');
 
     $dbh = get_database_connection();
     if (!Tag::check_category($dbh, $_GET['category'] ?? "")) {

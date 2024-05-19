@@ -1,7 +1,6 @@
 <?php
 
 declare(strict_types=1);
-require_once(__DIR__ . '/../templates/common.tpl.php');
 ?>
 
 <?php function draw_register_form(bool $checkout, bool $message, string $user, string $item)
