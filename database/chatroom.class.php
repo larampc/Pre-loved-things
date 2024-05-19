@@ -42,14 +42,14 @@ class Chatroom {
     public static function get_unread_message_count(PDO $dbh, string $user_id, string $chatroom_id) : int {
         $stmt = $dbh->prepare('SELECT COUNT(*) FROM messages WHERE chatroom = ? AND sender <> ? AND readTime is NULL');
         $stmt->execute([$chatroom_id, $user_id]);
-        return $stmt->fetchColumn();
+        return intval($stmt->fetchColumn());
     }
     public static function get_last_message(PDO $dbh, string $chatroom_id) : ?Message {
         $stmt = $dbh->prepare('SELECT * FROM messages WHERE chatroom = ? ORDER BY sentTime DESC LIMIT 1');
         $stmt->execute([$chatroom_id]);
         $message = $stmt->fetch();
         if($message === false) return null;
-        return new Message($chatroom_id , $message['sender'] , $message['sentTime'], $message['readTime'], $message['message']);
+        return new Message($chatroom_id , $message['sender'] , intval($message['sentTime']), intval($message['readTime']), $message['message']);
     }
 
     public static function get_chatroom_by_id(PDO $dbh, string $id, string $user) : Chatroom

@@ -26,7 +26,7 @@ class Item {
     public static function create_item(PDO $dbh, array $item): Item
     {
         $new_item = new Item($dbh, $item['id']);
-        $new_item->price = $item['price'] ?? 0.0;
+        $new_item->price = $item['price'] ? floatval($item['price']): 0.0;
         $new_item->description = $item['description'] ?? "";
         $new_item->name = $item['name'] ?? "";
         $new_item->creator = User::get_user($dbh, $item['creator']);
@@ -251,20 +251,20 @@ class Item {
         Tag::remove_item_tags($dbh, $id);
         return true;
     }
-    static function get_number_likes(PDO $dbh, Item $item) {
+    static function get_number_likes(PDO $dbh, Item $item): int {
         $stmt = $dbh->prepare('SELECT count(*) FROM items JOIN favorites ON favorites.item = items.id 
          where items.id = ? ');
         $stmt->execute(array($item->id));
-        return $stmt->fetchColumn();
+        return intval($stmt->fetchColumn());
     }
-    static function get_sell_items(PDO $dbh, string $month) {
+    static function get_sell_items(PDO $dbh, string $month): int {
         $stmt = $dbh->prepare('SELECT COUNT(*) FROM items WHERE date = ?');
         $stmt->execute(array("%/$month/".date("Y", time())));
-        return $stmt->fetchColumn();
+        return intval($stmt->fetchColumn());
     }
-    static function get_buy_items(PDO $dbh, string $month) {
+    static function get_buy_items(PDO $dbh, string $month): int {
         $stmt = $dbh->prepare('SELECT COUNT(*) FROM items JOIN purchases on items.id = purchases.item JOIN purchaseData on purchases.purchase = purchaseData.id WHERE purchaseData.deliveryDate LIKE ?');
         $stmt->execute(array("%/$month/".date("Y", time())));
-        return $stmt->fetchColumn();
+        return intval($stmt->fetchColumn());
     }
 }

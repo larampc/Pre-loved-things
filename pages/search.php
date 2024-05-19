@@ -16,10 +16,6 @@
     require_once(__DIR__ . '/../templates/common.tpl.php');
 
     $dbh = get_database_connection();
-    if (!Tag::check_category($dbh, $_GET['category'] ?? "")) {
-        $session->add_message("error", "Invalid category");
-        die(header('Location: /'));
-    }
     get_header("search", $dbh, $session);
     $categories = Tag::get_categories($dbh);
     draw_page_filters($categories, $dbh, $session);

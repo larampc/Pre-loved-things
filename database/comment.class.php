@@ -15,7 +15,7 @@ class Comment
         $this->to = User::get_user($dbh, $to);
         $this->message = $message;
         $this->date = $date;
-        $this->rating = $rating;
+        $this->rating = intval($rating);
     }
     public static function add_review(PDO $dbh, string $user_id, string $id,string $review, int $rating) {
         $stmt = $dbh->prepare('INSERT INTO comments (id, mainuser, userc, text, rating, date) VALUES (?, ?,?,?,?,?)');
