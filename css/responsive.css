@@ -4,11 +4,11 @@
     position: sticky;
     transition-duration: 0.2s;
 }
-.header-hidden ~ .cart-main  .cart-main .sum {
+.header-hidden ~ .cart-main  .seller .sum {
     top: 2rem;
 }
-.header-visible ~ .cart-main  .cart-main .sum {
-    top: 6rem;
+.header-visible ~ .cart-main  .seller .sum {
+    top: 7rem;
 }
 
 /* USER PAGE */
@@ -349,11 +349,11 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
     }
-    .header-hidden ~ .cart-main  .cart-main .seller-info {
+    .header-hidden ~ .cart-main  .seller .seller-info {
         top: 2rem;
     }
-    .header-visible ~ .cart-main  .cart-amin .seller-info {
-        top: 6rem;
+    .header-visible ~ .cart-main  .seller .seller-info {
+        top: 7rem;
     }
 
     /* USER AND PROFILE PAGE */
@@ -607,11 +607,11 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .cart-main .seller {
         margin: 2rem 1rem;
     }
-    .header-hidden ~ .cart-main .seller-info, .header-hidden ~  .cart-main .sum {
+    .header-hidden ~ .cart-main .seller .seller-info, .header-hidden ~  .cart-main .seller .sum {
         top: 2rem;
     }
-    .header-visible ~ .cart-main .seller-info, .header-visible ~ .cart-main .sum {
-        top: 9rem;
+    .header-visible ~ .cart-main .seller .seller-info, .header-visible ~ .cart-main .seller .sum {
+        top: 10rem;
     }
     .cart-main h2 {
         padding-top: 0;

@@ -366,6 +366,7 @@ main > h2 {
 
 .seller {
     margin: 2rem 3rem;
+    border-bottom-style: solid;
 }
 
 .seller-info {
@@ -396,10 +397,7 @@ main > h2 {
     padding: 0 1rem;
     margin-left: 1rem;
     margin-top: 1rem;
-}
-
-.seller-items {
-    border-bottom-style: solid;
+    margin-bottom: 1rem;
 }
 
 .num-items {
