@@ -31,6 +31,9 @@ We have used the following external libraries:
 - Item Page
 
 ![Screenshot1](screenshots/img.png)
+- Profile Page
+
+![Screenshot1](screenshots/img_8.png)
 - User Page
 
 ![Screenshot1](screenshots/img_3.png)
