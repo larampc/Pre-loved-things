@@ -244,12 +244,12 @@ main > h2 {
     color: var(--accent-primary);
 }
 
-.itemPage header {
+.item-main header {
     height: 4rem;
     width: 100%;
 }
 
-.edit img, .itemPage header > * {
+.edit img, .item-main header > * {
     height: 2rem;
     margin: 1rem 0;
 }
@@ -271,7 +271,7 @@ main > h2 {
     text-align: right;
 }
 
-.itemPage .price {
+.item-main .price {
     font-size: 2rem;
 }
 
@@ -290,12 +290,12 @@ main > h2 {
     height: 2rem;
 }
 
-.itemTags ul {
+.item-tags {
     padding: 0;
     margin: 0;
 }
 
-.itemTags li {
+.item-tags li {
     font-size: 0.7rem;
     margin-right: 0.5rem;
     border-style: solid;
@@ -348,7 +348,7 @@ main > h2 {
 
 /* CART PAGE */
 
-.cartPage .checkout {
+.cart-main .checkout {
     border-style: none;
     color: white;
     background-color: black;
@@ -384,11 +384,11 @@ main > h2 {
     }
 }
 
-.cartPage .item {
+.cart-main .item {
     margin: 1rem;
 }
 
-.cartPage .item-info {
+.cart-main .item-info {
     width: 100%;
     margin-left: 1rem;
 }
@@ -403,6 +403,11 @@ main > h2 {
 
 .seller-items {
     border-bottom-style: solid;
+}
+
+.num-items {
+    text-align: center;
+    font-weight: normal;
 }
 
 /* NEW ITEM PAGE */
@@ -569,7 +574,7 @@ main > h2 {
 
 /* USER PAGE */
 
-.userPage, .pfPage{
+.user-main, .profile-main{
     padding: 0 3rem;
 }
 
@@ -607,7 +612,7 @@ main > h2 {
     }
 }
 
-.userPage .items, .pfPage .items {
+.user-main .items, .profile-main .items {
     width: 24rem;
 }
 
@@ -623,7 +628,7 @@ main > h2 {
     }
 }
 
-.pfPage .display-item > a {
+.profile-main .display-item > a {
     background-color: var(--secondary);
     padding: 0.5rem 0;
     border-radius: 0.5rem;

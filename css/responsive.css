@@ -4,16 +4,16 @@
     position: sticky;
     transition-duration: 0.2s;
 }
-.header-hidden ~ .cart-main  .cartPage .sum {
+.header-hidden ~ .cart-main  .cart-main .sum {
     top: 2rem;
 }
-.header-visible ~ .cart-main  .cartPage .sum {
+.header-visible ~ .cart-main  .cart-main .sum {
     top: 6rem;
 }
 
 /* USER PAGE */
 
-.userPage .comment-box, .pfPage .comment-box {
+.user-main .comment-box, .profile-main .comment-box {
     overflow:auto;
 }
 
@@ -111,7 +111,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     transition: opacity 0.3s ease;
 }
 
-.userPage .items, .pfPage .items {
+.user-main .items, .profile-main .items {
     transition-duration: 500ms;
 }
 
@@ -234,7 +234,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* ITEM PAGE */
 
-    .itemPage {
+    .item-main {
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: auto auto auto auto auto auto;
@@ -265,38 +265,38 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .item-track {
         margin-left: 2rem;
     }
-    .priceSection {
+    .purchase {
         margin-top: 1rem;
     }
-    .itemPage .sendMessage {
+    .item-main .sendMessage {
         width: 8rem;
     }
-    .itemPage .userProfile {
+    .item-main .userProfile {
         margin-right: 0;
     }
 
     /* CART PAGE */
 
-    .cartPage .seller {
+    .cart-main .seller {
         grid-template-columns: auto auto;
         grid-template-areas:
         "seller-info sum"
         "seller-items seller-items";
     }
-    .cartPage .sum {
+    .cart-main .sum {
         align-items: center;
         justify-content: space-between;
     }
-    .cartPage .sum p {
+    .cart-main .sum h4, .cart-main .sum p {
         margin: 0;
     }
-    .cartPage .sum .num-items {
+    .cart-main .sum .num-items {
         grid-area: number-items;
     }
-    .cartPage .sum .sum-price {
+    .cart-main .sum .sum-price {
         grid-area: total;
     }
-    .cartPage .sum .checkout-item {
+    .cart-main .sum .checkout-item {
         grid-area: buy-now;
     }
     .sum {
@@ -315,26 +315,26 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
     }
-    .cartPage .checkout {
+    .cart-main .checkout {
         margin: 0;
     }
-    .cartPage .seller-info {
+    .cart-main .seller-info {
         position: sticky;
         transition-duration: 0.2s;
         background-color: var(--semi-transparent);
         backdrop-filter: blur(5px);
         -webkit-backdrop-filter: blur(5px);
     }
-    .header-hidden ~ .cart-main  .cartPage .seller-info {
+    .header-hidden ~ .cart-main  .cart-main .seller-info {
         top: 2rem;
     }
-    .header-visible ~ .cart-main  .cartPage .seller-info {
+    .header-visible ~ .cart-main  .cart-amin .seller-info {
         top: 6rem;
     }
 
     /* USER AND PROFILE PAGE */
 
-    main .userPage, main .pfPage {
+    .user-main, .profile-main {
         grid-template-columns: auto;
         grid-template-rows: auto auto auto;
         grid-template-areas:
@@ -343,14 +343,14 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         "stats"
         "items";
     }
-    .userPage .feedback, .pfPage .feedback {
+    .user-main .feedback, .profile-main .feedback {
         margin-right: 0;
         margin-bottom: 2rem;
     }
-    .userPage .items, .pfPage .items {
+    .user-main .items, .profile-main .items {
         width: auto;
     }
-    .userPage .user-details, .pfPage .user-details {
+    .user-main .user-details, .profile-main .user-details {
         a {
             display: flex;
             align-items: center;
@@ -564,25 +564,25 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .slider-btns {
         width: 80dvw;
     }
-    .itemPage .price {
+    .item-main .price {
         font-size: 1.5rem;
     }
-    .itemPage {
+    .item-main {
         padding: 0 1rem;
     }
 
     /* CART PAGE */
 
-    .cartPage .seller {
+    .cart-main .seller {
         margin: 2rem 1rem;
     }
-    .header-hidden ~ .cart-main  .cartPage .seller-info, .header-hidden ~ .cart-main  .cartPage .sum {
+    .header-hidden ~ .cart-main .seller-info, .header-hidden ~  .cart-main .sum {
         top: 2rem;
     }
-    .header-visible ~ .cart-main  .cartPage .seller-info, .header-visible ~ .cart-main  .cartPage .sum {
+    .header-visible ~ .cart-main .seller-info, .header-visible ~ .cart-main .sum {
         top: 9rem;
     }
-    main .cartPage h2 {
+    .cart-main h2 {
         padding-top: 0;
     }
     .sum {
@@ -593,16 +593,16 @@ input[type="search"]:focus::-webkit-search-cancel-button {
         "total"
         "buy-now";
     }
-    .cartPage .sum .num-items {
+    .cart-main .sum .num-items {
         flex-grow: 1;
     }
-    .cartPage .sum .sum-price {
+    .cart-main .sum .sum-price {
         grid-area: total;
     }
-    .cartPage .sum .checkout-item {
+    .cart-main .sum .checkout-item {
         grid-area: buy-now;
     }
-    .cartPage .sum p {
+    .cart-main .sum p {
         margin: 0.5rem 0;
     }
     .item img {
@@ -619,13 +619,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* USER AND PROFILE PAGE */
 
-    main .userPage, main .pfPage {
+    .user-main, .profile-main {
         padding: 0 1rem;
     }
-    .userPage .user, .pfPage .user {
+    .user-main .user, .profile-main .user {
         flex-direction: column;
     }
-    .userPage .user-details, .pfPage .user-details {
+    .user-main .user-details, .profile-main .user-details {
         text-align: center;
         h2 {
             margin-bottom: 0.6rem;
@@ -678,7 +678,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* FEEDBACK */
 
-    .userPage .comment .stars, .pfPage .comment .stars {
+    .user-main .comment .stars, .profile-main .comment .stars {
         position: unset;
         right: 0.5rem;
         top: 0.5rem;

@@ -133,7 +133,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* ITEM PAGE */
 
-.itemPage {
+.item-main {
     display: grid;
     grid-template-columns:  auto auto 1fr;
     grid-template-rows:  auto auto auto;
@@ -144,36 +144,37 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     padding: 1rem 3rem 0 3rem;
 }
 
-.itemPage .item-images {
+.item-main .item-images {
     grid-area: picture;
 }
 
-.itemPage .priceSection {
+.item-main .purchase {
     grid-area: priceSection;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.itemPage .description {
+.item-main .description {
     grid-area: description;
 }
 
-.itemPage .sendMessage {
+.item-main .sendMessage {
     grid-area: sendMessage;
 }
 
-.itemPage .buy-item {
+.item-main .buy-item {
     display: flex;
     align-items: center;
 }
 
-.itemPage .itemTags {
+.item-main .item-tags {
     grid-area: tags;
     display: flex;
+    flex-wrap: wrap;
 }
 
-.itemPage header {
+.item-main header {
     grid-area: header;
     display: flex;
     justify-content:space-between;
@@ -182,17 +183,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     }
 }
 
-.itemPage .userProfile {
+.item-main .userProfile {
     grid-area: userProfile;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.itemPage .itemTags ul {
-    display: flex;
-    flex-wrap: wrap;
-}
 
 .slides {
     position: absolute;
@@ -233,11 +230,11 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* CART PAGE */
 
-.cartPage .Buy {
+.cart-main .Buy {
     justify-content: center;
 }
 
-.cartPage .seller {
+.cart-main .seller {
     display: grid;
     grid-template-columns:  2fr 1fr;
     grid-template-rows:  auto auto;
@@ -245,17 +242,17 @@ input[type="search"]:focus::-webkit-search-cancel-button {
                             " seller-items sum";
 }
 
-.cartPage .seller-info {
+.cart-main .seller-info {
     grid-area: seller-info;
     display: flex;
     align-items: center;
 }
 
-.cartPage .item {
+.cart-main .item {
     display: flex;
 }
 
-.cartPage .item-info {
+.cart-main .item-info {
     display:flex;
     flex-direction: column;
     justify-content: space-between;
@@ -268,7 +265,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     justify-content: end;
 }
 
-.cartPage .seller-items {
+.cart-main .seller-items {
     grid-area: seller-items;
 }
 
@@ -277,7 +274,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     justify-content: space-between;
 }
 
-.cartPage p {
+.cart-main p {
     text-align: center;
 }
 
@@ -366,7 +363,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* USER PAGE */
 
-main .userPage{
+.user-main {
     display: grid;
     grid-template-columns:  1fr auto;
     grid-template-rows:  auto auto auto 1fr;
@@ -383,21 +380,21 @@ main .userPage{
     column-gap: 1rem;
 }
 
-.userPage .feedback, .pfPage .feedback {
+.user-main .feedback, .profile-main .feedback {
     grid-area: feedback;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.userPage .user-details, .pfPage .user-details {
+.user-main .user-details, .profile-main .user-details {
     align-self: center;
     a i {
         transform: translateY(25%);
     }
 }
 
-.pfPage .display-item > a {
+.profile-main .display-item > a {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -407,7 +404,7 @@ main .userPage{
     justify-content: center;
 }
 
-.userPage .items, .pfPage .items, .favorite-main .items {
+.user-main .items, .profile-main .items, .favorite-main .items {
     grid-area: items;
     display: flex;
     flex-wrap: wrap;
@@ -415,7 +412,7 @@ main .userPage{
     gap: 1rem
 }
 
-.userPage .comment img, .pfPage .comment img {
+.user-main .comment img, .profile-main .comment img {
     float: left;
 }
 
@@ -682,21 +679,21 @@ main .userPage{
     align-content: center;
 }
 
-.pfPage .items, .userPage .display-item .items{
+.profile-main .items, .user-main .display-item .items{
     display: flex;
     overflow: hidden;
     max-height: 0;
 }
 
-.pfPage .items#my,  .userPage .items#my{
+.profile-main .items#my,  .user-main .items#my{
     max-height: 100%;
 }
 
-.pfPage .collapsible {
+.profile-main .collapsible {
     border-radius: 1rem;
 }
 
-main .pfPage{
+.profile-main {
     display: grid;
     grid-template-columns:  1fr auto;
     grid-template-rows:  auto auto auto 1fr;
@@ -706,11 +703,11 @@ main .pfPage{
                          "none items";
 }
 
-.pfPage .display-item, .userPage .display-item {
+.profile-main .display-item, .user-main .display-item {
     grid-area: items;
 }
 
-.pfPage #curve_chart {
+.profile-main #curve_chart {
     grid-area: stats;
 }
 

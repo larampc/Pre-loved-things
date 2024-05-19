@@ -1,4 +1,4 @@
-const cart_page = document.querySelector('.cartPage')
+const cart_page = document.querySelector('.cart-main')
 if (cart_page) {
     let item = cart_page.querySelectorAll('a.item')
     add_remove_carts(item)
@@ -35,7 +35,8 @@ function add_remove_carts(item) {
         const icon = document.createElement('i');
         icon.className = "material-symbols-outlined";
         icon.innerText = "shopping_cart_off";
-        icon.value = item[i].id;
+        item[i].id = item[i].href.split("=")[1]
+        icon.value = item[i].href.split("=")[1];
         item[i].appendChild(icon);
     }
 }
