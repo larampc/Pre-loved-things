@@ -244,10 +244,10 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                 <div class="buy-form">
                     <div class="options">
                         <label> Credit card
-                            <input class="option" type="radio" name="option" id="credit-card" checked>
+                            <input class="option" type="radio" name="credit-card" checked>
                         </label>
                         <label> Mbway
-                            <input class="option" type="radio" name="option" id="mbway">
+                            <input class="option" type="radio" name="mbway">
                         </label>
                     </div>
                     <div id="credit-card" class="payment-form">
@@ -264,7 +264,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
                                    oninput="this.setCustomValidity('')">
                         </label>
                         <label> Expiration date
-                            <input type="month" name="expire" required>
+                            <input type="month" name="expire" min="<?=date("Y-m", time())?>" required>
                         </label>
                     </div>
                     <div id="mbway" class="payment-form">
