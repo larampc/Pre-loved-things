@@ -8,8 +8,8 @@ function upload_user_image($img) : string {
 
     $tempFileName = $_FILES[$img]['tmp_name'];
 
-    $original = @imagecreatefromjpeg($tempFileName);
-    if (!$original) $original = @imagecreatefrompng($tempFileName);
+    $original = @imagecreatefrompng($tempFileName);
+    if (!$original) $original = @imagecreatefromjpeg($tempFileName);
     if (!$original) $original = @imagecreatefromgif($tempFileName);
 
     if (!$original) die('Unknown image format!');
@@ -26,7 +26,7 @@ function upload_user_image($img) : string {
 
     $small = imagecreatetruecolor(200, 200);
     imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
-    imagejpeg($small, $FileName);
+    imagepng($small, $FileName);
     return $id;
 }
 
@@ -39,8 +39,8 @@ function upload_item_image($img) : string {
 
     // Create an image representation of the original image
     // @ before function is to prevent warning messages
-    $original = @imagecreatefromjpeg($tempFileName);
-    if (!$original) $original = @imagecreatefrompng($tempFileName);
+    $original = @imagecreatefrompng($tempFileName);
+    if (!$original) $original = @imagecreatefromjpeg($tempFileName);
     if (!$original) $original = @imagecreatefromgif($tempFileName);
 
     if (!$original) die('Unknown image format!');
@@ -65,7 +65,7 @@ function upload_item_image($img) : string {
     // Create and save a small square thumbnail
     $small = imagecreatetruecolor(200, 200);
     imagecopyresized($small, $original, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
-    imagejpeg($small, $thumbnailFileName);
+    imagepng($small, $thumbnailFileName);
 
     // Calculate width and height of medium sized image (max width: 400)
     $medium_width = $width;
@@ -78,7 +78,7 @@ function upload_item_image($img) : string {
     // Create and save a medium image
     $medium = imagecreatetruecolor($medium_width, $medium_height);
     imagecopyresized($medium, $original, 0, 0, 0, 0, $medium_width, $medium_height, $width, $height);
-    imagejpeg($medium, $mediumFileName);
+    imagepng($medium, $mediumFileName);
     return $id;
 }
 
