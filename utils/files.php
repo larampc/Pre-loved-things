@@ -8,8 +8,8 @@ function upload_user_image($img) : string {
 
     $tempFileName = $_FILES[$img]['tmp_name'];
 
-    $original = @imagecreatefromjpeg($tempFileName);
-    if (!$original) $original = @imagecreatefrompng($tempFileName);
+    $original = @imagecreatefrompng($tempFileName);
+    if (!$original) $original = @imagecreatefromjpeg($tempFileName);
     if (!$original) $original = @imagecreatefromgif($tempFileName);
 
     if (!$original) die('Unknown image format!');
@@ -39,8 +39,8 @@ function upload_item_image($img) : string {
 
     // Create an image representation of the original image
     // @ before function is to prevent warning messages
-    $original = @imagecreatefromjpeg($tempFileName);
-    if (!$original) $original = @imagecreatefrompng($tempFileName);
+    $original = @imagecreatefrompng($tempFileName);
+    if (!$original) $original = @imagecreatefromjpeg($tempFileName);
     if (!$original) $original = @imagecreatefromgif($tempFileName);
 
     if (!$original) die('Unknown image format!');
