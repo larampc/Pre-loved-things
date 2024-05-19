@@ -14,27 +14,59 @@ async function openNav(option) {
         if (buttons[j].classList.contains(option)) buttons[j].style.border = "2px solid #D9D9D9";
         else buttons[j].style.border = "none";
     }
-    document.querySelector(".display-item").lastElementChild.remove()
-    await draw_pagination();
+    await get_pagination();
     await updatePage();
 }
 
-async function draw_pagination() {
+async function get_pagination() {
     const response_max = await fetch('../api/api_get_max_page.php?' + encodeForAjax({nav: currentNav, user: (user?user:"")}));
     maxPage = await response_max.json();
+}
+
+async function draw_pagination() {
+    document.querySelector(".display-item nav")?.remove()
     const nav = document.createElement("nav");
     nav.className = "pagination"
-    for (let i = 1; i <= maxPage; i++) {
+    if (page-2 > 1) {
+        const number = document.createElement("a");
+        number.innerHTML = "1";
+        number.className = "page-number"
+        number.id = "1";
+        number.addEventListener("click", async () => {
+            page = 1;
+            await updatePage();
+        })
+        nav.appendChild(number);
+        const ellips = document.createElement("a");
+        ellips.innerHTML = "..."
+        nav.appendChild(ellips)
+    }
+    for (let i = Math.max(1, page-2); i <= Math.min(maxPage, page+2); i++) {
         const number = document.createElement("a");
         number.innerHTML = i.toString();
         number.className = "page-number"
         number.id = i.toString();
-        if (i === 1) number.classList.add("current");
+        if (i === page) number.classList.add("current");
         number.addEventListener("click", async () => {
             page = i;
             await updatePage();
         })
         nav.appendChild(number);
+    }
+    if (page+2 < maxPage) {
+        const ellips = document.createElement("a");
+        ellips.innerHTML = "..."
+        nav.appendChild(ellips)
+        const number = document.createElement("a");
+        number.innerHTML = maxPage.toString();
+        number.className = "page-number"
+        number.id = maxPage.toString();
+        number.addEventListener("click", async () => {
+            page = maxPage;
+            await updatePage();
+        })
+        nav.appendChild(number);
+
     }
     document.querySelector(".display-item").appendChild(nav);
 }
@@ -52,6 +84,7 @@ next.addEventListener("click", async () => {
 })
 
 async function updatePage() {
+    await draw_pagination();
     if (page === 1) previous.style.visibility = "hidden";
     if (page >= maxPage) next.style.visibility = "hidden"
     if (page < maxPage) next.style.visibility = "visible"
@@ -110,4 +143,4 @@ async function drawItem(item, currency) {
     return main;
 }
 
-draw_pagination().then(() => updatePage());
+get_pagination().then(() => draw_pagination().then(() => updatePage()))
