@@ -8,11 +8,9 @@
 
 ## Install Instructions
 
-(adapt this)
-
     git clone https://github.com/FEUP-LTW-2024/ltw-project-2024-ltw15g05.git
     git checkout final-delivery-v1
-    sqlite database/preloved.db < database/preloved.sql
+    sqlite3 data/preloved.db < sql/preloved.sql
     php -S localhost:9000
 
 ## External Libraries
@@ -61,7 +59,7 @@ We have been careful with the following security aspects:
 - [x] **Cross-Site Scripting (XSS)**
 - [x] **Cross-Site Request Forgery (CSRF)**
 
-**Password Storage Mechanism**: md5 / sha1 / sha256 / hash_password&verify_password
+**Password Storage Mechanism**: hash_password&verify_password
 
 **Aditional Requirements**:
 

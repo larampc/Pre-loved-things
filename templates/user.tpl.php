@@ -104,7 +104,7 @@ function draw_stars ($rating) : void {
     <?php }
 }
 
-function draw_user_feedback($user, $feedback, Session $session) { ?>
+function draw_user_feedback(User $user, array $feedback, Session $session) { ?>
     <div class="feedback">
         <section class="feedback-sum">
             <h2>Feedback</h2>

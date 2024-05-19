@@ -1,6 +1,4 @@
 <?php declare(strict_types = 1);
-require_once (__DIR__ . '/../utils/logger.php');
-
 function draw_item(Item $item, Currency $user_currency) { ?>
     <a href="../pages/item.php?id=<?= $item->id ?>" class="item">
         <img src="../uploads/medium/<?=$item->mainImage?>.png" alt="item photo">
