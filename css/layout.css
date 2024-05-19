@@ -133,7 +133,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 /* ITEM PAGE */
 
-.itemPage {
+.item-main {
     display: grid;
     grid-template-columns:  auto auto 1fr;
     grid-template-rows:  auto auto auto;
@@ -144,36 +144,37 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     padding: 1rem 3rem 0 3rem;
 }
 
-.itemPage .item-images {
+.item-main .item-images {
     grid-area: picture;
 }
 
-.itemPage .priceSection {
+.item-main .purchase {
     grid-area: priceSection;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.itemPage .description {
+.item-main .description {
     grid-area: description;
 }
 
-.itemPage .sendMessage {
+.item-main .sendMessage {
     grid-area: sendMessage;
 }
 
-.itemPage .buy-item {
+.item-main .buy-item {
     display: flex;
     align-items: center;
 }
 
-.itemPage .itemTags {
+.item-main .item-tags {
     grid-area: tags;
     display: flex;
+    flex-wrap: wrap;
 }
 
-.itemPage header {
+.item-main header {
     grid-area: header;
     display: flex;
     justify-content:space-between;
@@ -182,17 +183,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     }
 }
 
-.itemPage .userProfile {
+.item-main .userProfile {
     grid-area: userProfile;
     display: flex;
     justify-content: flex-end;
     align-items: center;
 }
 
-.itemPage .itemTags ul {
-    display: flex;
-    flex-wrap: wrap;
-}
 
 .slides {
     position: absolute;

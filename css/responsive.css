@@ -234,7 +234,7 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
     /* ITEM PAGE */
 
-    .itemPage {
+    .item-page {
         display: grid;
         grid-template-columns: auto 1fr;
         grid-template-rows: auto auto auto auto auto auto;
@@ -265,13 +265,13 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .item-track {
         margin-left: 2rem;
     }
-    .priceSection {
+    .purchase {
         margin-top: 1rem;
     }
-    .itemPage .sendMessage {
+    .item-page .sendMessage {
         width: 8rem;
     }
-    .itemPage .userProfile {
+    .item-page .userProfile {
         margin-right: 0;
     }
 
@@ -564,10 +564,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
     .slider-btns {
         width: 80dvw;
     }
-    .itemPage .price {
+    .item-main .price {
         font-size: 1.5rem;
     }
-    .itemPage {
+    .item-main {
         padding: 0 1rem;
     }
 

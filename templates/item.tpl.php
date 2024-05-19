@@ -40,11 +40,11 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
                     <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
                 </div>
             <?php } ?>
-            <section class="dots">
+            <div class="dots">
                 <?php for($i = 0; $i < sizeof($items); $i++) { ?>
                     <div class="dot" style="opacity: 0.2;"></div>
                 <?php } ?>
-            </section>
+            </div>
             <?php foreach($items as $item) {
                 ?>
                 <a href="../pages/item.php?id=<?= $item->id ?>" class="slides item" id="<?=$item->id?>">
@@ -62,11 +62,11 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
 <?php } ?>
 
 <?php function draw_item_images(array $images) { ?>
-    <section class="dots">
+    <div class="dots">
     <?php for($i = 0; $i < sizeof($images); $i++) { ?>
         <div class="dot" style="opacity: 0.2;"></div>
     <?php } ?>
-    </section>
+    </div>
     <?php foreach($images as $image) { ?>
         <img class="slides" src="../uploads/medium/<?=$image?>.png" alt="item">
     <?php } ?>
@@ -75,80 +75,72 @@ function draw_sliding_items(array $items, Currency $user_currency) { ?>
 <?php function draw_item_page(PDO $db, Item $item, Session $session, Currency $user_currency) { ?>
     <script src="../scripts/like.js" defer></script>
     <script src="../scripts/add_cart.js" defer></script>
-    <article class="itemPage">
-        <header>
-            <h2><?=$item->name?></h2>
-            <?php if ($item->sold === false) { ?>
-                <?php if ($session->isLoggedIn() && $item->creator->user_id === $session->getId()) { ?>
-                    <form method="post" action="../pages/edit_item.php">
-                        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                        <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
-                    </form>
-                <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
-                    <div class="like">
-                        <button value="<?=$item->id?>" class="material-symbols-outlined big <?= Item::check_favorite($db, $session->getId(), $item)? "filled": ""?>"> favorite </button>
-                        <p>Liked by <?=Item::get_number_likes($db, $item)?></p>
-                    </div> <?php } ?>
-            <?php }
-            if ($session->isLoggedIn() && ($session->is_admin() || $session->getId() == $item->creator->user_id)) { ?>
-                <form method="post" action="../actions/action_remove_item.php" class="confirmation">
+    <header>
+        <h2><?=$item->name?></h2>
+        <?php if ($item->sold === false) { ?>
+            <?php if ($session->isLoggedIn() && $item->creator->user_id === $session->getId()) { ?>
+                <form method="post" action="../pages/edit_item.php">
                     <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
-                    <script src="../scripts/user_actions.js" defer></script>
-                    <button title="Remove item" type="submit" value="<?=$item->id?>" name="remove-item" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
-                    </button>
+                    <button type="submit" value="<?=$item->id?>" name="edit-item" class="edit" ><i class="material-symbols-outlined big"> edit </i></button>
                 </form>
-            <?php } ?>
-        </header>
-        <div class="item-images">
-            <?php if (count($item->images) > 1) { ?>
-                <div class="slider-btns">
-                    <i class="material-symbols-outlined notSelectable" id="prev-btn"> chevron_left </i>
-                    <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
-                </div>
-            <?php } ?>
-            <div class="image-slide">
-                <?php draw_item_images($item->images) ?>
-            </div>
-        </div>
-        <script src="../scripts/slide.js" defer></script>
-        <section class="description">
-            <p><?= $item->description ?></p>
-        </section>
-        <section class="priceSection">
-            <span class="price"><?= round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></span>
-            <?php if ($item->sold === false) { ?>
-                <section class="buy-item">
-                    <i class="material-symbols-outlined cart big"> local_mall </i>
-                    <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator->user_id) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
-                </section>
-            <?php } ?>
-        </section>
-        <?php if( $item->creator->user_id !== $session->getId()) { ?>
-        <section class="sendMessage">
-            <form method="get" action="../pages/inbox.php">
-                <label>
-                    <button class="sendMessage-btn" type="submit">Send Message</button>
-                </label>
-                <input type="hidden" name="user_id" value="<?=$item->creator->user_id?>">
-                <input type="hidden" name="item_id" value="<?=$item->id?>">
+            <?php } if ($session->isLoggedIn() && $item->creator->user_id !== $session->getId()) { ?>
+                <div class="like">
+                    <button value="<?=$item->id?>" class="material-symbols-outlined big <?= Item::check_favorite($db, $session->getId(), $item)? "filled": ""?>"> favorite </button>
+                    <p>Liked by <?=Item::get_number_likes($db, $item)?></p>
+                </div> <?php } ?>
+        <?php }
+        if ($session->isLoggedIn() && ($session->is_admin() || $session->getId() == $item->creator->user_id)) { ?>
+            <form method="post" action="../actions/action_remove_item.php" class="confirmation">
+                <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+                <script src="../scripts/user_actions.js" defer></script>
+                <button title="Remove item" type="submit" value="<?=$item->id?>" name="remove-item" class="role confirm-action"><i class="material-symbols-outlined big"> delete </i>
+                </button>
             </form>
-        </section>
-        <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator->user_id?>"><?=$item->creator->name?>
-            <img src="../uploads/profile_pics/<?=$item->creator->image?>.png" class="profile-picture" alt="profile picture">
-        </a>
         <?php } ?>
-        <section class="itemTags">
-            <ul>
-                <?php if ($item->category) { ?>
-                <li>
-                    Category: <?=$item->category?>
-                </li> <?php } ?>
-                <?php foreach($item->tags as $tag) { ?>
-                    <li><?= $tag['tag'] . ': ' . $tag['data']?> </li>
-                <?php } ?>
-            </ul>
-        </section>
-    </article>
+    </header>
+    <div class="item-images">
+        <?php if (count($item->images) > 1) { ?>
+            <div class="slider-btns">
+                <i class="material-symbols-outlined notSelectable" id="prev-btn"> chevron_left </i>
+                <i class="material-symbols-outlined notSelectable" id="next-btn"> chevron_right </i>
+            </div>
+        <?php } ?>
+        <div class="image-slide">
+            <?php draw_item_images($item->images) ?>
+        </div>
+    </div>
+    <script src="../scripts/slide.js" defer></script>
+    <p class="description"><?= $item->description ?></p>
+    <section class="purchase">
+        <h2 class="price"><?= round($item->price * $user_currency->conversion,2) . $user_currency->symbol?></h2>
+        <?php if ($item->sold === false) { ?>
+            <div class="buy-item">
+                <i class="material-symbols-outlined cart big"> local_mall </i>
+                <button value="<?=$item->id?>" class="Buy"><?=($session->isLoggedIn() && $session->getId() == $item->creator->user_id) ? "You own this product" : (($session->isLoggedIn() && Item::check_cart($db, $session->getId(), $item) || ($session->hasItemsCart() && in_array($item->id, $session->getCart())))?  "Already in cart" : "Buy now!")?></button>
+            </div>
+        <?php } ?>
+    </section>
+    <?php if( $item->creator->user_id !== $session->getId()) { ?>
+    <form method="get" action="../pages/inbox.php" class="send-message">
+        <label>
+            <button class="sendMessage-btn" type="submit">Send Message</button>
+        </label>
+        <input type="hidden" name="user_id" value="<?=$item->creator->user_id?>">
+        <input type="hidden" name="item_id" value="<?=$item->id?>">
+    </form>
+    <a class="userProfile" href="../pages/user.php?user_id=<?=$item->creator->user_id?>"><?=$item->creator->name?>
+        <img src="../uploads/profile_pics/<?=$item->creator->image?>.png" class="profile-picture" alt="profile picture">
+    </a>
+    <?php } ?>
+    <ul class="item-tags">
+        <?php if ($item->category) { ?>
+        <li>
+            Category: <?=$item->category?>
+        </li> <?php } ?>
+        <?php foreach($item->tags as $tag) { ?>
+            <li><?= $tag['tag'] . ': ' . $tag['data']?> </li>
+        <?php } ?>
+    </ul>
 <?php }
 
 function draw_new_item_form(PDO $db, array $categories) { ?>
