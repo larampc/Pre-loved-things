@@ -201,16 +201,6 @@ if(uploadSection){
     function handleDragStart(e) {
         this.style.opacity = '0.2';
         dragSrcEl = this;
-        // e.dataTransfer.effectAllowed = 'move';
-        // e.dataTransfer.setData('text/inputID', this.querySelector('.uploader').id);
-        // e.dataTransfer.setData('text/inputName', this.querySelector('.uploader').name);
-        // e.dataTransfer.setData('text/deleteID', this.querySelector('.delete-icon').id);
-        // e.dataTransfer.setData('text/class', this.className);
-        // const hiddenInput = this.querySelector('input[type=hidden]')
-        // if(hiddenInput) {
-        //     e.dataTransfer.setData('text/hiddenName', hiddenInput.name)
-        //     e.dataTransfer.setData('text/hiddenValue', hiddenInput.value)
-        // }
     }
 
     function handleDragEnd(e) {
@@ -244,22 +234,12 @@ if(uploadSection){
     function handleDrop(e) {
         e.stopPropagation(); // stops the browser from redirecting.
         if (dragSrcEl !== this && this.draggable) {
-            // dragSrcEl.querySelector('.uploader').id = this.querySelector('.uploader').id;
-            // dragSrcEl.querySelector('.uploader').name = this.querySelector('.uploader').name;
-            // dragSrcEl.querySelector('.delete-icon').id = this.querySelector('.delete-icon').id;
-            // dragSrcEl.className = this.className;
             const position = dragSrcEl.compareDocumentPosition(this)
             if (position & Node.DOCUMENT_POSITION_FOLLOWING) {
                 swap(dragSrcEl, this)
             } else if (position & Node.DOCUMENT_POSITION_PRECEDING) {
                 swap(this, dragSrcEl)
             }
-
-            // this.querySelector('.uploader').id = e.dataTransfer.getData('text/inputID');
-            // this.querySelector('.uploader').name = e.dataTransfer.getData('text/inputName');
-            // this.querySelector('.delete-icon').id = e.dataTransfer.getData('text/deleteID');
-            // this.className = e.dataTransfer.getData('text/class');
-
             if (this.querySelector('h5')) {
                 const header = this.querySelector('h5');
                 this.removeChild(header)
@@ -273,15 +253,6 @@ if(uploadSection){
                 this.classList.add( "main-photo-upload")
                 dragSrcEl.classList.remove("main-photo-upload")
             }
-            //
-            // for (let i = 1; i <= lastLoadedImageId; i++) {
-            //     this.parentElement.appendChild(this.parentElement.querySelector('#img' + i).parentElement);
-            // }
-            //
-            // if (!this.parentElement.querySelector('.photo-upload').draggable) {
-            //     this.parentElement.appendChild(this.parentElement.querySelector('.photo-upload'));
-            // }
-            // this.parentElement.appendChild(this.parentElement.querySelector('.image-upload-adder'));
         }
         return false;
     }

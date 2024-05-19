@@ -657,15 +657,15 @@ main > h2 {
     text-align: center;
 }
 
-.comment-box::-webkit-scrollbar {
+.comment-box::-webkit-scrollbar, .navbar::-webkit-scrollbar {
     width: 20px;
 }
 
-.comment-box::-webkit-scrollbar-track {
+.comment-box::-webkit-scrollbar-track, .navbar::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-.comment-box::-webkit-scrollbar-thumb {
+.comment-box::-webkit-scrollbar-thumb, .navbar::-webkit-scrollbar-thumb {
     background: var(--scroll-background-secondary);
     border-radius: 20px;
     border: 6px solid transparent;
@@ -687,8 +687,11 @@ main > h2 {
     word-break: break-word;
 }
 
-.display-item .navbar {
+.navbar {
     text-align: center;
+    width: 24rem;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .navOption.my {

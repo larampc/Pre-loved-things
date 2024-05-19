@@ -704,6 +704,10 @@ input[type="search"]:focus::-webkit-search-cancel-button {
 
 .profile-main .display-item, .user-main .display-item {
     grid-area: items;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: auto;
 }
 
 .profile-main #curve_chart {
