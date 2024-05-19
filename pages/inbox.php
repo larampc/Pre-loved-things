@@ -14,7 +14,6 @@
     require_once(__DIR__ . '/../database/user.class.php');
     require_once(__DIR__ . '/../database/tags.class.php');
 
-    require_once(__DIR__ . '/../templates/messages.tpl.php');
     require_once(__DIR__ . '/../templates/common.tpl.php');
     require_once(__DIR__ . '/../templates/chatroom.tpl.php');
 
