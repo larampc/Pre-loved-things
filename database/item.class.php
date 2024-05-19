@@ -84,8 +84,8 @@ class Item {
     }
 
     static function get_user_items(PDO $dbh, string $user_id, int $page = 1): array {
-        $page = 5 * ($page - 1);
-        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ? AND sold = 0 LIMIT 5 OFFSET ?');
+        $page = 6 * ($page - 1);
+        $stmt = $dbh->prepare('SELECT * FROM items WHERE creator = ? AND sold = 0 LIMIT 6 OFFSET ?');
         $stmt->execute(array($user_id, $page));
         return self::create_items($dbh, $stmt->fetchAll());
     }

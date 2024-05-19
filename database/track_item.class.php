@@ -33,8 +33,8 @@ class TrackItem {
         return new TrackItem($dbh, $stmt->fetch());
     }
     public static function get_pending_purchases_items(PDO $dbh, string $buyer, int $page) : array {
-        $page = 5 * ($page - 1);
-        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase WHERE purchaseData.buyer = ? AND purchaseData.state <> ? LIMIT 5 OFFSET ? ');
+        $page = 6 * ($page - 1);
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase WHERE purchaseData.buyer = ? AND purchaseData.state <> ? LIMIT 6 OFFSET ? ');
         $stmt->execute(array($buyer, "delivered", $page));
         $items = $stmt->fetchAll();
         $result = array();
@@ -66,8 +66,8 @@ class TrackItem {
         return intval($stmt->fetchColumn());
     }
     public static function get_pending_sales_items(PDO $dbh, string $seller, int $page) : array {
-        $page = 5 * ($page - 1);
-        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ? AND purchaseData.state <> ? LIMIT 5 OFFSET ? ');
+        $page = 6 * ($page - 1);
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ? AND purchaseData.state <> ? LIMIT 6 OFFSET ? ');
         $stmt->execute(array($seller, "delivered", $page));
         $items = $stmt->fetchAll();
         $result = array();
@@ -83,8 +83,8 @@ class TrackItem {
         return intval($stmt->fetchColumn());
     }
     public static function get_sold_items(PDO $dbh, string $seller, int $page) : array {
-        $page = 5 * ($page - 1);
-        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ? AND purchaseData.state = ? LIMIT 5 OFFSET ? ');
+        $page = 6 * ($page - 1);
+        $stmt = $dbh->prepare('SELECT purchases.item FROM purchaseData join purchases on purchaseData.id = purchases.purchase join items on purchases.item = items.id WHERE items.creator = ? AND purchaseData.state = ? LIMIT 6 OFFSET ? ');
         $stmt->execute(array($seller, "delivered", $page));
         $items = $stmt->fetchAll();
         $result = array();
