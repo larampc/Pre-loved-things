@@ -173,9 +173,9 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                         $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
                         if ($options) { ?>
                             <label><?=$tag['tag']?>
-                                <select name="<?=$tag['id']?>"  <?=$category['category'] ? "":"required" ?>>
+                                <select name="<?=$tag['id']?>">
                                     <?php if ($category['category']) { ?>
-                                        <option value=""></option>
+                                        <option value="">None</option>
                                     <?php }
                                 foreach ($options as $option) { ?>
                                     <option value="<?=$option['value']?>"><?=$option['value']?></option>
@@ -184,7 +184,7 @@ function draw_new_item_form(PDO $db, array $categories) { ?>
                             </label>
                         <?php }
                         else { ?>
-                            <label for="<?=$tag['id']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['id']?>" name="<?=$tag['id']?>" <?=$category['category'] ? "":"required" ?>>
+                            <label for="<?=$tag['id']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['id']?>" name="<?=$tag['id']?>">
                         <?php }
                     } ?>
                 </div>
@@ -237,9 +237,9 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                             $options = Tag::get_tag_options($db, $category['category'], $tag['tag']);
                             if ($options) { ?>
                                 <label><?=$tag['tag']?>
-                                    <select name="<?=$tag['id']?>"  <?=$category['category'] ? "":"required" ?>>
+                                    <select name="<?=$tag['id']?>">
                                         <?php if ($category['category']) { ?>
-                                            <option value=""></option>
+                                            <option value="">None</option>
                                         <?php }
                                         foreach ($options as $option) { ?>
                                             <option value="<?=$option['value']?>" <?=Tag::get_tag_value_item($db, $tag['id'], $item->id) == $option['value']? "selected": ""?>><?=$option['value']?></option>
@@ -248,7 +248,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                                 </label>
                             <?php }
                             else { ?>
-                                <label for="<?=$tag['id']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['id']?>" name="<?=$tag['id']?>" <?=$category['category'] ? "":"required" ?> value="<?=Tag::get_tag_value_item($db, $tag['id'], $item->id)?>">
+                                <label for="<?=$tag['id']?>"><?=$tag['tag']?></label><input type="text" id="<?=$tag['id']?>" name="<?=$tag['id']?>" value="<?=Tag::get_tag_value_item($db, $tag['id'], $item->id)?>">
                             <?php }
                         } ?>
                     </div>
@@ -264,7 +264,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                 <h4>Upload Images</h4>
                 <div class="photo-upload main-photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $item->mainImage . ".png" ?>)">
                     <h5>Main Image</h5>
-                    <input type="file" id="img1" class="uploader" name="img1" accept="image/*" value="<?=$item->mainImage?>" required onchange="previewImage(this.id)">
+                    <input type="file" id="img1" class="uploader" name="img1" accept="image/*" required onchange="previewImage(this.id)">
                     <input type="hidden" class="image-data" value="<?=$item->mainImage?>" name="<?="hiddenimg1"?>">
                     <i class="material-symbols-outlined bolder delete-icon" id="delete1" onclick="shiftImages.bind(this)()">delete</i>
                 </div>
@@ -272,7 +272,7 @@ function draw_edit_item_form(PDO $db, Session $session, Item $item, array $categ
                     $images = $item->images;
                     for ($i = 1; $i < count( $images); $i++) { ?>
                         <div class="photo-upload" style="background-image: url(<?="../uploads/thumbnails/" . $images[$i] . ".png" ?>)">
-                            <input type="file" id="<?="img" . ($i+1)?>" value="<?=$images[$i]?>" class="uploader" name="<?="img" . ($i+1)?>" accept="image/*" onchange="previewImage(this.id)">
+                            <input type="file" id="<?="img" . ($i+1)?>" class="uploader" name="<?="img" . ($i+1)?>" accept="image/*" onchange="previewImage(this.id)">
                             <input type="hidden" class="image-data" value="<?=$images[$i]?>" name="<?="hiddenimg" . ($i+1)?>">
                             <i class="material-symbols-outlined bolder delete-icon" id="<?= "delete" . ($i+1)?>" onclick="shiftImages.bind(this)()">delete</i>
                         </div>
