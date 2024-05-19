@@ -142,9 +142,9 @@ INSERT INTO images VALUES
     ('1'); --flower.png
 
 INSERT INTO item_images (item, image) VALUES
-    ('1','1'),
+    ('1','8d9a9cff-adc6-4aa3-81e4-efbe3b3da086'),
     ('2','1'),
-    ('3','1'),
+    ('3','857b288f-10ff-4c54-ac4a-030ff7e01411'),
     ('4','1'),
     ('5','1f53c0a8-d4e1-4209-b968-78a152ff4f65'),
     ('6','143764f6-17d3-4889-8c86-5c391c984775'),
@@ -283,9 +283,9 @@ INSERT INTO users (user_id, password, name, email, phone, username, role, curren
 
 INSERT INTO items (id, name, price, date, description, creator, mainImage, category, sold)
 VALUES
-    ('1','Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', '1','1', 'music', 1),
+    ('1','Guitar', 299.99, '2024-04-10', 'Classic electric guitar.', '1','8d9a9cff-adc6-4aa3-81e4-efbe3b3da086', 'music', 1),
     ('2','Laptop', 899.99, '2024-04-10', 'High-performance laptop.', '2','1', 'technology', 1),
-    ('3','Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', '3','1', 'technology', 1),
+    ('3','Watch', 199.99, '2024-04-10', 'Luxury watch with timeless design.', '3','857b288f-10ff-4c54-ac4a-030ff7e01411', 'technology', 1),
     ('4','Bicycle', 399.00, '2024-04-10', 'Mountain bike for all terrains.', '4','1', 'sports', 1),
     ('5','Camera', 499.50, '2024-04-10', 'Great DSLR camera for beginners.', '5','1f53c0a8-d4e1-4209-b968-78a152ff4f65', '', 0),
     ('6','Smartphone', 599.99, '2024-04-10', 'Latest smartphone with advanced features.', '6','143764f6-17d3-4889-8c86-5c391c984775', 'technology', 0),
