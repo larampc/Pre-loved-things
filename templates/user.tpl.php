@@ -1,19 +1,20 @@
 <?php
 declare(strict_types=1);
+require_once (__DIR__ . "/../utils/logger.php");
 
-function draw_user_profile(PDO $dbh, User $user, array $feedback, array $items, Session $session, Currency $user_currency) { ?>
+function draw_user_profile(PDO $dbh, User $user, array $feedback, Session $session) { ?>
         <script src="../scripts/user_actions.js" defer></script>
         <script src="../scripts/profile_nav.js" defer></script>
     <?php
         draw_user_details($user, $session);
-        draw_user_feedback($dbh, $user, $feedback, $session); ?>
+        draw_user_feedback($user, $feedback, $session); ?>
         <?php if ($session->get_id() === $user->user_id || ($session-> is_logged_in() && $session->is_admin())) { ?>
             <div id="curve_chart"></div>
             <script src="https://www.gstatic.com/charts/loader.js"></script>
             <input type="hidden" class="chart-user" value="<?=$user->user_id?>">
             <script src="../scripts/draw_chart_user.js"></script>
             <?php
-            draw_user_options($dbh, $user, $session, $user_currency);
+            draw_user_options($user, $session);
         } else  { ?>
             <div class="display-item">
                 <div class="slider-btns">
@@ -105,15 +106,16 @@ function draw_stars ($rating) : void {
     <?php }
 }
 
-function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
+function draw_user_feedback($user, $feedback, Session $session) { ?>
     <div class="feedback">
         <section class="feedback-sum">
             <h2>Feedback</h2>
             <div class="stars">
-                <?php $avg = floatval(Comment::get_user_average($dbh, $user->user_id));
-                $average = round($avg);
-                draw_stars($average);
-               ?> <p><?=round($avg, 2)?> out of <?=Comment::get_number_comments($dbh, $user->user_id)?> ratings</p>
+                <?php $avg = 0;
+                foreach ($feedback as $comment) { $avg += $comment->rating; }
+                $avg /= count($feedback);
+                draw_stars(round($avg));
+               ?> <p><?=round($avg, 2)?> out of <?=count($feedback);?> ratings</p>
             </div>
         </section>
             <div class ="comment-box">
@@ -161,7 +163,7 @@ function draw_user_feedback(PDO $dbh, $user, $feedback, Session $session) { ?>
     </div>
 <?php } ?>
 
-<?php  function draw_user_options(PDO $dbh, User $user, Session $session, Currency $user_currency) { ?>
+<?php  function draw_user_options(User $user, Session $session) { ?>
     <div class="display-item">
         <?php if ($user->user_id === $session->get_id()) {?>
             <a href="../pages/new.php" class="new-item"><i class="material-symbols-outlined bold">library_add</i> New item </a>

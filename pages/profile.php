@@ -29,5 +29,5 @@
     $feedback = User::get_user_feedback($dbh, $session->get_id());
     $items = Item::get_user_items($dbh, $session->get_id());
 
-    draw_user_profile($dbh, $user, $feedback, $items, $session, $user_currency);
+    draw_user_profile($dbh, $user, $feedback, $session);
     draw_footer();
