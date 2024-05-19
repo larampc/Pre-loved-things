@@ -4,6 +4,8 @@ async function updateUserChatrooms(chatroom_id) {
     const inbox = document.querySelector('section.chat-rooms')
     const chat = document.getElementById('chat' + chatroom_id)
     const response = await fetch('../api/api_get_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroom_id}))
+    console.log(response.url)
+
     const chatroom = await response.json()
     const removed = inbox.removeChild(chat)
     inbox.insertBefore(removed, inbox.firstChild)
@@ -18,11 +20,15 @@ async function handleTemporary() {
     const sendMessageButton = document.querySelector('.chat-page button.send-icon')
     const temporary = document.querySelector('.temporary')
     const user_response = await fetch('../api/api_user.php')
+    console.log(user_response.url)
+
     const user = await user_response.json()
     const text = sendMessageInput.value.trim()
     if (!text.length) return
     const id = temporary.id.split('&')
     const response = await fetch('../api/api_register_chatroom.php?' + encodeForAjax({item_id: id[1], seller_id: id[0]}))
+    console.log(response.url)
+
     const chatroom = await response.json()
     await sendMessage(chatroom['chatroomId'], chatroom['buyer']['user_id'], sendMessageInput)
     const new_chatroom = createSmallChatroom(chatroom, chatroom['buyer'], chatroom['seller'],text)
@@ -48,11 +54,13 @@ async function handleTemporary() {
     new_element.focus()
 }
 async function addClickListeners() {
+    console.log("iuiu")
     const chatrooms = document.querySelectorAll('.chat')
     const temporary = document.querySelector('.temporary')
     const existing_chatroom = document.querySelector('.chat-page')
     const existing = !existing_chatroom.classList.contains('temporary') && existing_chatroom.id.includes('chat-page')
     const user_response = await fetch('../api/api_user.php')
+    console.log(user_response.url)
     const user = await user_response.json()
     if (chatrooms) {
         for (const chatroom of chatrooms) {
@@ -152,6 +160,8 @@ function formatDateTime(date) {
 
 async function handleClick(chatroom, user) {
     const response = await fetch('../api/api_get_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroom.id.substring(4)}))
+    console.log(response.url)
+
     const chatroom_data = await response.json()
     const msgInbox = await createMessageInbox(chatroom.id.substring(4), user)
     updateCurrentChatroom(chatroom)
@@ -245,6 +255,8 @@ function createUserInfo(chatroom_json, user) {
 
 async function createMessageInbox(chatroomId, user) {
     const response = await fetch('../api/api_current_chatroom.php?' + encodeForAjax({chatroom_id: chatroomId}))
+    console.log(response.url)
+
     const messages = await response.json()
     const msg_inbox = document.createElement('article')
     msg_inbox.classList.add("msg-inbox")

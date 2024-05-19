@@ -14,7 +14,7 @@ function draw_item(Item $item, Currency $user_currency) { ?>
 function draw_items_main(array $liked_items, array $recent_items, Currency $user_currency) { ?>
     <section class="last-added">
         <h2>Last Added Items</h2>
-        <a href="../pages/search.php?category=" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
+        <a href="../pages/search.php" id="show-more">Show more <i class="material-symbols-outlined">arrow_right_alt </i></a>
         <?php draw_items($recent_items, $user_currency); ?>
     </section>
     <section class="most-liked">

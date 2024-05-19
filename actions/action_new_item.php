@@ -10,6 +10,7 @@ if(!validate_csrf_token($_POST['csrf'])) {
 }
 
 require_once(__DIR__ . '/../database/item.class.php');
+require_once(__DIR__ . '/../database/currency.class.php');
 require_once(__DIR__ . '/../database/tags.class.php');
 require_once(__DIR__ . '/../database/connection.db.php');
 require_once(__DIR__ . '/../utils/files.php');
