@@ -57,11 +57,17 @@ declare(strict_types=1);
                 <input type="password" name="password" placeholder="Your password" autocomplete="off">
             </label>
             <button class="login-button" type="submit">Submit</button>
-            <a href="#" class="forgot-password">Forgot your password?</a>
-            <p class="rotateLogin">Don't have an account?</p>
         </form>
+        <script src="../scripts/forgot_password.js" defer></script>
+        <p class="forgot-password">Forgot your password?</p>
+        <dialog class="forgot-popup">
+            <form method="post" action="../actions/action_forgot_password.php">
+                <input type="email" name="email" placeholder="Please enter your email" required>
+                <button type="submit">Send recovery email</button>
+            </form>
+        </dialog>
+        <p class="rotateLogin">Don't have an account?</p>
     </section>
-
 <?php } ?>
 
 <?php function draw_login_register_form(bool $checkout, bool $message, string $user, string $item)
@@ -77,5 +83,28 @@ declare(strict_types=1);
     </h3>
     <label for="checkboxLoginRegister"></label><input class="checkboxLoginRegister" id="checkboxLoginRegister" type="checkbox">
     <span class="toggleLoginRegister"></span>
+
+<?php } ?>
+
+<?php function draw_recover_password()
+{ ?>
+    <form class="login-form" action="../actions/action_recover_password.php" method="POST">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
+        <label>
+            <input type="text" name="email" placeholder="Your email or username" autocomplete="on" required>
+        </label>
+        <label>
+            <input type="password" name="code" placeholder="The code send to email" autocomplete="off" required>
+        </label>
+        <label>
+            <input type="password" name="password" placeholder="Your password" autocomplete="off"
+                   pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[?!@#$%&<>\(\)\[\]\{\}\/\\\-\|+~\^\*]).{8,}"
+                   oninvalid="this.setCustomValidity('Invalid password - must contain at least one uppercase letter, one lowercase letter, one digit, one special character, and be at least 8 characters long')"
+                   oninput="this.setCustomValidity('')"
+                   required>
+        </label>
+        <button class="login-button" type="submit">Submit</button>
+    </form>
 
 <?php } ?>

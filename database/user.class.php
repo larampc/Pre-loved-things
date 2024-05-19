@@ -208,4 +208,44 @@ class User
         }
         return $users;
     }
+    public static function add_recovery_code(PDO $dbh, string $email, int $code): bool {
+        $tried = self::user_sent_email($dbh, $email);
+        if ($tried) {
+            $stmt = $dbh->prepare('UPDATE recovery SET code = ? WHERE email = ?');
+            return $stmt->execute(array($code, $email));
+        }
+        else {
+            $stmt = $dbh->prepare('INSERT INTO recovery VALUES(?,?)');
+            return $stmt->execute(array($email, $code));
+        }
+    }
+
+    public static function user_sent_email(PDO $dbh, string $email): bool
+    {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM recovery where email = ?');
+        $stmt->execute(array($email));
+        return boolval($stmt->fetchColumn());
+    }
+    public static function user_check_code(PDO $dbh, string $email, string $code): bool
+    {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM recovery where email = ? and code = ?');
+        $stmt->execute(array($email, $code));
+        return boolval($stmt->fetchColumn());
+    }
+    public static function user_check_password(PDO $dbh, string $email, string $password): bool
+    {
+        $stmt = $dbh->prepare('SELECT * FROM users where email = ?');
+        $stmt->execute(array($email));
+        $user = $stmt->fetch();
+        return password_verify($password, $user['password']);
+    }
+    public static function change_password(PDO $dbh, string $email,string $password): bool {
+        $stmt = $dbh->prepare('UPDATE users SET password = ? WHERE email = ?');
+        return $stmt->execute(array(password_hash($password, PASSWORD_DEFAULT), $email));
+    }
+    public static function remove_code(PDO $dbh, string $email): bool
+    {
+        $stmt = $dbh->prepare('DELETE FROM recovery where email = ?');
+        return $stmt->execute(array($email));
+    }
 }
