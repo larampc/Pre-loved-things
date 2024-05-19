@@ -24,7 +24,7 @@
     });
     get_header("inbox", $dbh, $session);
     draw_user_chatrooms($chatrooms, User::get_user($dbh, $session->get_id()));
-    if(isset($_GET["user_id"])){
+    if(!empty($_GET["user_id"])){
         $to = $_GET["user_id"];
         $to_chatroom = array_filter($chatrooms, function($chatroom) use($to) { return $chatroom->seller->user_id === $to && $chatroom->item->id === $_GET["item_id"]; });
         if(empty($to_chatroom)) {

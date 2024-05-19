@@ -16,9 +16,12 @@ require_once(__DIR__ . '/../utils/files.php');
 
 $dbh = get_database_connection();
 
-
+if (Tag::exists_category($dbh, $_POST['category'])) {
+    $session->add_message("error", "Category already exists.");
+    die (header('Location: ' . $_SERVER['HTTP_REFERER']));
+}
 $category_id = Tag::add_category($dbh, $_POST['category']);
-$tags = array_filter($_POST['tags']);
+$tags = $_POST['tags'] ? array_filter($_POST['tags']) : array();
 Tag::add_tags_category($dbh, $category_id, $tags);
 foreach ($tags as $key => $value) {
     if ($_POST['option' . $key] != NULL) {

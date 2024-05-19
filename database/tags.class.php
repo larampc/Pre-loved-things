@@ -65,7 +65,12 @@ class Tag
         }
         return $items;
     }
-
+    static function exists_category(PDO $dbh, string $category): bool
+    {
+        $stmt = $dbh->prepare('SELECT COUNT(*) FROM categories WHERE category = ?');
+        $stmt->execute(array($category));
+        return boolval($stmt->fetchColumn());
+    }
     static function add_category(PDO $dbh, string $category): string
     {
         $stmt = $dbh->prepare('INSERT INTO categories (category) VALUES (?)');
