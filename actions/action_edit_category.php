@@ -20,8 +20,8 @@ $dbh = get_database_connection();
 
 Tag::update_category($dbh, $_GET['id'],$_POST['category']);
 Tag::delete_category_tags($dbh, $_GET['id']);
-$tags = array_filter($_POST['tags']);
-Tag::add_tags_category($dbh, $_GET['id'], $tags);
+$tags = $_POST['tags'] ? array_filter($_POST['tags']) : array();
+if (!empty($tags)) Tag::add_tags_category($dbh, $_GET['id'], $tags);
 foreach ($tags as $key => $value) {
     if ($_POST['option' . $key] != NULL) {
         Tag::add_tag_options($dbh, array_filter($_POST['option' . $key]), Tag::get_tag_id($dbh, $_POST['category'],$value));
