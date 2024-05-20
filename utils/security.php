@@ -16,7 +16,7 @@ function validate_csrf_token(string $token): bool {
 }
 function validate_password(string $password): bool {
     if (!preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password)
-        || !preg_match('/[?!@#$%^&*()\-+=\\/<>|{}]/', $password) || strlen($password) < 8) {
+        || !preg_match('/[?!@#$%^&*()\-+=\\/<>|{}.]/', $password) || strlen($password) < 8) {
         $session = new Session();
         $session->add_message('error', 'Invalid password - must be at least 8 characters long and contain at least one: uppercase and lowercase letter, digit, special character.');
         return false;
