@@ -94,6 +94,8 @@ class Tag
     {
         $stmt = $dbh->prepare('UPDATE categories SET category = ? WHERE category = ?');
         $stmt->execute(array($category, $id));
+        $stmt = $dbh->prepare('UPDATE items SET category = ? WHERE category = ?');
+        $stmt->execute(array($category, $id));
     }
 
     static function delete_category_tags(PDO $dbh, string $id) {
