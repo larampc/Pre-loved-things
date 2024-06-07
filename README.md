@@ -103,3 +103,5 @@ We also implemented the following additional requirements (you can add more):
 - [ ] **User Preferences**
 - [ ] **Shipping Costs**
 - [ ] **Real-Time Messaging System**
+
+> Final grade: 19.5
